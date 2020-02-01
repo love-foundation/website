@@ -5,7 +5,7 @@
     return {
       events
     };
-  }
+	}
 </script>
 
 <script>

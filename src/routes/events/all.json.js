@@ -1,4 +1,4 @@
-import fetchEvents from './_events.js';
+import { fetchEvents } from '../../directus';
 
 
 export async function get(req, res, next) {
@@ -10,6 +10,7 @@ export async function get(req, res, next) {
 			JSON.stringify(
 				events.map(event => ({
 					title: event.name,
+					poster: event.poster
 				}))
 			)
 		);
