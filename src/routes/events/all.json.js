@@ -10,7 +10,7 @@ export async function get(req, res, next) {
 			JSON.stringify(
 				events.map(event => ({
 					title: event.name,
-					poster: event.poster
+					imageUrls: event.poster.data
 				}))
 			)
 		);

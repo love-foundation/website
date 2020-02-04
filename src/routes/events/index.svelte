@@ -27,6 +27,12 @@
 
 <ul>
 	{#each events as event}
-		{event.title}
+		<li>
+			<ul>
+				<li>{event.title}</li>
+				<li><img src="{event.imageUrls.full_url}" alt="{event.title} Poster"></li>
+			</ul>
+		</li>
+
 	{/each}
 </ul>
