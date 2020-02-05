@@ -20,7 +20,7 @@
 </style>
 
 <svelte:head>
-	<title>Blog</title>
+	<title>Events</title>
 </svelte:head>
 
 <h1>Recent events</h1>
@@ -29,10 +29,9 @@
 	{#each events as event}
 		<li>
 			<ul>
-				<li>{event.title}</li>
+				<li><a rel='prefetch' href="/events/{event.id}">{event.title}</a></li>
 				<li><img src="{event.imageUrls.full_url}" alt="{event.title} Poster"></li>
 			</ul>
 		</li>
-
 	{/each}
 </ul>
