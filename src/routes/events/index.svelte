@@ -1,10 +1,8 @@
 <script context="module">
-  export async function preload(page, session) {
-    const res = await this.fetch(`/events/all.json`);
-    const events = await res.json();
-    return {
-      events
-    };
+	export function preload({ params, query }) {
+		return this.fetch(`events.json`).then(r => r.json()).then(events => {
+			return { events };
+		});
 	}
 </script>
 
@@ -20,7 +18,7 @@
 </style>
 
 <svelte:head>
-	<title>Blog</title>
+	<title>Events</title>
 </svelte:head>
 
 <h1>Recent events</h1>
@@ -29,10 +27,9 @@
 	{#each events as event}
 		<li>
 			<ul>
-				<li>{event.title}</li>
+				<li><a rel='prefetch' href="/events/{event.id}">{event.title}</a></li>
 				<li><img src="{event.imageUrls.full_url}" alt="{event.title} Poster"></li>
 			</ul>
 		</li>
-
 	{/each}
 </ul>
