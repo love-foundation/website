@@ -1,7 +1,6 @@
   import { fetchEvent } from '../../_directus';
 
   export async function get(req, res, next) {
-    console.log(req.params.id);
     const event = await fetchEvent(req.params.slug);
 
     if (event !== null) {
@@ -11,3 +10,8 @@
       next();
     }
   }
+
+
+  // import events from './index.json'
+
+  // console.log(events);
