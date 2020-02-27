@@ -1,23 +1,64 @@
 <script>
-  import { fly } from "svelte/transition";
-  import { quintOut } from "svelte/easing";
+  import { createEventDispatcher } from "svelte";
 
-  export let segment;
+  export let duration = "300ms";
+  export let offset = 50;
+  export let tolerance = 0;
+
+  let dispatch = createEventDispatcher();
 
   let navActive = false;
+  let headerClass = "show";
+  let y = 0;
+  let lastY = 0;
 
   function toggleNav() {
     navActive = !navActive;
+    dispatch("nav");
   }
+
+  function deriveClass(y, dy) {
+    if (y < offset) {
+      return "show";
+    }
+
+    if (Math.abs(dy) <= tolerance) {
+      return headerClass;
+    }
+
+    if (dy > 0) {
+      return "show";
+    }
+
+    return "hide";
+  }
+
+  function updateClass(y) {
+    const dy = lastY - y;
+    lastY = y;
+    return deriveClass(y, dy);
+  }
+
+  function setTransitionDuration(node) {
+    node.style.transitionDuration = duration;
+  }
+
+  $: headerClass = updateClass(y);
+
 </script>
 
 <style lang="scss">
   header {
-    height: 66px;
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+    width: 100%;
+    height: $desktop-header-height;
     padding-top: 8px;
-    padding-left: 31px;
     background-color: $blue;
+    transition: transform 300ms ease-in-out;
     .homelink {
+      padding-left: 31px;
       float: left;
       text-decoration: none;
       color: white;
@@ -31,36 +72,11 @@
     }
   }
 
-  nav {
-    position: fixed;
-    top: 66px;
-    bottom: 0;
-    right: 0;
-    background: $blue;
-    z-index: 10000;
-    ul {
-      margin: 0;
-      padding: 0;
-      padding-left: 50px;
-      padding-right: 100px;
-      list-style-type: none;
-      li {
-        font-size: 36px;
-        font-size: 3.6rem;
-        color: white;
-        margin: 20px 0;
-        a {
-          text-decoration: none;
-        }
-      }
-    }
+  .show {
+    transform: translateY(0%);
   }
-
-  /* clearfix */
-  ul::after {
-    content: "";
-    display: block;
-    clear: both;
+  .hide {
+    transform: translateY(-100%);
   }
 
   /*!
@@ -166,7 +182,9 @@
   }
 </style>
 
-<header>
+<svelte:window bind:scrollY={y} />
+
+<header use:setTransitionDuration class={headerClass}>
   <a class="homelink" href="/">
     <h2>Love Foundation</h2>
   </a>
@@ -184,59 +202,3 @@
   </div>
 
 </header>
-
-{#if navActive}
-  <nav transition:fly={{ delay: 250, duration: 300, easing: quintOut, x: 200 }}>
-    <ul>
-      <li>
-        <a class:selected={segment === undefined} href="/" on:click={toggleNav}>
-          Home
-        </a>
-      </li>
-      <li>
-        <a
-          class:selected={segment === 'about'}
-          href="about"
-          on:click={toggleNav}>
-          About
-        </a>
-      </li>
-      <li>
-        <a
-          on:click={toggleNav}
-          rel="prefetch"
-          class:selected={segment === 'projects'}
-          href="projects">
-          Projects
-        </a>
-      </li>
-      <li>
-        <a
-          rel="prefetch"
-          class:selected={segment === 'events'}
-          href="events"
-          on:click={toggleNav}>
-          Events
-        </a>
-      </li>
-      <li>
-        <a
-          rel="prefetch"
-          class:selected={segment === 'artists'}
-          href="artists"
-          on:click={toggleNav}>
-          Artists
-        </a>
-      </li>
-      <li>
-        <a
-          rel="prefetch"
-          class:selected={segment === 'lovecasts'}
-          href="lovecasts"
-          on:click={toggleNav}>
-          Lovecasts
-        </a>
-      </li>
-    </ul>
-  </nav>
-{/if}
