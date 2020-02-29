@@ -44,7 +44,6 @@
   }
 
   $: headerClass = updateClass(y);
-
 </script>
 
 <style lang="scss">
@@ -182,7 +181,7 @@
   }
 </style>
 
-<svelte:window bind:scrollY={y} />
+<svelte:window bind:scrollY={y}/>
 
 <header use:setTransitionDuration class={headerClass}>
   <a class="homelink" href="/">

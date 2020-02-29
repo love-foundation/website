@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build",
+    "now-build": "sapper export",
     "export": "sapper export",
     "start": "node __sapper__/build",
     "cy:run": "cypress run",
