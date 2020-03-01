@@ -19,7 +19,13 @@ export async function get(req, res, next) {
       res.setHeader('Content-Type', 'application/json');
       res.end(
         JSON.stringify(
-          queriedContent
+          queriedContent.map(content => ({
+            id: content.id,
+            text: content.text,
+            type: content.type,
+            imageOne: content.image,
+            imageTwo: content.image_two
+          }))
         )
       );
     } else {
