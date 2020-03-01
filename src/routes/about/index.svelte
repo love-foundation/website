@@ -9,7 +9,9 @@
 </script>
 
 <script>
+  import Content from "../../components/UI/Content.svelte";
   export let queriedContent;
+
 </script>
 
 <svelte:head>
@@ -17,10 +19,9 @@
 </svelte:head>
 
 {#each queriedContent as content}
-  {#if content.text}
-    <p>{@html content.text}</p>
-  {/if}
-  {#if content.image}
-    <img src={content.image.data.full_url} alt="" />
-  {/if}
+  <Content
+    text={content.text}
+    imageOne={content.imageOne}
+    imageTwo={content.imageTwo}
+    type={content.type} />
 {/each}
