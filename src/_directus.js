@@ -42,7 +42,7 @@ export async function fetchEvent(passedId) {
 export async function fetchPageContent(passedSlug) {
   try {
     let raw = await directus.getItems("pages", {
-      fields: "slug, has_content.*, has_content.test_file",
+      fields: "slug, content.*.*.*",
       filter: {
         slug: passedSlug
       }

@@ -18,13 +18,9 @@
 
 {#each queriedContent as content}
   {#if content.text}
-    <p>{content.text}</p>
+    <p>{@html content.text}</p>
   {/if}
-  {#if content.test_file}
-    <img src={content.test_file.data.full_url} alt="" />
+  {#if content.image}
+    <img src={content.image.data.full_url} alt="" />
   {/if}
 {/each}
-
-<h1>About this site</h1>
-
-<p>This is the 'about' page. There's not much here.</p>

@@ -3,18 +3,18 @@ import { fetchFile, fetchPageContent } from '../../_directus';
 
 export async function get(req, res, next) {
   const pageContent = await fetchPageContent("test");
-  const queriedContent = pageContent[0].has_content;
+  const queriedContent = pageContent[0].content;
 
-  queriedContent.map(async (content) => {
-    let output;
-    if (content.test_file) {
-      let id = content.test_file;
-      output = await fetchFile(id);
-      content.test_file = output;
-    }
-  })
+  // queriedContent.map(async (content) => {
+  //   let output;
+  //   console.log(content)
+  //   if (content.image) {
+  //     let id = content.image;
+  //     output = await fetchFile(id);
+  //     content.image = output;
+  //   }
+  // })
 
-  setTimeout(() => {
     if (queriedContent !== null) {
       res.setHeader('Content-Type', 'application/json');
       res.end(
@@ -25,7 +25,6 @@ export async function get(req, res, next) {
     } else {
       next();
     }
-  }, 1000);
 
 }
 
