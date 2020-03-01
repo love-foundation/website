@@ -4,11 +4,12 @@
   export let duration = "300ms";
   export let offset = 50;
   export let tolerance = 0;
+  export let navActive = false;
 
   let dispatch = createEventDispatcher();
 
-  let navActive = false;
   let headerClass = "show";
+
   let y = 0;
   let lastY = 0;
 
@@ -43,7 +44,11 @@
     node.style.transitionDuration = duration;
   }
 
-  $: headerClass = updateClass(y);
+  $: if (navActive) {
+    headerClass = "show";
+  } else {
+    headerClass = updateClass(y);
+  }
 </script>
 
 <style lang="scss">
@@ -53,21 +58,30 @@
     z-index: 10000;
     width: 100%;
     height: $desktop-header-height;
-    padding-top: 8px;
-    background-color: $blue;
-    transition: transform 300ms ease-in-out;
-    .homelink {
-      padding-left: 31px;
-      float: left;
-      text-decoration: none;
-      color: white;
-      h2 {
-        text-transform: uppercase;
-      }
+
+    &:hover > div {
+      transform: translateY(0%);
     }
 
-    .side {
-      float: right;
+    > div {
+      box-sizing: border-box;
+      padding-top: 8px;
+      height: 100%;
+      background-color: $blue;
+      transition: transform 300ms ease-in-out;
+      .homelink {
+        padding-left: 31px;
+        float: left;
+        text-decoration: none;
+        color: white;
+        h2 {
+          text-transform: uppercase;
+        }
+      }
+
+      .side {
+        float: right;
+      }
     }
   }
 
@@ -181,23 +195,25 @@
   }
 </style>
 
-<svelte:window bind:scrollY={y}/>
+<svelte:window bind:scrollY={y} />
 
-<header use:setTransitionDuration class={headerClass}>
-  <a class="homelink" href="/">
-    <h2>Love Foundation</h2>
-  </a>
+<header>
+  <div use:setTransitionDuration class={headerClass}>
+    <a class="homelink" href="/">
+      <h2>Love Foundation</h2>
+    </a>
 
-  <div class="side">
-    <button
-      class:is-active={navActive}
-      class="hamburger hamburger--spin"
-      type="button"
-      on:click={toggleNav}>
-      <span class="hamburger-box">
-        <span class="hamburger-inner" />
-      </span>
-    </button>
+    <div class="side">
+      <button
+        class:is-active={navActive}
+        class="hamburger hamburger--spin"
+        type="button"
+        on:click={toggleNav}>
+        <span class="hamburger-box">
+          <span class="hamburger-inner" />
+        </span>
+      </button>
+    </div>
   </div>
 
 </header>
