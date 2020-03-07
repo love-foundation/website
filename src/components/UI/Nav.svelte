@@ -30,10 +30,14 @@
       li {
         font-size: 36px;
         font-size: 3.6rem;
-        color: white;
+
         line-height: 64px;
         a {
           text-decoration: none;
+          color: $white !important;
+          &:hover {
+            color: $dark-grey !important;
+          }
         }
       }
     }
