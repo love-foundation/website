@@ -6,10 +6,9 @@
 </script>
 
 <style lang="scss">
-  // section {
-  //   max-width: $content-width;
-  //   margin: 0 auto !important;
-  // }
+.image img {
+   object-fit: contain;
+}
 </style>
 
 <section>
@@ -20,7 +19,7 @@
       </div>
     {:else if type == 'image_left'}
       <div class="column is-half">
-        <figure class="image">
+        <figure class="image is-3by4">
           <img src={imageOne.data.full_url} alt="" />
         </figure>
 
@@ -33,18 +32,18 @@
         {@html text}
       </div>
       <div class="column is-half">
-        <figure class="image">
+        <figure class="image is-3by4">
           <img src={imageOne.data.full_url} alt="" />
         </figure>
       </div>
     {:else if type == 'double_image'}
       <div class="column is-half">
-        <figure class="image">
+        <figure class="image is-3by4">
           <img src={imageOne.data.full_url} alt="" />
         </figure>
       </div>
       <div class="column is-half">
-        <figure class="image">
+        <figure class="image is-3by4">
           <img src={imageTwo.data.full_url} alt="" />
         </figure>
       </div>
