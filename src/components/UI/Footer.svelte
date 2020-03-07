@@ -7,12 +7,34 @@
   ul {
     list-style-type: none;
     li {
-      a {
-        text-decoration: none;
-        line-height: 33px;
-      }
+      line-height: 33px;
     }
   }
+  a {
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .blob {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid $black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    align-self: bottom;
+    &:hover {
+      border-color: $dark-grey;
+    }
+  }
+
+  .low {
+    align-self: flex-end;
+  }
+
+
 </style>
 
 <footer>
@@ -40,7 +62,7 @@
           </li>
         </ul>
       </div>
-      <div class="column">
+      <div class="column is-2">
         <div class="content">
           Stichting Love Foundation
           <br />
@@ -60,6 +82,26 @@
         </div>
       </div>
       <div class="column" />
+      <div class="column is-3 is-flex">
+        <div class="columns is-mobile low">
+          <div class="column"><a href="https://www.instagram.com">
+            <div class="blob">
+              <h2>INS</h2>
+            </div>
+          </a></div>
+
+          <a class="column" href="https://www.facebook.com">
+            <div class="blob">
+              <h2>FB</h2>
+            </div>
+          </a>
+          <a class="column" href="https://www.soundcloud.com/love-foundation">
+            <div class="blob">
+              <h2>SC</h2>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </footer>
