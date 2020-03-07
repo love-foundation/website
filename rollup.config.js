@@ -8,6 +8,7 @@ import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
 import dotenv from 'dotenv';
 import sveltePreprocess from 'svelte-preprocess';
+import autoprefixer from 'autoprefixer';
 
 dotenv.config();
 
@@ -18,7 +19,9 @@ const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
 
 const preprocess = sveltePreprocess({
-	postcss: true,
+	postcss: {
+    plugins: [autoprefixer()],
+  },
 	scss: {
 		data: `@import "variables.scss";`
 	},

@@ -9,3 +9,12 @@ $white-pillar: #F8F8F8;
 // Margins & Heights
 
 $desktop-header-height: 66px;
+$max-width: 1920px;
+$content-width: 1440px;
+
+
+
+// Bulma Imports
+@import "./node_modules/bulma/sass/utilities/_all.sass";
+@import "./node_modules/bulma/sass/base/_all.sass";
+@import "./node_modules/bulma/sass/grid/_all.sass";
