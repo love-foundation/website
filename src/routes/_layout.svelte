@@ -50,12 +50,11 @@
 
 <svelte:window bind:scrollY={y} bind:innerHeight={winHeight} />
 
-
+<Nav {segment} />
+<progress value={progress} />
 
 
 <div bind:clientHeight={docHeight}>
-<Nav {segment} />
-<progress value={progress} />
 
   <main>
     <slot />
