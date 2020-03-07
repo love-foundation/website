@@ -16,23 +16,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-	font-size: 90px;
-	font-size: 9rem;
+	font-size: 90px !important;
+	font-size: 9rem !important;
 }
 
 h2 {
-	font-size: 36px;
-	font-size: 3.6rem;
+	font-size: 36px !important;
+	font-size: 3.6rem !important;
 }
 
 h3 {
-	font-size: 22px;
-	font-size: 2.2rem;
+	font-size: 22px !important;
+	font-size: 2.2rem !important;
 }
 
 p {
-	font-size: 18px;
-	font-size: 1.8rem;
+	font-size: 18px !important;
+	font-size: 1.8rem !important;
 }
 
 a {

@@ -39,5 +39,30 @@ export async function fetchEvent(passedId) {
 };
 
 
+export async function fetchPageContent(passedSlug) {
+  try {
+    let raw = await directus.getItems("pages", {
+      fields: "slug, content.*.*.*",
+      filter: {
+        slug: passedSlug
+      }
+    });
+    const pages = raw.data
+    return pages
+  } catch(err) {
+    console.log(err);
+  }
+};
+
+export async function fetchFile(passedID) {
+  try {
+    let raw = await directus.getFile(passedID.toString())
+    const file = raw.data
+    return file
+  } catch(err) {
+    console.log(err);
+  }
+};
+
 
 
