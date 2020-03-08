@@ -9,25 +9,31 @@
 </script>
 
 <script>
-  import GridItem from "../../components/UI/Grid/GridItem.svelte";
+  import GridGroup from "../../components/UI/Grid/GridGroup.svelte";
   export let events;
+
+  let eventsArray = events;
+  let eventGroups = [];
+	let len;
+
+
+	for  (let i = 0, len = events.length; i < len; i += 5) {
+    eventGroups.push(events.slice(i, i + 5));
+}
 </script>
 
 <style lang="scss">
-
+  .tile {
+    flex-flow: wrap !important;
+  }
 </style>
 
 <svelte:head>
   <title>Events</title>
 </svelte:head>
 
-<div class="columns is-multiline">
-  {#each events as event, i (event.id)}
-    <GridItem
-      id={event.id}
-      imageUrl={event.imageUrls.full_url}
-      title={event.title}
-      hub={event.hub}
-      index={i} />
+<div class="tile is-ancestor is-vertical">
+  {#each eventGroups as eventGroup, i}
+    <GridGroup {eventGroup} groupIndex={i} />
   {/each}
 </div>
