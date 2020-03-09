@@ -1,16 +1,16 @@
 <script>
-  export let id = null;
-  export let imageUrl = "";
-  export let title = "";
-  export let hub = "";
+  export let event = null;
   export let cardClass = '';
+
+  let { id, title, hub } = event;
+  let imageUrl = event.imageUrls.full_url;
 
 </script>
 
 <style lang="scss">
   .tile {
     &.is-child {
-      padding: 100px;
+      padding: 10%;
     }
     &.is-alone {
       height: max-content;
