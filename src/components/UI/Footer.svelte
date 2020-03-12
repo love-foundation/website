@@ -33,8 +33,6 @@
   .low {
     align-self: flex-end;
   }
-
-
 </style>
 
 <footer>
@@ -62,6 +60,10 @@
           </li>
         </ul>
       </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> Use the session store instead of the json file to load events into the events.index page
       <div class="column is-2">
         <div class="content">
           Stichting Love Foundation
@@ -84,12 +86,11 @@
       <div class="column" />
       <div class="column is-3 is-flex">
         <div class="columns is-mobile low">
-          <div class="column"><a href="https://www.instagram.com">
+          <a class="column" href="https://www.instagram.com">
             <div class="blob">
               <h2>INS</h2>
             </div>
-          </a></div>
-
+          </a>
           <a class="column" href="https://www.facebook.com">
             <div class="blob">
               <h2>FB</h2>
