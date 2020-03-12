@@ -1,17 +1,26 @@
 <script context="module">
-  export function preload({ params, query }) {
-    return this.fetch(`events.json`)
-      .then(r => r.json())
-      .then(events => {
-        return { events };
-      });
+  // export function preload({ params, query }) {
+  //   return this.fetch(`events.json`)
+  //     .then(r => r.json())
+  //     .then(events => {
+  //       return { events };
+  //     });
+  // }
+
+  export function preload(_, session) {
+    const events = session.events
+
+    return {events}
   }
 </script>
 
 <script>
   import GridGroup from "../../components/UI/Grid/GridGroup.svelte";
-  export let events;
+  import { stores } from "@sapper/app";
 
+  const { session } = stores();
+
+  let events = $session.events;
   let eventsArray = events;
   let eventGroups = [];
 	let len;
