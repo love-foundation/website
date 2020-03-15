@@ -1,23 +1,17 @@
 <script>
   import Nav from "../components/UI/Nav.svelte";
+  import Footer from "../components/UI/Footer.svelte"
 
   export let segment;
 
-  let docHeight = 0;
   let winHeight = 0;
   let y = 0;
-  let showProgress = true;
   let progress = 0;
+  let docHeight = 0;
 
   $: if (docHeight > winHeight) {
     progress = y / (docHeight - winHeight);
   }
-
-  // $: if (headerClass === "hide") {
-  //   showProgress = true;
-  // } else {
-  //   showProgress = false;
-  // }
 </script>
 
 <style lang="scss">
@@ -56,13 +50,16 @@
 
 <svelte:window bind:scrollY={y} bind:innerHeight={winHeight} />
 
-{#if showProgress}
-  <progress value={progress} />
-{/if}
 
+
+
+<div bind:clientHeight={docHeight}>
 <Nav {segment} />
+<progress value={progress} />
 
-<main bind:offsetHeight={docHeight}>
-  <slot />
-  <div class="test" />
-</main>
+  <main>
+    <slot />
+  </main>
+
+  <Footer/>
+</div>
