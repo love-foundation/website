@@ -3,6 +3,8 @@
   export let eventGroup = [];
   export let groupIndex = null;
   let isEven = groupIndex % 2 == 0;
+
+  // FIX ME: For ensuring order is maintained, the array needs to be reversed when isEven = true
 </script>
 
 <style lang="scss">
