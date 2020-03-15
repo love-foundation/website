@@ -11,6 +11,7 @@
 <script>
   import ArtistItem from "../../components/UI/ArtistItem.svelte";
   export let artists;
+
 </script>
 
 <style lang="scss">
@@ -26,3 +27,4 @@
     <ArtistItem {artist} />
   {/each}
 </div>
+
