@@ -26,7 +26,8 @@ export async function fetchItems(collection = "", fields = "", filter = {}) {
 export async function fetchArtists() {
   try {
     let raw = await directus.getItems("artists", {
-      fields: "id, artist_name, image.data.*, current_location, type_of_art"
+      fields: "id, artist_name, image.data.*, current_location, type_of_art",
+      limit: 20
     });
     const artists = raw.data
     return artists
