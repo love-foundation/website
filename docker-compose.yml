@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+    app:
+        build: .
+        volumes:
+            - ./__sapper__:/app/__sapper__
+            - ./static:/app/static
+        ports: 
+            - 80:3000
