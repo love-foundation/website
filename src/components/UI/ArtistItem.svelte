@@ -1,21 +1,18 @@
 <script>
-import lozad from "lozad";
-import { onMount} from 'svelte';
+  import lozad from "lozad";
+  import { onMount } from "svelte";
 
-export let artist;
+  export let artist;
 
-onMount(() => {
-const observer = lozad('.lozad', {
-    loaded: function(el) {
+  onMount(() => {
+    const observer = lozad(".lozad", {
+      loaded: function(el) {
         // Custom implementation on a loaded element
-        el.classList.add('loaded');
-    }
-});
-observer.observe();
-})
-
-
-
+        el.classList.add("loaded");
+      }
+    });
+    observer.observe();
+  });
 </script>
 
 <style lang="scss">
@@ -27,12 +24,15 @@ observer.observe();
     text-align: center;
     color: $white;
     opacity: 0;
-    transition: all 1s ease-in;
+    margin-top: -50px;
+    transition: margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94),
+      opacity 1s ease-in;
   }
 
   :global(.loaded) {
-      opacity: 1 !important;
-    };
+    margin-top: 0 !important;
+    opacity: 1 !important;
+  }
 
   .column {
     padding: 5rem;

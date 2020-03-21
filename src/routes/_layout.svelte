@@ -51,14 +51,7 @@
 <svelte:window bind:scrollY={y} bind:innerHeight={winHeight} />
 
 <Nav {segment} />
-<<<<<<< HEAD
 <progress value={progress} />
-=======
-  <progress value={progress} />
-
-<div bind:clientHeight={docHeight}>
-
->>>>>>> Adding the index pages, the query for the artists.json file, ArtistItem component
 
 <div bind:clientHeight={docHeight}>
 
@@ -68,8 +61,3 @@
   <Footer />
 </div>
 
-<<<<<<< HEAD
-=======
-  <Footer />
-</div>
->>>>>>> Adding the index pages, the query for the artists.json file, ArtistItem component
