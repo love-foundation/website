@@ -7,51 +7,19 @@ export const directus = new DirectusSDK({
 });
 
 
-export async function fetchEvents() {
+export async function fetchItems(collection = "", fields = "", filter = {}) {
+
   try {
-    let raw = await directus.getItems("events", {
-      fields: "id, name, poster.data.*, event_type, hubs.*.*",
-      filter: {
-        on_website: 1
-      }
+    let raw = await directus.getItems(collection, {
+      fields: fields,
+      filter: filter
     });
-    const events = raw.data
-    return events
-  } catch(err) {
+    const items = raw.data
+    return items
+  } catch (err) {
     console.log(err);
   }
-};
 
-
-export async function fetchEvent(passedId) {
-  try {
-    let raw = await directus.getItems("events", {
-      fields: "id, name, poster.data.*",
-      filter: {
-        id: passedId
-      }
-    });
-    const event = raw.data
-    return event
-  } catch(err) {
-    console.log(err);
-  }
-};
-
-
-export async function fetchPageContent(passedSlug) {
-  try {
-    let raw = await directus.getItems("pages", {
-      fields: "slug, content.*.*.*",
-      filter: {
-        slug: passedSlug
-      }
-    });
-    const pages = raw.data
-    return pages
-  } catch(err) {
-    console.log(err);
-  }
 };
 
 export async function fetchFile(passedID) {
@@ -59,7 +27,7 @@ export async function fetchFile(passedID) {
     let raw = await directus.getFile(passedID.toString())
     const file = raw.data
     return file
-  } catch(err) {
+  } catch (err) {
     console.log(err);
   }
 };
