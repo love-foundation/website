@@ -9,7 +9,7 @@ steps:
       - node -v
       - yarn -v
       - yarn
-      - yarn run build
+      - yarn run export
 
   - name: deploy
     image: cupcakearmy/drone-deploy
