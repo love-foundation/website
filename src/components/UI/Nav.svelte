@@ -13,10 +13,6 @@
 </script>
 
 <style lang="scss">
-.secret {
-      height: 0;
-      opacity: 0;
-    }
   nav {
     position: fixed;
     top: 66px;
@@ -34,10 +30,14 @@
       li {
         font-size: 36px;
         font-size: 3.6rem;
-        color: white;
+
         line-height: 64px;
         a {
           text-decoration: none;
+          color: $white !important;
+          &:hover {
+            color: $dark-grey !important;
+          }
         }
       }
     }
@@ -110,11 +110,3 @@
   </nav>
 {/if}
 
-<div class="secret">
-  <a href="/">Home</a>
-  <a href="about" rel="prefetch">About</a>
-  <a rel="prefetch" href="projects">Projects</a>
-  <a rel="prefetch" href="events">Events</a>
-  <a rel="prefetch" href="artists">Artists</a>
-  <a rel="prefetch" href="lovecasts">Lovecasts</a>
-</div>

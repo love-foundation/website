@@ -2,7 +2,10 @@ $blue: #0597F2;
 $red: #D10505;
 $green: #038C4C;
 $yellow: #F2B705;
-$white-pillar: #F8F8F8;
+$white: #ffffff;
+$black: #000000;
+$light-grey: #F8F8F8;
+$dark-grey: #BEBEBE;
 
 
 
@@ -12,6 +15,11 @@ $desktop-header-height: 66px;
 $max-width: 1920px;
 $content-width: 1440px;
 
+
+// Bulma Overrides
+
+$link: $black;
+$link-hover: $dark-grey;
 
 
 // Bulma Imports
