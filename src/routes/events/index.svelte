@@ -16,7 +16,6 @@
   let eventGroups = [];
 	let len;
 
-
 	for  (let i = 0, len = events.length; i < len; i += 5) {
     eventGroups.push(events.slice(i, i + 5));
 }
@@ -34,6 +33,6 @@
 
 <div class="tile is-ancestor is-vertical">
   {#each eventGroups as eventGroup, i}
-    <GridGroup {eventGroup} groupIndex={i} />
+    <GridGroup itemGroup={eventGroup} groupIndex={i} />
   {/each}
 </div>

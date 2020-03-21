@@ -1,10 +1,18 @@
 <script>
-  export let event = null;
-  export let cardClass = '';
+  export let item = null;
+  export let cardClass = "";
 
-  let { id, title, hub } = event;
-  let imageUrl = event.imageUrls.full_url;
+  let imageUrl;
+  let { id, title, subtitle = item.hub ? item.hub : null, soundcloud } = item;
 
+  if (item.imageUrls) {
+    imageUrl = item.imageUrls.full_url;
+  } else {
+    imageUrl = item.imageUrl;
+  }
+
+  let link = soundcloud ? soundcloud : `/events/${id}`;
+  let imageRatio = soundcloud ? "is-square" : "is-3by4";
 </script>
 
 <style lang="scss">
@@ -23,22 +31,28 @@
   }
   h3 {
     width: 100%;
-    &.hub {
+    &.subtitle {
       text-transform: capitalize;
     }
   }
+
+  .image img {
+    object-fit: contain;
+  }
 </style>
 
-<a rel="prefetch" href="/events/{id}" class="tile {cardClass}">
+<a rel="prefetch" href="{link}" class="tile {cardClass}">
   <div class="tile is-child card">
     <div class="card-image">
-      <figure class="image is-3by4">
+      <figure class="image {imageRatio}">
         <img src={imageUrl} alt="{title} Poster" />
       </figure>
     </div>
     <div class="card-header">
       <h3 class="title card-header-title is-centered">{title}</h3>
-      <h3 class="hub card-header-title is-centered">{hub}</h3>
+      {#if subtitle}
+        <h3 class="subtitle card-header-title is-centered">{subtitle}</h3>
+      {/if}
     </div>
   </div>
 </a>
