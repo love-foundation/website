@@ -51,7 +51,7 @@
   }
 </style>
 
-<VanishingHeader on:nav={toggleNav} {navActive}/>
+<VanishingHeader on:nav={toggleNav} {navActive} {segment}/>
 
 {#if navActive}
   <nav transition:fly={{ delay: 250, duration: 300, easing: quintOut, x: 200 }}>

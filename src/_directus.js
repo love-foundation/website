@@ -10,7 +10,7 @@ export const directus = new DirectusSDK({
 export async function fetchEvents() {
   try {
     let raw = await directus.getItems("events", {
-      fields: "id, name, poster.data.*",
+      fields: "id, name, poster.data.*, event_type, hubs.*.*",
       filter: {
         on_website: 1
       }
