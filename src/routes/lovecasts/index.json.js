@@ -1,24 +1,25 @@
-// import { fetchLovecasts } from '../../_directus';
+import { fetchItems } from '../../_directus';
 
 
-// export async function get(req, res, next) {
-//   const events = await fetchLovecasts();
+export async function get(req, res, next) {
+	const lovecasts = await fetchItems("lovecast", "id, name_of_the_set, design.data.*, soundcloud_link", {
+		status: "published"
+	});
 
-//   if (events !== null) {
-//     res.setHeader('Content-Type', 'application/json');
-//     res.end(
-// 			JSON.stringify(
-// 				events.map(event => ({
-// 					id: event.id,
-// 					title: event.name,
-// 					imageUrls: event.poster.data,
-// 					hub: event.hubs[0] ? event.hubs[0].hubs_id.city : null,
-// 					category: event.event_type
-// 				}))
-// 			)
-// 		);
-//   } else {
-// 		next();
-//   }
-// }
+	if (lovecasts !== null) {
+		res.setHeader('Content-Type', 'application/json');
+		res.end(
+			JSON.stringify(
+				lovecasts.map(lovecast => ({
+					id: lovecast.id,
+					title: lovecast.name_of_the_set,
+					imageUrl: lovecast.design.data.full_url,
+					soundcloud: lovecast.soundcloud_link
+				}))
+			)
+		);
+	} else {
+		next();
+	}
+}
 
