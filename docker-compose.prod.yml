@@ -6,15 +6,14 @@ networks:
 
 services:
     app:
-        build: .
+        image: cupcakearmy/static
         volumes:
-            - ./__sapper__:/app/__sapper__
-            - ./static:/app/static
+            - ./__sapper__/export:/srv
         networks:
             - proxy
             labels:
             - "traefik.enable=true"
-            - "traefik.port=3000"
+            - "traefik.port=80"
             - "traefik.docker.network=proxy"
             - "traefik.backend=webnew"
             - "traefik.frontend.rule=Host:new.love-foundation.org"

@@ -1,8 +1,12 @@
-.DS_Store
+# Node
 /node_modules/
+package-lock.json
+yarn.lock
+
+# Sapper
 /src/node_modules/@sapper/
-yarn-error.log
-/cypress/screenshots/
 /__sapper__/
+
+# Artifacts
 .env
 .now

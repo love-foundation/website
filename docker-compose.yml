@@ -2,9 +2,8 @@ version: '3.7'
 
 services:
     app:
-        build: .
+        image: cupcakearmy/static
         volumes:
-            - ./__sapper__:/app/__sapper__
-            - ./static:/app/static
+            - ./__sapper__/export:/srv
         ports: 
-            - 80:3000
+            - 80:80
