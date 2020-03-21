@@ -1,6 +1,6 @@
 <script>
   import GridItem from "./GridItem.svelte";
-  export let itemGroup = [];
+  export let eventGroup = [];
   export let groupIndex = null;
   let isEven = groupIndex % 2 == 0;
 
@@ -8,7 +8,7 @@
 </script>
 
 <style lang="scss">
-  .wrap {
+  .test {
     flex-flow: wrap !important;
   }
   // grid-template:
@@ -23,19 +23,19 @@
 </style>
 
 {#if isEven}
-  <GridItem item={itemGroup[0]} cardClass={'is-parent is-6'} />
+  <GridItem event={eventGroup[0]} cardClass={'is-parent is-6'} />
 {/if}
 
-<div class="tile is-parent is-6 is-vertical wrap">
-  {#each itemGroup.slice(1, itemGroup.length) as item, i (item.id)}
-    {#if itemGroup.length === 5}
-      <GridItem {item} cardClass={'is-6'} />
+<div class="tile is-parent is-6 is-vertical test">
+  {#each eventGroup.slice(1, eventGroup.length) as event, i (event.id)}
+    {#if eventGroup.length === 5}
+      <GridItem {event} cardClass={'is-6'} />
     {:else}
-      <GridItem {item} cardClass={'is-6 is-alone'} />
+      <GridItem {event} cardClass={'is-6 is-alone'} />
     {/if}
   {/each}
 </div>
 
 {#if !isEven}
-  <GridItem item={itemGroup[0]} cardClass={'is-parent is-6'} />
+  <GridItem event={eventGroup[0]} cardClass={'is-parent is-6'} />
 {/if}
