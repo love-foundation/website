@@ -8,5 +8,4 @@ yarn.lock
 /__sapper__/
 
 # Artifacts
-.env
 .now
