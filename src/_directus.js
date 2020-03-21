@@ -7,12 +7,13 @@ export const directus = new DirectusSDK({
 });
 
 
-export async function fetchItems(collection = "", fields = "", filter = {}) {
+export async function fetchItems(collection = "", fields = "", filter = {}, limit = -1) {
 
   try {
     let raw = await directus.getItems(collection, {
       fields: fields,
-      filter: filter
+      filter: filter,
+      limit: limit
     });
     const items = raw.data
     return items
