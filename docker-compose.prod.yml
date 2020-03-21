@@ -11,7 +11,7 @@ services:
             - ./__sapper__/export:/srv
         networks:
             - proxy
-            labels:
+        labels:
             - "traefik.enable=true"
             - "traefik.port=80"
             - "traefik.docker.network=proxy"
