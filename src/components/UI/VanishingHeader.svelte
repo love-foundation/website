@@ -7,8 +7,6 @@
   export let navActive = false;
   export let segment = "";
 
-  console.log(segment)
-
   let dispatch = createEventDispatcher();
 
   let headerClass = "show";
@@ -203,7 +201,7 @@
 <header>
   <div use:setTransitionDuration class={headerClass}>
     <a class="homelink" href="/">
-      <h2>Love Foundation</h2> - <h2>{segment}</h2>
+      <h2>Love Foundation &mdash; {segment}</h2>
     </a>
 
     <div class="side">
