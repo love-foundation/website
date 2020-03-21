@@ -1,35 +1,39 @@
 <script context="module">
-	export function preload({ params, query }) {
-		return this.fetch(`events.json`).then(r => r.json()).then(events => {
-			return { events };
-		});
-	}
+  export function preload({ params, query }) {
+    return this.fetch(`events.json`)
+      .then(r => r.json())
+      .then(events => {
+        return { events };
+      });
+  }
 </script>
 
 <script>
-	export let events;
+  import GridGroup from "../../components/UI/Grid/GridGroup.svelte";
+  export let events;
+
+  let eventsArray = events;
+  let eventGroups = [];
+	let len;
+
+
+	for  (let i = 0, len = events.length; i < len; i += 5) {
+    eventGroups.push(events.slice(i, i + 5));
+}
 </script>
 
-<style>
-	ul {
-		margin: 0 0 1em 0;
-		line-height: 1.5;
-	}
+<style lang="scss">
+  .tile {
+    flex-flow: wrap !important;
+  }
 </style>
 
 <svelte:head>
-	<title>Events</title>
+  <title>Events</title>
 </svelte:head>
 
-<h1>Recent events</h1>
-
-<ul>
-	{#each events as event}
-		<li>
-			<ul>
-				<li><a rel='prefetch' href="/events/{event.id}">{event.title}</a></li>
-				<li><img src="{event.imageUrls.full_url}" alt="{event.title} Poster"></li>
-			</ul>
-		</li>
-	{/each}
-</ul>
+<div class="tile is-ancestor is-vertical">
+  {#each eventGroups as eventGroup, i}
+    <GridGroup {eventGroup} groupIndex={i} />
+  {/each}
+</div>

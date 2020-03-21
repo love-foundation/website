@@ -62,7 +62,11 @@
           </li>
         </ul>
       </div>
+<<<<<<< HEAD
       <div class="column is-2">
+=======
+      <div class="column">
+>>>>>>> Add footer component
         <div class="content">
           Stichting Love Foundation
           <br />
@@ -82,6 +86,7 @@
         </div>
       </div>
       <div class="column" />
+<<<<<<< HEAD
       <div class="column is-3 is-flex">
         <div class="columns is-mobile low">
           <div class="column"><a href="https://www.instagram.com">
@@ -102,6 +107,8 @@
           </a>
         </div>
       </div>
+=======
+>>>>>>> Add footer component
     </div>
   </div>
 </footer>

@@ -1,6 +1,6 @@
 <script>
   import Nav from "../components/UI/Nav.svelte";
-  import Footer from "../components/UI/Footer.svelte"
+  import Footer from "../components/UI/Footer.svelte";
 
   export let segment;
 
@@ -26,21 +26,21 @@
   }
 
   progress {
-		top: 0;
+    top: 0;
     position: fixed;
     width: 100%;
-		height: 5px;
-		border: none;
-		background: transparent;
-		z-index: 1000;
+    height: 5px;
+    border: none;
+    background: transparent;
+    z-index: 1000;
 
-		&[value]::-webkit-progress-value {
-			background: $blue;
-		}
+    &[value]::-webkit-progress-value {
+      background: $blue;
+    }
 
-		&[value]::-moz-progress-bar {
-			background: $blue;
-		}
+    &[value]::-moz-progress-bar {
+      background: $blue;
+    }
   }
 
   .test {
@@ -53,12 +53,10 @@
 <Nav {segment} />
 <progress value={progress} />
 
-
 <div bind:clientHeight={docHeight}>
 
   <main>
     <slot />
   </main>
-
-  <Footer/>
+  <Footer />
 </div>
