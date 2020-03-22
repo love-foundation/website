@@ -17,17 +17,34 @@
 <script>
   import GridGroup from "../../components/UI/Grid/GridGroup.svelte";
   import { stores } from "@sapper/app";
-
+  import FilterBar from "../../components/UI/FilterBar.svelte";
   const { session } = stores();
+
 
   let events = $session.events;
   let eventsArray = events;
   let eventGroups = [];
-	let len;
+  let len;
+  let categories = [];
+  let hubs = [];
 
-	for  (let i = 0, len = events.length; i < len; i += 5) {
-    eventGroups.push(events.slice(i, i + 5));
-}
+  eventsArray.map(event => {
+    hubs = [...hubs, event.hub];
+    if (event.category) {
+      categories = [...categories, event.category];
+    }
+
+  });
+
+  hubs = [...new Set(hubs)];
+  categories = [...new Set(categories)];
+  for (let i = 0, len = eventsArray.length; i < len; i += 5) {
+    eventGroups.push(eventsArray.slice(i, i + 5));
+  }
+
+  // function filterEvents(filter) {
+
+  // }
 </script>
 
 <style lang="scss">
@@ -39,6 +56,13 @@
 <svelte:head>
   <title>Events</title>
 </svelte:head>
+
+<FilterBar
+  title={'Events'}
+  filterOne={hubs}
+  filterTwo={categories}
+  placeholderOne={'Location'}
+  placeholderTwo={'Genre'} />
 
 <div class="tile is-ancestor is-vertical">
   {#each eventGroups as eventGroup, i}
