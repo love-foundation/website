@@ -43,6 +43,7 @@
     "sapper": "^0.27.0",
     "svelte": "^3.0.0",
     "svelte-loader": "^2.9.0",
-    "svelte-preprocess": "^3.4.0"
+    "svelte-preprocess": "^3.4.0",
+    "svelte-select": "^3.4.0"
   }
 }
