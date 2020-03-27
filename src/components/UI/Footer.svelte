@@ -60,10 +60,6 @@
           </li>
         </ul>
       </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> Use the session store instead of the json file to load events into the events.index page
       <div class="column is-2">
         <div class="content">
           Stichting Love Foundation

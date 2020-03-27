@@ -22,8 +22,9 @@
 
 </style>
 
+
 {#if isEven}
-  <GridItem item={itemGroup[0]} cardClass={'is-parent is-6'} />
+  <GridItem item={itemGroup[0]} cardClass={'is-parent is-6'} (itemGroup[0].id)/>
 {/if}
 
 <div class="tile is-parent is-6 is-vertical wrap">
@@ -37,5 +38,5 @@
 </div>
 
 {#if !isEven}
-  <GridItem item={itemGroup[0]} cardClass={'is-parent is-6'} />
+  <GridItem item={itemGroup[0]} cardClass={'is-parent is-6'} (itemGroup[0].id)/>
 {/if}
