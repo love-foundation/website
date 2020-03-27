@@ -1,5 +1,8 @@
 <script>
   import Select from "svelte-select";
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
 
   export let filterOne = [];
   export let placeholderOne = "";
@@ -12,6 +15,15 @@
 
   let selectedValueOne = undefined;
   let selectedValueTwo = undefined;
+
+
+  function selectedOne(data) {
+    dispatch("selectedOne", {hub: data.detail.value})
+  }
+
+  function selectedTwo(data) {
+    dispatch("selectedTwo", {category: data.detail.value})
+  }
 </script>
 
 <style lang="scss">
@@ -55,7 +67,8 @@
         items={filterOne}
         placeholder={placeholderOne}
         bind:selectedValueOne
-        on:select />
+        on:select={data => {selectedOne(data)}}
+        on:clear />
     </div>
   </div>
   <div class="column is-2">
@@ -64,7 +77,8 @@
         items={filterTwo}
         placeholder={placeholderTwo}
         bind:selectedValueTwo
-        on:select />
+        on:select={data => {selectedTwo(data)}}
+        on:clear />
     </div>
   </div>
   <div class="column is-2">

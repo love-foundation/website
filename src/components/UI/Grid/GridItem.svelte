@@ -1,4 +1,6 @@
 <script>
+  import { fade } from 'svelte/transition';
+
   export let item = null;
   export let cardClass = "";
 
@@ -41,7 +43,7 @@
   }
 </style>
 
-<a rel="prefetch" href="{link}" class="tile {cardClass}">
+<a transition:fade rel="prefetch" href="{link}" class="tile {cardClass}">
   <div class="tile is-child card">
     <div class="card-image">
       <figure class="image {imageRatio}">
