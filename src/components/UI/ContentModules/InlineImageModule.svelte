@@ -73,9 +73,9 @@
       class:lozad={lazy}
       class="image">
       {#if lazy}
-        <img class="lozad" data-src={imageOne.data.full_url} alt="" />
+        <img class="lozad" data-src={imageTwo.data.full_url} alt="" />
       {:else}
-        <img src={imageOne.data.full_url} alt="" />
+        <img src={imageTwo.data.full_url} alt="" />
       {/if}
     </figure>
   </div>
