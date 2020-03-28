@@ -4,17 +4,11 @@
 
   const dispatch = createEventDispatcher();
 
-  export let filterOne = [];
-  export let placeholderOne = "";
-  export let filterTwo = [];
-  export let placeholderTwo = "";
   export let title = "";
+  export let filters = {};
 
-  let selectedValueOne = undefined;
-  let selectedValueTwo = undefined;
-
-  function selected(data) {
-    dispatch("selected", data)
+  function selected(key, event) {
+    dispatch("selected", { [key]: event.detail.value })
   }
 
 </script>
@@ -54,26 +48,19 @@
 <div class="topbar columns is-horizontal">
   <h2 class="column is-2">{title}</h2>
   <div class="column" />
-  <div class="column is-2">
+
+  {#each Object.entries(filters) as [key, { options, placeholder }]}
+    <div class="column is-2">
     <div class="select">
       <Select
-        items={filterOne}
-        placeholder={placeholderOne}
-        bind:selectedValueOne
-        on:select={data => {selected( { hub: data.detail.value }) }}
-        on:clear={() => {dispatch("clear", "one")}} />
+        items={options}
+        placeholder={placeholder}
+        on:select={e => { selected(key, e) }}
+        on:clear={() => { dispatch("clear", key) }} />
     </div>
   </div>
-  <div class="column is-2">
-    <div class="select">
-      <Select
-        items={filterTwo}
-        placeholder={placeholderTwo}
-        bind:selectedValueTwo
-        on:select={data => { selected({ category: data.detail.value }) }}
-        on:clear={() => {dispatch("clear", "two")}} />
-    </div>
-  </div>
+  {/each}
+
   <div class="column is-2">
     <div class="select">Sort</div>
   </div>
