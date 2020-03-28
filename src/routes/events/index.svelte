@@ -76,24 +76,23 @@
   }
 
   function filterEvents(filter) {
-       console.log(filter);
-    console.log(currentFilters);
-    if (filter.hub) {
-      currentFilters.hub = filter.hub;
-    } else {
-      currentFilters.category = filter.category;
-    }
+      if (filter.hub) {
+        currentFilters.hub = filter.hub;
+      } else {
+        currentFilters.category = filter.category;
+      }
+
     console.log(currentFilters);
 
     filteredEvents = eventsArray.filter(e => {
       if (currentFilters.hub != "" && currentFilters.category != "") {
         return (
-          e.hub === currentFilters.hub && e.category === currentFilters.category
+          e.hub == currentFilters.hub && e.category == currentFilters.category
         );
       } else if (currentFilters.hub == "" && currentFilters.category != "") {
-        return e.category === currentFilters.category;
+        return e.category == currentFilters.category;
       } else if (currentFilters.hub != "" && currentFilters.category == "") {
-        return e.hub === currentFilters.hub;
+        return e.hub == currentFilters.hub;
       } else {
         return true;
       }
@@ -103,26 +102,16 @@
     filtered = true;
   }
 
-  function filterLocation(filter) {
-    console.log(filter);
-    filteredEvents = eventsArray.filter(e => e.hub === filter.hub);
-    filtered = true;
-  }
-
-  function filterGenre(filter) {
-    console.log(filter);
-    filteredEvents = eventsArray.filter(e => e.category == filter.category);
-    // if(filteredEvents) {
-    //   filteredEvents = filteredEvents.filter(e => e.category == filter);
-    // } else {
-
-    // }
-    filtered = true;
-  }
-
-  function reset() {
+  function reset(filter) {
+    if (filter == "one") {
+      delete currentFilters.hub
+    } else {
+      delete currentFilters.category
+    }
+    filterEvents(currentFilters);
     filtered = false;
   }
+
 </script>
 
 <style lang="scss">
@@ -147,7 +136,9 @@
   on:selectedTwo={data => {
     filterEvents(data.detail);
   }}
-  on:clear={reset} />
+  on:clear={data => {
+    reset(data.detail);
+  }} />
 
 <button on:click={filterEvents}>Filtered</button>
 <div class="tile is-ancestor is-vertical">
