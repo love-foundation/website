@@ -4,8 +4,8 @@
   let wysiwyg;
   let layout;
 
-  wysiwyg = content.text;
-  layout = content.textLayout;
+  wysiwyg = content.details.text;
+  layout = content.details.textLayout;
 
   let classNames = "";
   switch (layout) {
@@ -27,8 +27,6 @@
   }
 </style>
 
-<section class="columns is-centered">
-  <div class={classNames}`>
-    {@html wysiwyg}
-  </div>
-</section>
+<div class={classNames} `>
+  {@html wysiwyg}
+</div>
