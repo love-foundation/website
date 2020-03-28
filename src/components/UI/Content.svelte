@@ -1,35 +1,51 @@
 <script>
-  import TextModule from "./ContentModules/TextModule.svelte"
+  import TextModule from "./ContentModules/TextModule.svelte";
+  import TextImageModule from "./ContentModules/TextImageModule.svelte";
   export let queriedContent;
 
   let layout;
   let moduleMapping = [
-    {type: "text_only", component: TextModule}
-
+    { type: "text_only", component: TextModule },
+    { type: "image_left", component: TextImageModule },
+    { type: "image_right", component: TextImageModule }
   ];
 
- // {type: "image_left", component: TextImageModule},
-    // {type: "image_right", component: TextImageModule},
-    // {type: "double_image", component: DoubleImageModule},
-    // {type: "image_caption", component: CaptionModule},
-    // {type: "image_only", component: InlineImageModule},
-    // {type: "full_width", component: FullWidthModule}
-queriedContent.map((qc) => {
-  layout = moduleMapping.filter(m => m.type == qc.type)
-  if (layout[0]) {
-    qc.component = layout[0].component;
-  }
-})
+  //
+  // {type: "double_image", component: DoubleImageModule},
+  // {type: "image_caption", component: CaptionModule},
+  // {type: "image_only", component: InlineImageModule},
+  // {type: "full_width", component: FullWidthModule}
+  queriedContent.map(qc => {
+    layout = moduleMapping.filter(m => m.type == qc.type);
+    if (layout[0]) {
+      qc.component = layout[0].component;
+    }
+  });
 </script>
 
-<style>
+<style lang="scss">
+  .pad {
+    &-large {
+      padding-bottom: 150px;
+    }
+
+    &-medium {
+      padding-bottom: 100px;
+    }
+
+    &-small {
+      padding-bottom: 50px;
+    }
+  }
 </style>
 
-
 {#each queriedContent as content}
-  {#if content.component}
-   <svelte:component this={content.component} content={content.details} />
-  {/if}
+
+  <section class={`columns is-centered pad-${content.details.padding}`}>
+    {#if content.component}
+      <svelte:component this={content.component} {content} />
+    {/if}
+  </section>
 {/each}
 
 <!-- <section>
