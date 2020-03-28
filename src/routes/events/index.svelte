@@ -49,22 +49,11 @@
     }
   };
 
+
   $: filteredEvents =
     eventsArray.filter(e => {
-      const filterHub = !!currentFilters.hub;
-      const filterCategory = !!currentFilters.category;
-
-      if (filterHub && filterCategory) {
-        return (
-          e.hub == currentFilters.hub && e.category == currentFilters.category
-        );
-      } else if (filterCategory) {
-        return e.category == currentFilters.category;
-      } else if (filterHub) {
-        return e.hub == currentFilters.hub;
-      } else {
-        return true;
-      }
+      return Object.entries(currentFilters)
+        .every(([filterName, value]) => e[filterName] == value || value == undefined)
     });
 
   function filterEvents(filter) {
@@ -74,7 +63,7 @@
       currentFilters.category = filter.category;
     }
 
-    console.log("filters updated", currentFilters);
+    console.debug("filters updated", currentFilters);
   }
 
   function reset(filter) {
@@ -83,7 +72,9 @@
     } else {
       delete currentFilters.category
     }
-    filterEvents(currentFilters);
+
+    // force an update
+    currentFilters = { ... currentFilters };
   }
 
 </script>
@@ -104,10 +95,7 @@
   filterTwo={categories}
   placeholderOne={'Location'}
   placeholderTwo={'Genre'}
-  on:selectedOne={data => {
-    filterEvents(data.detail);
-  }}
-  on:selectedTwo={data => {
+  on:selected={data => {
     filterEvents(data.detail);
   }}
   on:clear={data => {
