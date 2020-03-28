@@ -8,22 +8,15 @@
   export let placeholderOne = "";
   export let filterTwo = [];
   export let placeholderTwo = "";
-
-
-
   export let title = "";
 
   let selectedValueOne = undefined;
   let selectedValueTwo = undefined;
 
-
-  function selectedOne(data) {
-    dispatch("selectedOne", {hub: data.detail.value})
+  function selected(data) {
+    dispatch("selected", data)
   }
 
-  function selectedTwo(data) {
-    dispatch("selectedTwo", {category: data.detail.value})
-  }
 </script>
 
 <style lang="scss">
@@ -67,7 +60,7 @@
         items={filterOne}
         placeholder={placeholderOne}
         bind:selectedValueOne
-        on:select={data => {selectedOne(data)}}
+        on:select={data => {selected( { hub: data.detail.value }) }}
         on:clear={() => {dispatch("clear", "one")}} />
     </div>
   </div>
@@ -77,7 +70,7 @@
         items={filterTwo}
         placeholder={placeholderTwo}
         bind:selectedValueTwo
-        on:select={data => {selectedTwo(data)}}
+        on:select={data => { selected({ category: data.detail.value }) }}
         on:clear={() => {dispatch("clear", "two")}} />
     </div>
   </div>
