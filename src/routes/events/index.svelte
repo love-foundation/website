@@ -121,9 +121,7 @@
   }
 
   function reset() {
-    currentFilters = {};
-    console.log(currentFilters);
-    console.log("resetted")
+    filtered = false;
   }
 </script>
 
@@ -149,7 +147,7 @@
   on:selectedTwo={data => {
     filterEvents(data.detail);
   }}
-  on:clear={reset()} />
+  on:clear={reset} />
 
 <button on:click={filterEvents}>Filtered</button>
 <div class="tile is-ancestor is-vertical">
