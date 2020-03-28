@@ -27,6 +27,6 @@
   }
 </style>
 
-<div class={classNames} `>
+<div class={classNames}>
   {@html wysiwyg}
 </div>

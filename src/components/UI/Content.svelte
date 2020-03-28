@@ -2,6 +2,9 @@
   import TextModule from "./ContentModules/TextModule.svelte";
   import TextImageModule from "./ContentModules/TextImageModule.svelte";
   import InlineImageModule from "./ContentModules/InlineImageModule.svelte";
+  import { flip } from "svelte/animate";
+  import { onMount } from "svelte";
+  import lozad from "lozad";
 
   export let queriedContent;
 
@@ -14,6 +17,11 @@
     { type: "image_right", component: TextImageModule },
     { type: "full_width", component: InlineImageModule }
   ];
+
+  onMount(() => {
+    const observer = lozad();
+    observer.observe();
+  });
 
   queriedContent.map(qc => {
     layout = moduleMapping.filter(m => m.type == qc.type);
@@ -37,53 +45,28 @@
       padding-bottom: 50px;
     }
   }
+
+  section {
+    margin-top: -50px;
+    opacity: 0;
+    transition: margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94),
+      opacity 1s ease-in;
+    &.loaded {
+      opacity: 1;
+      margin-top: 0;
+    }
+  }
 </style>
 
-{#each queriedContent as content}
-
-  <section class={`columns is-centered pad-${content.details.padding}`}>
+{#each queriedContent as content, i (content.id)}
+  <section
+    data-toggle-class="loaded"
+    animate:flip
+    class:loaded={i < 3}
+    class:lozad={i >= 3}
+    class={`columns is-centered pad-${content.details.padding}`}>
     {#if content.component}
-      <svelte:component this={content.component} {content} />
+      <svelte:component this={content.component} {content} lazy={i >= 3} />
     {/if}
   </section>
 {/each}
-
-<!-- <section>
-  <div class="container columns is-vcentered">
-    {#if type == 'text_only'}
-      <div class="column">
-        {@html text}
-      </div>
-    {:else if type == 'image_left'}
-      <div class="column is-half">
-        <figure class="image is-3by4">
-          <img src={imageOne.data.full_url} alt="" />
-        </figure>
-
-      </div>
-      <div class="column is-half">
-        {@html text}
-      </div>
-    {:else if type == 'image_right'}
-      <div class="column is-half">
-        {@html text}
-      </div>
-      <div class="column is-half">
-        <figure class="image is-3by4">
-          <img src={imageOne.data.full_url} alt="" />
-        </figure>
-      </div>
-    {:else if type == 'double_image'}
-      <div class="column is-half">
-        <figure class="image is-3by4">
-          <img src={imageOne.data.full_url} alt="" />
-        </figure>
-      </div>
-      <div class="column is-half">
-        <figure class="image is-3by4">
-          <img src={imageTwo.data.full_url} alt="" />
-        </figure>
-      </div>
-    {/if}
-  </div>
-</section> -->
