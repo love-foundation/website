@@ -1,17 +1,38 @@
 <script>
-  export let text = "";
-  export let imageOne = null;
-  export let imageTwo = null;
-  export let type = "text_only";
+  import TextModule from "./ContentModules/TextModule.svelte"
+  export let queriedContent;
+
+  let layout;
+  let moduleMapping = [
+    {type: "text_only", component: TextModule}
+
+  ];
+
+ // {type: "image_left", component: TextImageModule},
+    // {type: "image_right", component: TextImageModule},
+    // {type: "double_image", component: DoubleImageModule},
+    // {type: "image_caption", component: CaptionModule},
+    // {type: "image_only", component: InlineImageModule},
+    // {type: "full_width", component: FullWidthModule}
+queriedContent.map((qc) => {
+  layout = moduleMapping.filter(m => m.type == qc.type)
+  if (layout[0]) {
+    qc.component = layout[0].component;
+  }
+})
 </script>
 
-<style lang="scss">
-.image img {
-   object-fit: contain;
-}
+<style>
 </style>
 
-<section>
+
+{#each queriedContent as content}
+  {#if content.component}
+   <svelte:component this={content.component} content={content.details} />
+  {/if}
+{/each}
+
+<!-- <section>
   <div class="container columns is-vcentered">
     {#if type == 'text_only'}
       <div class="column">
@@ -49,4 +70,4 @@
       </div>
     {/if}
   </div>
-</section>
+</section> -->
