@@ -6,7 +6,6 @@ export async function get(req, res, next) {
     slug: "test"
   });
 
-  console.log(pageContent);
   const queriedContent = pageContent[0].content;
 
   if (queriedContent !== null) {
@@ -21,7 +20,8 @@ export async function get(req, res, next) {
             textLayout: content.text_layout,
             imageOne: content.image,
             imageTwo: content.image_two,
-            padding: content.distance_to_next
+            padding: content.distance_to_next,
+            captions: content.captions
           }
 
         }))
