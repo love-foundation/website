@@ -43,25 +43,35 @@
   });
 
   $: {
+    categories = []
+    filteredEvents.map(event => {
+      if (event.category) {
+        categories = [...categories, event.category];
+      }
+    });
+
+    console.log("recalculating hubs", categories);
+    categories = [...new Set(categories)];
+    }
+
+  $: {
     eventGroups = [];
     for (let i = 0, len = filteredEvents.length; i < len; i += 5) {
       eventGroups = [...eventGroups, filteredEvents.slice(i, i + 5)];
     }
   };
 
-
-  $: filteredEvents =
+  $: {
+    console.log("recalculating filteredEvents")
+    filteredEvents =
     eventsArray.filter(e => {
       return Object.entries(currentFilters)
         .every(([filterName, value]) => e[filterName] == value || value == undefined)
     });
+  }
 
-  function filterEvents(filter) {
-    if (filter.hub) {
-      currentFilters.hub = filter.hub;
-    } else {
-      currentFilters.category = filter.category;
-    }
+  function updateFilters(filter) {
+    currentFilters = { ...currentFilters, ...filter };
 
     console.debug("filters updated", currentFilters);
   }
@@ -74,16 +84,19 @@
   }
 
   let filters = {};
-  $: filters = {
-    hub: {
-      placeholder: 'Location',
-      options: hubs
-    },
-    category: {
-      placeholder: 'Genre',
-      options: categories
-    }
-  };
+  $: {
+    console.log("recalculating filters");
+    filters = {
+      hub: {
+        placeholder: 'Location',
+        options: hubs
+      },
+      category: {
+        placeholder: 'Genre',
+        options: categories
+      }
+    };
+  }
 </script>
 
 <style lang="scss">
@@ -100,13 +113,12 @@
   title={'Events'}
   filters={filters}
   on:selected={data => {
-    filterEvents(data.detail);
+    updateFilters(data.detail);
   }}
   on:clear={data => {
     reset(data.detail);
   }} />
 
-<button on:click={filterEvents}>Filtered</button>
 <div class="tile is-ancestor is-vertical">
   {#each eventGroups as eventGroup, i (Math.random())}
     <GridGroup itemGroup={eventGroup} groupIndex={i} />
