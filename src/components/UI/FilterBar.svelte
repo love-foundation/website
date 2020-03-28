@@ -78,7 +78,7 @@
         placeholder={placeholderTwo}
         bind:selectedValueTwo
         on:select={data => {selectedTwo(data)}}
-        on:clear={() => {dispatch("clear", "one")}} />
+        on:clear={() => {dispatch("clear", "two")}} />
     </div>
   </div>
   <div class="column is-2">
