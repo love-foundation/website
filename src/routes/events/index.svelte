@@ -28,7 +28,6 @@
   let categories = [];
   let hubs = [];
   let filteredEvents;
-  let filtered = false;
   let currentFilters = {};
 
   onMount(() => {
@@ -43,63 +42,39 @@
     categories = [...new Set(categories)];
   });
 
-  // $: eventGroups = filtered
-  //   ? () => {
-  //     console.log("here")
-  //       for (let i = 0, len = filteredEvents.length; i < len; i += 5) {
-  //         eventGroups = [...eventGroups, filteredEvents.slice(i, i + 5)];
-  //       }
-  //       return eventGroups
-  //     }
-  //   : eventsArray => {
-  //     console.log("there")
-  //     console.log(eventsArray)
-  //     let output;
-
-  //       return eventGroups
-  //     };
-
-  // $:  eventsArray.length = eventsArray.length ? () => {
-  //     console.log(eventsArray.length)
-  //    } : console.log("test")
-
-  $: if (filtered) {
+  $: {
     eventGroups = [];
     for (let i = 0, len = filteredEvents.length; i < len; i += 5) {
       eventGroups = [...eventGroups, filteredEvents.slice(i, i + 5)];
     }
-  } else {
-    eventGroups = [];
-    for (let i = 0, len = eventsArray.length; i < len; i += 5) {
-      eventGroups = [...eventGroups, eventsArray.slice(i, i + 5)];
-    }
-  }
+  };
 
-  function filterEvents(filter) {
-      if (filter.hub) {
-        currentFilters.hub = filter.hub;
-      } else {
-        currentFilters.category = filter.category;
-      }
+  $: filteredEvents =
+    eventsArray.filter(e => {
+      const filterHub = !!currentFilters.hub;
+      const filterCategory = !!currentFilters.category;
 
-    console.log(currentFilters);
-
-    filteredEvents = eventsArray.filter(e => {
-      if (currentFilters.hub != "" && currentFilters.category != "") {
+      if (filterHub && filterCategory) {
         return (
           e.hub == currentFilters.hub && e.category == currentFilters.category
         );
-      } else if (currentFilters.hub == "" && currentFilters.category != "") {
+      } else if (filterCategory) {
         return e.category == currentFilters.category;
-      } else if (currentFilters.hub != "" && currentFilters.category == "") {
+      } else if (filterHub) {
         return e.hub == currentFilters.hub;
       } else {
         return true;
       }
     });
 
-    console.log(filteredEvents);
-    filtered = true;
+  function filterEvents(filter) {
+    if (filter.hub) {
+      currentFilters.hub = filter.hub;
+    } else {
+      currentFilters.category = filter.category;
+    }
+
+    console.log("filters updated", currentFilters);
   }
 
   function reset(filter) {
@@ -109,7 +84,6 @@
       delete currentFilters.category
     }
     filterEvents(currentFilters);
-    filtered = false;
   }
 
 </script>
