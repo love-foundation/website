@@ -67,16 +67,23 @@
   }
 
   function reset(filter) {
-    if (filter == "one") {
-      delete currentFilters.hub
-    } else {
-      delete currentFilters.category
-    }
+    delete currentFilters[filter];
 
     // force an update
     currentFilters = { ... currentFilters };
   }
 
+  let filters = {};
+  $: filters = {
+    hub: {
+      placeholder: 'Location',
+      options: hubs
+    },
+    category: {
+      placeholder: 'Genre',
+      options: categories
+    }
+  };
 </script>
 
 <style lang="scss">
@@ -91,10 +98,7 @@
 
 <FilterBar
   title={'Events'}
-  filterOne={hubs}
-  filterTwo={categories}
-  placeholderOne={'Location'}
-  placeholderTwo={'Genre'}
+  filters={filters}
   on:selected={data => {
     filterEvents(data.detail);
   }}
