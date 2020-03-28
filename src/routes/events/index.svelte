@@ -1,12 +1,4 @@
 <script context="module">
-  // export function preload({ params, query }) {
-  //   return this.fetch(`events.json`)
-  //     .then(r => r.json())
-  //     .then(events => {
-  //       return { events };
-  //     });
-  // }
-
   export function preload(_, session) {
     const events = session.events;
 
@@ -62,8 +54,6 @@
     } else {
       currentFilters.category = filter.category;
     }
-
-    console.debug("filters updated", currentFilters);
   }
 
   function reset(filter) {
