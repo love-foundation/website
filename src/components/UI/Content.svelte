@@ -1,20 +1,20 @@
 <script>
   import TextModule from "./ContentModules/TextModule.svelte";
   import TextImageModule from "./ContentModules/TextImageModule.svelte";
+  import InlineImageModule from "./ContentModules/InlineImageModule.svelte";
+
   export let queriedContent;
 
   let layout;
   let moduleMapping = [
     { type: "text_only", component: TextModule },
     { type: "image_left", component: TextImageModule },
-    { type: "image_right", component: TextImageModule }
+    { type: "image_only", component: InlineImageModule },
+    { type: "double_image", component: InlineImageModule },
+    { type: "image_right", component: TextImageModule },
+    { type: "full_width", component: InlineImageModule }
   ];
 
-  //
-  // {type: "double_image", component: DoubleImageModule},
-  // {type: "image_caption", component: CaptionModule},
-  // {type: "image_only", component: InlineImageModule},
-  // {type: "full_width", component: FullWidthModule}
   queriedContent.map(qc => {
     layout = moduleMapping.filter(m => m.type == qc.type);
     if (layout[0]) {

@@ -5,6 +5,7 @@
   let imageTwo;
   let imageOneCaption;
   let imageTwoCaption;
+  let fullWidth;
   let double;
 
   imageOne = content.details.imageOne;
@@ -16,6 +17,7 @@
     ? content.details.captions.imageTwoCaption
     : null;
   double = content.type == "double_image" ? true : false;
+  fullWidth = content.type == "full_width" ? true : false;
 </script>
 
 <style lang="scss">
@@ -36,7 +38,7 @@
   }
 </style>
 
-<div class={`column is-half`}>
+<div class={`column`} class:is-half={!fullWidth}>
   <figure class="image">
     <img src={imageOne.data.full_url} alt="" />
   </figure>
