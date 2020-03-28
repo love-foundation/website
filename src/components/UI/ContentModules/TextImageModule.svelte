@@ -5,7 +5,6 @@
   let caption;
   let text;
   let type;
-  console.log(content);
 
   imageOne = content.details.imageOne;
   caption = content.details.captions
