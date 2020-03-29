@@ -13,6 +13,8 @@
 
 <script>
   import HeroModule from "../../components/UI/ContentModules/HeroModule.svelte";
+  import ArtistItem from "../../components/UI/ArtistItem.svelte";
+
   export let event;
 
   let heroContent = {};
@@ -43,6 +45,10 @@
     align-items: center;
     position: relative;
   }
+
+  h2 {
+    text-align: center
+  }
 </style>
 
 <svelte:head>
@@ -71,9 +77,13 @@
       <h2>Time: {event.endtime}</h2>
     </div>
     <div class="column is-4">
-      {#each event.artists as artist}
-        <a rel="prefetch" href={`/artists/${artist.id}`}>{artist.name}</a>
-      {/each}
+
     </div>
   </div>
+</div>
+<h2>Artists that supported this event</h2>
+<div class="columns is-multiline">
+  {#each event.artists as artist}
+    <ArtistItem {artist} />
+  {/each}
 </div>

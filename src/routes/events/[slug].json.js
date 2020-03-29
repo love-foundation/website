@@ -19,7 +19,7 @@ export async function get(req, res, next) {
       artists: e.artists.map(artist => ({
         id: artist.artists_id.id,
         name: artist.artists_id.artist_name,
-        imageUrls: artist.artists_id.image.data
+        imageUrls: artist.artists_id.image ? artist.artists_id.image.data.thumbnails[3].url : "placeholder_artists.jpeg"
       }))
     })
 
