@@ -3,26 +3,77 @@
     const res = await this.fetch(`/events/${params.slug}.json`);
     const data = await res.json();
 
-   	if (res.status === 200) {
-			return { event: data[0] };
-		} else {
-			this.error(res.status, data.message);
-		}
-	}
+    if (res.status === 200) {
+      return { event: data[0] };
+    } else {
+      this.error(res.status, data.message);
+    }
+  }
 </script>
-
 
 <script>
+  import HeroModule from "../../components/UI/ContentModules/HeroModule.svelte";
   export let event;
+
+  let heroContent = {};
+
+  heroContent.image = event.imageUrls.full_url;
 </script>
 
+<style lang="scss">
+  .info {
+    background: $light-grey;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    .columns {
+      max-width: $content-width;
+      margin: 0 auto;
+      padding: 2em;
+    }
+  }
 
-<style>
-img {
-  width: 100%;
-  height: auto;
-}
+  .head {
+    background: $light-grey;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    display: flex;
+    height: 100px;
+    border-bottom: 0.5px solid $dark-grey;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
 </style>
 
-<h1>{event.name}</h1>
-<img src="{event.poster.data.full_url}" alt="">
+<svelte:head>
+  <title>{event.name}</title>
+</svelte:head>
+
+<HeroModule content={heroContent} />
+<div class="head">
+  <h1>{event.name}</h1>
+</div>
+<div class="info">
+  <div class="columns is-vertical is-multiline is-centered">
+    <div class="column is-4">
+      <h2>Hub: {event.hub}</h2>
+    </div>
+    <div class="column is-4">
+      <h2>Location: {event.location}</h2>
+    </div>
+    <div class="column is-4">
+      <h2>Genre: {event.category}</h2>
+    </div>
+    <div class="column is-4">
+      <h2>Date: {event.starttime}</h2>
+    </div>
+    <div class="column is-4">
+      <h2>Time: {event.endtime}</h2>
+    </div>
+    <div class="column is-4">
+      {#each event.artists as artist}
+        <a rel="prefetch" href={`/artists/${artist.id}`}>{artist.name}</a>
+      {/each}
+    </div>
+  </div>
+</div>
