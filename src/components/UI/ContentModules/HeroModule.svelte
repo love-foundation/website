@@ -5,9 +5,7 @@
 
   let { image, bgColor, heading } = content;
   let bgImage;
-  console.log(image);
-  console.log(bgColor);
-  console.log(heading);
+
 
   onMount(() => {
     if (bgColor) {
@@ -30,6 +28,7 @@
     display: flex;
     align-items: center;
     position: relative;
+    overflow: hidden;
 
     .backdrop {
       background-color: var(--hero-bgcolor);
@@ -44,7 +43,8 @@
       background-position: center;
       z-index: 0;
       &.image {
-        filter: blur(10px);
+        filter: blur(5px);
+        margin: -5px -10px -10px -5px;
       }
     }
 
@@ -52,7 +52,6 @@
       width: 70%;
       margin: 0 auto;
       padding: 20%;
-      filter: none;
       z-index: 5;
     }
   }
