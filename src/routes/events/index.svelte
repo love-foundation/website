@@ -1,8 +1,8 @@
 <script context="module">
-  export function preload(_, session) {
-    const events = session.events;
+  export function preload( session) {
+    const pageFilters = session.query
 
-    return { events };
+   return { pageFilters };
   }
 </script>
 
@@ -10,8 +10,10 @@
   import GridGroup from "../../components/UI/Grid/GridGroup.svelte";
   import { stores } from "@sapper/app";
   import FilterBar from "../../components/UI/FilterBar.svelte";
-  const { session } = stores();
-  import { onMount } from "svelte";
+  const { session, page } = stores();
+  import { onMount, beforeUpdate } from "svelte";
+
+  export let pageFilters;
 
   let events = $session.events;
   let eventsArray = events;
@@ -20,7 +22,7 @@
   let categories = [];
   let hubs = [];
   let filteredEvents;
-  let currentFilters = {};
+  let currentFilters = {...pageFilters};
 
   onMount(() => {
     eventsArray.map(event => {
@@ -34,19 +36,36 @@
     categories = [...new Set(categories)];
   });
 
+  beforeUpdate(() => {
+    let params = { ...currentFilters };
+    let url = new URL(window.location.href);
+
+    if (params.hub) {
+      url.searchParams.set("hub", params.hub);
+    } else if (url.searchParams.has("hub")) {
+      url.searchParams.delete("hub");
+    }
+
+    if (params.category) {
+      url.searchParams.set("category", params.category);
+    } else if (url.searchParams.has("category")) {
+      url.searchParams.delete("category");
+    }
+    window.history.pushState({}, null, url);
+  });
+
+  $: filteredEvents = eventsArray.filter(e => {
+    return Object.entries(currentFilters).every(
+      ([filterName, value]) => e[filterName] == value || value == undefined
+    );
+  });
+
   $: {
     eventGroups = [];
     for (let i = 0, len = filteredEvents.length; i < len; i += 5) {
       eventGroups = [...eventGroups, filteredEvents.slice(i, i + 5)];
     }
-  };
-
-
-  $: filteredEvents =
-    eventsArray.filter(e => {
-      return Object.entries(currentFilters)
-        .every(([filterName, value]) => e[filterName] == value || value == undefined)
-    });
+  }
 
   function filterEvents(filter) {
     if (filter.hub) {
@@ -60,18 +79,20 @@
     delete currentFilters[filter];
 
     // force an update
-    currentFilters = { ... currentFilters };
+    currentFilters = { ...currentFilters };
   }
 
   let filters = {};
   $: filters = {
     hub: {
-      placeholder: 'Location',
-      options: hubs
+      placeholder: "Location",
+      options: hubs,
+      value: pageFilters.hub
     },
     category: {
-      placeholder: 'Genre',
-      options: categories
+      placeholder: "Genre",
+      options: categories,
+      value: pageFilters.category
     }
   };
 </script>
@@ -88,7 +109,7 @@
 
 <FilterBar
   title={'Events'}
-  filters={filters}
+  {filters}
   on:selected={data => {
     filterEvents(data.detail);
   }}
@@ -96,7 +117,6 @@
     reset(data.detail);
   }} />
 
-<button on:click={filterEvents}>Filtered</button>
 <div class="tile is-ancestor is-vertical">
   {#each eventGroups as eventGroup, i (Math.random())}
     <GridGroup itemGroup={eventGroup} groupIndex={i} />

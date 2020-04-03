@@ -49,10 +49,11 @@
   <h2 class="column is-2">{title}</h2>
   <div class="column" />
 
-  {#each Object.entries(filters) as [key, { options, placeholder }]}
+  {#each Object.entries(filters) as [key, { options, placeholder, value }]}
     <div class="column is-2">
     <div class="select">
       <Select
+        selectedValue={value}
         items={options}
         placeholder={placeholder}
         on:select={e => { selected(key, e) }}
