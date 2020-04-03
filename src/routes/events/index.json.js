@@ -2,7 +2,7 @@ import { fetchItems } from '../../_directus';
 
 
 export async function get(req, res, next) {
-	const events = await fetchItems("events", "id, name, poster.data.*, event_type, hubs.*.*", {
+	const events = await fetchItems("events", "id, name, poster.data.*, event_type, hubs.*.*, startdatetime", {
 		on_website: 1
 	});
 
@@ -15,7 +15,8 @@ export async function get(req, res, next) {
 					title: event.name,
 					imageUrls: event.poster.data,
 					hub: event.hubs[0] ? event.hubs[0].hubs_id.city : null,
-					category: event.event_type
+					category: event.event_type,
+					starttime: event.startdatetime
 				}))
 			)
 		);
