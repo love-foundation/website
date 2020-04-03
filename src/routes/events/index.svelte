@@ -10,7 +10,7 @@
   import GridGroup from "../../components/UI/Grid/GridGroup.svelte";
   import { stores } from "@sapper/app";
   import FilterBar from "../../components/UI/FilterBar.svelte";
-  const { session, page } = stores();
+  const { session } = stores();
   import { onMount, beforeUpdate } from "svelte";
 
   export let pageFilters;
