@@ -1,13 +1,14 @@
 <script context="module">
-  export function preload( session) {
-    const pageFilters = session.query
+  export function preload(session) {
+    const pageFilters = session.query;
 
-   return { pageFilters };
+    return { pageFilters };
   }
 </script>
 
 <script>
   import GridGroup from "../../components/UI/Grid/GridGroup.svelte";
+  import { dynamicSort } from "../../lib/helpers/sharedFunctions.js";
   import { stores } from "@sapper/app";
   import FilterBar from "../../components/UI/FilterBar.svelte";
   const { session } = stores();
@@ -22,7 +23,12 @@
   let categories = [];
   let hubs = [];
   let filteredEvents;
-  let currentFilters = {...pageFilters};
+  let currentFilters = { ...pageFilters };
+  let reverse = false;
+
+  $: eventsArray = reverse
+    ? eventsArray.sort(dynamicSort("starttime"))
+    : eventsArray.sort(dynamicSort("starttime")).reverse();
 
   onMount(() => {
     eventsArray.map(event => {
@@ -115,6 +121,9 @@
   }}
   on:clear={data => {
     reset(data.detail);
+  }}
+  on:sort={() => {
+    reverse = !reverse;
   }} />
 
 <div class="tile is-ancestor is-vertical">
