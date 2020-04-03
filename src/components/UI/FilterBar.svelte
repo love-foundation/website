@@ -63,6 +63,6 @@
   {/each}
 
   <div class="column is-2">
-    <div class="select">Sort</div>
+    <div class="select" on:click={() =>{dispatch("sort")}}>Sort</div>
   </div>
 </div>
