@@ -18,7 +18,7 @@
     --border: none;
     --placeholderColor: black;
     --inputFontSize: 3.6rem;
-    --height: 44px;
+    --height: 54px;
     --itemIsActiveColor: #0597F2;
     --itemHoverBG: #0597F2;
   }
@@ -63,6 +63,6 @@
   {/each}
 
   <div class="column is-2">
-    <div class="select" on:click={() =>{dispatch("sort")}}>Sort</div>
+    <h2 class="select" on:click={() =>{dispatch("sort")}}>Sort</h2>
   </div>
 </div>
