@@ -26,9 +26,6 @@
 <script>
   import Nav from "../components/UI/Nav.svelte";
   import Footer from "../components/UI/Footer.svelte";
-  import { stores } from "@sapper/app";
-
-  const { session } = stores();
 
   export let segment;
 

@@ -1,11 +1,12 @@
 import { fetchItems } from '../../_directus';
+import { dynamicSort } from "../../lib/helpers/sharedFunctions.js";
 
 
 export async function get(req, res, next) {
 	const events = await fetchItems("events", "id, name, poster.data.*, event_type, hubs.*.*, startdatetime", {
 		on_website: 1
 	});
-
+	events.sort(dynamicSort("startdatetime")).reverse();
 	if (events !== null) {
 		res.setHeader('Content-Type', 'application/json');
 		res.end(

@@ -8,7 +8,6 @@
 
 <script>
   import GridGroup from "../../components/UI/Grid/GridGroup.svelte";
-  import { dynamicSort } from "../../lib/helpers/sharedFunctions.js";
   import { stores } from "@sapper/app";
   import FilterBar from "../../components/UI/FilterBar.svelte";
   const { session } = stores();
@@ -27,10 +26,11 @@
   let reverse = false;
 
   $: eventsArray = reverse
-    ? eventsArray.sort(dynamicSort("starttime"))
-    : eventsArray.sort(dynamicSort("starttime")).reverse();
+    ? eventsArray.reverse()
+    : eventsArray
 
   onMount(() => {
+
     eventsArray.map(event => {
       hubs = [...hubs, event.hub];
       if (event.category) {
