@@ -12,11 +12,16 @@
 </script>
 
 <script>
+  import HeroModule from "../../components/UI/ContentModules/HeroModule.svelte";
   import Content from "../../components/UI/Content.svelte";
   export let project;
 
   let { name, imageUrl, content, pillar } = project;
-  console.log(project);
+
+  let heroContent = {};
+
+  heroContent.image = imageUrl;
+  heroContent.heading = name;
 </script>
 
 <style>
@@ -30,7 +35,6 @@
   <title>Projects &mdash; {name}</title>
 </svelte:head>
 
-<h1>{name}</h1>
-<img src={imageUrl} alt="{name} image" />
+<HeroModule content={heroContent} />
 
 <Content queriedContent={content} />
