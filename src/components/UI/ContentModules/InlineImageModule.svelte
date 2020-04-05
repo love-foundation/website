@@ -2,8 +2,6 @@
   export let content;
   export let lazy;
 
-  console.log(lazy);
-
   let imageOne;
   let imageTwo;
   let imageOneCaption;
