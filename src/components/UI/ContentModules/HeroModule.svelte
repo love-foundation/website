@@ -11,8 +11,7 @@
     if (bgColor) {
       console.log("I'm running bg color");
       document.documentElement.style.setProperty("--hero-bgcolor", bgColor);
-    } else if (heading) {
-    } else {
+    } else if (!heading){
       bgImage = 'url("' + image + '"';
       document.documentElement.style.setProperty("--hero-bgimage", bgImage);
     }
@@ -32,6 +31,9 @@
     overflow: hidden;
 
     &.bgimage {
+      .backdrop {
+        background-image: var(--hero-bgimage);
+      }
       img {
         width: 70%;
         margin: 0 auto;
@@ -51,11 +53,13 @@
         color: $white;
         text-shadow: 2px 2px 2px $black;
       }
+      img {
+        width: 100% !important;
+      }
     }
 
     .backdrop {
       background-color: var(--hero-bgcolor);
-      background-image: var(--hero-bgimage);
       position: absolute;
       top: 0;
       left: 0;
