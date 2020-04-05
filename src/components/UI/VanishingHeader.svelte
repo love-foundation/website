@@ -9,6 +9,7 @@
 
   let dispatch = createEventDispatcher();
 
+  let subpage = "";
   let headerClass = "show";
 
   let y = 0;
@@ -50,6 +51,8 @@
   } else {
     headerClass = updateClass(y);
   }
+
+  subpage = segment ? "&mdash; " + segment : ""
 </script>
 
 <style lang="scss">
@@ -201,7 +204,7 @@
 <header>
   <div use:setTransitionDuration class={headerClass}>
     <a class="homelink" href="/">
-      <h2>Love Foundation &mdash; {segment}</h2>
+      <h2>Love Foundation {@html subpage}</h2>
     </a>
 
     <div class="side">
