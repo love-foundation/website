@@ -32,3 +32,7 @@ $family-primary: 'Theinhardt', sans-serif;
 @import "./node_modules/bulma/sass/elements/image.sass";
 
 @import "./node_modules/bulma/sass/components/card.sass";
+
+// Utilities
+
+@import "utilities.scss";

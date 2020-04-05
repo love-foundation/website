@@ -32,20 +32,6 @@
 </script>
 
 <style lang="scss">
-  .pad {
-    &-large {
-      padding-bottom: 150px;
-    }
-
-    &-medium {
-      padding-bottom: 100px;
-    }
-
-    &-small {
-      padding-bottom: 50px;
-    }
-  }
-
   section {
     margin-top: -50px;
     opacity: 0;
@@ -64,7 +50,7 @@
     animate:flip
     class:loaded={i < 3}
     class:lozad={i >= 3}
-    class={`columns is-centered pad-${content.details.padding}`}>
+    class={`columns is-centered pad--bottom--${content.details.padding}`}>
     {#if content.component}
       <svelte:component this={content.component} {content} lazy={i >= 3} />
     {/if}

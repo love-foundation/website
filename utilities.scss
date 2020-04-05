@@ -1,0 +1,17 @@
+$sizes: ("large", 150px), ("medium", 100px), ("small", 50px);
+$directions: "top", "bottom", "left", "right";
+
+@each $size in $sizes {
+  @each $dir in $directions {
+    $name: nth($size, 1);
+    $val: nth($size, 2);
+
+    .push--#{$dir}--#{$name} {
+      margin-#{$dir}: $val;
+    }
+
+    .pad--#{$dir}--#{$name} {
+      padding-#{$dir}: $val;
+    }
+  }
+}
