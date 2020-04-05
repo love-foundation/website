@@ -107,7 +107,7 @@
   </div>
 </div>
 
-{#if events}
+{#if events.length}
 <h2 class="pad--bottom--small pad--top--small">Events that this artist supported</h2>
 <div class="tile is-ancestor wrap">
   {#each events as event}
