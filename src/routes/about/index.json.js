@@ -3,7 +3,7 @@ import { fetchItems } from '../../_directus';
 
 export async function get(req, res, next) {
   const pageContent = await fetchItems("pages", "slug, content.*.*.*", {
-    slug: "test"
+    slug: "about"
   });
 
   const queriedContent = pageContent[0].content;
