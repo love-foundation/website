@@ -2,6 +2,7 @@
   import TextModule from "./ContentModules/TextModule.svelte";
   import TextImageModule from "./ContentModules/TextImageModule.svelte";
   import InlineImageModule from "./ContentModules/InlineImageModule.svelte";
+  import HeroModule from "./ContentModules/HeroModule.svelte";
   import { flip } from "svelte/animate";
   import { onMount } from "svelte";
   import lozad from "lozad";
@@ -15,7 +16,8 @@
     { type: "image_only", component: InlineImageModule },
     { type: "double_image", component: InlineImageModule },
     { type: "image_right", component: TextImageModule },
-    { type: "full_width", component: InlineImageModule }
+    { type: "full_width", component: InlineImageModule },
+    { type: "full_bleed_hero", component: HeroModule }
   ];
 
   onMount(() => {
@@ -50,7 +52,8 @@
     animate:flip
     class:loaded={i < 3}
     class:lozad={i >= 3}
-    class={`columns is-centered pad--bottom--${content.details.padding}`}>
+    class:is-centered={content.type != 'full_bleed_hero'}
+    class={`columns pad--bottom--${content.details.padding}`}>
     {#if content.component}
       <svelte:component this={content.component} {content} lazy={i >= 3} />
     {/if}
