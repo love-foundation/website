@@ -13,14 +13,13 @@
     image = content.details.imageOne.data.full_url;
     heading = content.details.text ? content.details.text : false;
   } else {
-    ({ image, bgColor, heading } = {...content});
+    ({ image, bgColor, heading } = { ...content });
   }
 
   heroClass = bgColor ? "bgcolor" : heading ? "title" : "bgimage";
 
   onMount(() => {
     if (bgColor) {
-      console.log("I'm running bg color");
       document.documentElement.style.setProperty("--hero-bgcolor", bgColor);
     } else if (!heading) {
       bgImage = 'url("' + image + '"';
@@ -40,18 +39,12 @@
     align-items: center;
     position: relative;
     overflow: hidden;
-    flex-shrink: 0;
-
-    &.bgimage {
-      .backdrop {
-        background-image: var(--hero-bgimage);
-      }
-      img {
-        width: 70%;
-        margin: 0 auto;
-        padding: 20%;
-        z-index: 5;
-      }
+    flex-shrink: 0; // needed when it is used as part of content
+    img {
+      width: 70%;
+      padding: 20%;
+      margin: 0 auto;
+      z-index: 5;
     }
 
     &.title {
@@ -81,9 +74,11 @@
       background-size: cover;
       background-position: center;
       z-index: 0;
+
       &.image {
         filter: blur(5px);
         margin: -5px -10px -10px -5px;
+        background-image: var(--hero-bgimage);
       }
     }
   }
