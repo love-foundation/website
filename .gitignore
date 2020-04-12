@@ -1,7 +1,6 @@
 # Node
 /node_modules/
 package-lock.json
-yarn.lock
 
 # Sapper
 /src/node_modules/@sapper/
