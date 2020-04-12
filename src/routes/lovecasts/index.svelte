@@ -10,6 +10,7 @@
 
 <script>
   import GridGroup from "../../components/UI/Grid/GridGroup.svelte";
+
   export let lovecasts;
 
   let lovecastsArray = lovecasts;
