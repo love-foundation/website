@@ -8,13 +8,14 @@
   let { id, title, subtitle = item.hub ? item.hub : null, soundcloud } = item;
 
   if (item.imageUrls) {
-    imageUrl = item.imageUrls.full_url;
+    imageUrl = item.imageUrls.thumbnails[7].url;
   } else {
     imageUrl = item.imageUrl;
   }
 
   let link = soundcloud ? soundcloud : `/events/${id}`;
   let imageRatio = soundcloud ? "is-square" : "is-3by4";
+
 </script>
 
 <style lang="scss">
