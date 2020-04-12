@@ -1,7 +1,7 @@
 import { fetchItems } from '../../_directus';
 
 export async function get(req, res, next) {
-  const artist = await fetchItems("artists", "id, artist_name, image.data.*, current_location, type_of_art, events.events_id.*.*.*, soundcloud_url, facebook_url, level_of_involvement", {
+  const artist = await fetchItems("artists", "id, artist_name, image.data.*, current_location, type_of_art, events.events_id.*.*.*, soundcloud_url, facebook_url, level_of_involvement, hero_background_color", {
     id: req.params.slug
   });
 
@@ -15,6 +15,7 @@ export async function get(req, res, next) {
       category: a.type_of_art,
       facebook: a.facebook_url,
       soundcloud: a.soundcloud_url,
+      heroColor: a.hero_background_color  || null,
       events: a.events.map(event => ({
         id: event.events_id.id,
         title: event.events_id.name,

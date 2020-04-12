@@ -26,12 +26,14 @@
     status,
     soundcloud,
     facebook,
-    events
+    events,
+    heroColor
   } = artist;
 
   let heroContent = {};
 
   heroContent.image = image;
+  heroContent.bgColor = heroColor;
 </script>
 
 <style lang="scss">
