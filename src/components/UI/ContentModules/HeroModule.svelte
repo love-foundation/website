@@ -39,6 +39,7 @@
     position: relative;
     overflow: hidden;
     flex-shrink: 0; // needed when it is used as part of content
+
     img {
       width: 70%;
       padding: 20%;
@@ -46,8 +47,7 @@
       z-index: 5;
     }
 
-    &.title {
-      h1 {
+    h1 {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -56,9 +56,15 @@
         text-align: center;
         color: $white;
         text-shadow: 2px 2px 2px $black;
+        z-index: 10;
       }
+
+    &.title {
       img {
         width: 100% !important;
+        padding: unset;
+        margin: unset;
+        z-index: unset;
       }
     }
 
@@ -72,7 +78,6 @@
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
-      z-index: 0;
 
       &.image {
         filter: blur(5px);
