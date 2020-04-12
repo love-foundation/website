@@ -14,7 +14,7 @@ export async function get(req, res, next) {
           id: project.id,
           slug: project.slug,
           name: project.name,
-          imageUrl: project.main_image.data.full_url,
+          imageUrl: project.main_image ? project.main_image.data.full_url : "placeholder_projects.jpeg",
           pillar: project.pillar,
           heroColor: project.hero_background_color || null,
           content: project.content.map(content => ({
