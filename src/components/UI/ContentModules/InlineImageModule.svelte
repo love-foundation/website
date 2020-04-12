@@ -9,8 +9,8 @@
   let fullWidth;
   let double;
 
-  imageOne = content.details.imageOne;
-  imageTwo = content.details.imageTwo;
+  imageOne = content.details.imageOne.data ? content.details.imageOne.data.full_url : null;
+  imageTwo = content.details.imageTwo ? content.details.imageTwo.data.full_url : null;
   imageOneCaption = content.details.captions
     ? content.details.captions.imageOneCaption
     : null;
@@ -57,9 +57,9 @@
     class:lozad={lazy}
     class="image">
     {#if lazy}
-      <img class="lozad" data-src={imageOne.data.full_url} alt="" />
+      <img class="lozad" data-src={imageOne} alt="" />
     {:else}
-      <img src={imageOne.data.full_url} alt="" />
+      <img src={imageOne} alt="" />
     {/if}
   </figure>
 </div>
@@ -71,9 +71,9 @@
       class:lozad={lazy}
       class="image">
       {#if lazy}
-        <img class="lozad" data-src={imageTwo.data.full_url} alt="" />
+        <img class="lozad" data-src={imageTwo} alt="" />
       {:else}
-        <img src={imageTwo.data.full_url} alt="" />
+        <img src={imageTwo} alt="" />
       {/if}
     </figure>
   </div>
