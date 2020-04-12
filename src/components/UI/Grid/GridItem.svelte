@@ -4,14 +4,7 @@
   export let item = null;
   export let cardClass = "";
 
-  let imageUrl;
-  let { id, title, subtitle = item.hub ? item.hub : null, soundcloud } = item;
-
-  if (item.imageUrls) {
-    imageUrl = item.imageUrls.thumbnails[7].url;
-  } else {
-    imageUrl = item.imageUrl;
-  }
+  let { id, title, subtitle = item.hub ? item.hub : null, soundcloud, imageUrl } = item;
 
   let link = soundcloud ? soundcloud : `/events/${id}`;
   let imageRatio = soundcloud ? "is-square" : "is-3by4";
