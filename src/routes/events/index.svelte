@@ -11,7 +11,8 @@
   import { stores } from "@sapper/app";
   import FilterBar from "../../components/UI/FilterBar.svelte";
   const { session } = stores();
-  import { onMount, beforeUpdate } from "svelte";
+  import { onMount, beforeUpdate, afterUpdate } from "svelte";
+  import lozad from "lozad";
 
   export let pageFilters;
 
@@ -25,21 +26,21 @@
   let currentFilters = { ...pageFilters };
   let reverse = false;
 
-  $: eventsArray = reverse
-    ? eventsArray.reverse()
-    : eventsArray
+  $: eventsArray = reverse ? eventsArray.reverse() : eventsArray;
+
+  eventsArray.map(event => {
+    hubs = [...hubs, event.hub];
+    if (event.category) {
+      categories = [...categories, event.category];
+    }
+  });
+
+  hubs = [...new Set(hubs)];
+  categories = [...new Set(categories)];
 
   onMount(() => {
-
-    eventsArray.map(event => {
-      hubs = [...hubs, event.hub];
-      if (event.category) {
-        categories = [...categories, event.category];
-      }
-    });
-
-    hubs = [...new Set(hubs)];
-    categories = [...new Set(categories)];
+    const observer = lozad();
+    observer.observe();
   });
 
   beforeUpdate(() => {
@@ -58,6 +59,11 @@
       url.searchParams.delete("category");
     }
     window.history.pushState({}, null, url);
+  });
+
+  afterUpdate(() => {
+    const observer = lozad();
+    observer.observe();
   });
 
   $: filteredEvents = eventsArray.filter(e => {
@@ -107,6 +113,16 @@
   .tile {
     flex-flow: wrap !important;
   }
+
+  section {
+    opacity: 0;
+    transition: margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94),
+      opacity 1s ease-in;
+    &.loaded {
+      opacity: 1;
+      margin-top: 0;
+    }
+  }
 </style>
 
 <svelte:head>
@@ -126,8 +142,12 @@
     reverse = !reverse;
   }} />
 
-<div class="tile is-ancestor is-vertical">
-  {#each eventGroups as eventGroup, i (Math.random())}
-    <GridGroup itemGroup={eventGroup} groupIndex={i} />
-  {/each}
-</div>
+{#each eventGroups as eventGroup, i (Math.random())}
+  <section
+    data-toggle-class="loaded"
+    class:loaded={i < 1}
+    class:lozad={i >= 1}
+    class="tile is-ancestor is-vertical">
+    <GridGroup itemGroup={eventGroup} groupIndex={i} lazy={i >= 1} />
+  </section>
+{/each}
