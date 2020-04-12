@@ -20,6 +20,7 @@
   let heroContent = {};
 
   heroContent.image = event.imageUrls.full_url;
+  heroContent.bgColor = event.heroColor;
 </script>
 
 <style lang="scss">
