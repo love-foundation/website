@@ -19,7 +19,7 @@
 
   let heroContent = {};
 
-  heroContent.image = event.imageUrls.full_url;
+  heroContent.image = event.imageUrl;
   heroContent.bgColor = event.heroColor;
 </script>
 

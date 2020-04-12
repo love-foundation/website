@@ -14,7 +14,7 @@ export async function get(req, res, next) {
 				events.map(event => ({
 					id: event.id,
 					title: event.name,
-					imageUrls: event.poster.data,
+					imageUrl: event.poster ? event.poster.data.thumbnails[7].url : "placeholder_events.jpeg",
 					hub: event.hubs[0] ? event.hubs[0].hubs_id.city : null,
 					category: event.event_type,
 					starttime: event.startdatetime
