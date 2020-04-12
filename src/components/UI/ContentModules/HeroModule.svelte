@@ -2,16 +2,27 @@
   import { onMount } from "svelte";
 
   export let content;
-
-  let { image, bgColor, heading } = content;
+  let heroClass;
+  let bgColor = false;
+  let heading = false;
+  let image = "";
   let bgImage;
-  let heroClass = bgColor ? "bgcolor" : heading ? "title" : "bgimage";
+
+  if (content.details) {
+    bgColor = content.details.heroColor ? content.details.heroColor : false;
+    image = content.details.imageOne.data.full_url;
+    heading = content.details.text ? content.details.text : false;
+  } else {
+    ({ image, bgColor, heading } = {...content});
+  }
+
+  heroClass = bgColor ? "bgcolor" : heading ? "title" : "bgimage";
 
   onMount(() => {
     if (bgColor) {
       console.log("I'm running bg color");
       document.documentElement.style.setProperty("--hero-bgcolor", bgColor);
-    } else if (!heading){
+    } else if (!heading) {
       bgImage = 'url("' + image + '"';
       document.documentElement.style.setProperty("--hero-bgimage", bgImage);
     }
@@ -29,6 +40,7 @@
     align-items: center;
     position: relative;
     overflow: hidden;
+    flex-shrink: 0;
 
     &.bgimage {
       .backdrop {
