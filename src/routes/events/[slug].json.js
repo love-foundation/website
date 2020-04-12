@@ -1,7 +1,7 @@
 import { fetchItems } from '../../_directus';
 
 export async function get(req, res, next) {
-  const event = await fetchItems("events", "id, name, poster.data.*, hubs.*.*, location, startdatetime, enddatetime, event_type, artists.artists_id.*.*", {
+  const event = await fetchItems("events", "id, name, poster.data.*, hubs.*.*, location, startdatetime, enddatetime, event_type, artists.artists_id.*.*, hero_background_color", {
     id: req.params.slug
   });
 
@@ -16,6 +16,7 @@ export async function get(req, res, next) {
       location: e.location,
       imageUrls: e.poster.data,
       artists_full: e.artists,
+      heroColor: e.hero_background_color || null,
       artists: e.artists.map(artist => ({
         id: artist.artists_id.id,
         name: artist.artists_id.artist_name,
