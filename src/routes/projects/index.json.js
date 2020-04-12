@@ -11,7 +11,7 @@ export async function get(req, res, next) {
         projects.map(project => ({
           id: project.id,
           name: project.name,
-          imageUrl: project.main_image.data.full_url,
+          imageUrl: project.main_image ? project.main_image.data.full_url : "placeholder_projects.jpeg",
           pillar: project.pillar,
           slug: project.slug
         }))
