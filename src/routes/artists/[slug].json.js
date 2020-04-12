@@ -9,7 +9,7 @@ export async function get(req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(artist.map(a => ({
       name: a.artist_name,
-      image: a.image.data.thumbnail[8].url,
+      image: a.image ? a.image.data.thumbnails[8].url : "placeholder_artists.jpeg",
       status: a.level_of_involvement,
       location: a.current_location,
       category: a.type_of_art,
@@ -19,7 +19,7 @@ export async function get(req, res, next) {
       events: a.events.map(event => ({
         id: event.events_id.id,
         title: event.events_id.name,
-        imageUrl: event.events_id.poster ? event.events_id.poster.data.thumbnail[7] : "placeholder_artists.jpeg",
+        imageUrl: event.events_id.poster ? event.events_id.poster.data.thumbnails[7] : "placeholder_artists.jpeg",
         hub: event.events_id.hubs[0] ? event.events_id.hubs[0].hubs_id.city : null
       }))
     })
