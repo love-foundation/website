@@ -11,7 +11,7 @@ export async function get(req, res, next) {
 				artists.map(artist => ({
 					id: artist.id,
 					name: artist.artist_name,
-					imageUrls: artist.image ? artist.image.data.thumbnails[3].url : "placeholder_artists.jpeg",
+					imageUrls: artist.image ? artist.image.data.thumbnails[8].url : "placeholder_artists.jpeg",
 					location: artist.current_location,
 					category: artist.type_of_art
 				}))
