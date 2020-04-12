@@ -7,7 +7,7 @@
   let text;
   let type;
 
-  imageOne = content.details.imageOne;
+  imageOne = content.details.imageOne.data.full_url;
   caption = content.details.captions
     ? content.details.captions.imageOneCaption
     : null;
@@ -51,9 +51,9 @@
     class:lozad={lazy}
     class="image">
     {#if lazy}
-      <img class="lozad" data-src={imageOne.data.full_url} alt="" />
+      <img class="lozad" data-src={imageOne} alt="" />
     {:else}
-      <img src={imageOne.data.full_url} alt="" />
+      <img src={imageOne} alt="" />
     {/if}
   </figure>
 </div>
