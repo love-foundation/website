@@ -14,7 +14,7 @@ export async function get(req, res, next) {
       endtime: e.enddatetime,
       category: e.event_type,
       location: e.location,
-      imageUrl: event.poster ? event.poster.data.thumbnails[7].url : "placeholder_events.jpeg",
+      imageUrl: e.poster ? e.poster.data.thumbnails[7].url : "placeholder_events.jpeg",
       artists_full: e.artists,
       heroColor: e.hero_background_color || null,
       artists: e.artists.map(artist => ({
