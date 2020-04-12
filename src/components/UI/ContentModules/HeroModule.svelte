@@ -1,7 +1,6 @@
 <script>
-  import { onMount } from "svelte";
-
   export let content;
+
   let heroClass;
   let bgColor = false;
   let heading = false;
@@ -18,14 +17,14 @@
 
   heroClass = bgColor ? "bgcolor" : heading ? "title" : "bgimage";
 
-  onMount(() => {
+  function setVars(node) {
     if (bgColor) {
-      document.documentElement.style.setProperty("--hero-bgcolor", bgColor);
+      node.style.setProperty("--hero-bgcolor", bgColor);
     } else if (!heading) {
       bgImage = 'url("' + image + '"';
-      document.documentElement.style.setProperty("--hero-bgimage", bgImage);
+      node.style.setProperty("--hero-bgimage", bgImage);
     }
-  });
+  }
 </script>
 
 <style lang="scss">
@@ -85,7 +84,7 @@
 </style>
 
 <div id="hero" class={heroClass}>
-  <div class="backdrop" class:image={bgImage}>
+  <div class="backdrop" use:setVars class:image={bgImage}>
     {#if heading}
       <h1>{heading}</h1>
     {/if}
