@@ -7,13 +7,14 @@
 
   let {
     id,
+    slug,
     title,
     subtitle = item.hub ? item.hub : null,
     soundcloud,
     imageUrl
   } = item;
 
-  let link = soundcloud ? soundcloud : `/events/${id}`;
+  let link = soundcloud ? soundcloud : `/events/${slug}`;
   let imageRatio = soundcloud ? "is-square" : "is-3by4";
 </script>
 

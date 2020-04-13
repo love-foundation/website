@@ -11,6 +11,7 @@ export async function get(req, res, next) {
 			JSON.stringify(
 				events.map(event => ({
 					id: event.id,
+					slug: event.slug,
 					title: event.name,
 					imageUrl: event.poster ? event.poster.data.thumbnails[7].url : "placeholder_events.jpeg",
 					hub: event.hubs[0] ? event.hubs[0].hubs_id.city : null,
