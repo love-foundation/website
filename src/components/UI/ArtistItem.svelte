@@ -41,7 +41,7 @@
 
 <a
   rel="prefetch"
-  href="/artists/{artist.id}"
+  href="/artists/{artist.slug}"
   class="column is-one-quarter-desktop is-one-third-tablet">
   <div>
     <figure class="image is-square">
