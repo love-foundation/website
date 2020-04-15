@@ -5,6 +5,7 @@ export async function get(req, res, next) {
     slug: req.params.slug
   });
 
+  let artists = event[0].artists || [];
   if (event !== null) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(event.map(e => ({
@@ -18,12 +19,12 @@ export async function get(req, res, next) {
       imageUrl: e.poster ? e.poster.data.thumbnails[7].url : "placeholder_events.jpeg",
       artists_full: e.artists,
       heroColor: e.hero_background_color || null,
-      artists: e.artists ? e.artists.map(artist => ({
+      artists: artists.map(artist => ({
         id: artist.artists_id.id,
         slug: artist.artists_id.slug,
         name: artist.artists_id.artist_name,
         imageUrl: artist.artists_id.image ? artist.artists_id.image.data.thumbnails[3].url : "placeholder_artists.jpeg"
-      })) : null
+      }))
     })
 
 
