@@ -17,13 +17,13 @@ export async function get(req, res, next) {
       facebook: a.facebook_url,
       soundcloud: a.soundcloud_url,
       heroColor: a.hero_background_color  || null,
-      events: a.events.map(event => ({
+      events: a.events ? a.events.map(event => ({
         id: event.events_id.id,
         slug: event.events_id.slug,
         title: event.events_id.name,
         imageUrl: event.events_id.poster ? event.events_id.poster.data.thumbnails[7].url : "placeholder_events.jpeg",
         hub: event.events_id.hubs[0] ? event.events_id.hubs[0].hubs_id.city : null
-      }))
+      })) : null
     })
     )));
   } else {
