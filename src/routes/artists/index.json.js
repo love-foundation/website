@@ -1,11 +1,8 @@
 import { fetchItems } from '../../_directus';
 
 export async function get(req, res, next) {
-<<<<<<< HEAD
+
 	const artists = await fetchItems("artists", "id, slug, artist_name, image.data.*, current_location, type_of_art", {});
-=======
-	const artists = await fetchItems("artists", "id, slug, artist_name, image.data.*, current_location, type_of_art", {}, 20);
->>>>>>> Swapping out id for slug for artists
 
 	if (artists !== null) {
 		res.setHeader('Content-Type', 'application/json');
