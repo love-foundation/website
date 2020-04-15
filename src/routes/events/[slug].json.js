@@ -22,7 +22,7 @@ export async function get(req, res, next) {
         id: artist.artists_id.id,
         slug: artist.artists_id.slug,
         name: artist.artists_id.artist_name,
-        imageUrl: artist.artists_id ? artist.artists_id.image.data.thumbnails[3].url : "placeholder_artists.jpeg"
+        imageUrl: artist.artists_id.image ? artist.artists_id.image.data.thumbnails[3].url : "placeholder_artists.jpeg"
       })) : null
     })
 
