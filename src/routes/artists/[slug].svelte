@@ -101,7 +101,7 @@
       {/if}
       {#if soundcloud}
         <a href={soundcloud}>
-          <h2>Sundcloud</h2>
+          <h2>Soundcloud</h2>
         </a>
       {/if}
     </div>
