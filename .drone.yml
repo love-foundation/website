@@ -9,7 +9,7 @@ steps:
       - node -v
       - npm -v
       - npm install
-      - npm run export
+      - npm run export --no-timeout
 
   - name: deploy
     image: cupcakearmy/drone-deploy
