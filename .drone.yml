@@ -3,13 +3,13 @@ name: default
 
 steps:
   - name: build
-    image: node:alpine
+    image: node:12
     pull: always
     commands:
       - node -v
-      - yarn -v
-      - yarn
-      - yarn run export
+      - npm -v
+      - npm install
+      - npm run export
 
   - name: deploy
     image: cupcakearmy/drone-deploy
