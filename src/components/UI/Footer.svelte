@@ -58,6 +58,9 @@
           <li>
             <a rel="prefetch" href="lovecasts">Lovecasts</a>
           </li>
+          <li>
+            <a rel="prefetch" href="lovecasts">Imprint</a>
+          </li>
         </ul>
       </div>
       <div class="column is-2">
