@@ -44,7 +44,7 @@
     position: relative;
     max-width: $max-width;
     background-color: white;
-    padding: 2em;
+    // padding: 2em;
     margin: 0 auto;
     box-sizing: border-box;
     margin-top: $desktop-header-height;

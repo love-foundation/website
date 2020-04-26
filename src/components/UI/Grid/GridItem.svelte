@@ -20,6 +20,7 @@
 
 <style lang="scss">
   .tile {
+   
     &.is-child {
       padding: 10%;
     }
