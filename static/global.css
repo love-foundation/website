@@ -47,9 +47,10 @@ h2 {
 }
 
 h3 {
-	font-size: 22px !important;
+	font-size: 18px !important;
 	font-weight: normal !important;
-	line-height: 25px;
+	line-height: 21px;
+	padding: 0px !important;
 }
 
 p {

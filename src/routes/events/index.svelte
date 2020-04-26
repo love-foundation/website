@@ -112,15 +112,14 @@
 <style lang="scss">
   .tile {
     flex-flow: wrap !important;
+    margin-bottom: 0px !important;
   }
 
   section {
     opacity: 0;
-    transition: margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94),
-      opacity 1s ease-in;
+    transition: opacity 0.2s;
     &.loaded {
       opacity: 1;
-      margin-top: 0;
     }
   }
 </style>

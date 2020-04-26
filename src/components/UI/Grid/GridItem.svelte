@@ -15,29 +15,39 @@
   } = item;
 
   let link = soundcloud ? soundcloud : `/events/${slug}`;
-  let imageRatio = soundcloud ? "is-square" : "is-3by4";
+  // let imageRatio = soundcloud ? "is-square" : "is-3by4";
+  let imageRatio = "is-square";
 </script>
 
 <style lang="scss">
-  .tile {
-   
-    &.is-child {
-      padding: 10%;
-    }
-    &.is-alone {
-      height: max-content;
+
+  .parent-single {    
+    .card {
+      width: 50vw;
+      height: 50vw;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
     }
   }
+
+  .parent-wrap {
+    .card {
+      width: 25vw;
+      height: 25vw;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
+  }
+
+  .tile { 
+    padding: 0px !important;
+    box-shadow: none !important;
+  }
+
   .card-header {
     flex-wrap: wrap;
     box-shadow: none;
     text-align: center;
-  }
-  h3 {
-    width: 100%;
-    &.subtitle {
-      text-transform: capitalize;
-    }
   }
 
   .image {
@@ -45,20 +55,22 @@
       object-fit: contain;
     }
 
+    &.is-square {
+      padding-top: 64%;
+      margin-top: 10% !important;
+    }
+
     &.lazy {
       opacity: 0;
-      margin-top: -50px;
-      transition: margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94),
-        opacity 1s ease-in;
+      transition: opacity 0.2s;
       &.loaded {
         opacity: 1;
-        margin-top: 0;
       }
     }
   }
 </style>
 
-<a transition:fade rel="prefetch" href={link} class="tile {cardClass}">
+<a transition:fade rel="prefetch" href={link} class="link tile {cardClass}">
   <div class="tile is-child card">
     <div class="card-image">
       <figure

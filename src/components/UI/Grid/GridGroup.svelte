@@ -17,29 +17,28 @@
   .wrap {
     flex-flow: wrap !important;
   }
-  // grid-template:
-  //   "a b b" 40px
-  //   "a b b" 40px / 1fr 1fr 1fr;
 
-  // grid-template: :nth-child(n+1)
-  //   "b b a" 40px
-  //   "b b a" 40px / 1fr 1fr 1fr;
+  .tile { 
+    padding: 0px !important;
+    margin-bottom: 0px !important;
+  }
+
 </style>
 
 {#if isEven}
   <GridItem
     item={itemGroup[0]}
     {lazy}
-    cardClass={'is-parent is-6'}
+    cardClass={'is-parent is-6 parent-single'}
     (itemGroup[0].id) />
 {/if}
 
 <div class="tile is-parent is-6 is-vertical wrap">
   {#each itemGroup.slice(1, itemGroup.length) as item, i (item.id)}
     {#if itemGroup.length === 5}
-      <GridItem {lazy} {item} cardClass={'is-6'} />
+      <GridItem {lazy} {item} cardClass={'is-6 parent-wrap'} />
     {:else}
-      <GridItem {lazy} {item} cardClass={'is-6 is-alone'} />
+      <GridItem {lazy} {item} cardClass={'is-6 is-alone parent-wrap'} />
     {/if}
   {/each}
 </div>
@@ -48,6 +47,6 @@
   <GridItem
     {lazy}
     item={itemGroup[0]}
-    cardClass={'is-parent is-6'}
+    cardClass={'is-parent is-6 parent-single'}
     (itemGroup[0].id) />
 {/if}
