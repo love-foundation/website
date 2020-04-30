@@ -44,6 +44,9 @@ steps:
     commands:
       - npm run export -- --timeout 15000
 
+  - name: deploy
+    image: cupcakearmy/drone-deploy
+    pull: always
     environment:
       PLUGIN_KEY:
         from_secret: key
