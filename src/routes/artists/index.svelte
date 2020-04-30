@@ -10,7 +10,11 @@
 
 <script>
   import ArtistItem from "../../components/UI/ArtistItem.svelte";
+  import { shuffleArray } from "../../lib/helpers/sharedFunctions.js";
+
   export let artists;
+
+  shuffleArray(artists);
 
 </script>
 

@@ -2,7 +2,7 @@ import { fetchItems } from '../../_directus';
 
 
 export async function get(req, res, next) {
-  const projectContent = await fetchItems("projects", "slug, content.*.*.*, name, main_image.*.*, pillar", {
+  const projectContent = await fetchItems("projects", "slug, content.*.*.*, name, main_image.*.*, pillar, hero_background_color", {
     slug: req.params.slug
   });
 
@@ -14,8 +14,9 @@ export async function get(req, res, next) {
           id: project.id,
           slug: project.slug,
           name: project.name,
-          imageUrl: project.main_image.data.full_url,
+          imageUrl: project.main_image ? project.main_image.data.full_url : "placeholder_projects.jpeg",
           pillar: project.pillar,
+          heroColor: project.hero_background_color || null,
           content: project.content.map(content => ({
             id: content.id,
             type: content.type,
@@ -25,7 +26,8 @@ export async function get(req, res, next) {
               imageOne: content.image,
               imageTwo: content.image_two,
               padding: content.distance_to_next,
-              captions: content.captions
+              captions: content.captions,
+              heroColor: content.hero_background_color  || null
             }
           }))
         }))

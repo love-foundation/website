@@ -1,18 +1,18 @@
-import { fetchItems } from '../../_directus';
+import { fetchItems } from '../_directus';
 
 
 export async function get(req, res, next) {
   const pageContent = await fetchItems("pages", "slug, content.*.*.*", {
-    slug: "about"
+    slug: "home"
   });
 
-  const queriedContent = pageContent[0].content;
+  const home = pageContent[0].content;
 
-  if (queriedContent !== null) {
+  if (home !== null) {
     res.setHeader('Content-Type', 'application/json');
     res.end(
       JSON.stringify(
-        queriedContent.map(content => ({
+        home.map(content => ({
           id: content.id,
           type: content.type,
           details: {
@@ -22,7 +22,7 @@ export async function get(req, res, next) {
             imageTwo: content.image_two,
             padding: content.distance_to_next,
             captions: content.captions,
-            heroColor: content.hero_background_color  || null
+            heroColor: content.hero_background_color ? content.hero_background_color : null
           }
 
         }))

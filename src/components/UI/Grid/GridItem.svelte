@@ -1,19 +1,20 @@
 <script>
-  import { fade } from 'svelte/transition';
+  import { fade } from "svelte/transition";
 
   export let item = null;
+  export let lazy = false;
   export let cardClass = "";
 
-  let imageUrl;
-  let { id, title, subtitle = item.hub ? item.hub : null, soundcloud } = item;
+  let {
+    id,
+    slug,
+    title,
+    subtitle = item.hub ? item.hub : null,
+    soundcloud,
+    imageUrl
+  } = item;
 
-  if (item.imageUrls) {
-    imageUrl = item.imageUrls.full_url;
-  } else {
-    imageUrl = item.imageUrl;
-  }
-
-  let link = soundcloud ? soundcloud : `/events/${id}`;
+  let link = soundcloud ? soundcloud : `/events/${slug}`;
   let imageRatio = soundcloud ? "is-square" : "is-3by4";
 </script>
 
@@ -38,16 +39,37 @@
     }
   }
 
-  .image img {
-    object-fit: contain;
+  .image {
+    img {
+      object-fit: contain;
+    }
+
+    &.lazy {
+      opacity: 0;
+      margin-top: -50px;
+      transition: margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94),
+        opacity 1s ease-in;
+      &.loaded {
+        opacity: 1;
+        margin-top: 0;
+      }
+    }
   }
 </style>
 
-<a transition:fade rel="prefetch" href="{link}" class="tile {cardClass}">
+<a transition:fade rel="prefetch" href={link} class="tile {cardClass}">
   <div class="tile is-child card">
     <div class="card-image">
-      <figure class="image {imageRatio}">
-        <img src={imageUrl} alt="{title} Poster" />
+      <figure
+        data-toggle-class="loaded"
+        class:lazy
+        class:lozad={lazy}
+        class="image {imageRatio}">
+        {#if lazy}
+          <img class="lozad" data-src={imageUrl} alt="{title} Poster" />
+        {:else}
+          <img src={imageUrl} alt="{title} Poster" />
+        {/if}
       </figure>
     </div>
     <div class="card-header">

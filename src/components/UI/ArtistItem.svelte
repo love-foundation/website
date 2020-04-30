@@ -41,13 +41,13 @@
 
 <a
   rel="prefetch"
-  href="/artists/{artist.id}"
+  href="/artists/{artist.slug}"
   class="column is-one-quarter-desktop is-one-third-tablet">
   <div>
     <figure class="image is-square">
       <img
         class="is-rounded lozad"
-        data-src={artist.imageUrls}
+        data-src={artist.imageUrl}
         alt="{artist.name} Picture" />
     </figure>
     <h3>{artist.name}</h3>

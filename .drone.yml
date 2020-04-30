@@ -25,15 +25,15 @@ steps:
       restore: true
 
   - name: build
-    image: node:alpine
+    image: node:12
     pull: always
     commands:
       - node -v
-      - yarn -v
-      - yarn
-      - yarn run export
-  
-  - name: restore-cache
+      - npm -v
+      - npm install
+      - npm run export -- --timeout 15000
+
+  - name: rebuild-cache
     <<: *cache-common
     settings:
       <<: *cache-settings

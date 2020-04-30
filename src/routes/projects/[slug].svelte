@@ -16,12 +16,13 @@
   import Content from "../../components/UI/Content.svelte";
   export let project;
 
-  let { name, imageUrl, content, pillar } = project;
+  let { name, imageUrl, content, pillar, heroColor } = project;
 
   let heroContent = {};
 
   heroContent.image = imageUrl;
   heroContent.heading = name;
+  heroContent.bgColor = heroColor;
 </script>
 
 <style>

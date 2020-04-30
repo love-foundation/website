@@ -26,12 +26,14 @@
     status,
     soundcloud,
     facebook,
-    events
+    events,
+    heroColor
   } = artist;
 
   let heroContent = {};
 
   heroContent.image = image;
+  heroContent.bgColor = heroColor;
 </script>
 
 <style lang="scss">
@@ -99,7 +101,7 @@
       {/if}
       {#if soundcloud}
         <a href={soundcloud}>
-          <h2>Sundcloud</h2>
+          <h2>Soundcloud</h2>
         </a>
       {/if}
     </div>

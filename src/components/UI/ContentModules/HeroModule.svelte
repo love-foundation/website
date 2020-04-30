@@ -1,21 +1,30 @@
 <script>
-  import { onMount } from "svelte";
-
   export let content;
 
-  let { image, bgColor, heading } = content;
+  let heroClass;
+  let bgColor = false;
+  let heading = false;
+  let image = "";
   let bgImage;
-  let heroClass = bgColor ? "bgcolor" : heading ? "title" : "bgimage";
 
-  onMount(() => {
+  if (content.details) {
+    bgColor = content.details.heroColor ? content.details.heroColor : false;
+    image = content.details.imageOne.data.full_url;
+    heading = content.details.text ? content.details.text : false;
+  } else {
+    ({ image, bgColor, heading } = { ...content });
+  }
+
+  heroClass = bgColor ? "bgcolor" : heading ? "title" : "bgimage";
+
+  function setVars(node) {
     if (bgColor) {
-      console.log("I'm running bg color");
-      document.documentElement.style.setProperty("--hero-bgcolor", bgColor);
-    } else if (!heading){
+      node.style.setProperty("--hero-bgcolor", bgColor);
+    } else if (!heading) {
       bgImage = 'url("' + image + '"';
-      document.documentElement.style.setProperty("--hero-bgimage", bgImage);
+      node.style.setProperty("--hero-bgimage", bgImage);
     }
-  });
+  }
 </script>
 
 <style lang="scss">
@@ -29,21 +38,16 @@
     align-items: center;
     position: relative;
     overflow: hidden;
+    flex-shrink: 0; // needed when it is used as part of content
 
-    &.bgimage {
-      .backdrop {
-        background-image: var(--hero-bgimage);
-      }
-      img {
-        width: 70%;
-        margin: 0 auto;
-        padding: 20%;
-        z-index: 5;
-      }
+    img {
+      width: 70%;
+      padding: 20%;
+      margin: 0 auto;
+      z-index: 5;
     }
 
-    &.title {
-      h1 {
+    h1 {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -52,9 +56,15 @@
         text-align: center;
         color: $white;
         text-shadow: 2px 2px 2px $black;
+        z-index: 10;
       }
+
+    &.title {
       img {
         width: 100% !important;
+        padding: unset;
+        margin: unset;
+        z-index: unset;
       }
     }
 
@@ -68,17 +78,18 @@
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
-      z-index: 0;
+
       &.image {
         filter: blur(5px);
         margin: -5px -10px -10px -5px;
+        background-image: var(--hero-bgimage);
       }
     }
   }
 </style>
 
 <div id="hero" class={heroClass}>
-  <div class="backdrop" class:image={bgImage}>
+  <div class="backdrop" use:setVars class:image={bgImage}>
     {#if heading}
       <h1>{heading}</h1>
     {/if}

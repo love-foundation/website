@@ -52,7 +52,8 @@
     headerClass = updateClass(y);
   }
 
-  subpage = segment ? "&mdash; " + segment : ""
+  $: subpage = segment ? "&mdash; " + segment : ""
+
 </script>
 
 <style lang="scss">
