@@ -1,7 +1,29 @@
 kind: pipeline
 name: default
 
+cache-common: &cache-common
+  image: meltwater/drone-cache
+  environment:
+    PLUGIN_ACCESS_KEY: 3R3u3XVKmNcPWCpzqV6R9vgtdgw6tk3Q
+    PLUGIN_SECRET_KEY:
+      from_secret: minio
+  pull: true
+
+cache-settings: &cache-settings
+  bucket: cache
+  region: main
+  path_style: true
+  endpoint: https://cache.love-foundation.org
+  mount:
+    - 'node_modules' 
+
 steps:
+  - name: restore-cache
+    <<: *cache-common
+    settings:
+      <<: *cache-settings
+      restore: true
+
   - name: build
     image: node:alpine
     pull: always
@@ -10,6 +32,12 @@ steps:
       - yarn -v
       - yarn
       - yarn run export
+  
+  - name: restore-cache
+    <<: *cache-common
+    settings:
+      <<: *cache-settings
+      rebuild: true
 
   - name: deploy
     image: cupcakearmy/drone-deploy
