@@ -24,24 +24,26 @@ steps:
       <<: *cache-settings
       restore: true
 
-  - name: build
+  - name: install
     image: node:12
     pull: always
     commands:
       - node -v
       - npm -v
       - npm install
-      - npm run export -- --timeout 15000
-
+  
   - name: rebuild-cache
     <<: *cache-common
     settings:
       <<: *cache-settings
-      rebuild: true
+      rebuild: true 
 
-  - name: deploy
-    image: cupcakearmy/drone-deploy
+  - name: build
+    image: node:12
     pull: always
+    commands:
+      - npm run export -- --timeout 15000
+
     environment:
       PLUGIN_KEY:
         from_secret: key
