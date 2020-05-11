@@ -44,7 +44,6 @@
     position: relative;
     max-width: $max-width;
     background-color: white;
-    // padding: 2em;
     margin: 0 auto;
     box-sizing: border-box;
     margin-top: $desktop-header-height;
@@ -56,20 +55,23 @@
     width: 100%;
     height: 5px;
     border: none;
-    background: transparent;
     z-index: 1000;
+    background-color: #aaa;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
+    &[value] { 
+      -webkit-appearance: none; 
+      appearance: none;
+    }
 
     &[value]::-webkit-progress-value {
-      background: $blue;
+      background-color: $blue;
     }
 
-    &[value]::-moz-progress-bar {
-      background: $blue;
+    &[value]::-moz-progress-bar {   
+      background-color: $blue;
     }
-  }
-
-  .test {
-    height: 1000px;
   }
 </style>
 

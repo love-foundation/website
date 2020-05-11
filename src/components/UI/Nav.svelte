@@ -15,7 +15,7 @@
 <style lang="scss">
   nav {
     position: fixed;
-    top: 66px;
+    top: 40px;
     bottom: 0;
     right: 0;
     background: $blue;
@@ -28,15 +28,15 @@
       padding-right: 100px;
       list-style-type: none;
       li {
-        font-size: 36px;
-        font-size: 3.6rem;
-
-        line-height: 64px;
         a {
           text-decoration: none;
           color: $white !important;
           &:hover {
             color: $dark-grey !important;
+          }
+          h1 {
+            line-height: 48px;
+            text-align: right;
           }
         }
       }
@@ -58,7 +58,7 @@
     <ul>
       <li>
         <a class:selected={segment === undefined} href="/" on:click={toggleNav}>
-          Home
+          <h1>Home </h1>
         </a>
       </li>
       <li>
@@ -67,7 +67,7 @@
           href="about"
           rel="prefetch"
           on:click={toggleNav}>
-          About
+          <h1>About</h1>
         </a>
       </li>
       <li>
@@ -76,7 +76,7 @@
           rel="prefetch"
           class:selected={segment === 'projects'}
           href="projects">
-          Projects
+          <h1>Projects</h1>
         </a>
       </li>
       <li>
@@ -85,7 +85,7 @@
           class:selected={segment === 'events'}
           href="events"
           on:click={toggleNav}>
-          Events
+          <h1>Events</h1>
         </a>
       </li>
       <li>
@@ -94,7 +94,7 @@
           class:selected={segment === 'artists'}
           href="artists"
           on:click={toggleNav}>
-          Artists
+          <h1>Artists</h1>
         </a>
       </li>
       <li>
@@ -103,7 +103,7 @@
           class:selected={segment === 'lovecasts'}
           href="lovecasts"
           on:click={toggleNav}>
-          Lovecasts
+          <h1>Lovecasts</h1>
         </a>
       </li>
     </ul>

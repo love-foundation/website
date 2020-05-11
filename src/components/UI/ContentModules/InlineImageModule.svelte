@@ -24,6 +24,7 @@
 <style lang="scss">
   .column {
     align-self: center;
+    padding: 0px;
 
     &--image {
       &_left {

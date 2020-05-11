@@ -23,7 +23,6 @@
     --itemHoverBG: #0597F2;
   }
   :global(input) {
-    font-family: $family-primary;
     color: $black;
     font-size: 36px;
     font-size: 3.6rem;

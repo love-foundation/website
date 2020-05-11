@@ -1,6 +1,6 @@
 // colors
 
-$blue: #0597F2;
+$blue: #286FFF;
 $red: #D10505;
 $green: #038C4C;
 $yellow: #F2B705;
@@ -13,7 +13,7 @@ $dark-grey: #BEBEBE;
 
 // Margins & Heights
 
-$desktop-header-height: 66px;
+$desktop-header-height: 40px;
 $max-width: 1920px;
 $content-width: 1440px;
 
@@ -22,7 +22,6 @@ $content-width: 1440px;
 
 $link: $black;
 $link-hover: $dark-grey;
-$family-primary: 'Theinhardt', sans-serif;
 
 
 // Bulma Imports
@@ -30,9 +29,10 @@ $family-primary: 'Theinhardt', sans-serif;
 @import "./node_modules/bulma/sass/base/_all.sass";
 @import "./node_modules/bulma/sass/grid/_all.sass";
 @import "./node_modules/bulma/sass/elements/image.sass";
-
 @import "./node_modules/bulma/sass/components/card.sass";
 
 // Utilities
 
+@import "resets.scss";
 @import "utilities.scss";
+@import "fonts.scss";

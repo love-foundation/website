@@ -70,16 +70,18 @@
 
     > div {
       box-sizing: border-box;
-      padding-top: 8px;
       height: 100%;
       background-color: $blue;
       transition: transform 300ms ease-in-out;
+
       .homelink {
         padding-left: 31px;
         float: left;
         text-decoration: none;
         color: white;
-        h2 {
+        padding-top: 6px;
+
+        h1 {
           text-transform: uppercase;
         }
       }
@@ -105,7 +107,7 @@
  * @link https://github.com/jonsuh/hamburgers
  */
   .hamburger {
-    padding: 15px 15px;
+    padding: 9px;
     display: inline-block;
     cursor: pointer;
     transition-property: opacity, filter;
@@ -146,10 +148,10 @@
   .hamburger-inner,
   .hamburger-inner::before,
   .hamburger-inner::after {
-    width: 40px;
-    height: 4px;
+    width: 28px;
+    height: 2px;
     background-color: #fff;
-    border-radius: 4px;
+    // border-radius: 4px;
     position: absolute;
     transition-property: transform;
     transition-duration: 0.15s;
@@ -161,57 +163,66 @@
     display: block;
   }
   .hamburger-inner::before {
-    top: -10px;
+    top: -8px;
   }
   .hamburger-inner::after {
-    bottom: -10px;
+    bottom: -8px;
   }
 
-  /*
-   * Spin
-   */
-  .hamburger--spin .hamburger-inner {
-    transition-duration: 0.22s;
+/*
+  * Squeeze
+*/
+.hamburger--squeeze {
+  .hamburger-inner {
+    transition-duration: 0.075s;
     transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-  }
-  .hamburger--spin .hamburger-inner::before {
-    transition: top 0.1s 0.25s ease-in, opacity 0.1s ease-in;
-  }
-  .hamburger--spin .hamburger-inner::after {
-    transition: bottom 0.1s 0.25s ease-in,
-      transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+    &::before {
+      transition: top 0.075s 0.12s ease,
+      opacity 0.075s ease;
+    }
+
+    &::after {
+      transition: bottom 0.075s 0.12s ease,
+      transform 0.075s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
   }
 
-  .hamburger--spin.is-active .hamburger-inner {
-    transform: rotate(225deg);
-    transition-delay: 0.12s;
-    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  &.is-active {
+    .hamburger-inner {
+      transform: rotate(45deg);
+      transition-delay: 0.12s;
+      transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+      &::before {
+        top: 0;
+        opacity: 0;
+        transition: top 0.075s ease,
+        opacity 0.075s 0.12s ease;
+      }
+
+      &::after {
+        bottom: 0;
+        transform: rotate(-90deg);
+        transition: bottom 0.075s ease,
+        transform 0.075s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+      }
+    }
   }
-  .hamburger--spin.is-active .hamburger-inner::before {
-    top: 0;
-    opacity: 0;
-    transition: top 0.1s ease-out, opacity 0.1s 0.12s ease-out;
-  }
-  .hamburger--spin.is-active .hamburger-inner::after {
-    bottom: 0;
-    transform: rotate(-90deg);
-    transition: bottom 0.1s ease-out,
-      transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
-  }
-</style>
+}</style>
 
 <svelte:window bind:scrollY={y} />
 
 <header>
   <div use:setTransitionDuration class={headerClass}>
     <a class="homelink" href="/">
-      <h2>Love Foundation {@html subpage}</h2>
+      <h1>Love Foundation {@html subpage}</h1>
     </a>
 
     <div class="side">
       <button
         class:is-active={navActive}
-        class="hamburger hamburger--spin"
+        class="hamburger hamburger--squeeze"
         type="button"
         on:click={toggleNav}>
         <span class="hamburger-box">
