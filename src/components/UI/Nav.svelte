@@ -15,27 +15,29 @@
 <style lang="scss">
   nav {
     position: fixed;
-    top: 40px;
+    top: $desktop-header-height;
     bottom: 0;
     right: 0;
-    background: $blue;
+    background: white;
     z-index: 10000;
+    width: 100%;
+    height: $desktop-header-height;
+    padding-top: 4px;
 
     ul {
       margin: 0;
       padding: 0;
-      padding-left: 50px;
-      padding-right: 100px;
+      padding-left: $distance-small;
+      padding-right: $distance-small;
       list-style-type: none;
+      display: flex;
+      justify-content: space-between;
       li {
         a {
           text-decoration: none;
-          color: $white !important;
-          &:hover {
-            color: $dark-grey !important;
-          }
+          color: black !important;
+
           h1 {
-            line-height: 48px;
             text-align: right;
           }
         }
@@ -43,18 +45,18 @@
     }
   }
 
-  /* clearfix */
-  ul::after {
-    content: "";
-    display: block;
-    clear: both;
-  }
+  // /* clearfix */
+  // ul::after {
+  //   content: "";
+  //   display: block;
+  //   clear: both;
+  // }
 </style>
 
 <VanishingHeader on:nav={toggleNav} {navActive} {segment}/>
 
 {#if navActive}
-  <nav transition:fly={{ delay: 250, duration: 300, easing: quintOut, x: 200 }}>
+  <nav transition:fly={{ delay: 50, duration: 200, easing: quintOut, y: -40 }}>
     <ul>
       <li>
         <a class:selected={segment === undefined} href="/" on:click={toggleNav}>

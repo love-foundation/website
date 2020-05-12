@@ -60,7 +60,7 @@
   header {
     position: fixed;
     top: 0;
-    z-index: 10000;
+    z-index: 100000;
     width: 100%;
     height: $desktop-header-height;
 
@@ -75,11 +75,11 @@
       transition: transform 300ms ease-in-out;
 
       .homelink {
-        padding-left: 31px;
+        padding-left: $distance-small;
         float: left;
         text-decoration: none;
         color: white;
-        padding-top: 6px;
+        padding-top: 4px;
 
         h1 {
           text-transform: uppercase;
@@ -107,7 +107,7 @@
  * @link https://github.com/jonsuh/hamburgers
  */
   .hamburger {
-    padding: 9px;
+    padding: 8px 0px;
     display: inline-block;
     cursor: pointer;
     transition-property: opacity, filter;
@@ -121,12 +121,6 @@
     margin: 0;
     overflow: visible;
   }
-  .hamburger:hover {
-    opacity: 0.7;
-  }
-  .hamburger.is-active:hover {
-    opacity: 0.7;
-  }
   .hamburger.is-active .hamburger-inner,
   .hamburger.is-active .hamburger-inner::before,
   .hamburger.is-active .hamburger-inner::after {
@@ -134,7 +128,7 @@
   }
 
   .hamburger-box {
-    width: 40px;
+    width: 44px;
     height: 24px;
     display: inline-block;
     position: relative;
@@ -149,7 +143,7 @@
   .hamburger-inner::before,
   .hamburger-inner::after {
     width: 28px;
-    height: 2px;
+    height: 3px;
     background-color: #fff;
     // border-radius: 4px;
     position: absolute;
@@ -179,7 +173,6 @@
 
     &::before {
       transition: top 0.075s 0.12s ease,
-      opacity 0.075s ease;
     }
 
     &::after {

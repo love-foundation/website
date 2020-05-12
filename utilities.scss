@@ -1,4 +1,4 @@
-$sizes: ("large", 150px), ("medium", 100px), ("small", 50px);
+$sizes: ("large", 150px), ("medium", 100px), ("small", 50px), ("none", 0px);
 $directions: "top", "bottom", "left", "right";
 
 @each $size in $sizes {
