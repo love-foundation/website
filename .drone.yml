@@ -15,7 +15,7 @@ cache-settings: &cache-settings
   path_style: true
   endpoint: https://cache.love-foundation.org
   mount:
-    - 'node_modules' 
+    - 'node_modules'
 
 steps:
   - name: restore-cache
@@ -31,18 +31,18 @@ steps:
       - node -v
       - npm -v
       - npm install
-  
+
   - name: rebuild-cache
     <<: *cache-common
     settings:
       <<: *cache-settings
-      rebuild: true 
+      rebuild: true
 
   - name: build
     image: node:12
     pull: always
     commands:
-      - npm run export -- --timeout 15000
+      - npm run export:production
 
   - name: deploy
     image: cupcakearmy/drone-deploy

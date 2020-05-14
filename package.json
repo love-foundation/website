@@ -7,6 +7,7 @@
     "build": "sapper build",
     "now-build": "sapper export",
     "export": "sapper export",
+    "export:production": "env NODE_ENV=production sapper export --timeout 15000",
     "start": "node __sapper__/build"
   },
   "browserslist": [
