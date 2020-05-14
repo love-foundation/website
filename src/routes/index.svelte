@@ -20,7 +20,15 @@
     text-align: center;
   }
 </style>
-
+<section class="pad--bottom--small">
+  <div class="columns is-centered">
+  <div class="column">
+    <figure class="image">
+      <img src="WorldMap.png" alt="Map of Love Foundation Hubs">
+    </figure>
+  </div>
+  </div>
+</section>
 <section class="pad--bottom--small">
   <div class="columns is-centered">
     <div class="column is-8">
@@ -36,5 +44,8 @@
 </section>
 
 {#if upcomingEvents.length}
+<section>
+  <h2 class="centered">Upcoming Events</h2>
   <UpcomingEvents {upcomingEvents} />
+</section>
 {/if}
