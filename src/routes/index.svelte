@@ -10,7 +10,7 @@
 
 <script>
   import Content from "../components/UI/Content.svelte";
-  import UpcomingEvents from "../components/UI/FrontPage/UpcomingEvents.svelte"
+  import UpcomingEvents from "../components/UI/FrontPage/UpcomingEvents.svelte";
   import { stores } from "@sapper/app";
 
   export let queriedContent;
@@ -20,6 +20,7 @@
   let upcomingEvents = $session.events.filter(
     event => new Date(event.starttime) >= new Date()
   );
+
 </script>
 
 <svelte:head>
@@ -29,5 +30,5 @@
 <Content {queriedContent} />
 
 {#if upcomingEvents.length}
-  <UpcomingEvents upcomingEvents />
+  <UpcomingEvents {upcomingEvents} />
 {/if}

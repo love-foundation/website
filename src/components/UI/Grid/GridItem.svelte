@@ -2,6 +2,7 @@
   import { fade } from "svelte/transition";
 
   export let item = null;
+  export let showDate = false;
   export let lazy = false;
   export let cardClass = "";
 
@@ -11,11 +12,21 @@
     title,
     subtitle = item.hub ? item.hub : null,
     soundcloud,
+    starttime,
     imageUrl
   } = item;
 
+  const months = ["JAN", "FEB", "MAR","APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
   let link = soundcloud ? soundcloud : `/events/${slug}`;
   let imageRatio = soundcloud ? "is-square" : "is-3by4";
+  let eventDate;
+
+  if (showDate) {
+    eventDate = new Date(starttime);
+    eventDate = eventDate.getDate() + " / " + months[eventDate.getMonth()] + " / " + eventDate.getFullYear();
+  }
+
+
 </script>
 
 <style lang="scss">
@@ -76,6 +87,9 @@
       <h3 class="title card-header-title is-centered">{title}</h3>
       {#if subtitle}
         <h3 class="subtitle card-header-title is-centered">{subtitle}</h3>
+      {/if}
+      {#if eventDate}
+        <h3 class="subtitle card-header-title is-centered">{eventDate}</h3>
       {/if}
     </div>
   </div>
