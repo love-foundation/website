@@ -21,7 +21,7 @@
   let imageRatio = soundcloud ? "is-square" : "is-3by4";
   let eventDate;
 
-  if (showDate) {
+  if (showDate && starttime) {
     eventDate = new Date(starttime);
     eventDate = eventDate.getDate() + " / " + months[eventDate.getMonth()] + " / " + eventDate.getFullYear();
   }
