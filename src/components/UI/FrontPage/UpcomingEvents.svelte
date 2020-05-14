@@ -4,6 +4,12 @@
   export let upcomingEvents;
 </script>
 
+<style lang="scss">
+ .wrap {
+    flex-flow: wrap;
+  }
+</style>
+
 <div class="tile is-ancestor is-parent wrap">
   {#each upcomingEvents as upcomingEvent}
     <GridItem
