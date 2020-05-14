@@ -11,22 +11,22 @@
   );
 </script>
 
-<svelte:head>
-  <title>Home</title>
-</svelte:head>
-
 <style lang="scss">
   .centered {
     text-align: center;
   }
 </style>
+
+<svelte:head>
+  <title>Home</title>
+</svelte:head>
 <section class="pad--bottom--small">
   <div class="columns is-centered">
-  <div class="column">
-    <figure class="image">
-      <img src="WorldMap.png" alt="Map of Love Foundation Hubs">
-    </figure>
-  </div>
+    <div class="column">
+      <figure class="image">
+        <object data="whatislove.svg" type="image/svg+xml" title="Map" />
+      </figure>
+    </div>
   </div>
 </section>
 <section class="pad--bottom--small">
@@ -40,12 +40,18 @@
       </h2>
     </div>
   </div>
-
 </section>
 
 {#if upcomingEvents.length}
-<section>
-  <h2 class="centered">Upcoming Events</h2>
-  <UpcomingEvents {upcomingEvents} />
-</section>
+  <section class="pad--bottom--small">
+    <h2 class="centered">Upcoming Events</h2>
+    <UpcomingEvents {upcomingEvents} />
+  </section>
 {/if}
+
+<section>
+<h2 class="centered">Where is Love Foundation</h2>
+  <figure class="image">
+    <object data="map.svg" type="image/svg+xml" title="Map" />
+  </figure>
+</section>
