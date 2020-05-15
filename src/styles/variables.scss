@@ -17,22 +17,8 @@ $desktop-header-height: 66px;
 $max-width: 1920px;
 $content-width: 1440px;
 
-
 // Bulma Overrides
 
 $link: $black;
 $link-hover: $dark-grey;
 $family-primary: 'Theinhardt', sans-serif;
-
-
-// Bulma Imports
-@import "./node_modules/bulma/sass/utilities/_all.sass";
-@import "./node_modules/bulma/sass/base/_all.sass";
-@import "./node_modules/bulma/sass/grid/_all.sass";
-@import "./node_modules/bulma/sass/elements/image.sass";
-
-@import "./node_modules/bulma/sass/components/card.sass";
-
-// Utilities
-
-@import "utilities.scss";
