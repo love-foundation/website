@@ -25,13 +25,6 @@
   heroContent.bgColor = heroColor;
 </script>
 
-<style>
-  img {
-    width: 100%;
-    height: auto;
-  }
-</style>
-
 <svelte:head>
   <title>Projects &mdash; {name}</title>
 </svelte:head>
