@@ -39,6 +39,8 @@
   }
 </script>
 
+
+
 <style lang="scss">
   main {
     position: relative;
@@ -67,11 +69,12 @@
       background: $blue;
     }
   }
-
-  .test {
-    height: 1000px;
-  }
 </style>
+
+<svelte:head>
+  <style src="../styles/global.scss"></style>
+</svelte:head>
+
 
 <svelte:window bind:scrollY={y} bind:innerHeight={winHeight} />
 

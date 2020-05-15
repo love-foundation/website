@@ -17,13 +17,21 @@ const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
 const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
+const dedupe = importee => importee === 'svelte' || importee.startsWith('svelte/');
+
 
 const preprocess = sveltePreprocess({
+	transformers: {
+		scss: {
+			includePaths: [
+				'node_modules',
+				'src'
+			],
+			data: '@import \'src/styles/variables.scss\';'
+		}
+	},
 	postcss: {
-    plugins: [autoprefixer()],
-  },
-	scss: {
-		data: `@import "variables.scss";`
+		plugins: [autoprefixer()],
 	},
 	// ...
 });
@@ -45,7 +53,7 @@ export default {
 			}),
 			resolve({
 				browser: true,
-				dedupe: ['svelte']
+				dedupe
 			}),
 			commonjs(),
 
@@ -88,7 +96,7 @@ export default {
 				dev
 			}),
 			resolve({
-				dedupe: ['svelte']
+				dedupe
 			}),
 			commonjs()
 		],
