@@ -2,13 +2,7 @@ import DirectusSDK from '@directus/sdk-js';
 
 // Query all assets on staging/development, but only published on production
 
-let status = null;
-
-if (process.env.NODE_ENV === "production") {
-  status = "published"
-}
-
-console.log(process.env.NODE_ENV === "production" ? "published" : "")
+let status = process.env.NODE_ENV === "production" ? "published" : "published,under_review,draft";
 
 export const directus = new DirectusSDK({
   url: process.env.DIRECTUS_URL,
