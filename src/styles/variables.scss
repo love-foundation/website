@@ -22,3 +22,7 @@ $content-width: 1440px;
 $link: $black;
 $link-hover: $dark-grey;
 $family-primary: 'Theinhardt', sans-serif;
+
+//Bulma Utilities so breakpoints can be used in the entire application
+
+@import "../../node_modules/bulma/sass/utilities/_all.sass";
