@@ -1,9 +1,13 @@
 # Love Foundation Website
 
+This is the repository containing the Love Foundation Website. The website is based on Sapper, a SSR-ready app creator based on Svelte. On the backend this site is fetching information from Directus, our Headless cms.
+
+
+
 ## Running the project
 
 ```bash
-npm install # or yarn
+npm install
 npm run dev
 ```
 
@@ -37,6 +41,10 @@ There are three simple rules for naming the files that define your routes:
 * Files and directories with a leading underscore do *not* create routes. This allows you to colocate helper modules and components with the routes that depend on them — for example you could have a file called `src/routes/_helpers/datetime.js` and it would *not* create a `/_helpers/datetime` route
 
 
+#### src/styles
+
+This is where global syles of the repository live. Generally, we try to have as many styles inside components, but some generals like fonts (and properties) are stored in the global.scss file. Utility mixins go to utilities.scss, while general variable settings are inside the variables.scss. Any scss that is inside variables.scss gets prepended to *EVERY* component with a `<style lang="scss">` section.
+
 ### static
 
 The [static](static) directory contains any static assets that should be available. These are served using [sirv](https://github.com/lukeed/sirv).
@@ -59,12 +67,7 @@ Sapper uses Rollup or webpack to provide code-splitting and dynamic imports, as 
 
 To start a production version of your app, run `npm run build && npm start`. This will disable live reloading, and activate the appropriate bundler plugins.
 
-You can deploy your application to any environment that supports Node 8 or above. As an example, to deploy to [Now](https://zeit.co/now), run these commands:
-
-```bash
-npm install -g now
-now
-```
+The site is deployed via drone automatically to the Love Foundation Server. If you want to test a production static build locally, you can run `npm run export:production` or `npm run export` for a non-productionized export
 
 
 ## Using external components
