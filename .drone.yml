@@ -41,6 +41,11 @@ steps:
   - name: build
     image: node:12
     pull: always
+    environment:
+      DIRECTUS_URL:
+        from_secret: directus_url
+      DIRECTUS_TOKEN:
+        from_secret: directus_token
     commands:
       - npm run export:production
 
