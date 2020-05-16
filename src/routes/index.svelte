@@ -2,8 +2,6 @@
   import UpcomingEvents from "../components/UI/FrontPage/UpcomingEvents.svelte";
   import { stores } from "@sapper/app";
 
-  export let queriedContent;
-
   const { session } = stores();
 
   let upcomingEvents = $session.events.filter(
@@ -15,10 +13,13 @@
   .centered {
     text-align: center;
   }
+  object {
+    width: 100%;
+  }
 </style>
 
 <svelte:head>
-  <title>Home</title>
+  <title>Love Foundation - Home</title>
 </svelte:head>
 <section class="pad--bottom--small">
   <div class="columns is-centered">
@@ -29,6 +30,7 @@
     </div>
   </div>
 </section>
+
 <section class="pad--bottom--small">
   <div class="columns is-centered">
     <div class="column is-8">
