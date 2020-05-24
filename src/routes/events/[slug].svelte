@@ -14,6 +14,10 @@
 <script>
   import HeroModule from "../../components/UI/ContentModules/HeroModule.svelte";
   import ArtistItem from "../../components/UI/ArtistItem.svelte";
+  import {
+    normalizeEventDate,
+    normalizeTime
+  } from "../../lib/helpers/sharedFunctions";
 
   export let event;
 
@@ -48,7 +52,9 @@
   }
 
   h2 {
-    text-align: center
+    &.centered {
+      text-align: center;
+    }
   }
 </style>
 
@@ -63,26 +69,44 @@
 <div class="info">
   <div class="columns is-vertical is-multiline is-centered">
     <div class="column is-4">
-      <h2>Hub: {event.hub}</h2>
+      <h2>
+        Hub:
+        <br />
+        {event.hub}
+      </h2>
     </div>
     <div class="column is-4">
-      <h2>Location: {event.location}</h2>
+      <h2>
+        Location:
+        <br />
+        {event.location}
+      </h2>
     </div>
     <div class="column is-4">
-      <h2>Genre: {event.category}</h2>
+      <h2>
+        Genre:
+        <br />
+        {event.category}
+      </h2>
     </div>
-    <div class="column is-4">
-      <h2>Date: {event.starttime}</h2>
+    <div class="column">
+      <h2>
+        Start:
+        <br />
+        {normalizeEventDate(event.starttime, true)}
+      </h2>
     </div>
-    <div class="column is-4">
-      <h2>Time: {event.endtime}</h2>
+    <div class="column">
+      <h2>
+        End:
+        <br />
+        {normalizeEventDate(event.endtime, true)}
+      </h2>
     </div>
-    <div class="column is-4">
-
-    </div>
+    <div class="column is-4" />
   </div>
 </div>
-<h2>Artists that supported this event</h2>
+<h2 class="centered">Artists that supported this event</h2>
 <div class="columns is-multiline">
   {#each event.artists as artist}
     <ArtistItem {artist} />
