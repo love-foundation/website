@@ -20,3 +20,22 @@ export function shuffleArray(array) {
       [array[i], array[j]] = [array[j], array[i]];
   }
 }
+
+export function normalizeEventDate(datestring, time = false) {
+  const months = ["JAN", "FEB", "MAR","APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+  let normalizedDate = new Date(datestring);
+  if (time) {
+    normalizedDate = normalizedDate.getDate() + " / " + months[normalizedDate.getMonth()] + " / " + normalizedDate.getFullYear() + " \u2014 " + normalizedDate.getHours() + " : " + normalizedDate.getMinutes();
+  }
+  else {
+  normalizedDate = normalizedDate.getDate() + " / " + months[normalizedDate.getMonth()] + " / " + normalizedDate.getFullYear();
+}
+  return normalizedDate;
+}
+
+export function normalizeTime(datestring) {
+  let normalizedTime = new Date(datestring);
+  normalizedTime = normalizedTime.getHours() + " : " + normalizedTime.getMinutes();
+
+  return normalizedTime;
+}
