@@ -14,6 +14,9 @@ export function dynamicSort(property) {
 }
 
 
+
+
+
 export function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -21,14 +24,15 @@ export function shuffleArray(array) {
   }
 }
 
+
 export function normalizeEventDate(datestring, time = false) {
   const months = ["JAN", "FEB", "MAR","APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
   let normalizedDate = new Date(datestring);
   if (time) {
-    normalizedDate = normalizedDate.getDate() + " / " + months[normalizedDate.getMonth()] + " / " + normalizedDate.getFullYear() + " \u2014 " + normalizedDate.getHours() + " : " + normalizedDate.getMinutes();
+    normalizedDate = String(normalizedDate.getDate()).padStart(2, '0') + " " + months[normalizedDate.getMonth()] + " " + normalizedDate.getFullYear() + " \u2014 " + String(normalizedDate.getHours()).padStart(2, '0') + " : " + String(normalizedDate.getMinutes()).padStart(2, '0');
   }
   else {
-  normalizedDate = normalizedDate.getDate() + " / " + months[normalizedDate.getMonth()] + " / " + normalizedDate.getFullYear();
+  normalizedDate = normalizedDate.getDate() + " " + months[normalizedDate.getMonth()] + " " + normalizedDate.getFullYear();
 }
   return normalizedDate;
 }
