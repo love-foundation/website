@@ -31,7 +31,6 @@
   font-style: normal;
 }
 
-
 // Media Queries work like this for each of the below breakpoints. If you want to change the size of the breakpoints you can assign different values in the variables.scss
 // mobile: up to 768px
 // tablet: from 769px
@@ -50,8 +49,8 @@ html {
 body {
   margin: 0;
   font-family: $family-primary;
-  font-size: 18px;
-  font-size: 1.8rem;
+  font-size: 14px;
+  font-size: 1.4rem;
   line-height: 1.5;
   color: $black !important;
   overflow-x: hidden;
@@ -67,50 +66,46 @@ h6 {
 }
 
 h1 {
-  font-size: 50px !important;
-  font-size: 5rem !important;
+  font-size: 34px !important;
+  font-size: 3.4rem !important;
   @include desktop {
-    font-size: 90px !important;
-    font-size: 9rem !important;
+    font-size: 50px !important;
+    font-size: 5rem !important;
   }
 }
 
 h2 {
-	font-size: 22px !important;
-  font-size: 2.2rem !important;
-	@include desktop {
-		font-size: 36px !important;
-  	font-size: 3.6rem !important;
-	}
-
+  font-size: 20px !important;
+  font-size: 2rem !important;
+  @include desktop {
+    font-size: 30px !important;
+    font-size: 3rem !important;
+  }
 }
 
 h3 {
-  font-size: 22px !important;
-  font-size: 2.2rem !important;
+  font-size: 16px !important;
+  font-size: 1.6rem !important;
   font-weight: 500 !important;
+  @include desktop {
+    font-size: 22px !important;
+    font-size: 2.2rem !important;
+    font-weight: 500 !important;
+  }
+  &.light {
+    font-weight: normal;
+  }
 }
 
 p {
-  font-size: 18px !important;
-  font-size: 1.8rem !important;
+  font-size: 14px !important;
+  font-size: 1.4rem !important;
+  @include desktop {
+    font-size: 18px !important;
+    font-size: 1.8rem !important;
+  }
 }
 
 a {
   color: inherit;
-}
-
-code {
-  font-family: menlo, inconsolata, monospace;
-  font-size: calc(1em - 2px);
-  color: #555;
-  background-color: #f0f0f0;
-  padding: 0.2em 0.4em;
-  border-radius: 2px;
-}
-
-@media (min-width: 400px) {
-  body {
-    font-size: 16px;
-  }
 }
