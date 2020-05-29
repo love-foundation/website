@@ -16,8 +16,8 @@
   }
 
   .blob {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     border: 2px solid $black;
     display: flex;
@@ -25,6 +25,11 @@
     justify-content: center;
     font-weight: bold;
     align-self: bottom;
+
+    @include desktop {
+      width: 100px;
+      height: 100px;
+    }
     &:hover {
       border-color: $dark-grey;
     }
