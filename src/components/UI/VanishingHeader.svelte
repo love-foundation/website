@@ -74,18 +74,17 @@
       height: 100%;
       background-color: $blue;
       transition: transform 300ms ease-in-out;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       .homelink {
         padding-left: 31px;
-        float: left;
         text-decoration: none;
         color: white;
+        padding-bottom: 5px;
         h2 {
           text-transform: uppercase;
         }
-      }
-
-      .side {
-        float: right;
       }
     }
   }
