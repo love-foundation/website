@@ -46,10 +46,14 @@
     position: relative;
     max-width: $max-width;
     background-color: white;
-    padding: 2em;
+    padding: 0.5em;
     margin: 0 auto;
     box-sizing: border-box;
     margin-top: $desktop-header-height;
+
+    @include desktop {
+      padding: 2em;
+    }
   }
 
   progress {
