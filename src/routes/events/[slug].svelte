@@ -55,6 +55,9 @@
     &.centered {
       text-align: center;
     }
+    &.capitalized {
+      text-transform: capitalize;
+    }
   }
 </style>
 
@@ -83,7 +86,7 @@
       </h2>
     </div>
     <div class="column is-4">
-      <h2>
+      <h2 class="capitalized">
         Genre:
         <br />
         {event.category}
@@ -106,9 +109,12 @@
     <div class="column is-4" />
   </div>
 </div>
-<h2 class="centered">Artists that supported this event</h2>
-<div class="columns is-multiline">
-  {#each event.artists as artist}
-    <ArtistItem {artist} />
-  {/each}
-</div>
+
+{#if event.artists.length}
+  <h2 class="centered">Artists that supported this event</h2>
+  <div class="columns is-multiline">
+    {#each event.artists as artist}
+      <ArtistItem {artist} />
+    {/each}
+  </div>
+{/if}
