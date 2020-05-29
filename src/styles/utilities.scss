@@ -9,11 +9,17 @@ $directions: "top", "bottom", "left", "right";
     $val: nth($size, 2);
 
     .push--#{$dir}--#{$name} {
-      margin-#{$dir}: $val;
+      margin-#{$dir}: $val / 2;
+      @include desktop {
+        margin-#{$dir}: $val;
+      }
     }
 
     .pad--#{$dir}--#{$name} {
-      padding-#{$dir}: $val;
+      padding-#{$dir}: $val / 2;
+      @include desktop {
+        padding-#{$dir}: $val;
+      }
     }
   }
 }
