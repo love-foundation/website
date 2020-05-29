@@ -45,8 +45,12 @@
     padding: 20px;
     line-height: 145%;
     text-align: center;
-    font-size: 30px !important; // FIX ME: This should come from global font values. Discussion on font/text variations should be happening
-    font-size: 3rem !important;
+    font-size: 20px !important; // FIX ME: This should come from global font values. Discussion on font/text variations should be happening
+    font-size: 2rem !important;
+    @include desktop {
+      font-size: 30px !important; // FIX ME: This should come from global font values. Discussion on font/text variations should be happening
+      font-size: 3rem !important;
+    }
   }
 
   #opener {
@@ -113,7 +117,7 @@
 
 {#if upcomingEvents.length}
   <section class="pad--bottom--small">
-    <h2 class="centered">Upcoming Events</h2>
+    <h1 class="centered">Upcoming Events</h1>
     <UpcomingEvents {upcomingEvents} />
   </section>
 {/if}
@@ -121,7 +125,7 @@
 <section class="love-locations pad--bottom--small">
   <div class="row">
 
-    <h2>Where is the Love?</h2>
+    <h1>Where is the Love?</h1>
 
     <figure class="image">
       <object data="map.svg" type="image/svg+xml" title="Map" />
@@ -139,7 +143,7 @@
 </section>
 
 <section class="active-hubs row">
-  <h2>Active Love Hubs</h2>
+  <h1>Active Love Hubs</h1>
   <div class="columns is-multiline">
     <div class="column is-4">
       <div class="hub-box">
