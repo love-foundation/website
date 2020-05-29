@@ -15,7 +15,6 @@
   import HeroModule from "../../components/UI/ContentModules/HeroModule.svelte";
   import GridItem from "../../components/UI/Grid/GridItem.svelte";
 
-
   export let artist;
 
   let {
@@ -61,7 +60,12 @@
   }
 
   h2 {
-    text-align: center;
+    &.centered {
+      text-align: center;
+    }
+    &.capitalized {
+      text-transform: capitalize;
+    }
   }
 
   .wrap {
@@ -78,42 +82,54 @@
   <h1>{name}</h1>
 </div>
 <div class="info">
-  <div class="columns is-vertical is-multiline is-centered">
-    <div class="column is-4">
-      <h2>Hub:</h2>
-      <h2>{location}</h2>
-    </div>
-    <div class="column is-4">
-      <h2>Status:</h2>
-      <h2>{status}</h2>
-    </div>
-    <div class="column is-4">
-      <h2>Genre:</h2>
-      <h2>{category}</h2>
-    </div>
+  <div class="columns is-centered">
+    {#if location}
+      <div class="column">
+        <h2>Hub:</h2>
+        <h2>{location}</h2>
+      </div>
+    {/if}
 
-    <div class="column is-4">
-      <h2>More:</h2>
-      {#if facebook}
-        <a href={facebook}>
-          <h2>Facebook</h2>
-        </a>
-      {/if}
-      {#if soundcloud}
-        <a href={soundcloud}>
-          <h2>Soundcloud</h2>
-        </a>
-      {/if}
-    </div>
-    <div class="column is-4" />
+    {#if status}
+      <div class="column">
+        <h2>Status:</h2>
+        <h2 class="capitalized">{status}</h2>
+      </div>
+    {/if}
+
+    {#if category}
+      <div class="column">
+        <h2>Genre:</h2>
+        <h2 class="capitalized">{category}</h2>
+      </div>
+    {/if}
+
+    {#if facebook || soundcloud}
+      <div class="column">
+        <h2>Links:</h2>
+        {#if facebook}
+          <a href={facebook}>
+            <h2>Facebook</h2>
+          </a>
+        {/if}
+        {#if soundcloud}
+          <a href={soundcloud}>
+            <h2>Soundcloud</h2>
+          </a>
+        {/if}
+
+      </div>
+    {/if}
   </div>
 </div>
 
 {#if events.length}
-<h2 class="pad--bottom--small pad--top--small">Events that this artist supported</h2>
-<div class="tile is-ancestor wrap">
-  {#each events as event}
-    <GridItem item={event} cardClass={'push--bottom--small is-4'} />
-  {/each}
-</div>
+  <h2 class="pad--bottom--small pad--top--small centered">
+    Events that this artist supported
+  </h2>
+  <div class="tile is-ancestor wrap">
+    {#each events as event}
+      <GridItem item={event} cardClass={'push--bottom--small is-4'} />
+    {/each}
+  </div>
 {/if}
