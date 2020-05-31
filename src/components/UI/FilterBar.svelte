@@ -103,19 +103,27 @@
   :global(input) {
     font-family: $family-primary;
     color: $black;
-    font-size: 36px;
-    font-size: 3.6rem;
+    font-size: 20px;
+    font-size: 2rem;
     cursor: pointer !important;
     &::placeholder {
       opacity: 1;
     }
+    @include desktop {
+      font-size: 30px;
+      font-size: 3rem;
+    }
   }
   :global(.selectedItem) {
-    font-size: 36px !important;
-    font-size: 3.6rem !important;
+    font-size: 20px;
+    font-size: 2rem;
     color: $black;
     overflow-x: visible !important;
     width: auto;
+    @include desktop {
+      font-size: 30px;
+      font-size: 3rem;
+    }
   }
   :global(.selection) {
     overflow-x: visible !important;
@@ -133,6 +141,7 @@
     <div class="column is-2">
       <div use:selectAction class="select" class:active={false}>
         <Select
+          inputAttributes={{readonly: 'readonly'}}
           selectedValue={value}
           items={options}
           {placeholder}
