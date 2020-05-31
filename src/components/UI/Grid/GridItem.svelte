@@ -16,41 +16,88 @@
     imageUrl
   } = item;
 
-  const months = ["JAN", "FEB", "MAR","APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+  const months = [
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DEC"
+  ];
   let link = soundcloud ? soundcloud : `/events/${slug}`;
-  let imageRatio = soundcloud ? "is-square" : "is-3by4";
+  let imageRatio = soundcloud ? "is-square" : "is-2by3";
   let eventDate;
 
   if (showDate && starttime) {
     eventDate = new Date(starttime);
-    eventDate = eventDate.getDate() + " / " + months[eventDate.getMonth()] + " / " + eventDate.getFullYear();
+    eventDate =
+      eventDate.getDate() +
+      " / " +
+      months[eventDate.getMonth()] +
+      " / " +
+      eventDate.getFullYear();
   }
-
-
 </script>
 
 <style lang="scss">
-  .tile {
-    &.is-child {
+  .item {
+    padding: 5%;
+    position: relative;
+    &.big {
+      grid-area: big;
+      border-bottom: 1px solid $light-grey;
+      &.right {
+        border-left: 1px solid $light-grey;
+      }
+      &.left {
+        border-right: 1px solid $light-grey;
+      }
+    }
+    &.small {
       padding: 10%;
-    }
-    &.is-alone {
-      height: max-content;
+      &.a {
+        grid-area: small-a;
+        border-bottom: 1px solid $light-grey;
+        border-right: 1px solid $light-grey;
+      }
+      &.b {
+        grid-area: small-b;
+        border-bottom: 1px solid $light-grey;
+      }
+      &.c {
+        grid-area: small-c;
+        border-bottom: 1px solid $light-grey;
+        border-right: 1px solid $light-grey;
+        align-self: end;
+      }
+      &.d {
+        grid-area: small-d;
+        border-bottom: 1px solid $light-grey;
+        align-self: end;
+      }
     }
   }
-  .card-header {
-    flex-wrap: wrap;
-    box-shadow: none;
-    text-align: center;
-  }
+
   h3 {
     width: 100%;
+    padding: 0;
+    line-height: 29px;
+    text-align: center;
     &.subtitle {
       text-transform: capitalize;
     }
   }
 
   .image {
+    &.is-2by3 {
+      padding-top: 141.421356238%;
+    }
     img {
       object-fit: contain;
     }
@@ -68,29 +115,25 @@
   }
 </style>
 
-<a transition:fade rel="prefetch" href={link} class="tile {cardClass}">
-  <div class="tile is-child card">
-    <div class="card-image">
-      <figure
-        data-toggle-class="loaded"
-        class:lazy
-        class:lozad={lazy}
-        class="image {imageRatio}">
-        {#if lazy}
-          <img class="lozad" data-src={imageUrl} alt="{title} Poster" />
-        {:else}
-          <img src={imageUrl} alt="{title} Poster" />
-        {/if}
-      </figure>
-    </div>
-    <div class="card-header">
-      <h3 class="title card-header-title is-centered">{title}</h3>
-      {#if subtitle}
-        <h3 class="subtitle card-header-title is-centered">{subtitle}</h3>
-      {/if}
-      {#if eventDate}
-        <h3 class="subtitle card-header-title is-centered">{eventDate}</h3>
-      {/if}
-    </div>
+<a transition:fade rel="prefetch" href={link} class="item {cardClass}">
+  <figure
+    data-toggle-class="loaded"
+    class:lazy
+    class:lozad={lazy}
+    class="image {imageRatio}">
+    {#if lazy}
+      <img class="lozad" data-src={imageUrl} alt="{title} Poster" />
+    {:else}
+      <img src={imageUrl} alt="{title} Poster" />
+    {/if}
+  </figure>
+  <div class="item-info">
+    <h3 class="title">{title}</h3>
+    {#if subtitle}
+      <h3 class="subtitle">{subtitle}</h3>
+    {/if}
+    {#if eventDate}
+      <h3 class="subtitle">{eventDate}</h3>
+    {/if}
   </div>
 </a>

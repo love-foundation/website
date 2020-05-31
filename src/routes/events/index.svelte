@@ -146,8 +146,7 @@
   <section
     data-toggle-class="loaded"
     class:loaded={i < 1}
-    class:lozad={i >= 1}
-    class="tile is-ancestor is-vertical">
+    class:lozad={i >= 1}>
     <GridGroup itemGroup={eventGroup} groupIndex={i} lazy={i >= 1} />
   </section>
 {/each}
