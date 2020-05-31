@@ -5,6 +5,13 @@
   export let groupIndex = null;
   let isEven = groupIndex % 2 == 0;
 
+  const mapping = {
+    0: "a",
+    1: "b",
+    2: "c",
+    3: "d"
+  };
+
   $: {
     if (!isEven) {
       let lastItem = itemGroup.pop();
@@ -14,9 +21,36 @@
 </script>
 
 <style lang="scss">
-  .wrap {
-    flex-flow: wrap !important;
+  .grid-group {
+    display: grid;
+    grid-template-areas:
+      "big"
+      "small-a"
+      "small-b"
+      "small-c"
+      "small-d";
+    grid-template-columns: 100%;
+    @include desktop {
+      grid-template-areas:
+        "small-a small-b big big"
+        "small-c small-d big big";
+      grid-template-columns: 25% 25% 25% 25%;
+    }
+    &.even {
+      grid-template-areas:
+        "small-a"
+        "small-b"
+        "small-c"
+        "small-d"
+        "big";
+      @include desktop {
+        grid-template-areas:
+          "big big small-a small-b"
+          "big big small-c small-d";
+      }
+    }
   }
+
   // grid-template:
   //   "a b b" 40px
   //   "a b b" 40px / 1fr 1fr 1fr;
@@ -26,28 +60,25 @@
   //   "b b a" 40px / 1fr 1fr 1fr;
 </style>
 
-{#if isEven}
-  <GridItem
-    item={itemGroup[0]}
-    {lazy}
-    cardClass={'is-parent is-6'}
-    (itemGroup[0].id) />
-{/if}
+<div class="grid-group" class:even={isEven}>
 
-<div class="tile is-parent is-6 is-vertical wrap">
+  {#if isEven}
+    <GridItem
+      item={itemGroup[0]}
+      {lazy}
+      cardClass={'big left'}
+      (itemGroup[0].id) />
+  {/if}
+
   {#each itemGroup.slice(1, itemGroup.length) as item, i (item.id)}
-    {#if itemGroup.length === 5}
-      <GridItem {lazy} {item} cardClass={'is-6'} />
-    {:else}
-      <GridItem {lazy} {item} cardClass={'is-6 is-alone'} />
-    {/if}
+    <GridItem {lazy} {item} cardClass={`small ${mapping[i]}`} />
   {/each}
-</div>
 
-{#if !isEven}
-  <GridItem
-    {lazy}
-    item={itemGroup[0]}
-    cardClass={'is-parent is-6'}
-    (itemGroup[0].id) />
-{/if}
+  {#if !isEven}
+    <GridItem
+      {lazy}
+      item={itemGroup[0]}
+      cardClass={'big right'}
+      (itemGroup[0].id) />
+  {/if}
+</div>
