@@ -20,6 +20,10 @@
     right: 0;
     background: $blue;
     z-index: 10000;
+    left: 0;
+    @include desktop {
+      left: unset;
+    }
 
     ul {
       margin: 0;
