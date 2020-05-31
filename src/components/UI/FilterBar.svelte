@@ -44,12 +44,15 @@
   .select {
     --border: none;
     --placeholderColor: black;
-    --inputFontSize: 3.6rem;
+    --inputFontSize: 2rem;
     --height: 54px;
     --itemIsActiveColor: #0597f2;
     --itemHoverBG: #0597f2;
     position: relative;
     cursor: pointer;
+    @include desktop {
+      --inputFontSize: 3rem;
+    }
     &::after {
       content: "";
       position: absolute;
@@ -58,10 +61,13 @@
       transform: translateY(-50%);
       width: 0;
       height: 0;
-      border-left: 12px solid transparent;
-      border-right: 12px solid transparent;
-      border-top: 12px solid #000;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 8px solid #000;
       clear: both;
+      @include desktop {
+        border-width: 12px
+      }
     }
     &.focused {
       &::after {
@@ -80,9 +86,20 @@
       display: flex;
       align-items: center;
       height: 100%;
+      padding: 0 16px;
+      @include desktop {
+        padding: unset;
+      }
     }
   }
 
+
+  .hide-on-mobile {
+    display: none;
+    @include desktop {
+      display: block;
+    }
+  }
   :global(input) {
     font-family: $family-primary;
     color: $black;
@@ -107,7 +124,7 @@
 </style>
 
 <div class="topbar columns is-horizontal">
-  <div class="column is-2">
+  <div class="column is-2 hide-on-mobile">
     <h2 class="vcentered">{title}</h2>
   </div>
   <div class="column" />
