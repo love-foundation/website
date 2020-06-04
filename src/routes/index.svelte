@@ -1,5 +1,6 @@
 <script>
   import UpcomingEvents from "../components/UI/FrontPage/UpcomingEvents.svelte";
+  import Button from "../components/UI/Button.svelte";
   import { stores } from "@sapper/app";
 
   const { session } = stores();
@@ -58,24 +59,6 @@
     text-align: center;
   }
 
-  /*   Buttons  ####################  */
-  .btn:link,
-  .btn:active,
-  .btn:visited {
-    background-color: #0597f2;
-    color: #fff;
-    font-weight: 300;
-    display: inline-block;
-    padding: 20px 30px;
-    margin: 20px;
-    border-radius: 200px;
-    text-decoration: none;
-    font-size: 150%;
-  }
-  .btn:hover {
-    background-color: #0482d1;
-  }
-
   // Hub Boxes
 
   .hub-box {
@@ -108,10 +91,7 @@
       connecting people and raising money for water development projects through
       cultural events.
     </h2>
-    <!-- Fix Me: Should be UI component, with properties for link and text -->
-    <div class="btn-center">
-      <a class="btn" href="#">Join the Family</a>
-    </div>
+    <Button link={'/join'}>Join the Family</Button>
   </div>
 </section>
 
@@ -221,7 +201,5 @@
 </section>
 <!-- Fix Me: Should be UI component, with properties for link and text -->
 <section class="cta pad--bottom--small centered">
-  <div class="btn-center">
-    <a class="btn" href="#">Join the Family</a>
-  </div>
+  <Button link={'/join'}>Join the Family</Button>
 </section>
