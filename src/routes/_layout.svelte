@@ -26,6 +26,9 @@
 <script>
   import Nav from "../components/UI/Nav.svelte";
   import Footer from "../components/UI/Footer.svelte";
+  import { stores } from "@sapper/app";
+
+  const { page } = stores();
 
   export let segment;
 
@@ -33,13 +36,14 @@
   let y = 0;
   let progress = 0;
   let docHeight = 0;
+  let mainClasses = "";
+
+  mainClasses = $page.path === "/events" ? "events" : "";
 
   $: if (docHeight > winHeight) {
     progress = y / (docHeight - winHeight);
   }
 </script>
-
-
 
 <style lang="scss">
   main {
@@ -53,6 +57,9 @@
 
     @include desktop {
       padding: 2em;
+    }
+    &.events {
+      padding: unset !important;
     }
   }
 
@@ -76,9 +83,10 @@
 </style>
 
 <svelte:head>
-  <style src="../styles/global.scss"></style>
-</svelte:head>
+  <style src="../styles/global.scss">
 
+  </style>
+</svelte:head>
 
 <svelte:window bind:scrollY={y} bind:innerHeight={winHeight} />
 
@@ -87,9 +95,8 @@
 
 <div bind:clientHeight={docHeight}>
 
-  <main>
+  <main class={mainClasses}>
     <slot />
   </main>
   <Footer />
 </div>
-
