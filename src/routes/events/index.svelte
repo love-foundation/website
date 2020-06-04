@@ -110,10 +110,6 @@
 </script>
 
 <style lang="scss">
-  .tile {
-    flex-flow: wrap !important;
-  }
-
   section {
     opacity: 0;
     transition: margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94),

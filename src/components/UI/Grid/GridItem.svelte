@@ -48,6 +48,7 @@
 <style lang="scss">
   .item {
     padding: 5%;
+    padding-bottom: 10%;
     position: relative;
     &.big {
       grid-area: big;
@@ -61,6 +62,7 @@
     }
     &.small {
       padding: 10%;
+      padding-bottom: 20%;
       &.a {
         grid-area: small-a;
         border-bottom: 1px solid $light-grey;
@@ -92,6 +94,10 @@
     &.subtitle {
       text-transform: capitalize;
     }
+  }
+
+  .item-info {
+    height: 0;
   }
 
   .image {
