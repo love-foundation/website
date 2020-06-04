@@ -17,7 +17,6 @@ export async function get(req, res, next) {
       category: e.event_type,
       location: e.location,
       imageUrl: e.poster ? e.poster.data.thumbnails[7].url : "placeholder_events.jpeg",
-      artists_full: e.artists,
       heroColor: e.hero_background_color || null,
       artists: artists.map(artist => ({
         id: artist.artists_id.id,
