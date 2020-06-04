@@ -41,6 +41,13 @@
 </script>
 
 <style lang="scss">
+  .topbar {
+    border-bottom: 2px solid $light-grey;
+    padding: 0% 3%;
+    .column {
+      padding: unset;
+    }
+  }
   .select {
     --border: none;
     --placeholderColor: black;
@@ -66,7 +73,7 @@
       border-top: 8px solid #000;
       clear: both;
       @include desktop {
-        border-width: 12px
+        border-width: 12px;
       }
     }
     &.focused {
@@ -92,7 +99,6 @@
       }
     }
   }
-
 
   .hide-on-mobile {
     display: none;
@@ -141,7 +147,7 @@
     <div class="column is-2">
       <div use:selectAction class="select" class:active={false}>
         <Select
-          inputAttributes={{readonly: 'readonly'}}
+          inputAttributes={{ readonly: 'readonly' }}
           selectedValue={value}
           items={options}
           {placeholder}
