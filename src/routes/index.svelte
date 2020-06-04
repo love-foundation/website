@@ -91,7 +91,7 @@
       connecting people and raising money for water development projects through
       cultural events.
     </h2>
-    <Button link={'/join'}>Join the Family</Button>
+    <Button link={'join'}>Join the Family</Button>
   </div>
 </section>
 
@@ -201,5 +201,5 @@
 </section>
 <!-- Fix Me: Should be UI component, with properties for link and text -->
 <section class="cta pad--bottom--small centered">
-  <Button link={'/join'}>Join the Family</Button>
+  <Button link={'join'}>Join the Family</Button>
 </section>
