@@ -27,7 +27,7 @@
 </style>
 
 <div class="btn--wrap">
-  <a target={target} class="btn" href={link}>
+  <a rel="prefetch" target={target} class="btn" href={link}>
     <slot />
   </a>
 </div>
