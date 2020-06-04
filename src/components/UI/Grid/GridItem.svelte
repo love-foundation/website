@@ -52,12 +52,12 @@
     position: relative;
     &.big {
       grid-area: big;
-      border-bottom: 1px solid $light-grey;
+      border-bottom: 1px solid $medium-grey;
       &.right {
-        border-left: 1px solid $light-grey;
+        border-left: 1px solid $medium-grey;
       }
       &.left {
-        border-right: 1px solid $light-grey;
+        border-right: 1px solid $medium-grey;
       }
     }
     &.small {
@@ -65,22 +65,22 @@
       padding-bottom: 20%;
       &.a {
         grid-area: small-a;
-        border-bottom: 1px solid $light-grey;
-        border-right: 1px solid $light-grey;
+        border-bottom: 1px solid $medium-grey;
+        border-right: 1px solid $medium-grey;
       }
       &.b {
         grid-area: small-b;
-        border-bottom: 1px solid $light-grey;
+        border-bottom: 1px solid $medium-grey;
       }
       &.c {
         grid-area: small-c;
-        border-bottom: 1px solid $light-grey;
-        border-right: 1px solid $light-grey;
+        border-bottom: 1px solid $medium-grey;
+        border-right: 1px solid $medium-grey;
         align-self: end;
       }
       &.d {
         grid-area: small-d;
-        border-bottom: 1px solid $light-grey;
+        border-bottom: 1px solid $medium-grey;
         align-self: end;
       }
     }

@@ -42,8 +42,11 @@
 
 <style lang="scss">
   .topbar {
-    border-bottom: 2px solid $light-grey;
+    padding-top: 10px;
+    border-bottom: 1px solid $medium-grey;
     padding: 0% 3%;
+    margin-bottom: 0;
+    margin-top: 5px;
     .column {
       padding: unset;
     }
