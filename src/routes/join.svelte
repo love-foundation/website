@@ -5,7 +5,7 @@
 <style lang="scss">
   .bubble {
     border-radius: 50%;
-    border: 10px solid $black;
+    border: 10px solid #555555;
     margin: 5%;
     .image {
       object {
