@@ -7,20 +7,11 @@
     border-radius: 50%;
     border: 10px solid $black;
     margin: 5%;
-    position: relative;
-
     .image {
       object {
         width: 100%;
-        padding: 20%;
+        padding: 10%;
       }
-    }
-
-    h2 {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 10%;
     }
   }
 </style>
@@ -37,7 +28,6 @@
       <figure class="image">
         <object data="join_family.svg" type="image/svg+xml" title="Map" />
       </figure>
-      <h2>Join a hub</h2>
     </div>
     <Button newTab={true} link={'mailto:hello@love-foundation.org'}>
       Join our hubs
@@ -48,7 +38,6 @@
       <figure class="image">
         <object data="join_events.svg" type="image/svg+xml" title="Map" />
       </figure>
-      <h2>Join an event</h2>
     </div>
     <Button newTab={true} link={'events'}>Join our events</Button>
   </div>
@@ -57,7 +46,6 @@
       <figure class="image">
         <object data="join_financial.svg" type="image/svg+xml" title="Map" />
       </figure>
-      <h2>Financial Hug</h2>
     </div>
     <Button newTab={true} link={'mailto:hello@love-foundation.org'}>
       Support us financially
