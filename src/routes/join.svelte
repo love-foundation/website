@@ -29,7 +29,7 @@
   <title>Love Foundation - Join the Family</title>
 </svelte:head>
 
-<h1 class="pad--bottom--small">Join the Family</h1>
+<h1 class="pad--bottom--small centered">Join the Family</h1>
 
 <div class="columns">
   <div class="column is-4">
