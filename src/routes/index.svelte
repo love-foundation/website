@@ -1,7 +1,20 @@
+<script context="module">
+  export function preload({ params, query }) {
+    return this.fetch(`hubs.json`)
+      .then(r => r.json())
+      .then(hubs => {
+        return { hubs };
+      });
+  }
+</script>
+
 <script>
   import UpcomingEvents from "../components/UI/FrontPage/UpcomingEvents.svelte";
   import Button from "../components/UI/Button.svelte";
+  import Hub from "../components/UI/Hub.svelte";
   import { stores } from "@sapper/app";
+
+  export let hubs;
 
   const { session } = stores();
 
@@ -54,23 +67,6 @@
     min-height: 100vh;
     text-align: center;
   }
-
-  // Hub Boxes
-
-  .hub-box {
-    text-align: center;
-    margin: 5%;
-    padding: 5%;
-    color: #0597f2;
-  }
-  .hub-box:hover {
-    background-color: aliceblue;
-  }
-  .hub-name {
-    text-decoration: none;
-    font-size: 150%;
-    color: #575757;
-  }
 </style>
 
 <svelte:head>
@@ -121,78 +117,9 @@
 <section class="active-hubs row">
   <h1>Active Love Hubs</h1>
   <div class="columns is-multiline">
-    <div class="column is-4">
-      <div class="hub-box">
-        <h3>Amsterdam</h3>
-        <a href="#" class="hub-name">Facebook</a>
-        <br />
-        <a href="#" class="hub-name">Instagram</a>
-      </div>
-    </div>
-    <div class="column is-4">
-      <div class="hub-box">
-        <h3>Berlin</h3>
-        <a href="#" class="hub-name">Facebook</a>
-        <br />
-        <a href="#" class="hub-name">Instagram</a>
-      </div>
-    </div>
-    <div class="column is-4">
-      <div class="hub-box">
-        <h3>Brussels</h3>
-        <a href="#" class="hub-name">Facebook</a>
-        <br />
-        <a href="#" class="hub-name">Instagram</a>
-      </div>
-    </div>
-    <div class="column is-4">
-      <div class="hub-box">
-        <h3>Cape Town</h3>
-        <a href="#" class="hub-name">Facebook</a>
-        <br />
-        <a href="#" class="hub-name">Instagram</a>
-      </div>
-    </div>
-    <div class="column is-4">
-      <div class="hub-box">
-        <h3>Dresden</h3>
-        <a href="#" class="hub-name">Facebook</a>
-        <br />
-        <a href="#" class="hub-name">Instagram</a>
-      </div>
-    </div>
-    <div class="column is-4">
-      <div class="hub-box">
-        <h3>Magdeburg</h3>
-        <a href="#" class="hub-name">Facebook</a>
-        <br />
-        <a href="#" class="hub-name">Instagram</a>
-      </div>
-    </div>
-    <div class="column is-4">
-      <div class="hub-box">
-        <h3>Maastricht</h3>
-        <a href="#" class="hub-name">Facebook</a>
-        <br />
-        <a href="#" class="hub-name">Instagram</a>
-      </div>
-    </div>
-    <div class="column is-4">
-      <div class="hub-box">
-        <h3>Munich</h3>
-        <a href="#" class="hub-name">Facebook</a>
-        <br />
-        <a href="#" class="hub-name">Instagram</a>
-      </div>
-    </div>
-    <div class="column is-4">
-      <div class="hub-box">
-        <h3>Tel Aviv</h3>
-        <a href="#" class="hub-name">Facebook</a>
-        <br />
-        <a href="#" class="hub-name">Instagram</a>
-      </div>
-    </div>
+    {#each hubs as hub}
+      <Hub {hub} />
+    {/each}
   </div>
 </section>
 <!-- Fix Me: Should be UI component, with properties for link and text -->
