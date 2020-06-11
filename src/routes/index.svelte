@@ -30,11 +30,7 @@
   /* ########################## */
   /* #### Reusable Elements ##### */
   /* ########################## */
-  .graphic {
-    width: 90%;
-    margin: 0px auto;
-    display: inline-block;
-  }
+
   h1,
   h2 {
     text-align: center;
