@@ -11,7 +11,7 @@
     color: #fff;
     font-weight: 300;
     display: inline-block;
-    padding: 20px 30px;
+    padding: 10px 30px;
     margin: 0 auto;
     border-radius: 200px;
     text-decoration: none;
