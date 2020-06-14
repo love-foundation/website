@@ -64,7 +64,7 @@
             <a rel="prefetch" href="lovecasts">Lovecasts</a>
           </li>
           <li>
-            <a rel="prefetch" href="lovecasts">Imprint</a>
+            <a rel="prefetch" href="impressum">Impressum</a>
           </li>
         </ul>
       </div>
