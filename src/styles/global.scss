@@ -66,6 +66,9 @@ h6 {
   &.centered {
     text-align: center;
   }
+  &.capitalized {
+    text-transform: capitalize;
+  }
 }
 
 h1 {
