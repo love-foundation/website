@@ -1,6 +1,6 @@
 <script context="module">
   export function preload({ params, query }) {
-    return this.fetch(`imprint.json`)
+    return this.fetch(`impressum.json`)
       .then(r => r.json())
       .then(queriedContent => {
         return { queriedContent };
@@ -14,7 +14,7 @@
 </script>
 
 <svelte:head>
-  <title>Imprint</title>
+  <title>Impressum</title>
 </svelte:head>
 
 <Content {queriedContent} />
