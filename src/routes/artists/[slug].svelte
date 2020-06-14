@@ -58,19 +58,6 @@
     align-items: center;
     position: relative;
   }
-
-  h2 {
-    &.centered {
-      text-align: center;
-    }
-    &.capitalized {
-      text-transform: capitalize;
-    }
-  }
-
-  .wrap {
-    flex-flow: wrap;
-  }
 </style>
 
 <svelte:head>
@@ -127,9 +114,9 @@
   <h2 class="pad--bottom--small pad--top--small centered">
     Events that this artist supported
   </h2>
-  <div class="tile is-ancestor wrap">
+  <div class="columns">
     {#each events as event}
-      <GridItem item={event} cardClass={'push--bottom--small is-4'} />
+      <GridItem item={event} cardClass={'push--bottom--small column is-4'} />
     {/each}
   </div>
 {/if}
