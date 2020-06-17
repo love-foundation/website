@@ -16,13 +16,13 @@ export async function get(req, res, next) {
       endtime: e.enddatetime,
       category: e.event_type,
       location: e.location,
-      imageUrl: e.poster ? e.poster.data.thumbnails[7].url : "placeholder_events.jpeg",
+      imageUrl: e.poster ? e.poster.data.thumbnails[7].url : "placeholder_events.png",
       heroColor: e.hero_background_color || null,
       artists: artists.map(artist => ({
         id: artist.artists_id.id,
         slug: artist.artists_id.slug,
         name: artist.artists_id.artist_name,
-        imageUrl: artist.artists_id.image ? artist.artists_id.image.data.thumbnails[3].url : "placeholder_artists.jpeg"
+        imageUrl: artist.artists_id.image ? artist.artists_id.image.data.thumbnails[3].url : "placeholder_artists.png"
       }))
     })
 
