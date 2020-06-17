@@ -13,7 +13,7 @@ export async function get(req, res, next) {
 				lovecasts.map(lovecast => ({
 					id: lovecast.id,
 					title: lovecast.name_of_the_set,
-					imageUrl: lovecast.design ? lovecast.design.data.thumbnails[8].url : "placeholder_lovecasts.jpeg",
+					imageUrl: lovecast.design ? lovecast.design.data.thumbnails[8].url : "placeholder_lovecasts.png",
 					soundcloud: lovecast.soundcloud_link
 				}))
 			)

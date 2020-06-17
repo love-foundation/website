@@ -12,7 +12,7 @@ export async function get(req, res, next) {
 					id: artist.id,
 					slug: artist.slug,
 					name: artist.artist_name,
-					imageUrl: artist.image ? artist.image.data.thumbnails[8].url : "placeholder_artists.jpeg",
+					imageUrl: artist.image ? artist.image.data.thumbnails[8].url : "placeholder_artists.png",
 					location: artist.current_location,
 					category: artist.type_of_art
 				}))
