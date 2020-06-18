@@ -114,7 +114,7 @@
   <h2 class="pad--bottom--small pad--top--small centered">
     Events that this artist supported
   </h2>
-  <div class="columns">
+  <div class="columns is-multiline">
     {#each events as event}
       <GridItem item={event} cardClass={'push--bottom--small column is-4'} />
     {/each}
