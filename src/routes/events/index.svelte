@@ -24,9 +24,6 @@
   let hubs = [];
   let filteredEvents;
   let currentFilters = { ...pageFilters };
-  let reverse = false;
-
-  $: eventsArray = reverse ? eventsArray.reverse() : eventsArray.reverse();
 
   eventsArray.map(event => {
     hubs = [...hubs, event.hub];
@@ -135,7 +132,7 @@
     reset(data.detail);
   }}
   on:sort={() => {
-    reverse = !reverse;
+    eventsArray = eventsArray.reverse()
   }} />
 
 {#each eventGroups as eventGroup, i (Math.random())}
