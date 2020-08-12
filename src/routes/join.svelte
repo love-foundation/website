@@ -22,6 +22,11 @@
 
 <h1 class="pad--bottom--small centered">Join the Family</h1>
 
+<h2 class="centered">
+  Download membership application for Love Foundation e.V. now
+</h2>
+<Button newTab={true} link={'Mitgliedsantrag_LF-eV.pdf'}>Download</Button>
+
 <div class="columns">
   <div class="column is-4">
     <div class="bubble">
