@@ -26,7 +26,7 @@
   let currentFilters = { ...pageFilters };
   let reverse = false;
 
-  $: eventsArray = reverse ? eventsArray.reverse() : eventsArray;
+  $: eventsArray = reverse ? eventsArray.reverse() : eventsArray.reverse();
 
   eventsArray.map(event => {
     hubs = [...hubs, event.hub];
