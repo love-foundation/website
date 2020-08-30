@@ -1,4 +1,4 @@
-const hubs = [
+export default [
   {
     "id": 362,
     "city": "Amsterdam",
