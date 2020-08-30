@@ -9,7 +9,7 @@ let projects;
 export async function get(req, res, next) {
 
   if (callApi) {
-    projects = await fetchItems("projects", "id, name, main_image.*.*, pillar, slug", {});
+    projects = await fetchItems("projects", "id, name, main_image.*.*, pillar, slug, location_country", {});
 
     if (projects !== null) {
       res.setHeader('Content-Type', 'application/json');
@@ -20,6 +20,7 @@ export async function get(req, res, next) {
             name: project.name,
             imageUrl: project.main_image ? project.main_image.data.full_url : "placeholder_projects.jpeg",
             pillar: project.pillar,
+            country: project.location_country,
             slug: project.slug
           }))
         )

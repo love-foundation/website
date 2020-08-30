@@ -12,6 +12,9 @@ describe('Projects Page Functionality', () => {
 
   it('shows at least one project item', () => {
     cy.get('[data-cy=projectTitle]').first().should('exist');
+    cy.get('[data-cy=projectPillar]').first().should('exist');
+
+
   });
 });
 
