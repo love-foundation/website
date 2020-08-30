@@ -77,19 +77,20 @@
     <h2 class="vcentered">Artists</h2>
   </div>
   <div class="column" />
-  <input type="text" bind:value={searchString} />
+  <input type="text" bind:value={searchString} data-cy="searchArtists"/>
   <div class="column is-2">
     <h2
       class="vcentered pointer"
       on:click={() => {
         shuffle();
-      }}>
+      }}
+      data-cy="shuffleArtists">
       Shuffle
     </h2>
   </div>
 </div>
 
-<div class="columns is-multiline">
+<div data-cy="artistGrid" class="columns is-multiline">
   {#each currentSet as artist (artist.id)}
     <ArtistItem {artist} />
   {/each}

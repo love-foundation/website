@@ -50,6 +50,6 @@
         data-src={artist.imageUrl}
         alt="{artist.name} Picture" />
     </figure>
-    <h3>{artist.name}</h3>
+    <h3 data-cy="artistName">{artist.name}</h3>
   </div>
 </a>
