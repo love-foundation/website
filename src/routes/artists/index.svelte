@@ -51,11 +51,10 @@
     searchedArtists = filteredArtists.filter(a =>
       fuseArtistsIds.includes(a.id)
     );
-
   }
 
-  $: currentSet = searchedArtists.length > 0 ? searchedArtists : filteredArtists;
-
+  $: currentSet =
+    searchedArtists.length > 0 ? searchedArtists : filteredArtists;
 
   function shuffle() {
     currentSet = shuffleArray(currentSet);
@@ -65,6 +64,20 @@
 <style lang="scss">
   .pointer {
     cursor: pointer;
+  }
+
+  .search-wrap {
+    input {
+      font-size: 20px !important;
+      font-size: 2rem !important;
+      border: none;
+      border-bottom: 3px solid $black;
+
+       @include desktop {
+        font-size: 30px !important;
+        font-size: 3rem !important;
+      }
+    }
   }
 </style>
 
@@ -77,15 +90,21 @@
     <h2 class="vcentered">Artists</h2>
   </div>
   <div class="column" />
-  <input type="text" bind:value={searchString} data-cy="searchArtists"/>
-  <div class="column is-2">
+  <div class="column is-2 search-wrap pointer">
+    <input
+      type="text"
+      bind:value={searchString}
+      data-cy="searchArtists"
+      placeholder="Search Artists.." />
+  </div>
+  <div class="column is-2 is-offset-1">
     <h2
-      class="vcentered pointer"
+      class="vcentered pointer centered"
       on:click={() => {
         shuffle();
       }}
       data-cy="shuffleArtists">
-      Shuffle
+      Shuffle Artists
     </h2>
   </div>
 </div>
