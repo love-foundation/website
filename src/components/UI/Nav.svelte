@@ -110,6 +110,15 @@
           Lovecasts
         </a>
       </li>
+      <li>
+        <a
+          rel="prefetch"
+          class:selected={segment === 'impressum'}
+          href="impressum"
+          on:click={toggleNav}>
+          Impressum
+        </a>
+      </li>
     </ul>
   </nav>
 {/if}
