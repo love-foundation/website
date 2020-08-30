@@ -212,7 +212,8 @@
         class:is-active={navActive}
         class="hamburger hamburger--spin"
         type="button"
-        on:click={toggleNav}>
+        on:click={toggleNav}
+        data-cy="toggleNav">
         <span class="hamburger-box">
           <span class="hamburger-inner" />
         </span>

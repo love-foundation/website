@@ -8,7 +8,11 @@
     "now-build": "sapper export",
     "export": "sapper export",
     "export:production": "env NODE_ENV=production sapper export --timeout 15000",
-    "start": "node __sapper__/build"
+    "start": "node __sapper__/build",
+    "cy:run": "cypress run",
+    "cy:open": "cypress open",
+    "test": "run-p --race dev cy:run",
+    "test-dev": "run-p --race dev cy:open"
   },
   "browserslist": [
     "last 2 chrome versions",
@@ -33,6 +37,7 @@
     "@rollup/plugin-node-resolve": "^7.1.1",
     "@rollup/plugin-replace": "^2.3.1",
     "autoprefixer": "^9.7.4",
+    "cypress": "^5.0.0",
     "dotenv": "^8.2.0",
     "fuse.js": "^6.4.1",
     "node-sass": "^4.13.1",
