@@ -47,6 +47,7 @@ steps:
       DIRECTUS_TOKEN:
         from_secret: directus_token
     commands:
+      - export NODE_ENV=production
       - npm run export:production
 
   - name: deploy

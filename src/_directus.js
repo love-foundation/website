@@ -10,6 +10,8 @@ export const directus = new DirectusSDK({
   token: process.env.DIRECTUS_TOKEN
 });
 
+console.log(process.env.NODE_ENV)
+
 
 export async function fetchItems(collection = "", fields = "", filter = {}, limit = -1) {
 
