@@ -71,7 +71,7 @@ describe('Navigation with the navbar', () => {
     cy.get('[data-cy=toggleNav]').click();
     cy.wait(1000);
     cy.get('nav').contains('Home').click();
-    cy.url().should('equal', '/');
+    cy.url().should('eq', 'http://localhost:3000/');
     cy.contains('What is Love Foundation?')
   });
 
