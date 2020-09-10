@@ -42,7 +42,7 @@ steps:
   #     rebuild: true
 
   - name: test
-    image: cypress/base:12
+    image: cypress/browsers:12
     pull: always
     environment:
       CYPRESS_CACHE_FOLDER: .cypress
