@@ -16,7 +16,7 @@ cache-settings: &cache-settings
   endpoint: https://cache.love-foundation.org
   mount:
     - 'node_modules'
-    - '/root/.cache/Cypress'
+    - '.cypress'
 
 steps:
   # - name: restore-cache
@@ -29,7 +29,7 @@ steps:
     image: node:12
     pull: always
     environment:
-      CYPRESS_CACHE_FOLDER: ./cypress
+      CYPRESS_CACHE_FOLDER: .cypress
     commands:
       - node -v
       - npm -v
@@ -46,7 +46,7 @@ steps:
     image: node:12
     pull: always
     environment:
-      CYPRESS_CACHE_FOLDER: ./cypress
+      CYPRESS_CACHE_FOLDER: .cypress
     commands:
       - npm run test
 
