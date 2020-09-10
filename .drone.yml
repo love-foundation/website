@@ -32,6 +32,7 @@ steps:
       - node -v
       - npm -v
       - npm install
+      - npx cypress install
 
   - name: rebuild-cache
     <<: *cache-common
