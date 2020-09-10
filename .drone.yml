@@ -44,7 +44,7 @@ steps:
     commands:
       - npm run test
 
-  - name: build
+  - name: test
     image: node:12
     pull: always
     environment:
