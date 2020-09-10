@@ -9,7 +9,7 @@
     "export": "sapper export",
     "export:production": "env NODE_ENV=production sapper export --timeout 15000",
     "start": "node __sapper__/build",
-    "cy:run": "cypress run",
+    "cy:run": "cypress run --browser chrome --headless",
     "cy:open": "cypress open",
     "test": "run-p --race dev cy:run",
     "test-dev": "run-p --race dev cy:open"

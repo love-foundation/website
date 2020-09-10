@@ -12,13 +12,11 @@
 // the project's config changing)
 
 module.exports = (on, config) => {
-  on('before:browser:launch', (browser = {}, args) => {
+  on('before:browser:launch', (browser = {}, launchOptions) => {
     if (browser.name === 'chrome') {
-      args.push('--disable-dev-shm-usage')
-      return args
+      launchOptions.args.push('--disable-dev-shm-usage')
+      return launchOptions
     }
-
-    return args
   })
 
   // `on` is used to hook into various events Cypress emits
