@@ -1,30 +1,7 @@
 kind: pipeline
 name: default
 
-cache-common: &cache-common
-  image: meltwater/drone-cache
-  environment:
-    PLUGIN_ACCESS_KEY: 3R3u3XVKmNcPWCpzqV6R9vgtdgw6tk3Q
-    PLUGIN_SECRET_KEY:
-      from_secret: minio
-  pull: true
-
-cache-settings: &cache-settings
-  bucket: cache
-  region: main
-  path_style: true
-  endpoint: https://cache.love-foundation.org
-  mount:
-    - 'node_modules'
-    - '.cypress'
-
 steps:
-  # - name: restore-cache
-  #   <<: *cache-common
-  #   settings:
-  #     <<: *cache-settings
-  #     restore: true
-
   - name: install
     image: node:12
     pull: always
@@ -34,12 +11,6 @@ steps:
       - node -v
       - npm -v
       - npm ci
-
-  # - name: rebuild-cache
-  #   <<: *cache-common
-  #   settings:
-  #     <<: *cache-settings
-  #     rebuild: true
 
   - name: test
     image: cypress/browsers:node12.18.0-chrome83-ff77
