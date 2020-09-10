@@ -19,11 +19,11 @@ cache-settings: &cache-settings
     - '.cypress'
 
 steps:
-  - name: restore-cache
-    <<: *cache-common
-    settings:
-      <<: *cache-settings
-      restore: true
+  # - name: restore-cache
+  #   <<: *cache-common
+  #   settings:
+  #     <<: *cache-settings
+  #     restore: true
 
   - name: install
     image: node:12
