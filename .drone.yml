@@ -9,21 +9,21 @@ cache-common: &cache-common
       from_secret: minio
   pull: true
 
-# cache-settings: &cache-settings
-#   bucket: cache
-#   region: main
-#   path_style: true
-#   endpoint: https://cache.love-foundation.org
-#   mount:
-#     - 'node_modules'
-#     - '/root/.cache/Cypress'
+cache-settings: &cache-settings
+  bucket: cache
+  region: main
+  path_style: true
+  endpoint: https://cache.love-foundation.org
+  mount:
+    - 'node_modules'
+    - '/root/.cache/Cypress'
 
 steps:
-  - name: restore-cache
-    <<: *cache-common
-    settings:
-      <<: *cache-settings
-      restore: true
+  # - name: restore-cache
+  #   <<: *cache-common
+  #   settings:
+  #     <<: *cache-settings
+  #     restore: true
 
   - name: install
     image: node:12
