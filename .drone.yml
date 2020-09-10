@@ -34,7 +34,6 @@ steps:
       - node -v
       - npm -v
       - npm ci
-      - npx cypress install
 
   # - name: rebuild-cache
   #   <<: *cache-common
@@ -43,7 +42,7 @@ steps:
   #     rebuild: true
 
   - name: test
-    image: node:12
+    image: cypress/base:12
     pull: always
     environment:
       CYPRESS_CACHE_FOLDER: .cypress
