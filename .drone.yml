@@ -38,13 +38,13 @@ steps:
       <<: *cache-settings
       rebuild: true
 
-  - name: build
+  - name: test
     image: node:12
     pull: always
     commands:
       - npm run test
 
-  - name: test
+  - name: build
     image: node:12
     pull: always
     environment:
