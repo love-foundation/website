@@ -17,6 +17,10 @@ steps:
     pull: always
     environment:
       CYPRESS_CACHE_FOLDER: .cypress
+      DIRECTUS_URL:
+        from_secret: directus_url
+      DIRECTUS_TOKEN:
+        from_secret: directus_token
     commands:
       - npm run test
 
