@@ -16,6 +16,7 @@ cache-settings: &cache-settings
   endpoint: https://cache.love-foundation.org
   mount:
     - 'node_modules'
+    - '/root/.cache/Cypress'
 
 steps:
   - name: restore-cache
