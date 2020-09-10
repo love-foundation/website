@@ -42,7 +42,7 @@ steps:
   #     rebuild: true
 
   - name: test
-    image: cypress/browsers:node12.14.1-chrome83-ff77
+    image: cypress/browsers:node12.18.0-chrome83-ff77
     pull: always
     environment:
       CYPRESS_CACHE_FOLDER: .cypress
