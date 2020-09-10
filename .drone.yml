@@ -28,6 +28,8 @@ steps:
   - name: install
     image: node:12
     pull: always
+    environment:
+      CYPRESS_CACHE_FOLDER: ./cypress
     commands:
       - node -v
       - npm -v
@@ -43,6 +45,8 @@ steps:
   - name: test
     image: node:12
     pull: always
+    environment:
+      CYPRESS_CACHE_FOLDER: ./cypress
     commands:
       - npm run test
 
