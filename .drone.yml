@@ -41,6 +41,12 @@ steps:
   - name: build
     image: node:12
     pull: always
+    commands:
+      - npm run test
+
+  - name: build
+    image: node:12
+    pull: always
     environment:
       DIRECTUS_URL:
         from_secret: directus_url
