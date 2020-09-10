@@ -9,14 +9,14 @@ cache-common: &cache-common
       from_secret: minio
   pull: true
 
-cache-settings: &cache-settings
-  bucket: cache
-  region: main
-  path_style: true
-  endpoint: https://cache.love-foundation.org
-  mount:
-    - 'node_modules'
-    - '/root/.cache/Cypress'
+# cache-settings: &cache-settings
+#   bucket: cache
+#   region: main
+#   path_style: true
+#   endpoint: https://cache.love-foundation.org
+#   mount:
+#     - 'node_modules'
+#     - '/root/.cache/Cypress'
 
 steps:
   - name: restore-cache
@@ -31,14 +31,14 @@ steps:
     commands:
       - node -v
       - npm -v
-      - npm install
-      - npx cypress install
+      - npm ci
+      # - npx cypress install
 
-  - name: rebuild-cache
-    <<: *cache-common
-    settings:
-      <<: *cache-settings
-      rebuild: true
+  # - name: rebuild-cache
+  #   <<: *cache-common
+  #   settings:
+  #     <<: *cache-settings
+  #     rebuild: true
 
   - name: test
     image: node:12
