@@ -33,7 +33,7 @@ steps:
     commands:
       - node -v
       - npm -v
-      - npm ci
+      - npm install
 
   - name: rebuild-cache
     <<: *cache-common
