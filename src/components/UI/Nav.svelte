@@ -119,6 +119,15 @@
           Impressum
         </a>
       </li>
+      <li>
+        <a
+          rel="prefetch"
+          class:selected={segment === 'test'}
+          href="test"
+          on:click={toggleNav}>
+          Test Page
+        </a>
+      </li>
     </ul>
   </nav>
 {/if}
