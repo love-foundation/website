@@ -10,18 +10,24 @@
 </script>
 
 <script>
-  import UpcomingEvents from "../components/UI/FrontPage/UpcomingEvents.svelte";
-  import Button from "../components/UI/Button.svelte";
-  import Hub from "../components/UI/Hub.svelte";
-  import { stores } from "@sapper/app";
+  import UpcomingEvents from '../components/UI/FrontPage/UpcomingEvents.svelte'
+  import FullWidthModule from '../components/UI/ContentModules/FullWidthModule.svelte'
+  import Button from '../components/UI/Button.svelte'
+  import Hub from '../components/UI/Hub.svelte'
+  import { stores } from '@sapper/app'
 
-  export let hubs;
+  export let hubs
 
-  const { session } = stores();
+  const { session } = stores()
 
   let upcomingEvents = $session.events.filter(
     event => new Date(event.starttime) >= new Date()
-  );
+  )
+
+  let image = {
+    src: 'map_countries.jpg',
+    alt: 'Map of Love Foundation Hubs',
+  }
 </script>
 
 <style lang="scss">
@@ -53,20 +59,23 @@
   }
 
   .main-text {
-    padding: 20px;
+    padding: 35px;
     line-height: 145%;
-    text-align: center;
-    font-size: 20px !important; // FIX ME: This should come from global font values. Discussion on font/text variations should be happening
-    font-size: 2rem !important;
-    @include desktop {
-      font-size: 30px !important; // FIX ME: This should come from global font values. Discussion on font/text variations should be happening
-      font-size: 3rem !important;
-    }
+    text-align: left;
   }
 
   #opener {
-    min-height: 100vh;
     text-align: center;
+  }
+
+  figure.image.whatis {
+    img {
+      margin: 0 auto;
+      width: 90%;
+      @include tablet {
+        width: 40%;
+      }
+    }
   }
 </style>
 
@@ -100,18 +109,19 @@
 
     <h1>Where is the Love?</h1>
 
+    <!-- <FullWidthModule {image} /> -->
     <figure class="image">
       <object data="map.svg" type="image/svg+xml" title="Map" />
     </figure>
 
-    <p class="main-text">
+    <h2 class="main-text">
       Love Foundation was founded in 2013 by two students from Maastricht
       University and a designer in the Netherlands.
       <br />
       We have organised events in the Netherlands, the US, Australia, Brazil,
       Israel, Spain, Germany, the UK, Italy, Portugal, Israel, South Africa and
       France.
-    </p>
+    </h2>
   </div>
 </section>
 
