@@ -1,46 +1,57 @@
 <script>
-  import { fly } from "svelte/transition";
-  import { quintOut } from "svelte/easing";
-  import VanishingHeader from "./VanishingHeader.svelte";
+  import { fly } from 'svelte/transition'
+  import { quintOut } from 'svelte/easing'
+  import VanishingHeader from './VanishingHeader.svelte'
 
-  export let segment;
+  export let segment
 
-  let navActive = false;
+  let navActive = false
 
   function toggleNav() {
-    navActive = !navActive;
+    navActive = !navActive
   }
 </script>
 
 <style lang="scss">
   nav {
     position: fixed;
-    top: 66px;
+    top: $mobile-header-height;
     bottom: 0;
     right: 0;
     background: $blue;
     z-index: 10000;
     left: 0;
-    @include desktop {
+    @include tablet {
+      top: $desktop-header-height;
       left: unset;
     }
 
     ul {
-      margin: 0;
+      margin-top: 40px;
       padding: 0;
-      padding-left: 50px;
-      padding-right: 100px;
       list-style-type: none;
+
+      @include tablet {
+        margin: 0;
+        padding-left: 40px;
+        padding-right: 100px;
+      }
       li {
+        text-align: center;
         font-size: 36px;
         font-size: 3.6rem;
-
         line-height: 64px;
+
+        @include tablet {
+          text-align: left;
+        }
+
         a {
           text-decoration: none;
           color: $white !important;
+          transition: opacity 0.2s ease;
           &:hover {
-            color: $dark-grey !important;
+            opacity: 0.7;
           }
         }
       }
@@ -49,13 +60,13 @@
 
   /* clearfix */
   ul::after {
-    content: "";
+    content: '';
     display: block;
     clear: both;
   }
 </style>
 
-<VanishingHeader on:nav={toggleNav} {navActive} {segment}/>
+<VanishingHeader on:nav={toggleNav} {navActive} {segment} />
 
 {#if navActive}
   <nav transition:fly={{ delay: 250, duration: 300, easing: quintOut, x: 200 }}>
@@ -122,4 +133,3 @@
     </ul>
   </nav>
 {/if}
-

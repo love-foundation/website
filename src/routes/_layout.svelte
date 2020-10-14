@@ -71,13 +71,30 @@
     border: none;
     background: transparent;
     z-index: 1000;
+    -webkit-appearance: none !important;
 
     &[value]::-webkit-progress-value {
-      background: $blue;
+      background: $blue !important;
+    }
+
+    &[value]::-webkit-progress-value {
+      background: $blue !important;
+    }
+
+    &::-webkit-progress-bar {
+      background-color: none !important;
+      background: none !important;
+      border: none !important;
+      -webkit-appearance: none !important;
+    }
+
+    &::-moz-progress-bar {
+      background: none !important;
+      border: none !important;
     }
 
     &[value]::-moz-progress-bar {
-      background: $blue;
+      background: $blue !important;
     }
   }
 </style>

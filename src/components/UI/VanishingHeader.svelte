@@ -1,59 +1,58 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher } from 'svelte'
 
-  export let duration = "300ms";
-  export let offset = 50;
-  export let tolerance = 0;
-  export let navActive = false;
-  export let segment = "";
+  export let duration = '300ms'
+  export let offset = 50
+  export let tolerance = 0
+  export let navActive = false
+  export let segment = ''
 
-  let dispatch = createEventDispatcher();
+  let dispatch = createEventDispatcher()
 
-  let subpage = "";
-  let headerClass = "show";
+  let subpage = ''
+  let headerClass = 'show'
 
-  let y = 0;
-  let lastY = 0;
+  let y = 0
+  let lastY = 0
 
   function toggleNav() {
-    navActive = !navActive;
-    dispatch("nav");
+    navActive = !navActive
+    dispatch('nav')
   }
 
   function deriveClass(y, dy) {
     if (y < offset) {
-      return "show";
+      return 'show'
     }
 
     if (Math.abs(dy) <= tolerance) {
-      return headerClass;
+      return headerClass
     }
 
     if (dy > 0) {
-      return "show";
+      return 'show'
     }
 
-    return "hide";
+    return 'hide'
   }
 
   function updateClass(y) {
-    const dy = lastY - y;
-    lastY = y;
-    return deriveClass(y, dy);
+    const dy = lastY - y
+    lastY = y
+    return deriveClass(y, dy)
   }
 
   function setTransitionDuration(node) {
-    node.style.transitionDuration = duration;
+    node.style.transitionDuration = duration
   }
 
   $: if (navActive) {
-    headerClass = "show";
+    headerClass = 'show'
   } else {
-    headerClass = updateClass(y);
+    headerClass = updateClass(y)
   }
 
-  $: subpage = segment ? "&mdash; " + segment : ""
-
+  $: subpage = segment ? '&mdash; ' + segment : ''
 </script>
 
 <style lang="scss">
@@ -62,7 +61,11 @@
     top: 0;
     z-index: 10000;
     width: 100%;
-    height: $desktop-header-height;
+    height: $mobile-header-height;
+
+    @include tablet {
+      height: $desktop-header-height;
+    }
 
     &:hover > div {
       transform: translateY(0%);
@@ -78,12 +81,21 @@
       justify-content: space-between;
       align-items: center;
       .homelink {
-        padding-left: 31px;
+        padding-left: 15px;
         text-decoration: none;
         color: white;
         padding-bottom: 5px;
         h2 {
           text-transform: uppercase;
+          font-size: 25px !important;
+          font-size: 2.5rem !important;
+          margin-top: -4px;
+
+          @include tablet {
+            font-size: 30px !important;
+            font-size: 3rem !important;
+            padding-top: unset;
+          }
         }
       }
     }
@@ -118,12 +130,7 @@
     margin: 0;
     overflow: visible;
   }
-  .hamburger:hover {
-    opacity: 0.7;
-  }
-  .hamburger.is-active:hover {
-    opacity: 0.7;
-  }
+
   .hamburger.is-active .hamburger-inner,
   .hamburger.is-active .hamburger-inner::before,
   .hamburger.is-active .hamburger-inner::after {
@@ -131,10 +138,14 @@
   }
 
   .hamburger-box {
-    width: 40px;
+    width: 33px;
     height: 24px;
     display: inline-block;
     position: relative;
+
+    @include tablet {
+      width: 40px;
+    }
   }
 
   .hamburger-inner {
@@ -145,57 +156,75 @@
   .hamburger-inner,
   .hamburger-inner::before,
   .hamburger-inner::after {
-    width: 40px;
-    height: 4px;
+    width: 30px;
+    height: 2px;
     background-color: #fff;
-    border-radius: 4px;
     position: absolute;
     transition-property: transform;
     transition-duration: 0.15s;
     transition-timing-function: ease;
+
+    @include tablet {
+      width: 34px;
+    }
   }
   .hamburger-inner::before,
   .hamburger-inner::after {
-    content: "";
+    content: '';
     display: block;
   }
   .hamburger-inner::before {
-    top: -10px;
+    top: -9px;
+    @include tablet {
+      top: -10px;
+    }
   }
   .hamburger-inner::after {
-    bottom: -10px;
+    bottom: -9px;
+    @include tablet {
+      bottom: -10px;
+    }
   }
 
-  /*
-   * Spin
-   */
-  .hamburger--spin .hamburger-inner {
-    transition-duration: 0.22s;
-    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-  }
-  .hamburger--spin .hamburger-inner::before {
-    transition: top 0.1s 0.25s ease-in, opacity 0.1s ease-in;
-  }
-  .hamburger--spin .hamburger-inner::after {
-    transition: bottom 0.1s 0.25s ease-in,
-      transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  .hamburger--squeeze {
+    .hamburger-inner {
+      transition-duration: 0.075s;
+      transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+      &::before {
+        transition: top 0.075s 0.12s ease, opacity 0.075s ease;
+      }
+
+      &::after {
+        transition: bottom 0.075s 0.12s ease,
+          transform 0.075s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+      }
+    }
+
+    &.is-active {
+      .hamburger-inner {
+        transform: rotate(45deg);
+        transition-delay: 0.12s;
+        transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+        &::before {
+          top: 0;
+          opacity: 0;
+          transition: top 0.075s ease, opacity 0.075s 0.12s ease;
+        }
+
+        &::after {
+          bottom: 0;
+          transform: rotate(-90deg);
+          transition: bottom 0.075s ease,
+            transform 0.075s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+      }
+    }
   }
 
-  .hamburger--spin.is-active .hamburger-inner {
-    transform: rotate(225deg);
-    transition-delay: 0.12s;
-    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-  }
-  .hamburger--spin.is-active .hamburger-inner::before {
-    top: 0;
-    opacity: 0;
-    transition: top 0.1s ease-out, opacity 0.1s 0.12s ease-out;
-  }
-  .hamburger--spin.is-active .hamburger-inner::after {
-    bottom: 0;
-    transform: rotate(-90deg);
-    transition: bottom 0.1s ease-out,
-      transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+  .hamburger:focus {
+    outline: none;
   }
 </style>
 
@@ -204,13 +233,16 @@
 <header>
   <div use:setTransitionDuration class={headerClass}>
     <a class="homelink" href="/">
-      <h2>Love Foundation {@html subpage}</h2>
+      <h2>
+        Love Foundation
+        {@html subpage}
+      </h2>
     </a>
 
     <div class="side">
       <button
         class:is-active={navActive}
-        class="hamburger hamburger--spin"
+        class="hamburger hamburger--squeeze"
         type="button"
         on:click={toggleNav}
         data-cy="toggleNav">
