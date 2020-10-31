@@ -2,7 +2,8 @@ import fs from 'fs';
 import fetch from 'node-fetch';
 
 
-const BASE_URL = "https://new.love-foundation.org";
+
+const BASE_URL = process.env.NODE_ENV === 'production' ? "https://new.love-foundation.org" : "https://new.love-foundation.org" ;
 const pages = [];
 
 fs.readdirSync("./src/routes").forEach(file => {
