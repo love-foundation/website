@@ -4,7 +4,8 @@
       .then(r => r.json())
       .then(hubs => {
         return { hubs };
-      });
+      })
+      .then(this.fetch('sitemap.xml'));
   }
 </script>
 
