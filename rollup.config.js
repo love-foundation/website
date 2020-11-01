@@ -1,3 +1,4 @@
+import path from 'path'
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
@@ -5,6 +6,7 @@ import svelte from 'rollup-plugin-svelte';
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
+import url from '@rollup/plugin-url';
 import pkg from './package.json';
 import dotenv from 'dotenv';
 import sveltePreprocess from 'svelte-preprocess';
@@ -51,6 +53,10 @@ export default {
 				hydratable: true,
 				emitCss: true
 			}),
+			url({
+				sourceDir: path.resolve(__dirname, 'src/node_modules/images'),
+				publicPath: '/client/'
+			}),
 			resolve({
 				browser: true,
 				dedupe
@@ -80,6 +86,7 @@ export default {
 		],
 
 		onwarn,
+		preserveEntrySignatures: false,
 	},
 
 	server: {
@@ -93,7 +100,13 @@ export default {
 			svelte({
 				preprocess,
 				generate: 'ssr',
+				hydratable: true,
 				dev
+			}),
+			url({
+				sourceDir: path.resolve(__dirname, 'src/node_modules/images'),
+				publicPath: '/client/',
+				emitFiles: false // already emitted by client build
 			}),
 			resolve({
 				dedupe
