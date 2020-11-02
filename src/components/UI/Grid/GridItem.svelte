@@ -1,10 +1,10 @@
 <script>
-  import { fade } from "svelte/transition";
+  import { fade } from 'svelte/transition'
 
-  export let item = null;
-  export let showDate = false;
-  export let lazy = false;
-  export let cardClass = "";
+  export let item = null
+  export let showDate = false
+  export let lazy = false
+  export let cardClass = ''
 
   let {
     id,
@@ -13,35 +13,35 @@
     subtitle = item.hub ? item.hub : null,
     soundcloud,
     starttime,
-    imageUrl
-  } = item;
+    imageUrl,
+  } = item
 
   const months = [
-    "JAN",
-    "FEB",
-    "MAR",
-    "APR",
-    "MAY",
-    "JUN",
-    "JUL",
-    "AUG",
-    "SEP",
-    "OCT",
-    "NOV",
-    "DEC"
-  ];
-  let link = soundcloud ? soundcloud : `/events/${slug}`;
-  let imageRatio = soundcloud ? "is-square" : "is-2by3";
-  let eventDate;
+    'JAN',
+    'FEB',
+    'MAR',
+    'APR',
+    'MAY',
+    'JUN',
+    'JUL',
+    'AUG',
+    'SEP',
+    'OCT',
+    'NOV',
+    'DEC',
+  ]
+  let link = soundcloud ? soundcloud : `/events/${slug}`
+  let imageRatio = soundcloud ? 'is-square' : 'is-2by3'
+  let eventDate
 
   if (showDate && starttime) {
-    eventDate = new Date(starttime);
+    eventDate = new Date(starttime)
     eventDate =
       eventDate.getDate() +
-      " / " +
+      ' / ' +
       months[eventDate.getMonth()] +
-      " / " +
-      eventDate.getFullYear();
+      ' / ' +
+      eventDate.getFullYear()
   }
 </script>
 
@@ -121,7 +121,11 @@
   }
 </style>
 
-<a transition:fade rel="prefetch" href={link} class="item {cardClass}">
+<a
+  transition:fade
+  rel={soundcloud ? 'nofollow' : 'prefetch'}
+  href={link}
+  class="item {cardClass}">
   <figure
     data-toggle-class="loaded"
     class:lazy
