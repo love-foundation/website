@@ -6,7 +6,7 @@ export async function get(req, res, next) {
 
 	let hubs;
 
-	const callApi = process.env.NODE_ENV === 'production';
+	const callApi = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging';
 
 	if (callApi) {
 		hubs = await fetchItems("hubs", "id, city, instagram, facebook", {
