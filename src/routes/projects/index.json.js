@@ -2,7 +2,7 @@ import { fetchItems } from '../../_directus';
 
 import fakeResponse from '../../../cypress/fixtures/projects.js'
 
-const callApi = process.env.NODE_ENV === 'production';
+const callApi = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging';
 
 let projects;
 

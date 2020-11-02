@@ -6,7 +6,7 @@ export async function get(req, res, next) {
 
   let queriedContent;
 
-  const callApi = process.env.NODE_ENV === 'production';
+  const callApi = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging';
 
   if (callApi) {
     const pageContent = await fetchItems("pages", "slug, content.*.*.*", {

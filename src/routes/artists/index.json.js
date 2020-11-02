@@ -7,7 +7,7 @@ export async function get(req, res, next) {
 
 	let artists;
 
-	const callApi = process.env.NODE_ENV === 'production';
+	const callApi = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging';
 
 	if (callApi) {
 		const artists = await fetchItems("artists", "id, slug, artist_name, image.data.*, current_location, type_of_art", {});

@@ -7,7 +7,7 @@ export async function get(req, res, next) {
 
 	let events;
 
-	const callApi = process.env.NODE_ENV === 'production';
+	const callApi = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging';
 
 	if (callApi) {
 		const events = await fetchItems("events", "id, name, poster.data.*, event_type, hubs.*.*, startdatetime, slug", {});
