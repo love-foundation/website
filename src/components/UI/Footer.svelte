@@ -66,6 +66,9 @@
           <li>
             <a rel="prefetch" href="impressum">Impressum</a>
           </li>
+          <li>
+            <a rel="prefetch" href="privacy">Privacy Policy</a>
+          </li>
         </ul>
       </div>
       <div class="column is-2">
