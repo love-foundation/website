@@ -1,5 +1,5 @@
 kind: pipeline
-name: default
+name: build-and-deploy
 
 steps:
   - name: install
@@ -96,3 +96,100 @@ steps:
     when:
       branch:
         - master
+
+trigger:
+  event:
+    include:
+    - push
+    - pull_request
+
+---
+kind: pipeline
+name: directus-build-and-deploy
+
+steps:
+  - name: install
+    image: node:12
+    pull: always
+    environment:
+      CYPRESS_CACHE_FOLDER: .cypress
+    commands:
+      - node -v
+      - npm -v
+      - npm ci
+
+  - name: test
+    image: cypress/browsers:node12.18.0-chrome83-ff77
+    pull: always
+    environment:
+      CYPRESS_CACHE_FOLDER: .cypress
+      DIRECTUS_URL:
+        from_secret: directus_url
+      DIRECTUS_TOKEN:
+        from_secret: directus_token
+    commands:
+      - npm run test
+
+  - name: build staging
+    image: node:12
+    pull: always
+    environment:
+      DIRECTUS_URL:
+        from_secret: directus_url
+      DIRECTUS_TOKEN:
+        from_secret: directus_token
+    commands:
+      - export NODE_ENV=staging
+      - npm run export:production
+
+  - name: deploy staging
+    image: cupcakearmy/drone-deploy
+    pull: always
+    environment:
+      PLUGIN_KEY:
+        from_secret: key
+    settings:
+      host: love-foundation.org
+      user: root
+      port: 1312
+      target: /srv/staging
+      sources:
+        - ./__sapper__/export
+        - ./docker-compose.staging.yml
+      commands:
+        - docker-compose -f docker-compose.staging.yml up -d --build
+
+  - name: build production
+    image: node:12
+    pull: always
+    environment:
+      DIRECTUS_URL:
+        from_secret: directus_url
+      DIRECTUS_TOKEN:
+        from_secret: directus_token
+      NODE_ENV: production
+    commands:
+      - export NODE_ENV=production
+      - npm run export:production
+
+  - name: deploy production
+    image: cupcakearmy/drone-deploy
+    pull: always
+    environment:
+      PLUGIN_KEY:
+        from_secret: key
+    settings:
+      host: love-foundation.org
+      user: root
+      port: 1312
+      target: /srv/new
+      sources:
+        - ./__sapper__/export
+        - ./docker-compose.prod.yml
+      commands:
+        - docker-compose -f docker-compose.prod.yml up -d --build
+
+trigger:
+  event:
+    include:
+    - custom
