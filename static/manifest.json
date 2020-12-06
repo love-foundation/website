@@ -1,19 +1,24 @@
 {
 	"background_color": "#ffffff",
 	"theme_color": "#333333",
-	"name": "TODO",
-	"short_name": "TODO",
+	"name": "Stichting Love Foundation Website",
+	"short_name": "Love Foundation website",
 	"display": "minimal-ui",
 	"start_url": "/",
 	"icons": [
 		{
-			"src": "logo-192.png",
-			"sizes": "192x192",
+			"src": "logo-tiny.png",
+			"sizes": "100x100",
 			"type": "image/png"
 		},
 		{
-			"src": "logo-512.png",
-			"sizes": "512x512",
+			"src": "Logo-S.png",
+			"sizes": "500x500",
+			"type": "image/png"
+		},
+		{
+			"src": "Logo-M.png",
+			"sizes": "1000x1000",
 			"type": "image/png"
 		}
 	]
