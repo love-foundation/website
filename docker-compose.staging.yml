@@ -16,5 +16,5 @@ services:
             - "traefik.enable=true"
             - "traefik.port=80"
             - "traefik.docker.network=proxy"
-            - "traefik.backend=webnew"
-            - "traefik.frontend.rule=Host:new.love-foundation.org"
+            - "traefik.backend=webnew-staging"
+            - "traefik.frontend.rule=Host:staging.love-foundation.org"

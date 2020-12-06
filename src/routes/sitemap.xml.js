@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 
 
 
-const BASE_URL = process.env.NODE_ENV === 'production' ? "https://new.love-foundation.org" : "https://new.love-foundation.org" ;
+const BASE_URL = process.env.NODE_ENV === 'production' ? "https://new.love-foundation.org" : process.env.NODE_ENV === 'staging'? "https://staging.love-foundation.org" : "http://localhost:3000";
 const pages = [];
 
 fs.readdirSync("./src/routes").forEach(file => {
