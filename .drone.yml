@@ -56,10 +56,10 @@ steps:
         - ./docker-compose.staging.yml
       commands:
         - docker-compose -f docker-compose.staging.yml up -d --build
-      when:
-        branch:
-          exclude:
-            - master
+    when:
+      branch:
+        exclude:
+          - master
 
   - name: build production
     image: node:12
