@@ -32,8 +32,8 @@ steps:
         from_secret: directus_url
       DIRECTUS_TOKEN:
         from_secret: directus_token
+      NODE_ENV: staging
     commands:
-      - export NODE_ENV=staging
       - npm run export:production
     when:
       branch:
@@ -71,7 +71,6 @@ steps:
         from_secret: directus_token
       NODE_ENV: production
     commands:
-      - export NODE_ENV=production
       - npm run export:production
     when:
       branch:
@@ -138,8 +137,8 @@ steps:
         from_secret: directus_url
       DIRECTUS_TOKEN:
         from_secret: directus_token
+      NODE_ENV: staging
     commands:
-      - export NODE_ENV=staging
       - npm run export:production
 
   - name: deploy staging
@@ -169,7 +168,6 @@ steps:
         from_secret: directus_token
       NODE_ENV: production
     commands:
-      - export NODE_ENV=production
       - npm run export:production
 
   - name: deploy production
