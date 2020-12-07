@@ -1,5 +1,19 @@
+<script context="module">
+  export function preload({ params, query }) {
+    return this.fetch(`join.json`)
+      .then(r => r.json())
+      .then(queriedContent => {
+        return { queriedContent };
+      });
+  }
+</script>
+
+
 <script>
-  import Button from "../components/UI/Button.svelte";
+  import Button from "../../components/UI/Button.svelte";
+  import Content from "../../components/UI/Content.svelte";
+
+  export let queriedContent;
 </script>
 
 <style lang="scss">
@@ -27,7 +41,7 @@
 </h2>
 <Button newTab={true} link={'Mitgliedsantrag_LF-eV.pdf'}>Download</Button>
 
-<div class="columns">
+<div class="columns pad--bottom--small">
   <div class="column is-4">
     <div class="bubble">
       <figure class="image">
@@ -57,3 +71,7 @@
     </Button>
   </div>
 </div>
+
+<Content {queriedContent} />
+
+
