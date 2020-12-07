@@ -1,7 +1,7 @@
-import { fetchItems } from '../../_directus';
+import { fetchItems } from '../../../_directus';
 
 //FIX ME: This should have a fakeResponse from a fixture for the specific join page
-import fakeResponse from '../../../cypress/fixtures/about.js'
+import fakeResponse from '../../../../cypress/fixtures/about.js'
 
 export async function get(req, res, next) {
 
