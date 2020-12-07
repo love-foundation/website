@@ -1,19 +1,5 @@
-<script context="module">
-  export function preload({ params, query }) {
-    return this.fetch(`join.json`)
-      .then(r => r.json())
-      .then(queriedContent => {
-        return { queriedContent };
-      });
-  }
-</script>
-
-
 <script>
   import Button from "../../components/UI/Button.svelte";
-  import Content from "../../components/UI/Content.svelte";
-
-  export let queriedContent;
 </script>
 
 <style lang="scss">
@@ -41,7 +27,7 @@
 </h2>
 <Button newTab={true} link={'Mitgliedsantrag_LF-eV.pdf'}>Download</Button>
 
-<div class="columns pad--bottom--small">
+<div class="columns pad--bottom--small is-multiline">
   <div class="column is-4">
     <div class="bubble">
       <figure class="image">
@@ -70,8 +56,14 @@
       Support us financially
     </Button>
   </div>
+  <div class="column is-4">
+    <div class="bubble">
+      <figure class="image">
+        <object data="join_financial.svg" type="image/svg+xml" title="Map" />
+      </figure>
+    </div>
+    <Button newTab={false} link={"/join/internships"}>
+      Work with us
+    </Button>
+  </div>
 </div>
-
-<Content {queriedContent} />
-
-
