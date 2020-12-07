@@ -34,7 +34,7 @@ steps:
         from_secret: directus_token
       NODE_ENV: staging
     commands:
-      - npm run export:production
+      - npm run build
     when:
       branch:
         exclude:
@@ -52,7 +52,11 @@ steps:
       port: 1312
       target: /srv/staging
       sources:
-        - ./__sapper__/export
+        - ./__sapper__/build
+        - ./static
+        - ./src
+        - ./node_modules
+        - ./Dockerfile
         - ./docker-compose.staging.yml
       commands:
         - docker-compose -f docker-compose.staging.yml up -d --build
@@ -128,35 +132,6 @@ steps:
         from_secret: directus_token
     commands:
       - npm run test
-
-  - name: build staging
-    image: node:12
-    pull: always
-    environment:
-      DIRECTUS_URL:
-        from_secret: directus_url
-      DIRECTUS_TOKEN:
-        from_secret: directus_token
-      NODE_ENV: staging
-    commands:
-      - npm run export:production
-
-  - name: deploy staging
-    image: cupcakearmy/drone-deploy
-    pull: always
-    environment:
-      PLUGIN_KEY:
-        from_secret: key
-    settings:
-      host: love-foundation.org
-      user: root
-      port: 1312
-      target: /srv/staging
-      sources:
-        - ./__sapper__/export
-        - ./docker-compose.staging.yml
-      commands:
-        - docker-compose -f docker-compose.staging.yml up -d --build
 
   - name: build production
     image: node:12
