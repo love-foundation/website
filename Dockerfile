@@ -2,8 +2,7 @@ FROM node:alpine
 
 WORKDIR /app
 
-COPY ./package.json .
-RUN yarn install --prod
+COPY . .
 
-ENTRYPOINT [ "yarn" ]
-CMD [ "run", "start" ]
+ENTRYPOINT [ "node" ]
+CMD [ "__sapper__/build" ]
