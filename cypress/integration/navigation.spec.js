@@ -57,15 +57,7 @@ describe('Navigation with the navbar', () => {
     cy.url().should('include', '/projects');
   });
 
-  it('opens the nav and navigates to the Impressum page', () => {
-    cy.get('[data-cy=toggleNav]').click();
-    cy.wait(1000);
-    cy.get('nav').contains('Impressum').click();
-    cy.url().should('include', '/impressum');
-    cy.contains('Impressum')
-  });
-
-  it('allows navigating to root when on another page', () => {
+   it('allows navigating to root when on another page', () => {
     cy.visit('/events')
     cy.wait(1000);
     cy.get('[data-cy=toggleNav]').click();
