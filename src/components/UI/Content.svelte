@@ -53,7 +53,7 @@
     class:loaded={i < 3}
     class:lozad={i >= 3}
     class:is-centered={content.type != 'full_bleed_hero'}
-    class={`columns pad--bottom--${content.details.padding}`}>
+    class={`content columns pad--bottom--${content.details.padding}`}>
     {#if content.component}
       <svelte:component this={content.component} {content} lazy={i >= 3} />
     {/if}
