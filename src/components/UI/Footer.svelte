@@ -64,9 +64,6 @@
             <a rel="prefetch" href="lovecasts">Lovecasts</a>
           </li>
           <li>
-            <a rel="prefetch" href="impressum">Impressum</a>
-          </li>
-          <li>
             <a rel="prefetch" href="privacy">Privacy Policy</a>
           </li>
         </ul>
