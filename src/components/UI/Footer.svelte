@@ -90,17 +90,17 @@
       <div class="column" />
       <div class="column is-3 is-flex">
         <div class="columns is-mobile low">
-          <a class="column" href="https://www.instagram.com">
+          <a class="column" rel="nofollow" href="https://www.instagram.com/lovefoundation_global/">
             <div class="blob">
               <h2>INS</h2>
             </div>
           </a>
-          <a class="column" href="https://www.facebook.com">
+          <a class="column" rel="nofollow" href="https://www.facebook.com/LoveFoundation">
             <div class="blob">
               <h2>FB</h2>
             </div>
           </a>
-          <a class="column" href="https://www.soundcloud.com/love-foundation">
+          <a class="column" rel="nofollow" href="https://www.soundcloud.com/love-foundation">
             <div class="blob">
               <h2>SC</h2>
             </div>
