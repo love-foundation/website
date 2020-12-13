@@ -17,4 +17,4 @@ services:
             - "traefik.port=80"
             - "traefik.docker.network=proxy"
             - "traefik.backend=webnew"
-            - "traefik.frontend.rule=Host:new.love-foundation.org"
+            - "traefik.frontend.rule=Host:www.love-foundation.org,love-foundation.org"
