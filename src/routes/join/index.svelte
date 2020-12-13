@@ -27,15 +27,15 @@
 </h2>
 <Button newTab={true} link={'Mitgliedsantrag_LF-eV.pdf'}>Download</Button>
 
-<div class="columns pad--bottom--small is-multiline">
+<section class="columns pad--bottom--small">
   <div class="column is-4">
     <div class="bubble">
       <figure class="image">
         <object data="join_family.svg" type="image/svg+xml" title="Map" />
       </figure>
     </div>
-    <Button newTab={true} link={'mailto:hello@love-foundation.org'}>
-      Join our hubs
+    <Button newTab={false} link={"/join/internships"}>
+      Work with us
     </Button>
   </div>
   <div class="column is-4">
@@ -56,14 +56,7 @@
       Support us financially
     </Button>
   </div>
-  <div class="column is-4">
-    <div class="bubble">
-      <figure class="image">
-        <object data="join_financial.svg" type="image/svg+xml" title="Map" />
-      </figure>
-    </div>
-    <Button newTab={false} link={"/join/internships"}>
-      Work with us
-    </Button>
-  </div>
-</div>
+</section>
+<section class="pad--bottom--small">
+  <Button newTab={true} link={'mailto:hello@love-foundation.org'}>Join us</Button>
+</section>
