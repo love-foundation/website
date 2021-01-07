@@ -1,18 +1,6 @@
 <script>
-  import lozad from "lozad";
-  import { onMount } from "svelte";
-
-  export let artist;
-
-  onMount(() => {
-    const observer = lozad(".lozad", {
-      loaded: function(el) {
-        // Custom implementation on a loaded element
-        el.classList.add("loaded");
-      }
-    });
-    observer.observe();
-  });
+  export let artist = {};
+  export let lazy = false;
 </script>
 
 <style lang="scss">
@@ -32,6 +20,8 @@
   :global(.loaded) {
     margin-top: 0 !important;
     opacity: 1 !important;
+    transition: margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94),
+      opacity 1s ease-in;
   }
 
   .column {
@@ -45,10 +35,11 @@
   class="column is-one-quarter-desktop is-one-third-tablet">
   <div>
     <figure class="image is-square">
-      <img
-        class="is-rounded lozad"
-        data-src={artist.imageUrl}
-        alt="{artist.name} Picture" />
+      {#if lazy}
+        <img class="is-rounded lozad" data-src={artist.imageUrl} alt="{artist.name} Picture" />
+      {:else}
+        <img class="is-rounded loaded" src={artist.imageUrl} alt="{artist.name} Picture" />
+      {/if}
     </figure>
     <h3 data-cy="artistName">{artist.name}</h3>
   </div>
