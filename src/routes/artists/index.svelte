@@ -12,6 +12,8 @@
   import ArtistItem from "../../components/UI/ArtistItem.svelte";
   import { shuffleArray } from "../../lib/helpers/sharedFunctions.js";
   import Fuse from "fuse.js";
+  import lozad from "lozad";
+  import { onMount } from "svelte";
 
   export let artists;
 
@@ -37,6 +39,16 @@
     // ignoreFieldNorm: false,
     keys: ["id", "name", "location", "category"]
   };
+
+  onMount(() => {
+    const observer = lozad(".lozad", {
+      loaded: function(el) {
+        // Custom implementation on a loaded element
+        el.classList.add("loaded");
+      }
+    });
+    observer.observe();
+  });
 
   const fuse = new Fuse(filteredArtists, fuseOptions);
 
@@ -110,7 +122,7 @@
 </div>
 
 <div data-cy="artistGrid" class="columns is-multiline">
-  {#each currentSet as artist (artist.id)}
-    <ArtistItem {artist} />
+  {#each currentSet as artist, i (artist.id)}
+    <ArtistItem {artist} lazy={i >= 8}/>
   {/each}
 </div>
