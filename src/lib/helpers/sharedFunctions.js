@@ -1,3 +1,8 @@
+// VARS
+const duration = '300ms'
+const offset = 50
+const tolerance = 0
+
 export function dynamicSort(property) {
   var sortOrder = 1;
   if(property[0] === "-") {
@@ -13,10 +18,6 @@ export function dynamicSort(property) {
   }
 }
 
-
-
-
-
 export function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -24,7 +25,6 @@ export function shuffleArray(array) {
   }
   return array
 }
-
 
 export function normalizeEventDate(datestring, time = false) {
   const months = ["JAN", "FEB", "MAR","APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
@@ -43,4 +43,30 @@ export function normalizeTime(datestring) {
   normalizedTime = normalizedTime.getHours() + " : " + normalizedTime.getMinutes();
 
   return normalizedTime;
+}
+
+
+function deriveClass(y, dy) {
+  if (y < offset) {
+    return 'show'
+  }
+
+  if (Math.abs(dy) <= tolerance) {
+    return 'show'
+  }
+
+  if (dy > 0) {
+    return 'show'
+  }
+
+  return 'hide'
+}
+export function updateClass(y, lastY) {
+  const dy = lastY - y
+  lastY = y
+  return { class: deriveClass(y, dy), lastY: lastY }
+}
+
+export function setTransitionDuration(node) {
+  node.style.transitionDuration = duration
 }
