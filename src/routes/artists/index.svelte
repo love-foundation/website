@@ -10,13 +10,15 @@
 
 <script>
   import ArtistItem from "../../components/UI/ArtistItem.svelte";
-  import { shuffleArray } from "../../lib/helpers/sharedFunctions.js";
+  import { shuffleArray, updateClass, setTransitionDuration } from "../../lib/helpers/sharedFunctions.js";
   import Fuse from "fuse.js";
   import lozad from "lozad";
   import { onMount } from "svelte";
 
   export let artists;
 
+  let headerClass = 'show'
+  let z = 0
   let searchString = "";
   let artistArray = artists;
   let filteredArtists = shuffleArray(artistArray);
@@ -71,6 +73,8 @@
   function shuffle() {
     currentSet = shuffleArray(currentSet);
   }
+
+  $: headerClass = updateClass(z)
 </script>
 
 <style lang="scss">
@@ -78,38 +82,73 @@
     cursor: pointer;
   }
 
+  .topbar {
+    position: fixed;
+    width: 100%;
+    border-bottom: 1px solid $black;
+    background: $white;
+    z-index: 10;
+    left: 0;
+    right: 0;
+    margin-top: -57px;
+    height: $mobile-header-height;
+    transition: transform 300ms ease-in-out;
+
+    @include desktop {
+      height: $desktop-header-height;
+      margin: 0;
+      margin-top: -57px;
+    }
+    &.show {
+      transform: translateY(100%);
+    }
+    &.hide {
+      transform: translateY(0%);
+    }
   .search-wrap {
+    padding-left: 15px;
     input {
       font-size: 20px !important;
       font-size: 2rem !important;
       border: none;
-      border-bottom: 3px solid $black;
+      width: 100%;
+      color: $black !important; //override browser styles
 
-       @include desktop {
+      @include desktop {
         font-size: 30px !important;
         font-size: 3rem !important;
       }
     }
   }
+
+  .shuffle {
+    margin-top: -1px;
+  }
+}
+
+section {
+  padding-top: 3rem;
+}
+
+
 </style>
 
 <svelte:head>
   <title>Artists</title>
 </svelte:head>
 
-<div class="topbar columns is-horizontal">
-  <div class="column is-2 hide-on-mobile">
-    <h2 class="vcentered">Artists</h2>
-  </div>
-  <div class="column" />
-  <div class="column is-2 search-wrap pointer">
+<svelte:window bind:scrollY={z} />
+
+<div use:setTransitionDuration class={`topbar columns is-mobile ${headerClass}`}>
+  <div class="column is-6-mobile is-2-desktop search-wrap pointer">
     <input
       type="text"
       bind:value={searchString}
       data-cy="searchArtists"
       placeholder="Search Artists.." />
   </div>
-  <div class="column is-2 is-offset-1">
+  <div class="column is-hidden-mobile" />
+  <div class="column is-6-mobile is-2-desktop shuffle">
     <h2
       class="vcentered pointer centered"
       on:click={() => {
@@ -121,8 +160,8 @@
   </div>
 </div>
 
-<div data-cy="artistGrid" class="columns is-multiline">
+<section data-cy="artistGrid" class="columns is-multiline">
   {#each currentSet as artist, i (artist.id)}
     <ArtistItem {artist} lazy={i >= 8}/>
   {/each}
-</div>
+</section>
