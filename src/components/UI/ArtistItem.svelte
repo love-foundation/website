@@ -6,6 +6,10 @@
 <style lang="scss">
   h3 {
     text-align: center;
+    margin-top: 13px;
+    @include mobile {
+      margin-top: 18px;
+    }
   }
   .image img {
     object-fit: cover;
@@ -14,7 +18,11 @@
     opacity: 0;
     margin-top: -50px;
     transition: margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94),
-      opacity 1s ease-in;
+      opacity 1s ease-in, transform 0.3s;
+    transform: scale(1);
+    &:hover {
+      transform: scale(1.05)
+    }
   }
 
   :global(.loaded) {
@@ -25,7 +33,11 @@
   }
 
   .column {
-    padding: 5rem;
+    padding: 3rem 5rem;
+  }
+
+  a:hover {
+    color: $black;
   }
 </style>
 
