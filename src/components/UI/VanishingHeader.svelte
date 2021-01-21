@@ -51,8 +51,6 @@
   } else {
     headerClass = updateClass(y)
   }
-
-  $: subpage = segment ? '&mdash; ' + segment : ''
 </script>
 
 <style lang="scss">
@@ -234,8 +232,11 @@
   <div use:setTransitionDuration class={headerClass}>
     <a class="homelink" href="/">
       <h2>
-        Love Foundation
-        {@html subpage}
+        {#if !segment}
+          Love Foundation
+        {:else}
+          {segment}
+        {/if}
       </h2>
     </a>
 
