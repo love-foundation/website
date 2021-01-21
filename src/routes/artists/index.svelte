@@ -18,7 +18,9 @@
   export let artists;
 
   let headerClass = 'show'
-  let z = 0
+  let y = 0
+  let lastY = 0
+  let helper
   let searchString = "";
   let artistArray = artists;
   let filteredArtists = shuffleArray(artistArray);
@@ -74,7 +76,11 @@
     currentSet = shuffleArray(currentSet);
   }
 
-  $: headerClass = updateClass(z)
+  $: {
+      helper = updateClass(y, lastY)
+      headerClass = helper.class
+      lastY = helper.lastY
+  }
 </script>
 
 <style lang="scss">
@@ -97,7 +103,7 @@
     @include desktop {
       height: $desktop-header-height;
       margin: 0;
-      margin-top: -57px;
+      margin-top: -78px;
     }
     &.show {
       transform: translateY(100%);
@@ -118,6 +124,10 @@
         font-size: 30px !important;
         font-size: 3rem !important;
       }
+      &::-webkit-input-placeholder,
+      &:-moz-placeholder {
+        color: $black !important; //override browser styles
+      }
     }
   }
 
@@ -127,7 +137,7 @@
 }
 
 section {
-  padding-top: 3rem;
+  margin-top: 3rem;
 }
 
 
@@ -137,7 +147,7 @@ section {
   <title>Artists</title>
 </svelte:head>
 
-<svelte:window bind:scrollY={z} />
+<svelte:window bind:scrollY={y} />
 
 <div use:setTransitionDuration class={`topbar columns is-mobile ${headerClass}`}>
   <div class="column is-6-mobile is-2-desktop search-wrap pointer">

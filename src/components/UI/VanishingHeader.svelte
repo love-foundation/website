@@ -1,55 +1,29 @@
 <script>
   import { createEventDispatcher } from 'svelte'
+  import { updateClass, setTransitionDuration } from '../../lib/helpers/sharedFunctions'
 
-  export let duration = '300ms'
-  export let offset = 50
-  export let tolerance = 0
   export let navActive = false
   export let segment = ''
 
   let dispatch = createEventDispatcher()
 
-  let subpage = ''
   let headerClass = 'show'
 
   let y = 0
   let lastY = 0
+  let helper
 
   function toggleNav() {
     navActive = !navActive
     dispatch('nav')
   }
 
-  function deriveClass(y, dy) {
-    if (y < offset) {
-      return 'show'
-    }
-
-    if (Math.abs(dy) <= tolerance) {
-      return headerClass
-    }
-
-    if (dy > 0) {
-      return 'show'
-    }
-
-    return 'hide'
-  }
-
-  function updateClass(y) {
-    const dy = lastY - y
-    lastY = y
-    return deriveClass(y, dy)
-  }
-
-  function setTransitionDuration(node) {
-    node.style.transitionDuration = duration
-  }
-
   $: if (navActive) {
     headerClass = 'show'
   } else {
-    headerClass = updateClass(y)
+    helper = updateClass(y, lastY)
+    headerClass = helper.class
+    lastY = helper.lastY
   }
 </script>
 
@@ -73,7 +47,7 @@
       box-sizing: border-box;
       padding-top: 8px;
       height: 100%;
-      background-color: $blue;
+      background-color: $black;
       transition: transform 300ms ease-in-out;
       display: flex;
       justify-content: space-between;

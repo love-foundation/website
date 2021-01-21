@@ -18,7 +18,7 @@
     top: $mobile-header-height;
     bottom: 0;
     right: 0;
-    background: $blue;
+    background: $black;
     z-index: 10000;
     left: 0;
     @include tablet {
