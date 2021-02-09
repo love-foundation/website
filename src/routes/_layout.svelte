@@ -38,8 +38,11 @@
   let progress = 0
   let docHeight = 0
   let mainClasses = ''
+  let progressClasses = ''
 
   mainClasses = $page.path === '/events' ? 'events' : ''
+
+  $: progressClasses = $page.path === '/events' || $page.path === '/artists' ? 'background' : ''
 
   $: if (docHeight > winHeight) {
     progress = y / (docHeight - winHeight)
@@ -97,6 +100,13 @@
     &[value]::-moz-progress-bar {
       background: $black !important;
     }
+
+    &.background {
+      background: $medium-grey !important;
+        &::-webkit-progress-bar {
+        background: $medium-grey !important;
+      }
+    }
   }
 </style>
 
@@ -130,7 +140,7 @@
 <svelte:window bind:scrollY={y} bind:innerHeight={winHeight} />
 
 <Nav {segment} />
-<progress value={progress} />
+<progress value={progress} class={progressClasses} />
 
 <div bind:clientHeight={docHeight}>
   <main class={mainClasses}>
