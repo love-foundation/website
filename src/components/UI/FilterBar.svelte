@@ -1,13 +1,18 @@
 <script>
   import Select from "svelte-select";
   import { createEventDispatcher } from "svelte";
+  import { updateClass, setTransitionDuration } from "../../lib/helpers/sharedFunctions.js";
+
 
   const dispatch = createEventDispatcher();
 
-  export let title = "";
   export let filters = {};
 
   let sort = false;
+  let headerClass = 'show'
+  let y = 0
+  let lastY = 0
+  let helper
 
   function selected(key, event) {
     dispatch("selected", { [key]: event.detail.value });
@@ -38,15 +43,41 @@
       }
     };
   };
+
+  $: {
+      helper = updateClass(y, lastY)
+      headerClass = helper.class
+      lastY = helper.lastY
+  }
 </script>
 
 <style lang="scss">
   .topbar {
-    padding-top: 10px;
+    position: fixed;
+    width: 100%;
     border-bottom: 1px solid $medium-grey;
-    padding: 0% 3%;
-    margin-bottom: 0;
-    margin-top: 5px;
+    background: $white;
+    z-index: 10;
+    left: 0;
+    right: 0;
+    top: $mobile-header-height;
+    margin-top: -57px;
+    height: $mobile-header-height;
+    transition: transform 300ms ease-in-out;
+
+    @include desktop {
+      height: $desktop-header-height;
+      top: $desktop-header-height;
+      margin: 0;
+      margin-top: -50px;
+      justify-content: space-between;
+    }
+    &.show {
+      transform: translateY(100%);
+    }
+    &.hide {
+      transform: translateY(0%);
+    }
     .column {
       padding: unset;
     }
@@ -54,59 +85,39 @@
   .select {
     --border: none;
     --placeholderColor: black;
-    --inputFontSize: 2rem;
+    --inputFontSize: 2.8rem;
     --height: 54px;
-    --itemIsActiveColor: #0597f2;
-    --itemHoverBG: #0597f2;
+    --itemIsActiveColor: black;
+    --itemHoverBG: #F8F8F8;
+    --background: transparent;
+    --listShadow: none;
+    --border-radius: 0;
+    --listBorderRadius: 0;
+    --itemIsActiveBG: #F8F8F8;
+    --itemFirstBorderRadius: 0;
+    --itemPadding: 0 16px;
     position: relative;
-    cursor: pointer;
     @include desktop {
       --inputFontSize: 3rem;
     }
-    &::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      right: 20px;
-      transform: translateY(-50%);
-      width: 0;
-      height: 0;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      border-top: 8px solid #000;
-      clear: both;
-      @include desktop {
-        border-width: 12px;
-      }
-    }
-    &.focused {
-      &::after {
-        transform: rotate(180deg) translateY(50%);
-      }
-    }
-    &.active {
-      &::after {
-        display: none;
-      }
-    }
   }
-
-  h2 {
-    &.vcentered {
-      display: flex;
-      align-items: center;
-      height: 100%;
-      padding: 0 16px;
-      @include desktop {
-        padding: unset;
-      }
-    }
-  }
-
   .hide-on-mobile {
     display: none;
     @include desktop {
       display: block;
+    }
+  }
+
+  :global(.listContainer) {
+    margin-top: -10px;
+    border: 1px solid $medium-grey;
+    font-size: 20px;
+    font-size: 2rem;
+    cursor: pointer !important;
+
+    @include desktop {
+      font-size: 30px;
+      font-size: 3rem;
     }
   }
   :global(input) {
@@ -140,14 +151,11 @@
   }
 </style>
 
-<div class="topbar columns is-horizontal">
-  <div class="column is-2 hide-on-mobile">
-    <h2 class="vcentered">{title}</h2>
-  </div>
-  <div class="column" />
+<svelte:window bind:scrollY={y} />
 
+<div use:setTransitionDuration class={`topbar columns is-horizontal ${headerClass}`}>
   {#each Object.entries(filters) as [key, { options, placeholder, value }]}
-    <div class="column is-2">
+    <div class="column is-3">
       <div use:selectAction class="select" class:active={false}>
         <Select
           inputAttributes={{ readonly: 'readonly' }}
@@ -163,15 +171,4 @@
       </div>
     </div>
   {/each}
-
-  <div class="column is-2">
-    <h2
-      class="select vcentered"
-      class:focused={sort}
-      on:click={() => {
-        dispatch('sort');
-        sort = !sort;
-      }}>
-      Sort
-    </h2>
-</div></div>
+</div>

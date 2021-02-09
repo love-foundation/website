@@ -91,9 +91,10 @@
   .topbar {
     position: fixed;
     width: 100%;
-    border-bottom: 1px solid $black;
+    border-bottom: 1px solid $medium-grey;
     background: $white;
     z-index: 10;
+    top: $mobile-header-height;
     left: 0;
     right: 0;
     margin-top: -57px;
@@ -102,8 +103,9 @@
 
     @include desktop {
       height: $desktop-header-height;
+      top: $desktop-header-height;
       margin: 0;
-      margin-top: -78px;
+      margin-top: -50px;
     }
     &.show {
       transform: translateY(100%);
