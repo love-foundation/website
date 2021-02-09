@@ -75,11 +75,11 @@
     -webkit-appearance: none !important;
 
     &[value]::-webkit-progress-value {
-      background: $blue !important;
+      background: $black !important;
     }
 
     &[value]::-webkit-progress-value {
-      background: $blue !important;
+      background: $black !important;
     }
 
     &::-webkit-progress-bar {
@@ -95,7 +95,7 @@
     }
 
     &[value]::-moz-progress-bar {
-      background: $blue !important;
+      background: $black !important;
     }
   }
 </style>
