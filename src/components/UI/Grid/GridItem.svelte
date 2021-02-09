@@ -53,12 +53,15 @@
     &.big {
       grid-area: big;
       border-bottom: 1px solid $medium-grey;
-      &.right {
-        border-left: 1px solid $medium-grey;
-      }
       &.left {
         border-right: 1px solid $medium-grey;
+
+        ~ .b,
+        ~ .d {
+        border-right: none;
       }
+
+    }
     }
     &.small {
       padding: 10%;
@@ -71,6 +74,7 @@
       &.b {
         grid-area: small-b;
         border-bottom: 1px solid $medium-grey;
+        border-right: 1px solid $medium-grey;
       }
       &.c {
         grid-area: small-c;
@@ -81,6 +85,7 @@
       &.d {
         grid-area: small-d;
         border-bottom: 1px solid $medium-grey;
+        border-right: 1px solid $medium-grey;
         align-self: end;
       }
     }
@@ -88,8 +93,11 @@
 
   h3 {
     width: 100%;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     padding: 0;
-    line-height: 29px;
+    line-height: 25px;
     text-align: center;
     &.subtitle {
       text-transform: capitalize;
@@ -98,6 +106,11 @@
 
   .item-info {
     height: 0;
+    padding-top: 7px;
+
+    .big & {
+      padding-top: 12px;
+    }
   }
 
   .image {
@@ -110,12 +123,9 @@
 
     &.lazy {
       opacity: 0;
-      margin-top: -50px;
-      transition: margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94),
-        opacity 1s ease-in;
+      transition: opacity 1s ease-in;
       &.loaded {
         opacity: 1;
-        margin-top: 0;
       }
     }
   }
