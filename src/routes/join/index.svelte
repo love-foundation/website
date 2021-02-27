@@ -52,7 +52,7 @@
         <object data="join_financial.svg" type="image/svg+xml" title="Map" />
       </figure>
     </div>
-    <Button newTab={true} link={'mailto:hello@love-foundation.org'}>
+    <Button link={'support'}>
       Support us financially
     </Button>
   </div>
@@ -60,3 +60,4 @@
 <section class="pad--bottom--small">
   <Button newTab={true} link={'mailto:hello@love-foundation.org'}>Join us</Button>
 </section>
+

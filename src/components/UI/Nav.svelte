@@ -121,6 +121,15 @@
           Lovecasts
         </a>
       </li>
+      <li>
+        <a
+          rel="prefetch"
+          class:selected={segment === 'support'}
+          href="support"
+          on:click={toggleNav}>
+          Support
+        </a>
+      </li>
     </ul>
   </nav>
 {/if}
