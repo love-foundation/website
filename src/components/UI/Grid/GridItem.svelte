@@ -89,6 +89,24 @@
         align-self: end;
       }
     }
+    &.borders {
+      padding-top: 4%;
+      padding-bottom: 6%;
+
+      .item-info {
+        padding-top: 14px;
+      }
+      &.one + .two {
+        border-left: 1px solid $medium-grey;
+        border-right: 1px solid $medium-grey;
+      }
+      &.one {
+        border-left: 1px solid $medium-grey;
+        &:only-child {
+          border-right: 1px solid $medium-grey;
+        }
+      }
+    }
   }
 
   h3 {

@@ -55,12 +55,14 @@
     max-width: $max-width;
     background-color: white;
     padding: 0.5em;
+    padding-bottom: 0;
     margin: 0 auto;
     box-sizing: border-box;
     margin-top: $desktop-header-height;
 
     @include desktop {
       padding: 2em;
+      padding-bottom: 0;
     }
     &.events {
       padding: unset !important;
