@@ -31,7 +31,7 @@
   #hero {
     width: 100vw;
     margin-left: calc(-50vw + 50%);
-    margin-top: -2em;
+    margin-top: -3em;
     text-align: center;
     max-height: calc(100vh - #{$mobile-header-height});
     display: flex;
@@ -47,6 +47,7 @@
     img {
       margin: 0 auto;
       z-index: 5;
+      filter: brightness(0.97);
     }
 
     h1 {

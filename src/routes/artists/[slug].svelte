@@ -17,6 +17,13 @@
 
   export let artist;
 
+  const mapping = {
+    0: 'one',
+    1: 'two',
+    2: 'three'
+  }
+
+
   let {
     name,
     image,
@@ -33,30 +40,57 @@
 
   heroContent.image = image;
   heroContent.bgColor = heroColor;
+
+  let eventGroups = [];
+  for (let i = 0, len = events.length; i < len; i += 3) {
+    eventGroups = [...eventGroups, events.slice(i, i + 3)];
+  }
 </script>
 
 <style lang="scss">
   .info {
-    background: $light-grey;
     width: 100vw;
     margin-left: calc(-50vw + 50%);
+    border-bottom: 1px solid $medium-grey;
     .columns {
-      max-width: $content-width;
-      margin: 0 auto;
-      padding: 2em;
+      padding: 10px 60px;
+      .column {
+        display: flex;
+        *:nth-child(2) {
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
     }
   }
 
   .head {
-    background: $light-grey;
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     display: flex;
-    height: 100px;
-    border-bottom: 0.5px solid $dark-grey;
+    padding-top: 4px;
+    border-bottom: 1px solid $medium-grey;
     justify-content: center;
     align-items: center;
     position: relative;
+    h1 {
+      text-transform: uppercase;
+    }
+  }
+
+  #artistevents {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    h2 {
+      padding-bottom: 40px;
+      padding-top: 30px;
+    }
+    .columns {
+      &:nth-child(2) {
+        border-top: 1px solid $medium-grey;
+      }
+      border-bottom: 1px solid $medium-grey;
+    }
   }
 </style>
 
@@ -72,36 +106,36 @@
   <div class="columns is-centered">
     {#if location}
       <div class="column">
-        <h2>Hub:</h2>
-        <h2>{location}</h2>
+        <h3 class="light">Hub:</h3>
+        <h3 class="light">{location}</h3>
       </div>
     {/if}
 
     {#if status}
       <div class="column">
-        <h2>Status:</h2>
-        <h2 class="capitalized">{status}</h2>
+        <h3 class="light">Status:</h3>
+        <h3 class="light capitalized">{status}</h3>
       </div>
     {/if}
 
     {#if category}
       <div class="column">
-        <h2>Genre:</h2>
-        <h2 class="capitalized">{category}</h2>
+        <h3 class="light">Genre:</h3>
+        <h3 class="light capitalized">{category}</h3>
       </div>
     {/if}
 
     {#if facebook || soundcloud}
       <div class="column">
-        <h2>Links:</h2>
+        <h3 class="light">Links:</h3>
         {#if facebook}
           <a href={facebook}>
-            <h2>Facebook</h2>
+            <h3 class="light">Facebook</h3>
           </a>
         {/if}
         {#if soundcloud}
           <a href={soundcloud}>
-            <h2>Soundcloud</h2>
+            <h3 class="light">Soundcloud</h3>
           </a>
         {/if}
 
@@ -111,12 +145,16 @@
 </div>
 
 {#if events.length}
-  <h2 class="pad--bottom--small pad--top--small centered">
-    Events that this artist supported
-  </h2>
-  <div class="columns is-multiline">
-    {#each events as event}
-      <GridItem item={event} cardClass={'push--bottom--small column is-4'} />
+  <section id="artistevents">
+    <h2 class="centered">
+      Events that this artist supported
+    </h2>
+    {#each eventGroups as eventGroup}
+      <div class="columns is-centered">
+        {#each eventGroup as item, i (item.id)}
+          <GridItem {item} cardClass={`column is-4 borders ${mapping[i]}`} />
+        {/each}
+      </div>
     {/each}
-  </div>
+  </section>
 {/if}
