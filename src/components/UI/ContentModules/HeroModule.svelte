@@ -33,16 +33,18 @@
     margin-left: calc(-50vw + 50%);
     margin-top: -2em;
     text-align: center;
-    max-height: 100vh;
+    max-height: calc(100vh - #{$mobile-header-height});
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
     flex-shrink: 0; // needed when it is used as part of content
 
+    @include desktop {
+      max-height: calc(100vh - #{$desktop-header-height});
+    }
+
     img {
-      width: 70%;
-      padding: 20%;
       margin: 0 auto;
       z-index: 5;
     }
@@ -80,8 +82,8 @@
       background-position: center;
 
       &.image {
-        filter: blur(5px);
-        margin: -5px -10px -10px -5px;
+        filter: blur(20px) brightness(0.3);
+        margin: -40px -40px -40px -40px;
         background-image: var(--hero-bgimage);
       }
     }
