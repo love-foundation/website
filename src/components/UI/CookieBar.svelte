@@ -8,9 +8,7 @@
   const { session } = stores();
 
   function initNecessary () {
-    console.log("setting session")
     $session.cookieConsent.necessary = true
-    console.log($session)
   }
 
   let choices = {
