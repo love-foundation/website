@@ -5,9 +5,9 @@ import DirectusSDK from '@directus/sdk-js';
 let status = process.env.NODE_ENV === "production" ? "published" : "published,under_review,draft";
 
 export const directus = new DirectusSDK({
-  url: process.env.DIRECTUS_URL,
+  url: import.meta.env.VITE_DIRECTUS_URL,
   project: "_",
-  token: process.env.DIRECTUS_TOKEN
+  token: import.meta.env.VITE_DIRECTUS_TOKEN
 });
 
 

@@ -4,6 +4,6 @@ services:
     app:
         image: cupcakearmy/static
         volumes:
-            - ./__sapper__/export:/srv
-        ports: 
+            - ./.svelte/export:/srv
+        ports:
             - 80:80
