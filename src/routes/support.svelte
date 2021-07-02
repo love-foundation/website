@@ -8,9 +8,6 @@
 
 <svelte:head>
   <title>Love Foundation - Support</title>
-  {#if necessaryAccepted}
-    <script src="https://www.helpmundo.de/helptools/donations/16431/0/init.js?type=dom&newLocal=de" type="text/javascript"></script>
-  {/if}
 </svelte:head>
 
 
@@ -18,9 +15,17 @@
 
 <section>
   {#if necessaryAccepted}
-    <div id="donationform-default"></div>
+    <div>
+      <iframe title="Betterplace donation form"  style="max-width: 600px; max-height: none; width: 100%; background-color: transparent; overflow: hidden; height: 849px;" src="https://www.betterplace.org/de/donate/iframe/projects/96620?background_color=ffffff&amp;color=0482d1&amp;donation_amount=5&amp;bottom_logo=false&amp;default_payment_method=&amp;default_interval=monthly&amp;utm_campaign=external_donation_forms&amp;utm_source=domain:%20&amp;utm_medium=project_96620&amp;utm_content=" id="iFrameResizer0" scrolling="no" width="100%" height="1200" frameborder="0"></iframe>
+    </div>
   {:else}
     <h2 class="centered">Hey! You have to accept necessary cookies so we can show you our donation form here.</h2>
   {/if}
 
 </section>
+
+<style>
+  div {
+    text-align: center;
+  }
+</style>
