@@ -20,7 +20,7 @@
     "last 2 safari versions"
   ],
   "dependencies": {
-    "@directus/sdk-js": "^6.0.1",
+    "@directus/sdk": "^9.0.0-rc.90",
     "bulma": "^0.8.0",
     "compression": "^1.7.1",
     "lozad": "^1.14.0",
@@ -43,9 +43,9 @@
     "cypress": "^5.0.0",
     "dotenv": "^8.2.0",
     "fuse.js": "^6.4.1",
-    "node-sass": "^4.14.1",
+    "node-sass": "^6.0.1",
     "npm-run-all": "^4.1.5",
-    "postcss": "^7.0.27",
+    "postcss": "^7.0.36",
     "rollup": "^2.3.4",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-svelte": "^6.0.0",
