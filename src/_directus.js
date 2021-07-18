@@ -1,24 +1,30 @@
-import DirectusSDK from '@directus/sdk-js';
+import { Directus } from '@directus/sdk';
+import { writable } from 'svelte/store';
 
 // Query all assets on staging/development, but only published on production
 
-let status = process.env.NODE_ENV === "production" ? "published" : "published,under_review,draft";
+let status =
+  process.env.NODE_ENV === 'production'
+    ? ['published']
+    : ['published', 'under_review', 'draft']
+console.log(process.env.NODE_ENV)
+const directus = new Directus(process.env.DIRECTUS_URL)
 
-export const directus = new DirectusSDK({
-  url: process.env.DIRECTUS_URL,
-  project: "_",
-  token: process.env.DIRECTUS_TOKEN
-});
+const authDirectus = async () => {
+  await directus.auth.static(process.env.DIRECTUS_TOKEN);
+}
 
+authDirectus();
 
 export async function fetchItems(collection = "", fields = "", filter = {}, limit = -1) {
-
+  let filters = {...filter, status: {
+    _in: status
+  }}
   try {
-    let raw = await directus.getItems(collection, {
+    let raw = await directus.items(collection).readMany({
       fields: fields,
-      filter: filter,
-      limit: limit,
-      status: status
+      filter: filters,
+      limit: limit
     });
     const items = raw.data
     return items
@@ -30,7 +36,7 @@ export async function fetchItems(collection = "", fields = "", filter = {}, limi
 
 export async function fetchFile(passedID) {
   try {
-    let raw = await directus.getFile(passedID.toString())
+    let raw = await api.getFile(passedID.toString())
     const file = raw.data
     return file
   } catch (err) {
