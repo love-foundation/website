@@ -10,7 +10,7 @@ export async function get(req, res, next) {
 	const callApi = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging';
 
 	if (callApi) {
-		const events = await fetchItems("events", "id, name, poster.data.*, event_type, hubs.*.*, startdatetime, slug", {});
+		const events = await fetchItems("events", "id, name, poster.data.*, event_type, hubs.*.*, startdatetime, slug");
 		events.sort(dynamicSort("startdatetime")).reverse();
 		if (events !== null) {
 			res.setHeader('Content-Type', 'application/json');
@@ -20,7 +20,7 @@ export async function get(req, res, next) {
 						id: event.id,
 						slug: event.slug,
 						title: event.name,
-						imageUrl: event.poster ? event.poster.data.thumbnails[7].url : "placeholder_events.png",
+						imageUrl: event.poster ? process.env.DIRECTUS_URL + "/assets/" + event.poster + "?key=event-poster" : "placeholder_events.png",
 						hub: event.hubs[0] && event.hubs[0].hubs_id ?  event.hubs[0].hubs_id.city : null,
 						category: event.event_type,
 						starttime: event.startdatetime
