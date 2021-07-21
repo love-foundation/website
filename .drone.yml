@@ -50,7 +50,7 @@ steps:
       host: love-foundation.org
       user: root
       port: 1312
-      target: /srv/lf/website//staging
+      target: /srv/lf/website/staging
       sources:
         - ./__sapper__/build
         - ./static
