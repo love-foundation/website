@@ -50,7 +50,7 @@ steps:
       host: love-foundation.org
       user: root
       port: 1312
-      target: /srv/staging
+      target: /srv/lf/website/staging
       sources:
         - ./__sapper__/build
         - ./static
@@ -90,7 +90,7 @@ steps:
       host: love-foundation.org
       user: root
       port: 1312
-      target: /srv/new
+      target: /srv/lf/website/prod
       sources:
         - ./__sapper__/export
         - ./docker-compose.prod.yml
@@ -103,8 +103,8 @@ steps:
 trigger:
   event:
     include:
-    - push
-    - pull_request
+      - push
+      - pull_request
 
 ---
 kind: pipeline
@@ -155,7 +155,7 @@ steps:
       host: love-foundation.org
       user: root
       port: 1312
-      target: /srv/new
+      target: /srv/lf/website/prod
       sources:
         - ./__sapper__/export
         - ./docker-compose.prod.yml
@@ -165,4 +165,4 @@ steps:
 trigger:
   event:
     include:
-    - custom
+      - custom
