@@ -9,8 +9,8 @@
   let fullWidth;
   let double;
 
-  imageOne = content.details.imageOne ? content.details.imageOne.data.full_url : null;
-  imageTwo = content.details.imageTwo ? content.details.imageTwo.data.full_url : null;
+  imageOne = content.details.imageOne ? process.env.ASSETBASE + "/assets/" + content.details.imageOne.id : null;
+  imageTwo = content.details.imageTwo ? process.env.ASSETBASE + "/assets/" + content.details.imageTwo.id : null;
   imageOneCaption = content.details.captions
     ? content.details.captions.imageOneCaption
     : null;

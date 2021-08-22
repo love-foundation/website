@@ -15,6 +15,7 @@ import autoprefixer from 'autoprefixer';
 dotenv.config();
 
 const mode = process.env.NODE_ENV;
+const DIRECTUS_URL = process.env.DIRECTUS_URL;
 const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
@@ -45,7 +46,8 @@ export default {
 		plugins: [
 			replace({
 				'process.browser': true,
-				'process.env.NODE_ENV': JSON.stringify(mode)
+				'process.env.NODE_ENV': JSON.stringify(mode),
+				'process.env.ASSETBASE': JSON.stringify(DIRECTUS_URL)
 			}),
 			svelte({
 				preprocess,
@@ -95,7 +97,7 @@ export default {
 		plugins: [
 			replace({
 				'process.browser': false,
-				'process.env.NODE_ENV': JSON.stringify(mode)
+				'process.env.NODE_ENV': JSON.stringify(mode),
 			}),
 			svelte({
 				preprocess,
