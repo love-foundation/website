@@ -17,8 +17,8 @@ services:
         networks:
             - proxy
         labels:
-            - "traefik.enable=true"
-            - "traefik.port=3000"
-            - "traefik.docker.network=proxy"
-            - "traefik.backend=webnew-staging"
-            - "traefik.frontend.rule=Host:staging.love-foundation.org"
+            - traefik.enable=true
+            - traefik.http.services.lf-website-staging.loadbalancer.server.port=3000
+            - traefik.http.routers.lf-website-staging.rule=Host(`staging.love-foundation.org`)
+            - traefik.http.routers.lf-website-staging.entrypoints=secure
+            - traefik.http.routers.lf-website-staging.tls.certresolver=le
