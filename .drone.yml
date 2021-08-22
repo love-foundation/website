@@ -18,9 +18,9 @@ steps:
     environment:
       CYPRESS_CACHE_FOLDER: .cypress
       DIRECTUS_URL:
-        from_secret: directus_url
+        from_secret: directus_url_new
       DIRECTUS_TOKEN:
-        from_secret: directus_token
+        from_secret: directus_token_new
     commands:
       - npm run test
 
@@ -29,9 +29,9 @@ steps:
     pull: always
     environment:
       DIRECTUS_URL:
-        from_secret: directus_url
+        from_secret: directus_url_new
       DIRECTUS_TOKEN:
-        from_secret: directus_token
+        from_secret: directus_token_new
       NODE_ENV: staging
     commands:
       - npm run build
@@ -70,9 +70,9 @@ steps:
     pull: always
     environment:
       DIRECTUS_URL:
-        from_secret: directus_url
+        from_secret: directus_url_new
       DIRECTUS_TOKEN:
-        from_secret: directus_token
+        from_secret: directus_token_new
       NODE_ENV: production
     commands:
       - npm run export:production
@@ -127,9 +127,9 @@ steps:
     environment:
       CYPRESS_CACHE_FOLDER: .cypress
       DIRECTUS_URL:
-        from_secret: directus_url
+        from_secret: directus_url_new
       DIRECTUS_TOKEN:
-        from_secret: directus_token
+        from_secret: directus_token_new
     commands:
       - npm run test
 
@@ -138,9 +138,9 @@ steps:
     pull: always
     environment:
       DIRECTUS_URL:
-        from_secret: directus_url
+        from_secret: directus_url_new
       DIRECTUS_TOKEN:
-        from_secret: directus_token
+        from_secret: directus_token_new
       NODE_ENV: production
     commands:
       - npm run export:production
