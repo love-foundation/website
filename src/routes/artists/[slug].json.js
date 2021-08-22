@@ -11,7 +11,7 @@ export async function get(req, res, next) {
     res.end(JSON.stringify(artist.map(a => ({
       name: a.artist_name,
       slug: a.slug,
-      image: a.image ? a.image.data.thumbnails[8].url : "placeholder_artists.png",
+      image: a.image ? process.env.DIRECTUS_URL + "/assets/" + a.image + "?key=artist-square" : "placeholder_artists.png",
       status: a.level_of_involvement,
       location: a.current_location,
       category: a.type_of_art,
@@ -22,7 +22,7 @@ export async function get(req, res, next) {
         id: event.events_id.id,
         slug: event.events_id.slug,
         title: event.events_id.name,
-        imageUrl: event.events_id.poster ? event.events_id.poster.data.thumbnails[7].url : "placeholder_events.png",
+        imageUrl: event.events_id.poster ? process.env.DIRECTUS_URL + "/assets/" + event.events_id.poster.id + "?key=event-poster" : "placeholder_events.png",
         hub: event.events_id.hubs[0] ? event.events_id.hubs[0].hubs_id.city : null
       })),
     })
