@@ -36,22 +36,4 @@ export async function fetchItems(
   } catch (err) {
     console.log(err)
   }
-<<<<<<< HEAD
-
-};
-
-export async function fetchFile(passedID) {
-  try {
-    let raw = await api.getFile(passedID.toString())
-    const file = raw.data
-    return file
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-
-
-=======
 }
->>>>>>> 43d6300... fixup! Initiate the new sdk and adjusting the fetchItems function
