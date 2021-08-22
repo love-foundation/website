@@ -10,7 +10,6 @@ export async function get(req, res, next) {
 
   if (callApi) {
     projects = await fetchItems("projects", "id, name, main_image.*.*, pillar, slug, location_country", {});
-
     if (projects !== null) {
       res.setHeader('Content-Type', 'application/json');
       res.end(
@@ -18,7 +17,7 @@ export async function get(req, res, next) {
           projects.map(project => ({
             id: project.id,
             name: project.name,
-            imageUrl: project.main_image ? project.main_image.data.full_url : "placeholder_projects.jpeg",
+            imageUrl: project.main_image ? process.env.DIRECTUS_URL + "/assets/" + project.main_image.id : "placeholder_projects.jpeg",
             pillar: project.pillar,
             country: project.location_country,
             slug: project.slug
