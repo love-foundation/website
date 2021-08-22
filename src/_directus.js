@@ -31,18 +31,6 @@ export async function fetchItems(collection = "", fields = "", filter = {}, limi
   } catch (err) {
     console.log(err);
   }
-
 };
-
-export async function fetchFile(passedID) {
-  try {
-    let raw = await api.getFile(passedID.toString())
-    const file = raw.data
-    return file
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 
 
