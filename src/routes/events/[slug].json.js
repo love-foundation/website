@@ -31,7 +31,7 @@ export async function get(req, res, next) {
             slug: artist.artists_id.slug,
             name: artist.artists_id.artist_name,
             imageUrl: artist.artists_id.image
-              ? process.env.DIRECTUS_URL + "/assets/" + artist.artists_id.image.id + "?key=artist-square"
+              ? process.env.DIRECTUS_URL + "/assets/" + artist.artists_id.image.id
               : 'placeholder_artists.png',
           })),
         }))
