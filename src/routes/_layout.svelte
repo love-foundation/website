@@ -6,6 +6,20 @@
         session.events = events
         return { events }
       })
+
+    // return this.fetch(`artists.json`)
+    //   .then(r => r.json())
+    //   .then(artists => {
+    //     session.artist = artists;
+    //     return { artists };
+    //   });
+
+    //   return this.fetch(`lovecasts.json`)
+    //   .then(r => r.json())
+    //   .then(artists => {
+    //     session.artist = artists;
+    //     return { artists };
+    //   });
   }
 </script>
 

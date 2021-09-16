@@ -14,7 +14,7 @@ export async function get(req, res, next) {
           id: project.id,
           slug: project.slug,
           name: project.name,
-          imageUrl: project.main_image ? process.env.DIRECTUS_URL + "assets/" + project.main_image.id : "placeholder_projects.jpeg",
+          imageUrl: project.main_image ? process.env.DIRECTUS_URL + "/assets/" + project.main_image.id : "placeholder_projects.jpeg",
           pillar: project.pillar,
           heroColor: project.hero_background_color || null,
           content: project.content.map(content => ({
