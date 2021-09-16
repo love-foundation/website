@@ -7,7 +7,7 @@
   let text;
   let type;
 
-  imageOne = content.details.imageOne ? process.env.ASSETBASE + "/assets/" + content.details.imageOne.id : null;
+  imageOne = content.details.imageOne ? content.details.imageOne.data.full_url : null;
   caption = content.details.captions
     ? content.details.captions.imageOneCaption
     : null;
