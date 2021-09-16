@@ -7,7 +7,7 @@
     "build": "sapper build",
     "now-build": "sapper export",
     "export": "sapper export",
-    "export:production": "sapper export --timeout 100000",
+    "export:production": "sapper export --timeout 30000",
     "start": "node __sapper__/build",
     "cy:run": "cypress run --browser chrome --headless",
     "cy:open": "cypress open",
