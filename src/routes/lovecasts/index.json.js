@@ -9,7 +9,7 @@ let lovecasts;
 export async function get(req, res, next) {
 
 	if (callApi)  {
-		lovecasts = await fetchItems("lovecast", "id, name_of_the_set, design.data.*, soundcloud_link", {
+		lovecasts = await fetchItems("lovecast", "id, name_of_the_set, design, soundcloud_link", {
 			status: "published"
 		});
 

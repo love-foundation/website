@@ -10,7 +10,7 @@ export async function get(req, res, next) {
 	const callApi = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging';
 
 	if (callApi) {
-		const events = await fetchItems("events", "id, name, poster.data.*, event_type, hubs.*.*, startdatetime, slug");
+		const events = await fetchItems("events", "id, name, poster, event_type, hubs.*.*, startdatetime, slug");
 		events.sort(dynamicSort("startdatetime")).reverse();
 		if (events !== null) {
 			res.setHeader('Content-Type', 'application/json');
