@@ -20,7 +20,7 @@
     "last 2 safari versions"
   ],
   "dependencies": {
-    "@directus/sdk": "^9.0.0-rc.92",
+    "@directus/sdk": "^9.0.0-rc.93",
     "bulma": "^0.8.0",
     "compression": "^1.7.1",
     "lozad": "^1.14.0",
