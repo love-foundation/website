@@ -3,7 +3,7 @@ import { fetchItems } from '../../_directus'
 export async function get(req, res, next) {
   const event = await fetchItems(
     'events',
-    'id, name, slug, poster.data.*, hubs.*.*, location, startdatetime, enddatetime, event_type, artists.artists_id.*.*, hero_background_color',
+    'id, name, slug, poster, hubs.*.*, location, startdatetime, enddatetime, event_type, artists.artists_id.*.*, hero_background_color',
     {
       slug: { _eq: req.params.slug },
     }

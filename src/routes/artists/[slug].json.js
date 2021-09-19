@@ -1,7 +1,7 @@
 import { fetchItems } from '../../_directus';
 
 export async function get(req, res, next) {
-  const artist = await fetchItems("artists", "id, slug, artist_name, image.data.*, current_location, type_of_art, events.events_id.*.*.*, soundcloud_url, facebook_url, level_of_involvement, hero_background_color", {
+  const artist = await fetchItems("artists", "id, slug, artist_name, image, current_location, type_of_art, events.events_id.*.*.*, soundcloud_url, facebook_url, level_of_involvement, hero_background_color", {
     slug: req.params.slug
   });
 
