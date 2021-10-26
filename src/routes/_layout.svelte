@@ -33,6 +33,8 @@
   $: if (docHeight > winHeight) {
     progress = y / (docHeight - winHeight)
   }
+
+  let siteId = process.env.NODE_ENV === 'production' ? 2 : 1
 </script>
 
 <style lang="scss">
@@ -122,6 +124,7 @@
       s.parentNode.insertBefore(g, s)
     })()
   </script>
+  <noscript><p><img src={`//matomo.love-foundation.org/matomo.php?idsite=${siteId}&amp;rec=1`} style="border:0;" alt="" /></p></noscript>
   <!-- End Matomo Code -->
 </svelte:head>
 
