@@ -1,3 +1,74 @@
+<footer>
+  <div class="container fluid">
+    <div class="columns">
+      <div class="column is-2">
+        <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="about" rel="prefetch">About</a>
+          </li>
+          <li>
+            <a rel="prefetch" href="projects">Projects</a>
+          </li>
+          <li>
+            <a rel="prefetch" href="events">Events</a>
+          </li>
+          <li>
+            <a rel="prefetch" href="artists">Artists</a>
+          </li>
+          <li>
+            <a rel="prefetch" href="lovecasts">Lovecasts</a>
+          </li>
+          <li>
+            <a rel="prefetch" href="support">Support</a>
+          </li>
+          <li>
+            <a rel="prefetch" href="privacy">Privacy Policy</a>
+          </li>
+        </ul>
+      </div>
+      <div class="column is-2">
+        <div class="content">Love Foundation e.V.</div>
+        <a rel="prefetch" href="impressum">Impressum</a>
+      </div>
+      <div class="column" />
+      <div class="column is-3 is-flex">
+        <div class="columns is-mobile low">
+          <a
+            class="column"
+            rel="nofollow noopener noreferrer"
+            href="https://www.instagram.com/lovefoundation_global/"
+          >
+            <div class="blob">
+              <h2>INS</h2>
+            </div>
+          </a>
+          <a
+            class="column"
+            rel="nofollow noopener noreferrer"
+            href="https://www.facebook.com/LoveFoundation"
+          >
+            <div class="blob">
+              <h2>FB</h2>
+            </div>
+          </a>
+          <a
+            class="column"
+            rel="nofollow noopener noreferrer"
+            href="https://www.soundcloud.com/love-foundation"
+          >
+            <div class="blob">
+              <h2>SC</h2>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
 <style lang="scss">
   footer {
     background: $light-grey;
@@ -39,77 +110,3 @@
     align-self: flex-end;
   }
 </style>
-
-<footer>
-  <div class="container fluid">
-    <div class="columns">
-      <div class="column is-2">
-        <ul>
-          <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
-            <a href="about" rel="prefetch">About</a>
-          </li>
-          <li>
-            <a rel="prefetch" href="projects">Projects</a>
-          </li>
-          <li>
-            <a rel="prefetch" href="events">Events</a>
-          </li>
-          <li>
-            <a rel="prefetch" href="artists">Artists</a>
-          </li>
-          <li>
-            <a rel="prefetch" href="lovecasts">Lovecasts</a>
-          </li>
-          <li>
-            <a rel="prefetch" href="support">Support</a>
-          </li>
-          <li>
-            <a rel="prefetch" href="privacy">Privacy Policy</a>
-          </li>
-        </ul>
-      </div>
-      <div class="column is-2">
-        <div class="content">
-          Stichting Love Foundation
-          <br />
-          Midscheeps 61, 1034TH Amsterdam
-          <br />
-          Netherlands
-          <br />
-          <br />
-          <a class="email" href="mailto:hello@love-foundation.org">
-            hello@love-foundation.org
-          </a>
-          <br />
-          <br />
-          Kamer van Koophandel (KvK):
-          <br />
-          57645906
-        </div>
-      </div>
-      <div class="column" />
-      <div class="column is-3 is-flex">
-        <div class="columns is-mobile low">
-          <a class="column" rel="nofollow" href="https://www.instagram.com/lovefoundation_global/">
-            <div class="blob">
-              <h2>INS</h2>
-            </div>
-          </a>
-          <a class="column" rel="nofollow" href="https://www.facebook.com/LoveFoundation">
-            <div class="blob">
-              <h2>FB</h2>
-            </div>
-          </a>
-          <a class="column" rel="nofollow" href="https://www.soundcloud.com/love-foundation">
-            <div class="blob">
-              <h2>SC</h2>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
