@@ -1,16 +1,17 @@
+@import '/node_modules/bulma/sass/utilities/_all.sass';
+
 // colors
 
-$blue: #006FFF;
-$red: #D10505;
-$green: #038C4C;
-$yellow: #F2B705;
+$blue: #006fff;
+$red: #d10505;
+$green: #038c4c;
+$yellow: #f2b705;
 $white: #ffffff;
 $black: #000000;
-$light-grey: #F8F8F8;
-$dark-grey: #BEBEBE;
-$medium-grey:#00000019;
+$light-grey: #f8f8f8;
+$dark-grey: #bebebe;
+$medium-grey: #00000019;
 $hover-blue: #0482d1;
-
 
 // project colors
 $water: $blue;
@@ -18,7 +19,6 @@ $community: $red;
 $love: $white;
 $joy: $yellow;
 $sustainability: $green;
-
 
 // Margins & Heights
 $mobile-header-height: 47px;
@@ -33,5 +33,3 @@ $link-hover: $dark-grey;
 $family-primary: 'Theinhardt', sans-serif;
 
 //Bulma Utilities so breakpoints can be used in the entire application
-
-@import "../../node_modules/bulma/sass/utilities/_all.sass";

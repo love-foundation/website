@@ -10,7 +10,7 @@ const config = {
 			postcss: true,
 
 			scss: {
-				prependData: '@use "src/styles/variables.scss" as *;'
+				prependData: '@use "src/variables.scss" as *;'
 			}
 		})
 	],
@@ -30,7 +30,7 @@ const config = {
 			css: {
 				preprocessorOptions: {
 					scss: {
-						additionalData: '@use "src/styles/variables.scss" as *;'
+						additionalData: '@use "src/variables.scss" as *;'
 					}
 				}
 			}
