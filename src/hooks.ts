@@ -11,14 +11,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 		// set a cookie so that we recognise them when they return
 		response.headers.set(
 			'set-cookie',
-			cookie.serialize(
-				'cookieConsent',
-				{ necessary: false },
-				{
-					path: '/',
-					httpOnly: true
-				}
-			)
+			cookie.serialize('cookieConsent', '{ necessary: false }', {
+				path: '/',
+				httpOnly: true
+			})
 		);
 	}
 

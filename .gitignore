@@ -1,9 +1,8 @@
 # Node
 /node_modules/
 
-# Sapper
-/src/node_modules/@sapper/
-/__sapper__/
+# Sveltekit
+.svelte-kit/
 
 # Artifacts
 .now
