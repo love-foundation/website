@@ -1,11 +1,12 @@
 <script context="module">
-	export async function preload({ params, query }, session) {
+	export async function preload(session) {
 		const hubs = await this.fetch(`hubs.json`)
 			.then((r) => r.json())
 			.then((hubs) => {
 				return hubs;
 			});
-		const sitemap = await this.fetch('sitemap.xml');
+		// Todo: Get sitemap working
+		// const sitemap = await this.fetch('sitemap.xml');
 
 		const events = await this.fetch(`events.json`)
 			.then((r) => r.json())
@@ -13,18 +14,18 @@
 				session.events = events;
 				return events;
 			});
-		return { sitemap, hubs };
+		return { hubs };
 	}
 </script>
 
-<script>
-	import UpcomingEvents from '../components/UI/FrontPage/UpcomingEvents.svelte';
-	import FullWidthModule from '../components/UI/ContentModules/FullWidthModule.svelte';
-	import Button from '../components/UI/Button.svelte';
-	import Hub from '../components/UI/Hub.svelte';
+<script lang="ts">
+	import UpcomingEvents from '$lib/components/UI/FrontPage/UpcomingEvents.svelte';
+	import Button from '$lib/components/UI/Button.svelte';
+	import Hub from '$lib/components/UI/Hub.svelte';
 	import { session } from '$app/stores';
+	import type { HubObject } from 'src/global';
 
-	export let hubs;
+	export let hubs: HubObject[];
 
 	let upcomingEvents = $session.events.filter((event) => new Date(event.starttime) >= new Date());
 	let image = {
@@ -79,9 +80,11 @@
 <section class="active-hubs row">
 	<h1>Active Love Hubs</h1>
 	<div class="columns is-multiline">
+		<!--
 		{#each hubs as hub}
 			<Hub {hub} />
 		{/each}
+		-->
 	</div>
 </section>
 <!-- Fix Me: Should be UI component, with properties for link and text -->
@@ -125,15 +128,5 @@
 
 	#opener {
 		text-align: center;
-	}
-
-	figure.image.whatis {
-		img {
-			margin: 0 auto;
-			width: 90%;
-			@include tablet {
-				width: 40%;
-			}
-		}
 	}
 </style>
