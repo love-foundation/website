@@ -1,58 +1,56 @@
-import { fetchItems } from '../../../_directus';
+import { fetchItems } from '$lib/_directus';
 
 //FIX ME: This should have a fakeResponse from a fixture for the specific join page
-import fakeResponse from '../../../../cypress/fixtures/about.js'
+import fakeResponse from '../../../../cypress/fixtures/about.js';
 
 export async function get(req, res, next) {
+	let queriedContent;
 
-  let queriedContent;
+	const callApi = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging';
 
-  const callApi = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging';
+	if (callApi) {
+		const pageContent = await fetchItems('pages', 'slug, content.*.*.*', {
+			slug: 'join'
+		});
 
-  if (callApi) {
-    const pageContent = await fetchItems("pages", "slug, content.*.*.*", {
-      slug: "join"
-    });
+		queriedContent = pageContent[0].content;
 
-    queriedContent = pageContent[0].content;
+		if (queriedContent !== null) {
+			res.setHeader('Content-Type', 'application/json');
+			res.end(
+				JSON.stringify(
+					queriedContent.map((content) => ({
+						id: content.id,
+						type: content.type,
+						details: {
+							text: content.text,
+							textLayout: content.text_layout,
+							imageOne: content.image,
+							imageTwo: content.image_two,
+							padding: content.distance_to_next,
+							captions: content.captions,
+							heroColor: content.hero_background_color || null
+						}
+					}))
+				)
+			);
+		} else {
+			next();
+		}
+	} else {
+		queriedContent = fakeResponse;
 
-    if (queriedContent !== null) {
-      res.setHeader('Content-Type', 'application/json');
-      res.end(
-        JSON.stringify(
-          queriedContent.map(content => ({
-            id: content.id,
-            type: content.type,
-            details: {
-              text: content.text,
-              textLayout: content.text_layout,
-              imageOne: content.image,
-              imageTwo: content.image_two,
-              padding: content.distance_to_next,
-              captions: content.captions,
-              heroColor: content.hero_background_color || null
-            }
-
-          }))
-        )
-      );
-    } else {
-      next();
-    }
-  } else {
-    queriedContent = fakeResponse;
-
-    if (queriedContent !== null) {
-      res.setHeader('Content-Type', 'application/json');
-      res.end(
-        JSON.stringify(
-          queriedContent.map(content => ({
-            ...content
-            })
-          )));
-    } else {
-      next();
-    }
-  }
+		if (queriedContent !== null) {
+			res.setHeader('Content-Type', 'application/json');
+			res.end(
+				JSON.stringify(
+					queriedContent.map((content) => ({
+						...content
+					}))
+				)
+			);
+		} else {
+			next();
+		}
+	}
 }
-

@@ -1,4 +1,4 @@
-import { fetchItems } from '../../_directus';
+import { fetchItems } from '$lib/_directus';
 import { dynamicSort } from '$lib/helpers/sharedFunctions.js';
 
 import fakeResponse from '../../../cypress/fixtures/events.js';
