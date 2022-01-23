@@ -1,4 +1,4 @@
-import { directus, status } from '../_directus';
+import { directus, status } from '$lib/_directus';
 
 import fakeResponse from '../../cypress/fixtures/hubs.js';
 import type { RequestHandler } from '@sveltejs/kit';
