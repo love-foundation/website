@@ -1,14 +1,3 @@
-<script context="module">
-  export function preload({ params, query }, session) {
-    return this.fetch(`events.json`)
-      .then((r) => r.json())
-      .then((events) => {
-        session.events = events
-        return { events }
-      })
-  }
-</script>
-
 <script>
   import Nav from '../components/UI/Nav.svelte'
   import Footer from '../components/UI/Footer.svelte'
@@ -28,7 +17,8 @@
 
   mainClasses = $page.path === '/events' ? 'events' : ''
 
-  $: progressClasses = $page.path === '/events' || $page.path === '/artists' ? 'background' : ''
+  $: progressClasses =
+    $page.path === '/events' || $page.path === '/artists' ? 'background' : ''
 
   $: if (docHeight > winHeight) {
     progress = y / (docHeight - winHeight)
@@ -36,6 +26,56 @@
 
   let siteId = process.env.NODE_ENV === 'production' ? 2 : 1
 </script>
+
+<svelte:head>
+  <style src="../styles/global.scss">
+  </style>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = (window._paq = window._paq || [])
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['requireCookieConsent'])
+    _paq.push(['trackPageView'])
+    _paq.push(['enableLinkTracking'])
+    ;(function () {
+      var siteId = process.env.NODE_ENV === 'production' ? 2 : 1
+      var u = '//matomo.love-foundation.org/'
+      _paq.push(['setTrackerUrl', u + 'matomo.php'])
+      _paq.push(['setSiteId', siteId])
+      var d = document,
+        g = d.createElement('script'),
+        s = d.getElementsByTagName('script')[0]
+      g.type = 'text/javascript'
+      g.async = true
+      g.src = u + 'matomo.js'
+      s.parentNode.insertBefore(g, s)
+    })()
+  </script>
+  <noscript
+    ><p>
+      <img
+        src={`//matomo.love-foundation.org/matomo.php?idsite=${siteId}&amp;rec=1`}
+        style="border:0;"
+        alt=""
+      />
+    </p></noscript
+  >
+  <!-- End Matomo Code -->
+</svelte:head>
+
+<svelte:window bind:scrollY={y} bind:innerHeight={winHeight} />
+
+<Nav {segment} />
+<progress value={progress} class={progressClasses} />
+
+<div bind:clientHeight={docHeight}>
+  <main class={mainClasses}>
+    <slot />
+  </main>
+  <Footer />
+</div>
+
+<CookieBar />
 
 <style lang="scss">
   main {
@@ -93,51 +133,9 @@
 
     &.background {
       background: $medium-grey !important;
-        &::-webkit-progress-bar {
+      &::-webkit-progress-bar {
         background: $medium-grey !important;
       }
     }
   }
 </style>
-
-<svelte:head>
-  <style src="../styles/global.scss">
-  </style>
-  <!-- Matomo -->
-  <script type="text/javascript">
-    var _paq = (window._paq = window._paq || [])
-    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-    _paq.push(['requireCookieConsent'])
-    _paq.push(['trackPageView'])
-    _paq.push(['enableLinkTracking'])
-    ;(function () {
-      var siteId = process.env.NODE_ENV === 'production' ? 2 : 1
-      var u = '//matomo.love-foundation.org/'
-      _paq.push(['setTrackerUrl', u + 'matomo.php'])
-      _paq.push(['setSiteId', siteId])
-      var d = document,
-        g = d.createElement('script'),
-        s = d.getElementsByTagName('script')[0]
-      g.type = 'text/javascript'
-      g.async = true
-      g.src = u + 'matomo.js'
-      s.parentNode.insertBefore(g, s)
-    })()
-  </script>
-  <noscript><p><img src={`//matomo.love-foundation.org/matomo.php?idsite=${siteId}&amp;rec=1`} style="border:0;" alt="" /></p></noscript>
-  <!-- End Matomo Code -->
-</svelte:head>
-
-<svelte:window bind:scrollY={y} bind:innerHeight={winHeight} />
-
-<Nav {segment} />
-<progress value={progress} class={progressClasses} />
-
-<div bind:clientHeight={docHeight}>
-  <main class={mainClasses}>
-    <slot />
-  </main>
-  <Footer />
-</div>
-
-<CookieBar />

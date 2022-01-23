@@ -1,8 +1,14 @@
 <script context="module">
-  export function preload(session) {
-    const pageFilters = session.query;
+  export async function preload(session) {
+    const events = await this.fetch(`events.json`)
+      .then((r) => r.json())
+      .then((events) => {
+        session.events = events
+        return events
+      })
+    const pageFilters = session.query
 
-    return { pageFilters };
+    return { pageFilters }
   }
 </script>
 
