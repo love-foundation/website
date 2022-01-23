@@ -10,8 +10,8 @@
 </script>
 
 <script>
-	import ProjectItem from '.$lib/components/UI/ProjectItem.svelte;
-	import PillarBlob from '.$lib/components/UI/PillarBlob.svelte;
+	import ProjectItem from '$lib/components/UI/ProjectItem.svelte';
+	import PillarBlob from '$lib/components/UI/PillarBlob.svelte';
 	import { fade } from 'svelte/transition';
 	import { beforeUpdate } from 'svelte';
 
