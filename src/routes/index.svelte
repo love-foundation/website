@@ -1,21 +1,29 @@
-<script context="module">
-	export async function preload(session) {
-		const hubs = await this.fetch(`hubs.json`)
-			.then((r) => r.json())
-			.then((hubs) => {
-				return hubs;
-			});
+<script lang="ts" context="module">
+	import type { Load } from '@sveltejs/kit';
+	export const load: Load = async ({ fetch }) => {
+		const url = '/hubs.json';
+		const res = await fetch(url);
+
+		if (res.ok) {
+			const hubs = await res.json();
+			return {
+				props: { hubs }
+			};
+		}
+
+		return {
+			status: res.status,
+			error: new Error(`Could not load ${url}`)
+		};
 		// Todo: Get sitemap working
 		// const sitemap = await this.fetch('sitemap.xml');
-
 		const events = await this.fetch(`events.json`)
 			.then((r) => r.json())
 			.then((events) => {
 				session.events = events;
 				return events;
 			});
-		return { hubs };
-	}
+	};
 </script>
 
 <script lang="ts">
@@ -80,11 +88,9 @@
 <section class="active-hubs row">
 	<h1>Active Love Hubs</h1>
 	<div class="columns is-multiline">
-		<!--
 		{#each hubs as hub}
 			<Hub {hub} />
 		{/each}
-		-->
 	</div>
 </section>
 <!-- Fix Me: Should be UI component, with properties for link and text -->
