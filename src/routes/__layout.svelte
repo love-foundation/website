@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Nav from '../components/UI/Nav.svelte';
-	import Footer from '../components/UI/Footer.svelte';
+	import Nav from '$lib/components/UI/Nav.svelte';
+	import Footer from '$lib/components/UI/Footer.svelte';
 	import { page } from '$app/stores';
-	import CookieBar from '../components/UI/CookieBar.svelte';
+	import CookieBar from '$lib/components/UI/CookieBar.svelte';
 	import '../app.scss';
 
 	export let segment;
@@ -28,26 +28,7 @@
 
 <svelte:head>
 	<!-- Matomo -->
-	<script type="text/javascript">
-		var _paq = (window._paq = window._paq || []);
-		/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-		_paq.push(['requireCookieConsent']);
-		_paq.push(['trackPageView']);
-		_paq.push(['enableLinkTracking']);
-		(function () {
-			var siteId = process.env.NODE_ENV === 'production' ? 2 : 1;
-			var u = '//matomo.love-foundation.org/';
-			_paq.push(['setTrackerUrl', u + 'matomo.php']);
-			_paq.push(['setSiteId', siteId]);
-			var d = document,
-				g = d.createElement('script'),
-				s = d.getElementsByTagName('script')[0];
-			g.type = 'text/javascript';
-			g.async = true;
-			g.src = u + 'matomo.js';
-			s.parentNode.insertBefore(g, s);
-		})();
-	</script>
+
 	<noscript
 		><p>
 			<img
