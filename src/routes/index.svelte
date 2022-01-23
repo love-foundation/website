@@ -1,11 +1,19 @@
 <script context="module">
-  export function preload({ params, query }) {
-    return this.fetch(`hubs.json`)
+  export async function preload({ params, query }, session) {
+    const hubs = await this.fetch(`hubs.json`)
       .then((r) => r.json())
       .then((hubs) => {
-        return { hubs }
+        return hubs
       })
-      .then(this.fetch('sitemap.xml'))
+    const sitemap = await this.fetch('sitemap.xml')
+
+    const events = await this.fetch(`events.json`)
+      .then((r) => r.json())
+      .then((events) => {
+        session.events = events
+        return events
+      })
+    return { sitemap, hubs }
   }
 </script>
 
@@ -17,13 +25,11 @@
   import { stores } from '@sapper/app'
 
   export let hubs
-
   const { session } = stores()
 
   let upcomingEvents = $session.events.filter(
     (event) => new Date(event.starttime) >= new Date()
   )
-
   let image = {
     src: 'map_countries.jpg',
     alt: 'Map of Love Foundation Hubs',
@@ -68,8 +74,8 @@
       Love Foundation was founded in 2013 by two students from Maastricht
       University and a designer in the Netherlands.
       <br />
-      We have organised events in the Netherlands, the US, Australia, Brazil, Israel,
-      Spain, Germany, the UK, Italy, Portugal, Israel, South Africa and France.
+      We have organised events in the Netherlands, US, Australia, Brazil, Israel,
+      Spain, Germany, UK, Italy, Portugal, South Africa and France.
     </h2>
   </div>
 </section>
