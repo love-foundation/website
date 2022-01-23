@@ -45,6 +45,35 @@
   }
 </script>
 
+<a
+  transition:fade
+  rel={soundcloud ? 'nofollow noopener noreferrer' : 'prefetch'}
+  href={link}
+  class="item {cardClass}"
+>
+  <figure
+    data-toggle-class="loaded"
+    class:lazy
+    class:lozad={lazy}
+    class="image {imageRatio}"
+  >
+    {#if lazy}
+      <img class="lozad" data-src={imageUrl} alt="{title} Poster" />
+    {:else}
+      <img src={imageUrl} alt="{title} Poster" />
+    {/if}
+  </figure>
+  <div class="item-info">
+    <h3 class="title">{title}</h3>
+    {#if subtitle}
+      <h3 class="subtitle">{subtitle}</h3>
+    {/if}
+    {#if eventDate}
+      <h3 class="subtitle">{eventDate}</h3>
+    {/if}
+  </div>
+</a>
+
 <style lang="scss">
   .item {
     padding: 5%;
@@ -58,10 +87,9 @@
 
         ~ .b,
         ~ .d {
-        border-right: none;
+          border-right: none;
+        }
       }
-
-    }
     }
     &.small {
       padding: 10%;
@@ -111,7 +139,7 @@
 
   h3 {
     width: 100%;
-    overflow:hidden;
+    overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     padding: 0;
@@ -148,30 +176,3 @@
     }
   }
 </style>
-
-<a
-  transition:fade
-  rel={soundcloud ? 'nofollow' : 'prefetch'}
-  href={link}
-  class="item {cardClass}">
-  <figure
-    data-toggle-class="loaded"
-    class:lazy
-    class:lozad={lazy}
-    class="image {imageRatio}">
-    {#if lazy}
-      <img class="lozad" data-src={imageUrl} alt="{title} Poster" />
-    {:else}
-      <img src={imageUrl} alt="{title} Poster" />
-    {/if}
-  </figure>
-  <div class="item-info">
-    <h3 class="title">{title}</h3>
-    {#if subtitle}
-      <h3 class="subtitle">{subtitle}</h3>
-    {/if}
-    {#if eventDate}
-      <h3 class="subtitle">{eventDate}</h3>
-    {/if}
-  </div>
-</a>
