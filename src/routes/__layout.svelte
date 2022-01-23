@@ -13,10 +13,10 @@
 	let mainClasses = '';
 	let progressClasses = '';
 
-	// TODO: Fix usage of path here
-	mainClasses = $page.path === '/events' ? 'events' : '';
+	mainClasses = $page.url.pathname === '/events' ? 'events' : '';
 
-	$: progressClasses = $page.path === '/events' || $page.path === '/artists' ? 'background' : '';
+	$: progressClasses =
+		$page.url.pathname === '/events' || $page.url.pathname === '/artists' ? 'background' : '';
 
 	$: if (docHeight > winHeight) {
 		progress = y / (docHeight - winHeight);
