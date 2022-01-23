@@ -3,7 +3,7 @@
 @import 'bulma/sass/grid/_all.sass';
 @import 'bulma/sass/elements/image.sass';
 @import 'bulma/sass/elements/content.sass';
-
+@import 'bulma/sass/utilities/_all.sass';
 @import 'bulma/sass/components/card.sass';
 
 /* Font */
@@ -128,14 +128,14 @@ $directions: 'top', 'bottom', 'left', 'right';
 		$val: nth($size, 2);
 
 		.push--#{$dir}--#{$name} {
-			margin-#{$dir}: $val / 2;
+			margin-#{$dir}: calc($val / 2);
 			@include desktop {
 				margin-#{$dir}: $val;
 			}
 		}
 
 		.pad--#{$dir}--#{$name} {
-			padding-#{$dir}: $val / 2;
+			padding-#{$dir}: calc($val / 2);
 			@include desktop {
 				padding-#{$dir}: $val;
 			}
