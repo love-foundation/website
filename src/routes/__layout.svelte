@@ -3,6 +3,7 @@
 	import Footer from '../components/UI/Footer.svelte';
 	import { page } from '$app/stores';
 	import CookieBar from '../components/UI/CookieBar.svelte';
+	import '../app.scss';
 
 	export let segment;
 
@@ -26,8 +27,6 @@
 </script>
 
 <svelte:head>
-	<style src="../styles/global.scss">
-	</style>
 	<!-- Matomo -->
 	<script type="text/javascript">
 		var _paq = (window._paq = window._paq || []);
