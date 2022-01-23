@@ -13,9 +13,9 @@
 </script>
 
 <script lang="ts">
-	import GridGroup from '../../components/UI/Grid/GridGroup.svelte';
+	import GridGroup from '$lib/components/UI/Grid/GridGroup.svelte';
 	import { session } from '$app/stores';
-	import FilterBar from '../../components/UI/FilterBar.svelte';
+	import FilterBar from '$lib/components/UI/FilterBar.svelte';
 	import { onMount, beforeUpdate, afterUpdate } from 'svelte';
 	import lozad from 'lozad';
 
