@@ -28,6 +28,7 @@
   ],
   "dependencies": {
     "@directus/sdk": "^9.4",
+    "cookie": "^0.4.1",
     "lozad": "^1.14.0",
     "node-fetch": "^2.6.1"
   },
