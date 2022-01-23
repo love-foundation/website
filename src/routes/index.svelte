@@ -23,12 +23,7 @@
 				session.events = events;
 				return events;
 			});
-<<<<<<< HEAD
 	};
-=======
-		return { hubs };
-	}
->>>>>>> 7489148 (Move components to lib and fix imports)
 </script>
 
 <script lang="ts">
@@ -36,15 +31,9 @@
 	import Button from '$lib/components/UI/Button.svelte';
 	import Hub from '$lib/components/UI/Hub.svelte';
 	import { session } from '$app/stores';
-<<<<<<< HEAD
 	import type { Hubs } from '$lib/types';
 
 	export let hubs: Hubs[];
-=======
-	import type { HubObject } from 'src/global';
-
-	export let hubs: HubObject[];
->>>>>>> 7489148 (Move components to lib and fix imports)
 
 	let upcomingEvents = $session.events.filter((event) => new Date(event.starttime) >= new Date());
 	let image = {
@@ -99,11 +88,9 @@
 <section class="active-hubs row">
 	<h1>Active Love Hubs</h1>
 	<div class="columns is-multiline">
-		<!--
 		{#each hubs as hub}
 			<Hub {hub} />
 		{/each}
-		-->
 	</div>
 </section>
 <!-- Fix Me: Should be UI component, with properties for link and text -->
