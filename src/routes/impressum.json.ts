@@ -1,5 +1,5 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import { directus, status } from '../_directus';
+import { directus, status } from '$lib/_directus';
 
 export const get: RequestHandler = async () => {
 	const pageContent = await directus()
