@@ -1,14 +1,13 @@
+import type { MyCollections } from '$lib/types';
 import { Directus, PartialItem } from '@directus/sdk';
 
 // Query all assets on staging/development, but only published on production
 
-const status =
+export const status =
 	process.env.NODE_ENV === 'production' ? ['published'] : ['published', 'under_review', 'draft'];
-const directus = new Directus(process.env.DIRECTUS_URL);
-
-const authDirectus = async () => {
-	await directus.auth.static(process.env.DIRECTUS_TOKEN);
-};
+export const directus = new Directus<MyCollections>(process.env.DIRECTUS_URL, {
+	auth: { staticToken: process.env.DIRECTUS_TOKEN }
+});
 
 export async function fetchItems(
 	collection = '',
@@ -22,7 +21,6 @@ export async function fetchItems(
 			_in: status
 		}
 	};
-	await authDirectus();
 	try {
 		const raw = await directus.items(collection).readMany({
 			fields: fields,

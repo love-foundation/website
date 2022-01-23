@@ -1,4 +1,6 @@
 export interface Hubs {
+	active: boolean;
+	status: string;
 	city: string;
 	facebook: string;
 	instagram: string;
@@ -17,3 +19,8 @@ export interface Content {
 		heroColor: string | undefined;
 	};
 }
+
+type MyCollections = {
+	hubs: Hubs;
+	content: Content;
+};
