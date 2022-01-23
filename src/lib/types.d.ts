@@ -461,7 +461,6 @@ export type DirectusPanels = {
 	show_header: boolean;
 	note?: string;
 	type: string;
-<<<<<<< HEAD
 	position_x: number;
 	position_y: number;
 	width: number;
@@ -534,20 +533,4 @@ export type CustomDirectusTypes = {
 	directus_panels: DirectusPanels;
 	directus_notifications: DirectusNotifications;
 	directus_shares: DirectusShares;
-=======
-	details: {
-		text: string;
-		textLayout: string;
-		imageOne: string;
-		imageTwo: string;
-		padding: string;
-		captions: string;
-		heroColor: string | undefined;
-	};
-}
-
-type MyCollections = {
-	hubs: Hubs;
-	content: Content;
->>>>>>> 9d7dc90 (Rewrite hubs endpoint to directly use SKD for typescript support)
 };
