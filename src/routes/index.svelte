@@ -31,9 +31,9 @@
 	import Button from '$lib/components/UI/Button.svelte';
 	import Hub from '$lib/components/UI/Hub.svelte';
 	import { session } from '$app/stores';
-	import type { HubObject } from 'src/global';
+	import type { Hubs } from '$lib/types';
 
-	export let hubs: HubObject[];
+	export let hubs: Hubs[];
 
 	let upcomingEvents = $session.events.filter((event) => new Date(event.starttime) >= new Date());
 	let image = {
