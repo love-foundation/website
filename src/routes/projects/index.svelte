@@ -1,21 +1,32 @@
-<script context="module">
-	export function preload({ params, query }) {
-		const pageFilters = query;
-		return this.fetch(`projects.json`)
-			.then((r) => r.json())
-			.then((projects) => {
-				return { projects, pageFilters };
-			});
-	}
+<script context="module" lang="ts">
+	import type { Load } from '@sveltejs/kit';
+	export const load: Load = async ({ fetch }) => {
+		const url = '/projects.json';
+		const res = await fetch(url);
+
+		if (res.ok) {
+			const projects = await res.json();
+			return {
+				props: { projects }
+				// TODO: Fix pageFilters
+			};
+		}
+
+		return {
+			status: res.status,
+			error: new Error(`Could not load ${url}`)
+		};
+	};
 </script>
 
-<script>
+<script lang="ts">
 	import ProjectItem from '$lib/components/UI/ProjectItem.svelte';
 	import PillarBlob from '$lib/components/UI/PillarBlob.svelte';
 	import { fade } from 'svelte/transition';
 	import { beforeUpdate } from 'svelte';
+	import type { ConvertedProject } from './types';
 
-	export let projects;
+	export let projects: ConvertedProject[];
 	export let pageFilters;
 
 	let currentPillars = { ...pageFilters };
