@@ -13,14 +13,12 @@
 	let heroClass;
 	let bgColor: string | boolean;
 	let heading: string | boolean;
-	let image: string | boolean;
+	let image: string | null;
 	let bgImage;
 
 	if (content) {
 		bgColor = content.hero_background_color ? content.hero_background_color : false;
-		image = content.image
-			? `${import.meta.env.VITE_DIRECTUS_URL}assets/${content.image.id}`
-			: false;
+		image = content.image ? `${import.meta.env.VITE_DIRECTUS_URL}assets/${content.image.id}` : null;
 		heading = content.text ? content.text : false;
 	} else {
 		({ image, bgColor, heading } = { ...heroModuleProps });
@@ -44,7 +42,7 @@
 			<h1>{heading}</h1>
 		{/if}
 	</div>
-	<img src={image.toString()} alt="" />
+	<img src={image} alt="" />
 </div>
 
 <style lang="scss">

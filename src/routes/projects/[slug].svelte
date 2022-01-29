@@ -1,28 +1,37 @@
-<script context="module">
-	export async function preload({ params, query }) {
-		const res = await this.fetch(`/projects/${params.slug}.json`);
-		const data = await res.json();
+<script context="module" lang="ts">
+	export const load = async ({ fetch, params }) => {
+		const url = `/projects/${params.slug}.json`;
+		const res = await fetch(url);
 
-		if (res.status === 200) {
-			return { project: data[0] };
-		} else {
-			this.error(res.status, data.message);
+		if (res.ok) {
+			const project = await res.json();
+			return {
+				props: { project }
+			};
 		}
-	}
+
+		return {
+			status: res.status,
+			error: new Error(`Could not load ${url}`)
+		};
+	};
 </script>
 
-<script>
+<script lang="ts">
 	import HeroModule from '$lib/components/UI/ContentModules/HeroModule.svelte';
 	import Content from '$lib/components/UI/Content.svelte';
-	export let project;
+	import type { ConvertedSingleProject } from './types';
+	export let project: ConvertedSingleProject[];
 
-	let { name, imageUrl, content, pillar, heroColor } = project;
+	const { name, imageUrl, content, heroColor } = project[0];
 
-	let heroContent = {};
+	let heroContent = {
+		image: imageUrl,
+		heading: name,
+		bgColor: heroColor
+	};
 
-	heroContent.image = imageUrl;
-	heroContent.heading = name;
-	heroContent.bgColor = heroColor;
+	console.log(content);
 </script>
 
 <svelte:head>
