@@ -5,9 +5,9 @@
 		const res = await fetch(url);
 
 		if (res.ok) {
-			const impressum = await res.json();
+			const privacyPolicy = await res.json();
 			return {
-				props: { queriedContent: impressum }
+				props: { queriedContent: privacyPolicy }
 			};
 		}
 

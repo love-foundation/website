@@ -4,7 +4,8 @@ import fakeResponse from '../../cypress/fixtures/hubs.js';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const get: RequestHandler = async () => {
-	const callApi = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging';
+	const callApi =
+		import.meta.env.NODE_ENV === 'production' || import.meta.env.NODE_ENV === 'staging';
 
 	const hubs = callApi
 		? await directus()

@@ -2,7 +2,7 @@ import { fetchItems } from '$lib/_directus';
 
 import fakeResponse from '../../../cypress/fixtures/lovecasts.js';
 
-const callApi = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging';
+const callApi = import.meta.env.NODE_ENV === 'production' || import.meta.env.NODE_ENV === 'staging';
 
 let lovecasts;
 
@@ -20,7 +20,10 @@ export async function get(req, res, next) {
 						id: lovecast.id,
 						title: lovecast.name_of_the_set,
 						imageUrl: lovecast.design
-							? process.env.DIRECTUS_URL + 'assets/' + lovecast.design + '?key=event-poster'
+							? import.meta.env.VITE_DIRECTUS_URL +
+							  'assets/' +
+							  lovecast.design +
+							  '?key=event-poster'
 							: 'placeholder_lovecasts.png',
 						soundcloud: lovecast.soundcloud_link
 					}))
