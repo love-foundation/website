@@ -181,7 +181,7 @@ export type Pages = {
 	name?: string;
 	slug?: string;
 	hero_background_color?: string;
-	content: string;
+	content: Content;
 };
 
 export type Projects = {

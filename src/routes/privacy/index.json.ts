@@ -1,5 +1,6 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import { directus, status } from '$lib/_directus';
+import type { Content } from '$lib/types';
 
 export const get: RequestHandler = async () => {
 	const pageContent = await directus()
@@ -15,7 +16,7 @@ export const get: RequestHandler = async () => {
 		});
 
 	const privacyPolicy = pageContent.data.flatMap((item) => {
-		const content = item.content[0]; //We know there is only one content item here.
+		const content: Content = item.content[0]; //We know there is only one content item here.
 		console.log(content);
 		return {
 			id: content.id,
