@@ -23,7 +23,7 @@
 		progress = y / (docHeight - winHeight);
 	}
 
-	let siteId = process.env.NODE_ENV === 'production' ? 2 : 1;
+	let siteId = import.meta.env.NODE_ENV === 'production' ? 2 : 1;
 </script>
 
 <svelte:head>

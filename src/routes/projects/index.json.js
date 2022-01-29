@@ -2,7 +2,7 @@ import { fetchItems } from '$lib/_directus';
 
 import fakeResponse from '../../../cypress/fixtures/projects.js';
 
-const callApi = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging';
+const callApi = import.meta.env.NODE_ENV === 'production' || import.meta.env.NODE_ENV === 'staging';
 
 let projects;
 
@@ -21,7 +21,7 @@ export async function get(req, res, next) {
 						id: project.id,
 						name: project.name,
 						imageUrl: project.main_image
-							? process.env.DIRECTUS_URL + 'assets/' + project.main_image.id
+							? import.meta.env.VITE_DIRECTUS_URL + 'assets/' + project.main_image.id
 							: 'placeholder_projects.jpeg',
 						pillar: project.pillar,
 						country: project.location_country,

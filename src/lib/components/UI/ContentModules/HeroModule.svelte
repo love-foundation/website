@@ -18,7 +18,7 @@
 
 	if (content) {
 		bgColor = content.hero_background_color ? content.hero_background_color : false;
-		image = content.image ? `${process.env.VITE_DIRECTUS_URL}assets/${content.image}` : false;
+		image = content.image ? `${import.meta.env.VITE_DIRECTUS_URL}assets/${content.image}` : false;
 		heading = content.text ? content.text : false;
 	} else {
 		({ image, bgColor, heading } = { ...heroModuleProps });

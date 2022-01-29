@@ -17,7 +17,7 @@ steps:
     pull: always
     environment:
       CYPRESS_CACHE_FOLDER: .cypress
-      DIRECTUS_URL:
+      VITE_DIRECTUS_URL:
         from_secret: directus_url_new
       DIRECTUS_TOKEN:
         from_secret: directus_token_new
@@ -28,7 +28,7 @@ steps:
     image: node:12
     pull: always
     environment:
-      DIRECTUS_URL:
+      VITE_DIRECTUS_URL:
         from_secret: directus_url_new
       DIRECTUS_TOKEN:
         from_secret: directus_token_new
@@ -69,7 +69,7 @@ steps:
     image: node:12
     pull: always
     environment:
-      DIRECTUS_URL:
+      VITE_DIRECTUS_URL:
         from_secret: directus_url_new
       DIRECTUS_TOKEN:
         from_secret: directus_token_new
@@ -126,7 +126,7 @@ steps:
     pull: always
     environment:
       CYPRESS_CACHE_FOLDER: .cypress
-      DIRECTUS_URL:
+      VITE_DIRECTUS_URL:
         from_secret: directus_url_new
       DIRECTUS_TOKEN:
         from_secret: directus_token_new
@@ -137,7 +137,7 @@ steps:
     image: node:12
     pull: always
     environment:
-      DIRECTUS_URL:
+      VITE_DIRECTUS_URL:
         from_secret: directus_url_new
       DIRECTUS_TOKEN:
         from_secret: directus_token_new

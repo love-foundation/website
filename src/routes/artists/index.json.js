@@ -5,7 +5,8 @@ import fakeResponse from '../../../cypress/fixtures/artists.js';
 export async function get(req, res, next) {
 	let artists;
 
-	const callApi = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging';
+	const callApi =
+		import.meta.env.NODE_ENV === 'production' || import.meta.env.NODE_ENV === 'staging';
 
 	if (callApi) {
 		const artists = await fetchItems(
@@ -23,7 +24,7 @@ export async function get(req, res, next) {
 						slug: artist.slug,
 						name: artist.artist_name,
 						imageUrl: artist.image
-							? process.env.DIRECTUS_URL + 'assets/' + artist.image + '?key=artist-square'
+							? import.meta.env.VITE_DIRECTUS_URL + 'assets/' + artist.image + '?key=artist-square'
 							: 'placeholder_artists.png',
 						location: artist.current_location,
 						category: artist.type_of_art

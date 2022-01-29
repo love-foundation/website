@@ -11,9 +11,9 @@
 	let fullWidth;
 	let double;
 
-	imageOne = content.image ? `${process.env.VITE_DIRECTUS_URL}assets/${content.image}` : null;
+	imageOne = content.image ? `${import.meta.env.VITE_DIRECTUS_URL}assets/${content.image}` : null;
 	imageTwo = content.image_two
-		? `${process.env.VITE_DIRECTUS_URL}assets/${content.image_two}`
+		? `${import.meta.env.VITE_DIRECTUS_URL}assets/${content.image_two}`
 		: null;
 	imageOneCaption = content.captions ? content.captions.imageOneCaption : null;
 	imageTwoCaption = content.captions ? content.captions.imageTwoCaption : null;

@@ -18,7 +18,7 @@ export async function get(req, res, next) {
 					name: a.artist_name,
 					slug: a.slug,
 					image: a.image
-						? process.env.DIRECTUS_URL + 'assets/' + a.image + '?key=artist-square'
+						? import.meta.env.VITE_DIRECTUS_URL + 'assets/' + a.image + '?key=artist-square'
 						: 'placeholder_artists.png',
 					status: a.level_of_involvement,
 					location: a.current_location,
@@ -31,7 +31,7 @@ export async function get(req, res, next) {
 						slug: event.events_id.slug,
 						title: event.events_id.name,
 						imageUrl: event.events_id.poster
-							? process.env.DIRECTUS_URL +
+							? import.meta.env.VITE_DIRECTUS_URL +
 							  'assets/' +
 							  event.events_id.poster.id +
 							  '?key=event-poster'

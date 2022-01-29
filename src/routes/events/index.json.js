@@ -6,7 +6,8 @@ import fakeResponse from '../../../cypress/fixtures/events.js';
 export async function get(req, res, next) {
 	let events;
 
-	const callApi = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging';
+	const callApi =
+		import.meta.env.NODE_ENV === 'production' || import.meta.env.NODE_ENV === 'staging';
 
 	if (callApi) {
 		const events = await fetchItems(
@@ -23,7 +24,7 @@ export async function get(req, res, next) {
 						slug: event.slug,
 						title: event.name,
 						imageUrl: event.poster
-							? process.env.DIRECTUS_URL + 'assets/' + event.poster + '?key=event-poster'
+							? import.meta.env.VITE_DIRECTUS_URL + 'assets/' + event.poster + '?key=event-poster'
 							: 'placeholder_events.png',
 						hub: event.hubs[0] && event.hubs[0].hubs_id ? event.hubs[0].hubs_id.city : null,
 						category: event.event_type,

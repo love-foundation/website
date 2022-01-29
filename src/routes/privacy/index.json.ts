@@ -15,20 +15,7 @@ export const get: RequestHandler = async (): Promise<unknown> => {
 			}
 		});
 
-	const privacyPolicy = pageContent.data.flatMap((item) => {
-		const content: ContentCollection = item.content[0]; //We know there is only one content item here.
-		return {
-			id: content.id,
-			type: content.type,
-			text: content.text,
-			textLayout: content.text_layout,
-			imageOne: content.image,
-			imageTwo: content.image_two,
-			padding: content.distance_to_next,
-			captions: content.captions,
-			heroColor: content.hero_background_color || null
-		};
-	});
+	const privacyPolicy = pageContent.data[0].content;
 	if (privacyPolicy) {
 		return {
 			body: privacyPolicy

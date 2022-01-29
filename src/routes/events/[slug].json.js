@@ -23,7 +23,7 @@ export async function get(req, res, next) {
 					category: e.event_type,
 					location: e.location,
 					imageUrl: e.poster
-						? process.env.DIRECTUS_URL + 'assets/' + e.poster + '?key=event-poster'
+						? import.meta.env.VITE_DIRECTUS_URL + 'assets/' + e.poster + '?key=event-poster'
 						: 'placeholder_events.png',
 					heroColor: e.hero_background_color || null,
 					artists: artists.map((artist) => ({
@@ -31,7 +31,7 @@ export async function get(req, res, next) {
 						slug: artist.artists_id.slug,
 						name: artist.artists_id.artist_name,
 						imageUrl: artist.artists_id.image
-							? process.env.DIRECTUS_URL +
+							? import.meta.env.VITE_DIRECTUS_URL +
 							  'assets/' +
 							  artist.artists_id.image.id +
 							  '?key=artist-square'
