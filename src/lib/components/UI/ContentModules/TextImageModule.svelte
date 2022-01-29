@@ -9,7 +9,9 @@
 	let text;
 	let type;
 
-	imageOne = content.image ? `${import.meta.env.VITE_DIRECTUS_URL}assets/${content.image}` : null;
+	imageOne = content.image
+		? `${import.meta.env.VITE_DIRECTUS_URL}assets/${content.image.id}`
+		: null;
 	caption = content.captions ? content.captions.imageOneCaption : null;
 	text = content.text;
 	type = content.type == 'image_left' ? '_left' : '_right';
