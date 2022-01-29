@@ -28,7 +28,7 @@
 	<title>{event.name}</title>
 </svelte:head>
 
-<HeroModule content={heroContent} />
+<HeroModule heroModuleProps={heroContent} />
 <div class="head">
 	<h1>{event.name}</h1>
 </div>
