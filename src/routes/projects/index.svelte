@@ -1,6 +1,5 @@
 <script context="module" lang="ts">
-	import type { Load } from '@sveltejs/kit';
-	export const load: Load = async ({ fetch }) => {
+	export const load = async ({ fetch }) => {
 		const url = '/projects.json';
 		const res = await fetch(url);
 
@@ -24,9 +23,9 @@
 	import PillarBlob from '$lib/components/UI/PillarBlob.svelte';
 	import { fade } from 'svelte/transition';
 	import { beforeUpdate } from 'svelte';
-	import type { ConvertedProject } from './types';
+	import type { ConvertedProjectForIndex } from './types';
 
-	export let projects: ConvertedProject[];
+	export let projects: ConvertedProjectForIndex[];
 	export let pageFilters;
 
 	let currentPillars = { ...pageFilters };

@@ -197,11 +197,11 @@ export type Projects = {
 	contact_main_partner_organisation?: string;
 	short_description?: string;
 	project_info?: string;
-	main_image?: string;
+	main_image?: DirectusFiles;
 	pillar?: string;
 	slug?: string;
 	hero_background_color?: string;
-	content: string;
+	content: ContentCollection[];
 	events_that_donated: string;
 };
 
