@@ -20,7 +20,7 @@ export type Artists = {
 	events: string;
 };
 
-export type Content = {
+export type ContentCollection = {
 	id: number;
 	status?: string;
 	created_by?: string;
@@ -181,7 +181,7 @@ export type Pages = {
 	name?: string;
 	slug?: string;
 	hero_background_color?: string;
-	content: Content;
+	content: ContentCollection;
 };
 
 export type Projects = {
@@ -499,7 +499,7 @@ export type DirectusShares = {
 
 export type CustomDirectusTypes = {
 	artists: Artists;
-	content: Content;
+	content: ContentCollection;
 	events: Events;
 	events_artists: EventsArtists;
 	events_directus_files: EventsDirectusFiles;
