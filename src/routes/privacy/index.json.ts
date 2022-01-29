@@ -29,7 +29,6 @@ export const get: RequestHandler = async (): Promise<unknown> => {
 			heroColor: content.hero_background_color || null
 		};
 	});
-	console.log(privacyPolicy);
 	if (privacyPolicy) {
 		return {
 			body: privacyPolicy

@@ -34,7 +34,7 @@ export type ContentCollection = {
 	text_layout?: string;
 	content_label?: string;
 	distance_to_next?: string;
-	captions?: unknown;
+	captions?: { imageOneCaption?: string; imageTwoCaption?: string };
 	content_for_project?: number;
 	hero_background_color?: string;
 };
