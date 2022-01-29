@@ -1,6 +1,9 @@
 import type { CustomDirectusTypes } from '$lib/types';
 import { Directus, PartialItem } from '@directus/sdk';
 
+export const callApi =
+	import.meta.env.NODE_ENV === 'production' || import.meta.env.NODE_ENV === 'staging';
+
 // Query all assets on staging/development, but only published on production
 
 export const status =

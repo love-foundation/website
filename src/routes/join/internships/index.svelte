@@ -1,18 +1,29 @@
-<script context="module">
-	export function preload({ params, query }) {
-		return this.fetch(`join/internships.json`)
-			.then((r) => r.json())
-			.then((queriedContent) => {
-				return { queriedContent };
-			});
-	}
+<script context="module" lang="ts">
+	import type { Load } from '@sveltejs/kit';
+	export const load: Load = async ({ fetch }) => {
+		const url = '/join/internships.json';
+		const res = await fetch(url);
+
+		if (res.ok) {
+			const internships = await res.json();
+			return {
+				props: { queriedContent: internships }
+			};
+		}
+
+		return {
+			status: res.status,
+			error: new Error(`Could not load ${url}`)
+		};
+	};
 </script>
 
-<script>
+<script lang="ts">
 	import Button from '$lib/components/UI/Button.svelte';
 	import Content from '$lib/components/UI/Content.svelte';
+	import type { ContentCollection } from '$lib/types';
 
-	export let queriedContent;
+	export let queriedContent: ContentCollection[];
 </script>
 
 <svelte:head>
