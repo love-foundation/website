@@ -13,7 +13,7 @@ export type Artists = {
 	other_links?: string;
 	booking_contact?: string;
 	type_of_art?: string;
-	image?: string;
+	image?: DirectusFiles;
 	artist_name?: string;
 	hero_background_color?: string;
 	slug?: string;
@@ -27,9 +27,9 @@ export type ContentCollection = {
 	created_on?: string;
 	on_page?: number;
 	text?: string;
-	image?: string;
+	image?: DirectusFiles;
 	type?: string;
-	image_two?: string;
+	image_two?: DirectusFiles;
 	sort?: number;
 	text_layout?: string;
 	content_label?: string;
@@ -48,7 +48,7 @@ export type Events = {
 	modified_by?: string;
 	modified_on?: string;
 	name?: string;
-	poster?: string;
+	poster?: DirectusFiles;
 	designer?: string;
 	location?: string;
 	startdatetime?: string;
