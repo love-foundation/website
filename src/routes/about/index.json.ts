@@ -1,7 +1,5 @@
 import { directus, status, callApi } from '$lib/_directus';
 import type { RequestHandler } from '@sveltejs/kit';
-import fs from 'fs';
-
 import fakeResponse from '../../../cypress/fixtures/about.js';
 
 export const get: RequestHandler = async () => {
