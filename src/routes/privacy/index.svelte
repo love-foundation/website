@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
 	import type { Load } from '@sveltejs/kit';
 	export const load: Load = async ({ fetch }) => {
-		const url = '/impressum.json';
+		const url = '/privacy.json';
 		const res = await fetch(url);
 
 		if (res.ok) {
@@ -19,8 +19,8 @@
 </script>
 
 <script lang="ts">
-	import Content from '$lib/components/UI/Content.svelte';
 	import type { ContentCollection } from '$lib/types';
+	import Content from '$lib/components/UI/Content.svelte';
 	export let queriedContent: ContentCollection[];
 </script>
 

@@ -19,8 +19,8 @@
 </script>
 
 <script lang="ts">
-	import Content from '$lib/components/UI/Content.svelte';
 	import type { ContentCollection } from '$lib/types';
+	import Content from '$lib/components/UI/Content.svelte';
 	export let queriedContent: ContentCollection[];
 </script>
 
