@@ -29,6 +29,6 @@
 	<title>Projects &mdash; {name}</title>
 </svelte:head>
 
-<HeroModule content={heroContent} />
+<HeroModule heroModuleProps={heroContent} />
 
 <Content queriedContent={content} />

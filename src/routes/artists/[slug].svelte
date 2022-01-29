@@ -40,7 +40,7 @@
 	<title>Artists &mdash; {name}</title>
 </svelte:head>
 
-<HeroModule content={heroContent} />
+<HeroModule heroModuleProps={heroContent} />
 <div class="head">
 	<h1>{name}</h1>
 </div>
