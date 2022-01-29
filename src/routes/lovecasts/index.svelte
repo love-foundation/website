@@ -1,19 +1,29 @@
-<script context="module">
-	export function preload({ params, query }) {
-		return this.fetch(`lovecasts.json`)
-			.then((r) => r.json())
-			.then((lovecasts) => {
-				return { lovecasts };
-			});
-	}
+<script context="module" lang="ts">
+	export const load = async ({ fetch }) => {
+		const url = '/lovecasts.json';
+		const res = await fetch(url);
+
+		if (res.ok) {
+			const lovecasts = await res.json();
+			return {
+				props: { lovecasts }
+			};
+		}
+
+		return {
+			status: res.status,
+			error: new Error(`Could not load ${url}`)
+		};
+	};
 </script>
 
-<script>
+<script lang="ts">
 	import GridGroup from '$lib/components/UI/Grid/GridGroup.svelte';
 	import lozad from 'lozad';
 	import { onMount } from 'svelte';
+	import type { ConvertedLovecast } from './types';
 
-	export let lovecasts;
+	export let lovecasts: ConvertedLovecast[];
 
 	let lovecastsArray = lovecasts;
 	let lovecastGroups = [];
