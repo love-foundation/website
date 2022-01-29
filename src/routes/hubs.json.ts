@@ -1,12 +1,8 @@
-import { directus, status } from '$lib/_directus';
-
+import { directus, status, callApi } from '$lib/_directus';
 import fakeResponse from '../../cypress/fixtures/hubs.js';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const get: RequestHandler = async () => {
-	const callApi =
-		import.meta.env.NODE_ENV === 'production' || import.meta.env.NODE_ENV === 'staging';
-
 	const hubs = callApi
 		? await directus()
 				.items('hubs')
@@ -20,9 +16,11 @@ export const get: RequestHandler = async () => {
 					}
 				})
 		: fakeResponse;
-	if (hubs) {
+
+	const hubData = hubs.data[0];
+	if (hubData) {
 		return {
-			body: hubs
+			body: hubData
 		};
 	}
 
