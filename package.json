@@ -28,14 +28,15 @@
     "last 2 safari versions"
   ],
   "dependencies": {
-    "node-fetch": "^2.6.1",
+    "@directus/sdk": "^9.4.3",
     "cookie": "^0.4.1",
     "lozad": "^1.16.0",
-    "@directus/sdk": "^9.4.3"
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "@beyonk/gdpr-cookie-consent-banner": "^9.0.3",
-    "@sveltejs/adapter-auto": "next",
+    "@sveltejs/adapter-node": "^1.0.0-next.67",
+    "@sveltejs/adapter-static": "^1.0.0-next.26",
     "@sveltejs/kit": "next",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
