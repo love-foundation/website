@@ -1,20 +1,31 @@
-<script context="module">
-	export function preload({ params, query }) {
-		return this.fetch(`artists.json`)
-			.then((r) => r.json())
-			.then((artists) => {
-				return { artists };
-			});
-	}
+<script context="module" lang="ts">
+	export const load: Load = async ({ fetch }) => {
+		const fetchUrl = '/artists.json';
+		const res = await fetch(fetchUrl);
+		if (res.ok) {
+			const artists = await res.json();
+			return {
+				props: {
+					artists
+				}
+			};
+		}
+
+		return {
+			status: res.status,
+			error: new Error(`Could not load ${fetchUrl}`)
+		};
+	};
 </script>
 
-<script>
+<script lang="ts">
 	import ArtistItem from '$lib/components/UI/ArtistItem.svelte';
 	import {
 		shuffleArray,
 		updateClass,
 		setTransitionDuration
 	} from '$lib/helpers/sharedFunctions.js';
+	import type { Load } from '@sveltejs/kit';
 	import Fuse from 'fuse.js';
 	import lozad from 'lozad';
 	import { onMount } from 'svelte';
