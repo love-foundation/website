@@ -1,15 +1,25 @@
-<script lang="ts" context="module">
-	export async function preload(session) {
-		const events = await this.fetch(`events.json`)
-			.then((r) => r.json())
-			.then((events) => {
-				session.events = events;
-				return events;
-			});
-		const pageFilters = session.query;
+<script context="module" lang="ts">
+	export const load: Load = async ({ fetch, url }) => {
+		const fetchUrl = '/events.json';
+		const res = await fetch(fetchUrl);
+		if (res.ok) {
+			const events = await res.json();
+			return {
+				props: {
+					events,
+					pageFilters: {
+						hub: url.searchParams.get('hub'),
+						category: url.searchParams.get('category')
+					}
+				}
+			};
+		}
 
-		return { pageFilters };
-	}
+		return {
+			status: res.status,
+			error: new Error(`Could not load ${url}`)
+		};
+	};
 </script>
 
 <script lang="ts">
@@ -18,10 +28,11 @@
 	import FilterBar from '$lib/components/UI/FilterBar.svelte';
 	import { onMount, beforeUpdate, afterUpdate } from 'svelte';
 	import lozad from 'lozad';
-
+	import type { Load } from '@sveltejs/kit';
+	export let events;
 	export let pageFilters;
 
-	let events = $session.events;
+	// TODO: let events = $session.events;
 	let eventsArray = events;
 	let eventGroups = [];
 	let len;
