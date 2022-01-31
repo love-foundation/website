@@ -24,7 +24,6 @@
 
 <script lang="ts">
 	import GridGroup from '$lib/components/UI/Grid/GridGroup.svelte';
-	import { session } from '$app/stores';
 	import FilterBar from '$lib/components/UI/FilterBar.svelte';
 	import { onMount, beforeUpdate, afterUpdate } from 'svelte';
 	import lozad from 'lozad';
@@ -32,7 +31,6 @@
 	export let events;
 	export let pageFilters;
 
-	// TODO: let events = $session.events;
 	let eventsArray = events;
 	let eventGroups = [];
 	let len;
