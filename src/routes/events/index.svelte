@@ -1,16 +1,12 @@
 <script context="module" lang="ts">
-	export const load: Load = async ({ fetch, url }) => {
+	export const load: Load = async ({ fetch }) => {
 		const fetchUrl = '/events.json';
 		const res = await fetch(fetchUrl);
 		if (res.ok) {
 			const events = await res.json();
 			return {
 				props: {
-					events,
-					pageFilters: {
-						hub: url.searchParams.get('hub'),
-						category: url.searchParams.get('category')
-					}
+					events
 				}
 			};
 		}
@@ -28,8 +24,15 @@
 	import { onMount, beforeUpdate, afterUpdate } from 'svelte';
 	import lozad from 'lozad';
 	import type { Load } from '@sveltejs/kit';
+	import { page } from '$app/stores';
 	export let events;
-	export let pageFilters;
+	const pageFilters: {
+		hub?: string | undefined;
+		category?: string | undefined;
+	} = {
+		hub: $page.url.searchParams.get('hub'),
+		category: $page.url.searchParams.get('category')
+	};
 
 	let eventsArray = events;
 	let eventGroups = [];
@@ -52,6 +55,8 @@
 	onMount(() => {
 		const observer = lozad();
 		observer.observe();
+		pageFilters.category = $page.url.searchParams.get('category');
+		pageFilters.hub = $page.url.searchParams.get('hub');
 	});
 
 	beforeUpdate(() => {

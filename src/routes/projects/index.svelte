@@ -1,12 +1,12 @@
 <script context="module" lang="ts">
-	export const load: Load = async ({ fetch, url }) => {
+	export const load: Load = async ({ fetch }) => {
 		const fetchUrl = '/projects.json';
 		const res = await fetch(fetchUrl);
 
 		if (res.ok) {
 			const projects = await res.json();
 			return {
-				props: { projects, pageFilters: { pillar: url.searchParams.get('pillar') } }
+				props: { projects }
 			};
 		}
 
@@ -21,12 +21,19 @@
 	import ProjectItem from '$lib/components/UI/ProjectItem.svelte';
 	import PillarBlob from '$lib/components/UI/PillarBlob.svelte';
 	import { fade } from 'svelte/transition';
-	import { beforeUpdate } from 'svelte';
+	import { beforeUpdate, onMount } from 'svelte';
 	import type { ConvertedProjectForIndex } from './_types';
 	import type { Load } from '@sveltejs/kit';
+	import { page } from '$app/stores';
 
 	export let projects: ConvertedProjectForIndex[];
-	export let pageFilters;
+	const pageFilters: {
+		pillar?: string;
+	} = { pillar: $page.url.searchParams.get('pillar') };
+
+	onMount(() => {
+		pageFilters.pillar = $page.url.searchParams.get('pillar');
+	});
 
 	let currentPillars = { ...pageFilters };
 	let projectsArray = projects;
