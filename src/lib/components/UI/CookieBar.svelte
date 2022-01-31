@@ -1,19 +1,16 @@
 <script lang="ts">
 	import '@beyonk/gdpr-cookie-consent-banner/dist/style.css'; // optional, you can also define your own styles
 	import GdprBanner from '@beyonk/gdpr-cookie-consent-banner';
-	import cookie from 'cookie';
-
-	// TODO: Fix cookieconset
+	import { session } from '$app/stores';
 
 	function initNecessary() {
-		return;
+		$session.cookieConsent.necessary = true;
 	}
 
 	let choices = {
 		necessary: {
 			label: 'Necessary cookies',
-			description:
-				'Used for cookie control and scripts that enable the general functionality of the site',
+			description: 'Used for cookie control and usage of the donation form',
 			value: true
 		},
 		tracking: false,
