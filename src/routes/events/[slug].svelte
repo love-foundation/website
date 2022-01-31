@@ -1,36 +1,48 @@
-<script context="module">
-	export async function preload({ params, query }) {
-		const res = await this.fetch(`/events/${params.slug}.json`);
-		const data = await res.json();
+<script context="module" lang="ts">
+	export const load: Load = async ({ fetch, params }) => {
+		const url = `/events/${params.slug}.json`;
+		const res = await fetch(url);
 
-		if (res.status === 200) {
-			return { event: data[0] };
-		} else {
-			this.error(res.status, data.message);
+		if (res.ok) {
+			const event = await res.json();
+			return {
+				props: { event }
+			};
 		}
-	}
+
+		return {
+			status: res.status,
+			error: new Error(`Could not load ${url}`)
+		};
+	};
 </script>
 
-<script>
+<script lang="ts">
 	import HeroModule from '$lib/components/UI/ContentModules/HeroModule.svelte';
 	import ArtistItem from '$lib/components/UI/ArtistItem.svelte';
 	import { normalizeEventDate, normalizeTime } from '$lib/helpers/sharedFunctions';
+	import type { Load } from '@sveltejs/kit';
+	import type { ConvertedSingleEvent } from './types';
 
-	export let event;
+	export let event: ConvertedSingleEvent;
 
-	let heroContent = {};
+	let heroContent: {
+		image?: string;
+		bgColor?: string;
+		heading?: string;
+	} = {};
 
-	heroContent.image = event.imageUrl;
-	heroContent.bgColor = event.heroColor;
+	heroContent.image = event[0]?.imageUrl;
+	heroContent.bgColor = event[0]?.heroColor;
 </script>
 
 <svelte:head>
-	<title>{event.name}</title>
+	<title>{event[0]?.name}</title>
 </svelte:head>
 
 <HeroModule heroModuleProps={heroContent} />
 <div class="head">
-	<h1>{event.name}</h1>
+	<h1>{event[0]?.name}</h1>
 </div>
 <div class="info">
 	<div class="columns is-vertical is-multiline is-centered">
@@ -38,45 +50,45 @@
 			<h2>
 				Hub:
 				<br />
-				{event.hub}
+				{event[0]?.hub}
 			</h2>
 		</div>
 		<div class="column is-4">
 			<h2>
 				Location:
 				<br />
-				{event.location}
+				{event[0]?.location}
 			</h2>
 		</div>
 		<div class="column is-4">
 			<h2 class="capitalized">
 				Genre:
 				<br />
-				{event.category}
+				{event[0]?.category}
 			</h2>
 		</div>
 		<div class="column">
 			<h2>
 				Start:
 				<br />
-				{normalizeEventDate(event.starttime, true)}
+				{normalizeEventDate(event[0]?.starttime, true)}
 			</h2>
 		</div>
 		<div class="column">
 			<h2>
 				End:
 				<br />
-				{normalizeEventDate(event.endtime, true)}
+				{normalizeEventDate(event[0]?.endtime, true)}
 			</h2>
 		</div>
 		<div class="column is-4" />
 	</div>
 </div>
 
-{#if event.artists.length}
+{#if event[0]?.artists.length}
 	<h2 class="centered">Artists that supported this event</h2>
 	<div class="columns is-multiline">
-		{#each event.artists as artist}
+		{#each event[0]?.artists as artist}
 			<ArtistItem {artist} />
 		{/each}
 	</div>

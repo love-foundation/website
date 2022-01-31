@@ -77,8 +77,12 @@ export type Events = {
 	human_power: string;
 	logo_of_other_collectives_involved: string;
 	upload_inspiration: string;
-	hubs: string;
-	artists: string;
+	hubs: Hubs[];
+	artists: {
+		id: number;
+		events_id?: number;
+		artists_id?: Artists;
+	}[];
 	design_info: string;
 	design_assets: string;
 	event_info: string;
