@@ -5,7 +5,7 @@ export default {
 			name: 'How I Met Your Lover part 2',
 			poster: null,
 			event_type: 'party',
-			startdatetime: '2021-12-20T22:00:10',
+			startdatetime: '2025-12-20T22:00:10',
 			slug: 'how-i-met-your-lover-2',
 			hubs: [
 				{
