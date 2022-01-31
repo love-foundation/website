@@ -1,12 +1,11 @@
-<script>
+<script lang="ts">
 	import { fly } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 	import VanishingHeader from './VanishingHeader.svelte';
-
-	export let segment;
+	import { page } from '$app/stores';
 
 	let navActive = false;
-
+	$: segment = $page.url.pathname ? $page.url.pathname.split('/')[1] : undefined;
 	function toggleNav() {
 		navActive = !navActive;
 	}
