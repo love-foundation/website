@@ -21,7 +21,7 @@
 	import GridGroup from '$lib/components/UI/Grid/GridGroup.svelte';
 	import lozad from 'lozad';
 	import { onMount } from 'svelte';
-	import type { ConvertedLovecast } from './types';
+	import type { ConvertedLovecast } from './_types';
 
 	export let lovecasts: ConvertedLovecast[];
 

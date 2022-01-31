@@ -20,7 +20,7 @@
 <script lang="ts">
 	import HeroModule from '$lib/components/UI/ContentModules/HeroModule.svelte';
 	import Content from '$lib/components/UI/Content.svelte';
-	import type { ConvertedSingleProject } from './types';
+	import type { ConvertedSingleProject } from './_types';
 	export let project: ConvertedSingleProject[];
 
 	const { name, imageUrl, content, heroColor } = project[0];

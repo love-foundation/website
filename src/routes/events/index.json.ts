@@ -2,7 +2,7 @@ import { directus, status, callApi } from '$lib/_directus';
 
 import fakeResponse from '../../../cypress/fixtures/events.js';
 import type { RequestHandler } from '@sveltejs/kit';
-import type { ConvertedIndexEvents } from './types.js';
+import type { ConvertedIndexEvents } from './_types.js';
 export const get: RequestHandler = async () => {
 	const events = callApi
 		? await directus()

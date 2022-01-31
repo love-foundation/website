@@ -22,7 +22,7 @@
 	import ArtistItem from '$lib/components/UI/ArtistItem.svelte';
 	import { normalizeEventDate, normalizeTime } from '$lib/helpers/sharedFunctions';
 	import type { Load } from '@sveltejs/kit';
-	import type { ConvertedSingleEvent } from './types';
+	import type { ConvertedSingleEvent } from './_types';
 
 	export let event: ConvertedSingleEvent;
 

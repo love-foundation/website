@@ -1,5 +1,6 @@
 <script lang="ts">
 	// TODO fix cookies here!
+	import { session } from '$app/stores';
 
 	$: necessaryAccepted = $session.cookieConsent.necessary;
 </script>

@@ -1,6 +1,6 @@
 import { callApi, directus, status } from '$lib/_directus';
 import type { RequestHandler } from '@sveltejs/kit';
-import type { ConvertedSingleProject } from './types';
+import type { ConvertedSingleProject } from './_types';
 
 export const get: RequestHandler = async ({ params }) => {
 	const project = await directus()
