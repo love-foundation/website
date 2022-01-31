@@ -13,7 +13,7 @@
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "export:production": "sapper export --timeout 100000",
-    "cy:run": "cypress run --browser chrome --headless",
+    "cy:run": "cypress run --headless",
     "cy:open": "cypress open",
     "test": "run-p --race dev cy:run",
     "test-dev": "run-p --race dev cy:open"
@@ -41,7 +41,7 @@
     "@typescript-eslint/parser": "^4.31.1",
     "autoprefixer": "^10.4.2",
     "bulma": "^0.9.3",
-    "cypress": "^9.3.1",
+    "cypress": "^9.4.1",
     "dotenv": "^8.2.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
