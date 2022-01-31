@@ -33,7 +33,7 @@ export const get: RequestHandler = async ({ params }) => {
 		return {
 			name: name,
 			slug: slug,
-			hub: hubs[0] ? hubs[0].city : null,
+			hub: hubs[0] ? hubs[0].hubs_id.city : null,
 			starttime: startdatetime,
 			endtime: enddatetime,
 			category: event_type,
