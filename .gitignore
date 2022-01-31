@@ -3,6 +3,7 @@
 
 # Sveltekit
 .svelte-kit/
+build/
 
 # Artifacts
 .now
