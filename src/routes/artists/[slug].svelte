@@ -1,19 +1,26 @@
-<script context="module">
-	export async function preload({ params, query }) {
-		const res = await this.fetch(`/artists/${params.slug}.json`);
-		const data = await res.json();
+<script context="module" lang="ts">
+	export const load: Load = async ({ fetch, params }) => {
+		const url = `/artists/${params.slug}.json`;
+		const res = await fetch(url);
 
-		if (res.status === 200) {
-			return { artist: data[0] };
-		} else {
-			this.error(res.status, data.message);
+		if (res.ok) {
+			const artist = await res.json();
+			return {
+				props: { artist }
+			};
 		}
-	}
+
+		return {
+			status: res.status,
+			error: new Error(`Could not load ${url}`)
+		};
+	};
 </script>
 
-<script>
+<script lang="ts">
 	import HeroModule from '$lib/components/UI/ContentModules/HeroModule.svelte';
 	import GridItem from '$lib/components/UI/Grid/GridItem.svelte';
+	import type { Load } from '@sveltejs/kit';
 
 	export let artist;
 
@@ -25,7 +32,11 @@
 
 	let { name, image, location, category, status, soundcloud, facebook, events, heroColor } = artist;
 
-	let heroContent = {};
+	let heroContent: {
+		image?: string;
+		bgColor?: string;
+		heading?: string;
+	} = {};
 
 	heroContent.image = image;
 	heroContent.bgColor = heroColor;

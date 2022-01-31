@@ -17,7 +17,11 @@ export type Artists = {
 	artist_name?: string;
 	hero_background_color?: string;
 	slug?: string;
-	events: string;
+	events: {
+		id: number;
+		events_id?: PartialItem<Events>;
+		artists_id?: PartialItem<Artists>;
+	}[];
 };
 
 export type ContentCollection = {
@@ -77,11 +81,15 @@ export type Events = {
 	human_power: string;
 	logo_of_other_collectives_involved: string;
 	upload_inspiration: string;
-	hubs: Hubs[];
+	hubs: {
+		id: number;
+		events_id?: number;
+		hubs_id?: PartialItem<Hubs>;
+	}[];
 	artists: {
 		id: number;
 		events_id?: number;
-		artists_id?: Artists;
+		artists_id?: PartialItem<Artists>;
 	}[];
 	design_info: string;
 	design_assets: string;
