@@ -1,19 +1,18 @@
 <script context="module" lang="ts">
-	export const load = async ({ fetch }) => {
-		const url = '/projects.json';
-		const res = await fetch(url);
+	export const load: Load = async ({ fetch, url }) => {
+		const fetchUrl = '/projects.json';
+		const res = await fetch(fetchUrl);
 
 		if (res.ok) {
 			const projects = await res.json();
 			return {
-				props: { projects }
-				// TODO: Fix pageFilters
+				props: { projects, pageFilters: { pillar: url.searchParams.get('pillar') } }
 			};
 		}
 
 		return {
 			status: res.status,
-			error: new Error(`Could not load ${url}`)
+			error: new Error(`Could not load ${fetchUrl}`)
 		};
 	};
 </script>
@@ -24,6 +23,7 @@
 	import { fade } from 'svelte/transition';
 	import { beforeUpdate } from 'svelte';
 	import type { ConvertedProjectForIndex } from './_types';
+	import type { Load } from '@sveltejs/kit';
 
 	export let projects: ConvertedProjectForIndex[];
 	export let pageFilters;
