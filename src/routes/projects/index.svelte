@@ -67,7 +67,6 @@
 	});
 
 	function filterProjects(pillar) {
-		console.log('Filtering');
 		if (currentPillars.pillar === pillar) {
 			delete currentPillars.pillar;
 

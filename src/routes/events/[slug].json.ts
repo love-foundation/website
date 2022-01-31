@@ -29,7 +29,6 @@ export const get: RequestHandler = async ({ params }) => {
 			location,
 			poster
 		} = event;
-		console.log(poster);
 		return {
 			name: name,
 			slug: slug,
