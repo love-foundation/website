@@ -18,28 +18,3 @@ const directusSDK = new Directus<CustomDirectusTypes>(
 );
 
 export const directus = (): Directus<CustomDirectusTypes> => directusSDK;
-
-export async function fetchItems(
-	collection = '',
-	fields = '',
-	filter = {},
-	limit = -1
-): Promise<PartialItem<unknown>[]> {
-	const filters = {
-		...filter,
-		status: {
-			_in: status
-		}
-	};
-	try {
-		const raw = await directusSDK.items(collection).readMany({
-			fields: fields,
-			filter: filters,
-			limit: limit
-		});
-		const items = raw.data;
-		return items;
-	} catch (err) {
-		console.log(err);
-	}
-}

@@ -30,8 +30,6 @@
 		heading: name,
 		bgColor: heroColor
 	};
-
-	console.log(content);
 </script>
 
 <svelte:head>
