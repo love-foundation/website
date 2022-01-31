@@ -17,10 +17,10 @@ export const get: RequestHandler = async () => {
 				})
 		: fakeResponse;
 
-	const hubData = hubs.data[0];
+	const hubData = hubs.data;
 	if (hubData) {
 		return {
-			body: hubData
+			body: JSON.stringify(hubData)
 		};
 	}
 
