@@ -2,27 +2,22 @@
 	import type { Load } from '@sveltejs/kit';
 	export const load: Load = async ({ fetch }) => {
 		const url = '/hubs.json';
+		const eventUrl = '/events.json';
+		const resEvents = await fetch(eventUrl);
 		const res = await fetch(url);
 
-		if (res.ok) {
+		if (res.ok && resEvents.ok) {
 			const hubs = await res.json();
+			const events = await resEvents.json();
 			return {
-				props: { hubs }
+				props: { hubs, events }
 			};
 		}
 
 		return {
-			status: res.status,
+			status: res.status || resEvents.status,
 			error: new Error(`Could not load ${url}`)
 		};
-		// Todo: Get sitemap working
-		// const sitemap = await this.fetch('sitemap.xml');
-		const events = await this.fetch(`events.json`)
-			.then((r) => r.json())
-			.then((events) => {
-				session.events = events;
-				return events;
-			});
 	};
 </script>
 
@@ -30,12 +25,13 @@
 	import UpcomingEvents from '$lib/components/UI/FrontPage/UpcomingEvents.svelte';
 	import Button from '$lib/components/UI/Button.svelte';
 	import Hub from '$lib/components/UI/Hub.svelte';
-	import { session } from '$app/stores';
 	import type { Hubs } from '$lib/types';
+	import type { ConvertedIndexEvents } from './events/_types';
 
 	export let hubs: Hubs[];
+	export let events: ConvertedIndexEvents[];
 
-	let upcomingEvents = $session.events.filter((event) => new Date(event.starttime) >= new Date());
+	let upcomingEvents = events.filter((event) => new Date(event.starttime) >= new Date());
 	let image = {
 		src: 'map_countries.jpg',
 		alt: 'Map of Love Foundation Hubs'
