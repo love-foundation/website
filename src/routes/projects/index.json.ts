@@ -3,7 +3,7 @@ import { directus, status, callApi } from '$lib/_directus';
 import type { PartialItem } from '@directus/sdk';
 import type { RequestHandler } from '@sveltejs/kit';
 import fakeResponse from '../../../cypress/fixtures/projects.js';
-import type { ConvertedProjectForIndex } from './types.js';
+import type { ConvertedProjectForIndex } from './_types.js';
 
 export const get: RequestHandler = async () => {
 	const projects = callApi

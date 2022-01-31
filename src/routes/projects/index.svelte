@@ -23,7 +23,7 @@
 	import PillarBlob from '$lib/components/UI/PillarBlob.svelte';
 	import { fade } from 'svelte/transition';
 	import { beforeUpdate } from 'svelte';
-	import type { ConvertedProjectForIndex } from './types';
+	import type { ConvertedProjectForIndex } from './_types';
 
 	export let projects: ConvertedProjectForIndex[];
 	export let pageFilters;

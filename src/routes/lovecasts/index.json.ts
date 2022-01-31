@@ -1,8 +1,7 @@
 import { callApi, directus, status } from '$lib/_directus';
 import fakeResponse from '../../../cypress/fixtures/lovecasts.js';
 import type { RequestHandler } from '@sveltejs/kit';
-import type { ConvertedLovecast } from './types.js';
-import type { Lovecast } from '$lib/types.js';
+import type { ConvertedLovecast } from './_types.js';
 
 export const get: RequestHandler = async () => {
 	const lovecasts = callApi

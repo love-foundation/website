@@ -1,6 +1,6 @@
 import { directus, status } from '$lib/_directus';
 import type { RequestHandler } from '@sveltejs/kit';
-import type { ConvertedSingleEvent } from './types';
+import type { ConvertedSingleEvent } from './_types';
 
 export const get: RequestHandler = async ({ params }) => {
 	const event = await directus()
