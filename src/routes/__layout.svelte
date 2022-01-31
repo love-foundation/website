@@ -5,8 +5,6 @@
 	import CookieBar from '$lib/components/UI/CookieBar.svelte';
 	import '../app.scss';
 
-	export let segment;
-
 	let winHeight = 0;
 	let y = 0;
 	let progress = 0;
@@ -43,7 +41,7 @@
 
 <svelte:window bind:scrollY={y} bind:innerHeight={winHeight} />
 
-<Nav {segment} />
+<Nav />
 <progress value={progress} class={progressClasses} />
 
 <div bind:clientHeight={docHeight}>
