@@ -41,18 +41,29 @@ export const get: RequestHandler = async ({ params }) => {
 			facebook: facebook_url,
 			soundcloud: soundcloud_url,
 			heroColor: hero_background_color || null,
-			events: events.map((event) => {
-				const { id, slug, name, poster, hubs } = event.events_id;
-				return {
-					id: id,
-					slug: slug,
-					title: name,
-					imageUrl: poster
-						? import.meta.env.VITE_DIRECTUS_URL + 'assets/' + poster.id + '?key=event-poster'
-						: 'placeholder_events.png',
-					hub: hubs[0] ? hubs[0].hubs_id.city : null
-				};
-			})
+			events:
+				typeof events != 'string' &&
+				events.map((event) => {
+					let { id, slug, name, poster, hubs } =
+						typeof event.events_id != 'number' && event.events_id;
+					return {
+						id: id,
+						slug: slug,
+						title: name,
+						imageUrl: poster
+							? import.meta.env.VITE_DIRECTUS_URL +
+							  'assets/' +
+							  (typeof poster != 'string' && poster.id) +
+							  '?key=event-poster'
+							: 'placeholder_events.png',
+						hub:
+							typeof hubs != 'string'
+								? typeof hubs[0].hubs_id != 'number'
+									? hubs[0].hubs_id.city
+									: null
+								: null
+					};
+				})
 		};
 	});
 
