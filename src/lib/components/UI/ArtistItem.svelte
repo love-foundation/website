@@ -5,7 +5,7 @@
 
 <a
 	sveltekit:prefetch
-	href="/artists/{artist.slug}"
+	href={artist.slug && `/artists/${artist.slug}`}
 	class="column is-one-quarter-desktop is-one-third-tablet"
 >
 	<div>

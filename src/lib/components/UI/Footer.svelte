@@ -7,38 +7,38 @@
 						<a href="/">Home</a>
 					</li>
 					<li>
-						<a href="about" sveltekit:prefetch>About</a>
+						<a href="/about" sveltekit:prefetch>About</a>
 					</li>
 					<li>
-						<a sveltekit:prefetch href="projects">Projects</a>
+						<a sveltekit:prefetch href="/projects">Projects</a>
 					</li>
 					<li>
-						<a sveltekit:prefetch href="events">Events</a>
+						<a sveltekit:prefetch href="/events">Events</a>
 					</li>
 					<li>
-						<a sveltekit:prefetch href="artists">Artists</a>
+						<a sveltekit:prefetch href="/artists">Artists</a>
 					</li>
 					<li>
-						<a sveltekit:prefetch href="lovecasts">Lovecasts</a>
+						<a sveltekit:prefetch href="/lovecasts">Lovecasts</a>
 					</li>
 					<li>
-						<a sveltekit:prefetch href="support">Support</a>
+						<a sveltekit:prefetch href="/support">Support</a>
 					</li>
 					<li>
-						<a sveltekit:prefetch href="privacy">Privacy Policy</a>
+						<a sveltekit:prefetch href="/privacy">Privacy Policy</a>
 					</li>
 				</ul>
 			</div>
 			<div class="column is-2">
 				<div class="content">Love Foundation e.V.</div>
-				<a sveltekit:prefetch href="impressum">Impressum</a>
+				<a sveltekit:prefetch href="/impressum">Impressum</a>
 			</div>
 			<div class="column" />
 			<div class="column is-3 is-flex">
 				<div class="columns is-mobile low">
 					<a
 						class="column"
-						rel="nofollow noopener noreferrer"
+						rel="external nofollow noopener noreferrer"
 						href="https://www.instagram.com/lovefoundation_global/"
 					>
 						<div class="blob">
@@ -47,7 +47,7 @@
 					</a>
 					<a
 						class="column"
-						rel="nofollow noopener noreferrer"
+						rel="external nofollow noopener noreferrer"
 						href="https://www.facebook.com/LoveFoundation"
 					>
 						<div class="blob">
@@ -56,7 +56,7 @@
 					</a>
 					<a
 						class="column"
-						rel="nofollow noopener noreferrer"
+						rel="external nofollow noopener noreferrer"
 						href="https://www.soundcloud.com/love-foundation"
 					>
 						<div class="blob">

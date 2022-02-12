@@ -22,7 +22,7 @@
 			<li>
 				<a
 					class:selected={segment === 'about'}
-					href="about"
+					href="/about"
 					sveltekit:prefetch
 					on:click={toggleNav}
 				>
@@ -34,7 +34,7 @@
 					on:click={toggleNav}
 					sveltekit:prefetch
 					class:selected={segment === 'projects'}
-					href="projects"
+					href="/projects"
 				>
 					Projects
 				</a>
@@ -43,7 +43,7 @@
 				<a
 					sveltekit:prefetch
 					class:selected={segment === 'events'}
-					href="events"
+					href="/events"
 					on:click={toggleNav}
 				>
 					Events
@@ -53,7 +53,7 @@
 				<a
 					sveltekit:prefetch
 					class:selected={segment === 'artists'}
-					href="artists"
+					href="/artists"
 					on:click={toggleNav}
 				>
 					Artists
@@ -63,7 +63,7 @@
 				<a
 					sveltekit:prefetch
 					class:selected={segment === 'lovecasts'}
-					href="lovecasts"
+					href="/lovecasts"
 					on:click={toggleNav}
 				>
 					Lovecasts
@@ -73,7 +73,7 @@
 				<a
 					sveltekit:prefetch
 					class:selected={segment === 'support'}
-					href="support"
+					href="/support"
 					on:click={toggleNav}
 				>
 					Support
