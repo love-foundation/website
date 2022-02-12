@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Select from 'svelte-select';
 	import { createEventDispatcher } from 'svelte';
-	import { updateClass, setTransitionDuration } from '$lib/helpers/sharedFunctions.js';
+	import { updateClass, setTransitionDuration } from '$lib/helpers/sharedFunctions';
 
 	const dispatch = createEventDispatcher();
 

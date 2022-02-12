@@ -25,13 +25,14 @@
 	import lozad from 'lozad';
 	import type { Load } from '@sveltejs/kit';
 	import { page } from '$app/stores';
+	import { browser } from '$app/env';
 	export let events;
 	const pageFilters: {
 		hub?: string | undefined;
 		category?: string | undefined;
 	} = {
-		hub: $page.url.searchParams.get('hub'),
-		category: $page.url.searchParams.get('category')
+		hub: browser && $page.url.searchParams.get('hub'),
+		category: browser && $page.url.searchParams.get('category')
 	};
 
 	let eventsArray = events;
