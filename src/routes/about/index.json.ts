@@ -1,6 +1,6 @@
 import { directus, status, callApi } from '$lib/_directus';
 import type { RequestHandler } from '@sveltejs/kit';
-import fakeResponse from '../../../cypress/fixtures/about.js';
+import fakeResponse from '../../../cypress/fixtures/about';
 
 export const get: RequestHandler = async () => {
 	const aboutPage = callApi
@@ -19,7 +19,7 @@ export const get: RequestHandler = async () => {
 	const aboutPageContent = aboutPage.data[0].content;
 	if (aboutPageContent) {
 		return {
-			body: aboutPageContent
+			body: JSON.stringify(aboutPageContent)
 		};
 	}
 

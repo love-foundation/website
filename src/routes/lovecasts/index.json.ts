@@ -1,5 +1,5 @@
 import { callApi, directus, status } from '$lib/_directus';
-import fakeResponse from '../../../cypress/fixtures/lovecasts.js';
+import fakeResponse from '../../../cypress/fixtures/lovecasts';
 import type { RequestHandler } from '@sveltejs/kit';
 import type { ConvertedLovecast } from './_types.js';
 

@@ -20,11 +20,7 @@
 
 <script lang="ts">
 	import ArtistItem from '$lib/components/UI/ArtistItem.svelte';
-	import {
-		shuffleArray,
-		updateClass,
-		setTransitionDuration
-	} from '$lib/helpers/sharedFunctions.js';
+	import { shuffleArray, updateClass, setTransitionDuration } from '$lib/helpers/sharedFunctions';
 	import type { Load } from '@sveltejs/kit';
 	import Fuse from 'fuse.js';
 	import lozad from 'lozad';

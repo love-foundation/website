@@ -4,7 +4,7 @@ export type Artists = {
 	sort?: number;
 	created_by?: string;
 	created_on?: string;
-	modified_by?: string;
+	modified_by?: string | DirectusUsers;
 	modified_on?: string;
 	level_of_involvement?: string;
 	current_location?: string;
@@ -13,33 +13,29 @@ export type Artists = {
 	other_links?: string;
 	booking_contact?: string;
 	type_of_art?: string;
-	image?: DirectusFiles;
+	image?: string | DirectusFiles;
 	artist_name?: string;
 	hero_background_color?: string;
 	slug?: string;
-	events: {
-		id: number;
-		events_id?: PartialItem<Events>;
-		artists_id?: PartialItem<Artists>;
-	}[];
+	events: string | EventsArtists[];
 };
 
-export type ContentCollection = {
+export type Content = {
 	id: number;
 	status?: string;
 	created_by?: string;
 	created_on?: string;
-	on_page?: number;
+	on_page?: number | Pages;
 	text?: string;
-	image?: DirectusFiles;
+	image?: string | DirectusFiles;
 	type?: string;
-	image_two?: DirectusFiles;
+	image_two?: string | DirectusFiles;
 	sort?: number;
 	text_layout?: string;
 	content_label?: string;
 	distance_to_next?: string;
-	captions?: { imageOneCaption?: string; imageTwoCaption?: string };
-	content_for_project?: number;
+	captions?: unknown;
+	content_for_project?: number | Projects;
 	hero_background_color?: string;
 };
 
@@ -49,10 +45,10 @@ export type Events = {
 	sort?: number;
 	created_by?: string;
 	created_on?: string;
-	modified_by?: string;
+	modified_by?: string | DirectusUsers;
 	modified_on?: string;
 	name?: string;
-	poster?: DirectusFiles;
+	poster?: string | DirectusFiles;
 	designer?: string;
 	location?: string;
 	startdatetime?: string;
@@ -79,51 +75,43 @@ export type Events = {
 	hero_background_color?: string;
 	estimated_guests?: string;
 	human_power: string;
-	logo_of_other_collectives_involved: string;
-	upload_inspiration: string;
-	hubs: {
-		id: number;
-		events_id?: number;
-		hubs_id?: PartialItem<Hubs>;
-	}[];
-	artists: {
-		id: number;
-		events_id?: number;
-		artists_id?: PartialItem<Artists>;
-	}[];
+	logo_of_other_collectives_involved: string | EventsDirectusFilesOtherCollectivesLogos[];
+	upload_inspiration: string | EventsDirectusFilesInspiration[];
+	hubs: string | EventsHubs[];
+	artists: string | EventsArtists[];
 	design_info: string;
-	design_assets: string;
+	design_assets: string | EventsDirectusFiles[];
 	event_info: string;
 };
 
 export type EventsArtists = {
 	id: number;
-	events_id?: number;
-	artists_id?: number;
+	events_id?: number | Events;
+	artists_id?: number | Artists;
 };
 
 export type EventsDirectusFiles = {
 	id: number;
-	directus_files_id?: string;
-	events_id?: number;
+	directus_files_id?: string | DirectusFiles;
+	events_id?: number | Events;
 };
 
 export type EventsDirectusFilesInspiration = {
 	id: number;
-	events_id: number;
-	directus_files_id: string;
+	events_id: number | Events;
+	directus_files_id: string | DirectusFiles;
 };
 
 export type EventsDirectusFilesOtherCollectivesLogos = {
 	id: number;
-	events_id: number;
-	directus_files_id: string;
+	events_id: number | Events;
+	directus_files_id: string | DirectusFiles;
 };
 
 export type EventsHubs = {
 	id: number;
-	events_id?: number;
-	hubs_id?: number;
+	events_id?: number | Events;
+	hubs_id?: number | Hubs;
 };
 
 export type Hubs = {
@@ -131,7 +119,7 @@ export type Hubs = {
 	status?: string;
 	created_by?: string;
 	created_on?: string;
-	modified_by?: string;
+	modified_by?: string | DirectusUsers;
 	modified_on?: string;
 	city?: string;
 	country?: string;
@@ -139,13 +127,13 @@ export type Hubs = {
 	facebook?: string;
 	instagram?: string;
 	active?: boolean;
-	member: string;
+	member: string | HubsMembers[];
 };
 
 export type HubsMembers = {
 	id: number;
-	hubs_id?: number;
-	members_id?: number;
+	hubs_id?: number | Hubs;
+	members_id?: number | Members;
 };
 
 export type Lovecast = {
@@ -154,20 +142,20 @@ export type Lovecast = {
 	sort?: number;
 	owner?: string;
 	created_on?: string;
-	modified_by?: string;
+	modified_by?: string | DirectusUsers;
 	modified_on?: string;
 	name_of_the_set?: string;
 	soundcloud_link?: string;
-	design?: string;
+	design?: string | DirectusFiles;
 	published?: boolean;
 	slug?: string;
-	artist: string;
+	artist: string | LovecastArtists[];
 };
 
 export type LovecastArtists = {
 	id: number;
-	lovecast_id: number;
-	artists_id: number;
+	lovecast_id: number | Lovecast;
+	artists_id: number | Artists;
 };
 
 export type Members = {
@@ -177,7 +165,7 @@ export type Members = {
 	created_on?: string;
 	name?: string;
 	slack_name?: string;
-	hub?: number;
+	hub?: number | Hubs;
 	legal_member_of_national_institution?: boolean;
 	position?: string;
 	roles?: unknown;
@@ -189,11 +177,11 @@ export type Pages = {
 	status?: string;
 	created_by?: string;
 	created_on?: string;
-	modified_by?: string;
+	modified_by?: string | DirectusUsers;
 	name?: string;
 	slug?: string;
 	hero_background_color?: string;
-	content: ContentCollection[];
+	content: string | Content[];
 };
 
 export type Projects = {
@@ -209,31 +197,31 @@ export type Projects = {
 	contact_main_partner_organisation?: string;
 	short_description?: string;
 	project_info?: string;
-	main_image?: DirectusFiles;
+	main_image?: string | DirectusFiles;
 	pillar?: string;
 	slug?: string;
 	hero_background_color?: string;
-	content: ContentCollection[];
-	events_that_donated: string;
+	content: string | Content[];
+	events_that_donated: string | ProjectsEvents[];
 };
 
 export type ProjectsEvents = {
 	id: number;
-	projects_id?: number;
-	events_id?: number;
+	projects_id?: number | Projects;
+	events_id?: number | Events;
 };
 
 export type DirectusActivity = {
 	id: number;
 	action: string;
-	user?: string;
+	user?: string | DirectusUsers;
 	timestamp: string;
 	ip: string;
 	user_agent?: string;
 	collection: string;
 	item: string;
 	comment?: string;
-	revisions: string;
+	revisions: string | DirectusRevisions[];
 };
 
 export type DirectusCollections = {
@@ -253,7 +241,7 @@ export type DirectusCollections = {
 	color?: string;
 	item_duplication_fields?: unknown;
 	sort?: number;
-	group?: string;
+	group?: string | DirectusCollections;
 	collapse: string;
 	collection_divider: string;
 	archive_divider: string;
@@ -264,7 +252,7 @@ export type DirectusCollections = {
 
 export type DirectusFields = {
 	id: number;
-	collection: string;
+	collection: string | DirectusCollections;
 	field: string;
 	special?: unknown;
 	interface?: string;
@@ -279,7 +267,7 @@ export type DirectusFields = {
 	note?: string;
 	conditions?: unknown;
 	required?: boolean;
-	group?: string;
+	group?: string | DirectusFields;
 };
 
 export type DirectusFiles = {
@@ -289,10 +277,10 @@ export type DirectusFiles = {
 	filename_download: string;
 	title?: string;
 	type?: string;
-	folder?: string;
-	uploaded_by?: string;
+	folder?: string | DirectusFolders;
+	uploaded_by?: string | DirectusUsers;
 	uploaded_on: string;
-	modified_by?: string;
+	modified_by?: string | DirectusUsers;
 	modified_on: string;
 	charset?: string;
 	filesize?: number;
@@ -310,7 +298,7 @@ export type DirectusFiles = {
 export type DirectusFolders = {
 	id: string;
 	name: string;
-	parent?: string;
+	parent?: string | DirectusFolders;
 };
 
 export type DirectusMigrations = {
@@ -321,7 +309,7 @@ export type DirectusMigrations = {
 
 export type DirectusPermissions = {
 	id: number;
-	role?: string;
+	role?: string | DirectusRoles;
 	collection: string;
 	action: string;
 	permissions?: unknown;
@@ -333,8 +321,8 @@ export type DirectusPermissions = {
 export type DirectusPresets = {
 	id: number;
 	bookmark?: string;
-	user?: string;
-	role?: string;
+	user?: string | DirectusUsers;
+	role?: string | DirectusRoles;
 	collection?: string;
 	search?: string;
 	layout?: string;
@@ -359,12 +347,12 @@ export type DirectusRelations = {
 
 export type DirectusRevisions = {
 	id: number;
-	activity: number;
+	activity: number | DirectusActivity;
 	collection: string;
 	item: string;
 	data?: unknown;
 	delta?: unknown;
-	parent?: number;
+	parent?: number | DirectusRevisions;
 };
 
 export type DirectusRoles = {
@@ -376,16 +364,16 @@ export type DirectusRoles = {
 	enforce_tfa: boolean;
 	admin_access: boolean;
 	app_access: boolean;
-	users: string;
+	users: string | DirectusUsers[];
 };
 
 export type DirectusSessions = {
 	token: string;
-	user?: string;
+	user?: string | DirectusUsers;
 	expires: string;
 	ip?: string;
 	user_agent?: string;
-	share?: string;
+	share?: string | DirectusShares;
 };
 
 export type DirectusSettings = {
@@ -393,16 +381,16 @@ export type DirectusSettings = {
 	project_name: string;
 	project_url?: string;
 	project_color?: string;
-	project_logo?: string;
-	public_foreground?: string;
-	public_background?: string;
+	project_logo?: string | DirectusFiles;
+	public_foreground?: string | DirectusFiles;
+	public_background?: string | DirectusFiles;
 	public_note?: string;
 	auth_login_attempts?: number;
 	auth_password_policy?: string;
 	storage_asset_transform?: string;
 	storage_asset_presets?: unknown;
 	custom_css?: string;
-	storage_default_folder?: string;
+	storage_default_folder?: string | DirectusFolders;
 	basemaps?: unknown;
 	mapbox_key?: string;
 	module_bar?: unknown;
@@ -424,12 +412,12 @@ export type DirectusUsers = {
 	title?: string;
 	description?: string;
 	tags?: unknown;
-	avatar?: string;
+	avatar?: string | DirectusFiles;
 	language?: string;
 	theme?: string;
 	tfa_secret?: string;
 	status: string;
-	role?: string;
+	role?: string | DirectusRoles;
 	token?: string;
 	last_access?: string;
 	last_page?: string;
@@ -460,13 +448,13 @@ export type DirectusDashboards = {
 	icon: string;
 	note?: string;
 	date_created?: string;
-	user_created?: string;
-	panels: string;
+	user_created?: string | DirectusUsers;
+	panels: string | DirectusPanels[];
 };
 
 export type DirectusPanels = {
 	id: string;
-	dashboard: string;
+	dashboard: string | DirectusDashboards;
 	name?: string;
 	icon?: string;
 	color?: string;
@@ -479,15 +467,15 @@ export type DirectusPanels = {
 	height: number;
 	options?: unknown;
 	date_created?: string;
-	user_created?: string;
+	user_created?: string | DirectusUsers;
 };
 
 export type DirectusNotifications = {
 	id: number;
 	timestamp: string;
 	status?: string;
-	recipient: string;
-	sender: string;
+	recipient: string | DirectusUsers;
+	sender: string | DirectusUsers;
 	subject: string;
 	message?: string;
 	collection?: string;
@@ -497,11 +485,11 @@ export type DirectusNotifications = {
 export type DirectusShares = {
 	id: string;
 	name?: string;
-	collection?: string;
+	collection?: string | DirectusCollections;
 	item?: string;
-	role?: string;
+	role?: string | DirectusRoles;
 	password?: string;
-	user_created?: string;
+	user_created?: string | DirectusUsers;
 	date_created?: string;
 	date_start?: string;
 	date_end?: string;
@@ -511,7 +499,7 @@ export type DirectusShares = {
 
 export type CustomDirectusTypes = {
 	artists: Artists;
-	content: ContentCollection;
+	content: Content;
 	events: Events;
 	events_artists: EventsArtists;
 	events_directus_files: EventsDirectusFiles;

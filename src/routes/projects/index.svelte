@@ -25,11 +25,12 @@
 	import type { ConvertedProjectForIndex } from './_types';
 	import type { Load } from '@sveltejs/kit';
 	import { page } from '$app/stores';
+	import { browser } from '$app/env';
 
 	export let projects: ConvertedProjectForIndex[];
 	const pageFilters: {
 		pillar?: string;
-	} = { pillar: $page.url.searchParams.get('pillar') };
+	} = { pillar: browser && $page.url.searchParams.get('pillar') };
 
 	onMount(() => {
 		pageFilters.pillar = $page.url.searchParams.get('pillar');
