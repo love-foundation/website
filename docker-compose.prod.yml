@@ -1,19 +1,19 @@
 version: '3.7'
 
 networks:
-    proxy:
-      external: true
+  proxy:
+    external: true
 
 services:
-    app:
-        image: cupcakearmy/static
-        restart: unless-stopped
-        volumes:
-            - ./__sapper__/export:/srv
-        networks:
-            - proxy
-        labels:
-            - traefik.enable=true
-            - traefik.http.routers.lf-website-prod.rule=Host(`www.love-foundation.org`) || Host(`love-foundation.org`)
-            - traefik.http.routers.lf-website-prod.entrypoints=secure
-            - traefik.http.routers.lf-website-prod.tls.certresolver=le
+  app:
+    image: cupcakearmy/static
+    restart: unless-stopped
+    volumes:
+      - ./build:/srv
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.lf-website-prod.rule=Host(`www.love-foundation.org`) || Host(`love-foundation.org`)
+      - traefik.http.routers.lf-website-prod.entrypoints=secure
+      - traefik.http.routers.lf-website-prod.tls.certresolver=le
