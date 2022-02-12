@@ -1,4 +1,5 @@
-import adapter from '@sveltejs/adapter-auto';
+import adapterStatic from '@sveltejs/adapter-static';
+import node from '@sveltejs/adapter-node';
 import preprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -8,7 +9,6 @@ const config = {
 	preprocess: [
 		preprocess({
 			postcss: true,
-
 			scss: {
 				prependData: '@use "src/variables.scss" as *;'
 			}
@@ -16,7 +16,7 @@ const config = {
 	],
 
 	kit: {
-		adapter: adapter(),
+		adapter: process.env.ADAPTER === 'node' ? node() : adapterStatic(),
 
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
