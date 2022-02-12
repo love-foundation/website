@@ -1,3 +1,2 @@
-Sitemap: https://www.love-foundation.org/sitemap.xml
-User-agent:*
-Disallow:
+User-agent: *
+Allow: /

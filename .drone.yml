@@ -3,7 +3,7 @@ name: build-and-deploy
 
 steps:
   - name: install
-    image: node:12
+    image: node:16
     pull: always
     environment:
       CYPRESS_CACHE_FOLDER: .cypress
@@ -13,7 +13,7 @@ steps:
       - npm ci
 
   - name: test
-    image: cypress/browsers:node12.18.0-chrome83-ff77
+    image: cypress/included:3.2.0
     pull: always
     environment:
       CYPRESS_CACHE_FOLDER: .cypress
@@ -25,16 +25,16 @@ steps:
       - npm run test
 
   - name: build staging
-    image: node:12
+    image: node:16
     pull: always
     environment:
       VITE_DIRECTUS_URL:
         from_secret: directus_url_new
       DIRECTUS_TOKEN:
         from_secret: directus_token_new
-      NODE_ENV: staging
+      ADAPTER: staging
     commands:
-      - npm run build
+      - npm run build:staging
     when:
       branch:
         exclude:
@@ -52,9 +52,7 @@ steps:
       port: 1312
       target: /srv/lf/website/staging
       sources:
-        - ./__sapper__/build
-        - ./static
-        - ./src
+        - ./build
         - ./node_modules
         - ./Dockerfile
         - ./docker-compose.staging.yml
@@ -66,16 +64,15 @@ steps:
           - master
 
   - name: build production
-    image: node:12
+    image: node:16
     pull: always
     environment:
       VITE_DIRECTUS_URL:
         from_secret: directus_url_new
       DIRECTUS_TOKEN:
         from_secret: directus_token_new
-      NODE_ENV: production
     commands:
-      - npm run export:production
+      - npm run build
     when:
       branch:
         - master
@@ -92,7 +89,7 @@ steps:
       port: 1312
       target: /srv/lf/website/prod
       sources:
-        - ./__sapper__/export
+        - ./build
         - ./docker-compose.prod.yml
       commands:
         - docker-compose -f docker-compose.prod.yml up -d --build
@@ -112,7 +109,7 @@ name: directus-build-and-deploy
 
 steps:
   - name: install
-    image: node:12
+    image: node:16
     pull: always
     environment:
       CYPRESS_CACHE_FOLDER: .cypress
@@ -122,7 +119,7 @@ steps:
       - npm ci
 
   - name: test
-    image: cypress/browsers:node12.18.0-chrome83-ff77
+    image: cypress/included:3.2.0
     pull: always
     environment:
       CYPRESS_CACHE_FOLDER: .cypress
@@ -134,7 +131,7 @@ steps:
       - npm run test
 
   - name: build production
-    image: node:12
+    image: node:16
     pull: always
     environment:
       VITE_DIRECTUS_URL:
@@ -157,7 +154,7 @@ steps:
       port: 1312
       target: /srv/lf/website/prod
       sources:
-        - ./__sapper__/export
+        - ./build
         - ./docker-compose.prod.yml
       commands:
         - docker-compose -f docker-compose.prod.yml up -d --build
