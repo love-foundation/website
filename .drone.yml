@@ -19,7 +19,7 @@ steps:
       CYPRESS_CACHE_FOLDER: .cypress
       VITE_DIRECTUS_URL:
         from_secret: directus_url_new
-      DIRECTUS_TOKEN:
+      VITE_DIRECTUS_TOKEN:
         from_secret: directus_token_new
     commands:
       - npm run test
@@ -30,7 +30,7 @@ steps:
     environment:
       VITE_DIRECTUS_URL:
         from_secret: directus_url_new
-      DIRECTUS_TOKEN:
+      VITE_DIRECTUS_TOKEN:
         from_secret: directus_token_new
       ADAPTER: staging
     commands:
@@ -69,7 +69,7 @@ steps:
     environment:
       VITE_DIRECTUS_URL:
         from_secret: directus_url_new
-      DIRECTUS_TOKEN:
+      VITE_DIRECTUS_TOKEN:
         from_secret: directus_token_new
     commands:
       - npm run build
@@ -125,7 +125,7 @@ steps:
       CYPRESS_CACHE_FOLDER: .cypress
       VITE_DIRECTUS_URL:
         from_secret: directus_url_new
-      DIRECTUS_TOKEN:
+      VITE_DIRECTUS_TOKEN:
         from_secret: directus_token_new
     commands:
       - npm run test
@@ -136,7 +136,7 @@ steps:
     environment:
       VITE_DIRECTUS_URL:
         from_secret: directus_url_new
-      DIRECTUS_TOKEN:
+      VITE_DIRECTUS_TOKEN:
         from_secret: directus_token_new
       NODE_ENV: production
     commands:
