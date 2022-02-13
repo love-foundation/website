@@ -54,6 +54,9 @@ steps:
       sources:
         - ./build
         - ./node_modules
+        - ./package.json
+        - ./package-lock.json
+        - ./src
         - ./Dockerfile
         - ./docker-compose.staging.yml
       commands:
