@@ -1,10 +1,10 @@
+import type { RequestHandler } from '@sveltejs/kit';
 import fs from 'fs';
-import fetch from 'node-fetch';
 
 const BASE_URL =
-	import.meta.env.NODE_ENV === 'production'
+	import.meta.env.MODE === 'production'
 		? 'https://www.love-foundation.org'
-		: import.meta.env.NODE_ENV === 'staging'
+		: import.meta.env.MODE === 'staging'
 		? 'https://staging.love-foundation.org'
 		: 'http://localhost:3000';
 const pages = [];
@@ -75,9 +75,14 @@ const render = (
 </urlset>
 `;
 
-export async function get(req, res, next) {
+export const get: RequestHandler = async () => {
+	const headers = {
+		'Cache-Control': 'max-age=0, s-maxage=3600',
+		'Content-Type': 'application/xml'
+	};
+
 	let fetchedEvents = await fetch(
-		import.meta.env.NODE_ENV === 'development'
+		import.meta.env.MODE === 'development'
 			? `http://localhost:3000/events.json`
 			: `${BASE_URL}/events.json`,
 		{
@@ -89,7 +94,7 @@ export async function get(req, res, next) {
 	);
 
 	let fetchedArtists = await fetch(
-		import.meta.env.NODE_ENV === 'development'
+		import.meta.env.MODE === 'development'
 			? `http://localhost:3000/artists.json`
 			: `${BASE_URL}/artists.json`,
 		{
@@ -101,7 +106,7 @@ export async function get(req, res, next) {
 	);
 
 	let fetchedLovecasts = await fetch(
-		import.meta.env.NODE_ENV === 'development'
+		import.meta.env.MODE === 'development'
 			? `http://localhost:3000/lovecasts.json`
 			: `${BASE_URL}/lovecasts.json`,
 		{
@@ -113,7 +118,7 @@ export async function get(req, res, next) {
 	);
 
 	let fetchedProjects = await fetch(
-		import.meta.env.NODE_ENV === 'development'
+		import.meta.env.MODE === 'development'
 			? `http://localhost:3000/projects.json`
 			: `${BASE_URL}/projects.json`,
 		{
@@ -129,8 +134,9 @@ export async function get(req, res, next) {
 	const lovecasts = await fetchedLovecasts.json();
 	const projects = await fetchedProjects.json();
 
-	res.setHeader('Cache-Control', `max-age=0, s-max-age=${600}`); // 10 minutes
-	res.setHeader('Content-Type', 'application/rss+xml');
 	const sitemap = render(pages, events, artists, lovecasts, projects);
-	res.end(sitemap);
-}
+	return {
+		headers,
+		body: sitemap
+	};
+};
