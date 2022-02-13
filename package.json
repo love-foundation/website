@@ -41,7 +41,7 @@
     "@typescript-eslint/parser": "^4.31.1",
     "autoprefixer": "^10.4.2",
     "bulma": "^0.9.3",
-    "cypress": "^9.4.1",
+    "cypress": "^8.3.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
