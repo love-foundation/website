@@ -17,7 +17,7 @@ export const get: RequestHandler = async () => {
 	const impressum = pageContent.data[0].content;
 	if (impressum) {
 		return {
-			body: impressum
+			body: JSON.stringify(impressum)
 		};
 	}
 
