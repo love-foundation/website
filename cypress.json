@@ -3,5 +3,9 @@
   "video": false,
   "viewportHeight": 1080,
   "viewportWidth": 1920,
-  "pluginsFile": false
+  "pluginsFile": false,
+  "retries": {
+    "runMode": 4,
+    "openMode": 0
+  }
 }

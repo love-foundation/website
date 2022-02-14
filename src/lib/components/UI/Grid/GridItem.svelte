@@ -5,10 +5,8 @@
 	export let showDate = false;
 	export let lazy = false;
 	export let cardClass = '';
-
 	let {
-		id,
-		slug,
+		slug = item.slug ?? null,
 		title,
 		subtitle = item.hub ? item.hub : null,
 		soundcloud,
@@ -44,7 +42,7 @@
 <a
 	transition:fade
 	rel={soundcloud ? 'nofollow noopener noreferrer' : 'prefetch'}
-	href={link}
+	href={link ?? '/events'}
 	class="item {cardClass}"
 >
 	<figure data-toggle-class="loaded" class:lazy class:lozad={lazy} class="image {imageRatio}">

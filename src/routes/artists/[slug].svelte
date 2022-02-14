@@ -31,7 +31,6 @@
 	};
 
 	let { name, image, location, category, status, soundcloud, facebook, events, heroColor } = artist;
-
 	let heroContent: {
 		image?: string;
 		bgColor?: string;
@@ -82,12 +81,12 @@
 			<div class="column">
 				<h3 class="light">Links:</h3>
 				{#if facebook}
-					<a href={facebook}>
+					<a rel="external nofollow" href={facebook}>
 						<h3 class="light">Facebook</h3>
 					</a>
 				{/if}
 				{#if soundcloud}
-					<a href={soundcloud}>
+					<a rel="external nofollow" href={soundcloud}>
 						<h3 class="light">Soundcloud</h3>
 					</a>
 				{/if}

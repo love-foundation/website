@@ -1,3 +1,4 @@
+import type { Events, EventsArtists } from '$lib/types';
 import { directus, status } from '$lib/_directus';
 import type { RequestHandler } from '@sveltejs/kit';
 import type { convertedSingleArtist } from './_types';
@@ -7,7 +8,7 @@ export const get: RequestHandler = async ({ params }) => {
 		.items('artists')
 		.readMany({
 			fields:
-				'id, slug, artist_name, image, current_location, type_of_art, events.events_id.*.*.*, soundcloud_url, facebook_url, level_of_involvement, hero_background_color',
+				'id, slug, artist_name, image, current_location, type_of_art, events.*.*.*, soundcloud_url, facebook_url, level_of_involvement, hero_background_color',
 			filter: {
 				slug: params.slug,
 				status: {
@@ -34,7 +35,7 @@ export const get: RequestHandler = async ({ params }) => {
 			slug: slug,
 			image: image
 				? import.meta.env.VITE_DIRECTUS_URL + 'assets/' + image + '?key=artist-square'
-				: 'placeholder_artists.png',
+				: '/placeholder_artists.png',
 			status: level_of_involvement,
 			location: current_location,
 			category: type_of_art,
@@ -42,28 +43,27 @@ export const get: RequestHandler = async ({ params }) => {
 			soundcloud: soundcloud_url,
 			heroColor: hero_background_color || null,
 			events:
-				typeof events != 'string' &&
-				events.map((event) => {
-					let { id, slug, name, poster, hubs } =
-						typeof event.events_id != 'number' && event.events_id;
-					return {
-						id: id,
-						slug: slug,
-						title: name,
-						imageUrl: poster
-							? import.meta.env.VITE_DIRECTUS_URL +
-							  'assets/' +
-							  (typeof poster != 'string' && poster.id) +
-							  '?key=event-poster'
-							: 'placeholder_events.png',
-						hub:
-							typeof hubs != 'string'
-								? typeof hubs[0].hubs_id != 'number'
-									? hubs[0].hubs_id.city
-									: null
-								: null
-					};
-				})
+				Array.isArray(events) &&
+				events
+					.filter((event) => event.events_id && event.events_id.status === 'published')
+					.map((event: EventsArtists) => {
+						if (event.events_id && typeof event.events_id != 'number') {
+							const { id, slug, name, poster, hubs, status }: Partial<Events> = event.events_id;
+							if (status === 'published')
+								return {
+									id: id,
+									slug: slug,
+									title: name,
+									imageUrl: poster
+										? import.meta.env.VITE_DIRECTUS_URL +
+										  'assets/' +
+										  poster.id +
+										  '?key=event-poster'
+										: '/placeholder_events.png',
+									hub: hubs ? hubs[0].hubs_id.city : null
+								};
+						}
+					})
 		};
 	});
 
