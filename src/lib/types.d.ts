@@ -17,7 +17,7 @@ export type Artists = {
 	artist_name?: string;
 	hero_background_color?: string;
 	slug?: string;
-	events: string & EventsArtists[];
+	events: string | EventsArtists[];
 };
 
 export type Content = {
@@ -78,7 +78,7 @@ export type Events = {
 	logo_of_other_collectives_involved: string & EventsDirectusFilesOtherCollectivesLogos[];
 	upload_inspiration: string & EventsDirectusFilesInspiration[];
 	hubs: string & EventsHubs[];
-	artists: string & EventsArtists[];
+	artists: string | EventsArtists[];
 	design_info: string;
 	design_assets: string & EventsDirectusFiles[];
 	event_info: string;

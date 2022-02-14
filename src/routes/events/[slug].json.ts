@@ -39,19 +39,24 @@ export const get: RequestHandler = async ({ params }) => {
 			location: location,
 			imageUrl: poster
 				? import.meta.env.VITE_DIRECTUS_URL + 'assets/' + poster + '?key=event-poster'
-				: 'placeholder_events.png',
+				: '/placeholder_events.png',
 			heroColor: hero_background_color || null,
-			artists: artists.map((artist) => {
-				const { id, slug, artist_name, image } = artist.artists_id;
-				return {
-					id: id,
-					slug: slug,
-					name: artist_name,
-					imageUrl: image
-						? import.meta.env.VITE_DIRECTUS_URL + 'assets/' + image + '?key=artist-square'
-						: 'placeholder_artists.png'
-				};
-			})
+			artists:
+				Array.isArray(artists) &&
+				artists
+					.filter((artist) => artist.artists_id && artist.artists_id.status === 'published')
+					.map((artist) => {
+						const { id, slug, artist_name, image, status } = artist.artists_id;
+						if (status === 'published')
+							return {
+								id: id,
+								slug: slug,
+								name: artist_name,
+								imageUrl: image
+									? import.meta.env.VITE_DIRECTUS_URL + 'assets/' + image + '?key=artist-square'
+									: '/placeholder_artists.png'
+							};
+					})
 		};
 	});
 
