@@ -23,6 +23,10 @@ steps:
         from_secret: directus_token_new
     commands:
       - npm run test
+    when:
+      branch:
+        exclude:
+          - master
 
   - name: build staging
     image: node:16
