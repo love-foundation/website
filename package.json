@@ -28,7 +28,7 @@
     "last 2 safari versions"
   ],
   "dependencies": {
-    "@directus/sdk": "^9.4.3",
+    "@directus/sdk": "^9.8.0",
     "cross-env": "^7.0.3",
     "lozad": "^1.16.0"
   },
