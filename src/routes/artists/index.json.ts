@@ -7,7 +7,7 @@ export const get: RequestHandler = async () => {
 	const artists = callApi
 		? await directus()
 				.items('artists')
-				.readMany({
+				.readByQuery({
 					fields: 'id, slug, artist_name, image.data.*, current_location, type_of_art',
 					filter: {
 						status: {

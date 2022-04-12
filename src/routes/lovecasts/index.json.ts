@@ -7,7 +7,7 @@ export const get: RequestHandler = async () => {
 	const lovecasts = callApi
 		? await directus()
 				.items('lovecast')
-				.readMany({
+				.readByQuery({
 					fields: 'id, name_of_the_set, design, soundcloud_link',
 					filter: {
 						status: {

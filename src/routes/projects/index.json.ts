@@ -9,7 +9,7 @@ export const get: RequestHandler = async () => {
 	const projects = callApi
 		? await directus()
 				.items('projects')
-				.readMany({
+				.readByQuery({
 					fields: 'id, name, main_image.*.*, pillar, slug, location_country',
 					filter: {
 						status: {

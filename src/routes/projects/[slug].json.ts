@@ -5,7 +5,7 @@ import type { ConvertedSingleProject } from './_types';
 export const get: RequestHandler = async ({ params }) => {
 	const project = await directus()
 		.items('projects')
-		.readMany({
+		.readByQuery({
 			fields: 'content.*.*.*, name, main_image.*.*, hero_background_color',
 			filter: {
 				slug: params.slug,
