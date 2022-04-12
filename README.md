@@ -1,6 +1,6 @@
 # Love Foundation Website
 
-This is the repository containing the Love Foundation Website. The website is based on Sapper, a SSR-ready app creator based on Svelte. On the backend this site is fetching information from Directus, our Headless cms.
+This is the repository containing the Love Foundation Website. The website is based on SvelteKit, a SSR-ready app creator based on Svelte. On the backend this site is fetching information from Directus, our Headless cms.
 
 
 
@@ -13,8 +13,10 @@ npm run dev
 
 Open up [localhost:3000](http://localhost:3000) and start clicking around.
 
-Consult [sapper.svelte.dev](https://sapper.svelte.dev) for help getting started.
+Consult [kit.svelte.dev](https://kit.svelte.dev) for help getting started.
 
+
+# OUTDATED 
 
 ## Structure
 
