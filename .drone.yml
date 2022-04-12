@@ -36,7 +36,7 @@ steps:
         from_secret: directus_url_new
       VITE_DIRECTUS_TOKEN:
         from_secret: directus_token_new
-      ADAPTER: staging
+      VITE_APP_MODE: staging
     commands:
       - npm run build:staging
     when:
