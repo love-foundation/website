@@ -7,7 +7,7 @@ export const get: RequestHandler = async () => {
 	const events = callApi
 		? await directus()
 				.items('events')
-				.readMany({
+				.readByQuery({
 					fields: 'id, name, poster, event_type, hubs.*.*, startdatetime, slug',
 					filter: {
 						status: {

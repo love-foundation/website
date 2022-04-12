@@ -5,7 +5,7 @@ import type { ConvertedSingleEvent } from './_types';
 export const get: RequestHandler = async ({ params }) => {
 	const event = await directus()
 		.items('events')
-		.readMany({
+		.readByQuery({
 			fields:
 				'id, name, slug, poster, hubs.*.*, location, startdatetime, enddatetime, event_type, artists.*.*, hero_background_color',
 			filter: {

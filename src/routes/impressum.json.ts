@@ -4,7 +4,7 @@ import type { RequestHandler } from '@sveltejs/kit';
 export const get: RequestHandler = async () => {
 	const pageContent = await directus()
 		.items('pages')
-		.readMany({
+		.readByQuery({
 			fields: 'content.*.*.*',
 			filter: {
 				slug: 'impressum',

@@ -6,7 +6,7 @@ import type { convertedSingleArtist } from './_types';
 export const get: RequestHandler = async ({ params }) => {
 	const artist = await directus()
 		.items('artists')
-		.readMany({
+		.readByQuery({
 			fields:
 				'id, slug, artist_name, image, current_location, type_of_art, events.*.*.*, soundcloud_url, facebook_url, level_of_involvement, hero_background_color',
 			filter: {

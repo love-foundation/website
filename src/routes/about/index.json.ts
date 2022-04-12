@@ -6,7 +6,7 @@ export const get: RequestHandler = async () => {
 	const aboutPage = callApi
 		? await directus()
 				.items('pages')
-				.readMany({
+				.readByQuery({
 					fields: 'content.*.*.*',
 					filter: {
 						slug: 'about',
