@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { HubObject } from 'src/global';
+	import type { Hubs } from '$lib/types';
 
-	export let hub: HubObject;
+	export let hub: Hubs;
 
 	const { city, facebook, instagram } = hub;
 </script>
