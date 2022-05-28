@@ -147,7 +147,7 @@ steps:
         from_secret: directus_token_new
       NODE_ENV: production
     commands:
-      - npm run export:production
+      - npm run build
 
   - name: deploy production
     image: cupcakearmy/drone-deploy
@@ -169,4 +169,4 @@ steps:
 trigger:
   event:
     include:
-      - custom
+      - cron
