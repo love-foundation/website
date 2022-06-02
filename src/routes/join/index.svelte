@@ -26,7 +26,7 @@
 				<object data="/join_events.svg" type="image/svg+xml" title="Map" />
 			</figure>
 		</div>
-		<Button newTab={true} link={'events'}>Join our events</Button>
+		<Button newTab={true} link="/events">Join our events</Button>
 	</div>
 	<div class="column is-4">
 		<div class="bubble">
@@ -34,7 +34,7 @@
 				<object data="/join_financial.svg" type="image/svg+xml" title="Map" />
 			</figure>
 		</div>
-		<Button link={'support'}>Support us financially</Button>
+		<Button link="/support">Support us financially</Button>
 	</div>
 </section>
 <section class="pad--bottom--small">
