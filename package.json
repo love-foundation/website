@@ -53,7 +53,7 @@
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.4.0",
     "sass": "^1.46.0",
-    "svelte": "^3.44.0",
+    "svelte": "^3.49.0",
     "svelte-check": "^2.2.6",
     "svelte-preprocess": "^4.10.1",
     "svelte-select": "^3.4.0",
