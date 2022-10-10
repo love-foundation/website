@@ -25,9 +25,7 @@
 
 	export let lovecasts: ConvertedLovecast[];
 
-	let lovecastsArray = lovecasts;
 	let lovecastGroups = [];
-	let len;
 
 	for (let i = 0, len = lovecasts.length; i < len; i += 5) {
 		lovecastGroups.push(lovecasts.slice(i, i + 5));
@@ -42,6 +40,8 @@
 <svelte:head>
 	<title>Lovecasts</title>
 </svelte:head>
+
+<!-- Add filtering bar similar to projects with prefiltered for lovecasts -->
 
 {#each lovecastGroups as lovecastGroup, i (Math.random())}
 	<section data-toggle-class="loaded" class:loaded={i < 1} class:lozad={i >= 1}>
