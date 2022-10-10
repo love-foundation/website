@@ -57,5 +57,8 @@
 			opacity: 1;
 			margin-top: 0;
 		}
+		&:first-child {
+			margin-top: 50px;
+		}
 	}
 </style>

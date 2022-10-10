@@ -19,7 +19,7 @@ export const get: RequestHandler = async () => {
 				})
 		: fakeResponse;
 
-	const projectsData: ConvertedProjectForIndex[] = projects.data.map((project) => {
+	const projectsData: ConvertedProjectForIndex[] = projects.data.reverse().map((project) => {
 		const { id, name, pillar, location_country, main_image, slug } = project;
 		return {
 			id,
