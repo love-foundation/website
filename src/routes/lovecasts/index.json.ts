@@ -4,7 +4,7 @@ import type { RequestHandler } from '@sveltejs/kit';
 import type { ConvertedLovecast } from './_types.js';
 
 export const get: RequestHandler = async () => {
-	const lovecasts = callApi
+	const lovecasts = true
 		? await directus()
 				.items('lovecast')
 
@@ -19,15 +19,17 @@ export const get: RequestHandler = async () => {
 				})
 		: fakeResponse;
 
-	const lovecastsData: ConvertedLovecast[] = lovecasts.data.reverse().map((lovecast) => {
-		const { id, name_of_the_set, design, soundcloud_link } = lovecast;
-		return {
-			id,
-			title: name_of_the_set,
-			soundcloud: soundcloud_link,
-			imageUrl: design ? `${import.meta.env.VITE_DIRECTUS_URL}assets/${design}` : null
-		};
-	});
+	const lovecastsData: ConvertedLovecast[] = lovecasts.data
+		.sort((a, b) => b.name_of_the_set.localeCompare(a.name_of_the_set))
+		.map((lovecast) => {
+			const { id, name_of_the_set, design, soundcloud_link } = lovecast;
+			return {
+				id,
+				title: name_of_the_set,
+				soundcloud: soundcloud_link,
+				imageUrl: design ? `${import.meta.env.VITE_DIRECTUS_URL}assets/${design}` : null
+			};
+		});
 
 	if (lovecastsData) {
 		return {
