@@ -7,6 +7,7 @@ export const get: RequestHandler = async () => {
 	const lovecasts = callApi
 		? await directus()
 				.items('lovecast')
+
 				.readByQuery({
 					fields: 'id, name_of_the_set, design, soundcloud_link',
 					filter: {
@@ -18,7 +19,7 @@ export const get: RequestHandler = async () => {
 				})
 		: fakeResponse;
 
-	const lovecastsData: ConvertedLovecast[] = lovecasts.data.map((lovecast) => {
+	const lovecastsData: ConvertedLovecast[] = lovecasts.data.reverse().map((lovecast) => {
 		const { id, name_of_the_set, design, soundcloud_link } = lovecast;
 		return {
 			id,
