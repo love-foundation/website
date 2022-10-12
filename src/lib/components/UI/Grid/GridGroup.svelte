@@ -2,7 +2,7 @@
 	import GridItem from './GridItem.svelte';
 	export let itemGroup = [];
 	export let lazy = false;
-	export let groupIndex = null;
+	export let groupIndex = 0;
 
 	let isEven = groupIndex % 2 == 0;
 
@@ -39,11 +39,11 @@
 	.grid-group {
 		display: grid;
 		grid-template-areas:
-			'big'
 			'small-a'
 			'small-b'
 			'small-c'
-			'small-d';
+			'small-d'
+			'big';
 		grid-template-columns: 100%;
 		@include desktop {
 			grid-template-areas:
@@ -53,11 +53,11 @@
 		}
 		&.even {
 			grid-template-areas:
+				'big'
 				'small-a'
 				'small-b'
 				'small-c'
-				'small-d'
-				'big';
+				'small-d';
 			@include desktop {
 				grid-template-areas:
 					'big big small-a small-b'
@@ -65,12 +65,4 @@
 			}
 		}
 	}
-
-	// grid-template:
-	//   "a b b" 40px
-	//   "a b b" 40px / 1fr 1fr 1fr;
-
-	// grid-template: :nth-child(n+1)
-	//   "b b a" 40px
-	//   "b b a" 40px / 1fr 1fr 1fr;
 </style>
