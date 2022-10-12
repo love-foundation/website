@@ -3,4 +3,6 @@ export type ConvertedLovecast = {
 	title: string;
 	imageUrl: string;
 	soundcloud: string;
+	type: string;
+	regexCastType: string;
 };
