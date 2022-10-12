@@ -21,7 +21,7 @@
 	}
 
 	let siteId = import.meta.env.NODE_ENV === 'production' ? 2 : 1;
-	const scriptInjectString = `
+	const scriptInjectString = `<script>
 		var _paq = (window._paq = window._paq || []);
 		/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
 		_paq.push(['setDocumentTitle', document.domain + '/' + document.title]);
@@ -53,8 +53,7 @@
 
 <svelte:head>
 	<!-- Matomo -->
-
-	{@html `<script>${scriptInjectString}</script>`}
+	{@html scriptInjectString + '</script>'}
 	{@html noscriptInjectString}
 	<!-- End Matomo Code -->
 </svelte:head>
