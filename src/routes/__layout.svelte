@@ -54,7 +54,7 @@
 <svelte:head>
 	<!-- Matomo -->
 
-	{@html `<script type="text/javascript">${scriptInjectString}</script>`}
+	{@html `<script>${scriptInjectString}</script>`}
 	{@html noscriptInjectString}
 	<!-- End Matomo Code -->
 </svelte:head>
