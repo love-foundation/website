@@ -158,8 +158,11 @@
 			margin-top: -1px;
 		}
 
-		h2.active {
-			text-decoration: underline;
+		h2 {
+			margin-top: 5px;
+			&.active {
+				text-decoration: underline;
+			}
 		}
 	}
 </style>
