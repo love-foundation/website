@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { ContentCollection } from '$lib/types';
+	import type { Content as ContentCollection } from '$lib/types';
 
 	export let content: ContentCollection;
-	export let lazy;
+	export let lazy: boolean;
 
 	let imageOne;
 	let imageTwo;
