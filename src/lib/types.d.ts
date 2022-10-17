@@ -34,7 +34,10 @@ export type Content = {
 	text_layout?: string;
 	content_label?: string;
 	distance_to_next?: string;
-	captions?: unknown;
+	captions?: {
+		imageOneCaption: string;
+		imageTwoCaption: string;
+	};
 	content_for_project?: number & Projects;
 	hero_background_color?: string;
 };

@@ -19,7 +19,7 @@
 </script>
 
 <script lang="ts">
-	import type { ContentCollection } from '$lib/types';
+	import type { Content as ContentCollection } from '$lib/types';
 	import Content from '$lib/components/UI/Content.svelte';
 	export let queriedContent: ContentCollection[];
 </script>

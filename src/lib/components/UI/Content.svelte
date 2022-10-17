@@ -6,7 +6,7 @@
 	import { flip } from 'svelte/animate';
 	import { onMount } from 'svelte';
 	import lozad from 'lozad';
-	import type { ContentCollection } from '$lib/types';
+	import type { Content as ContentCollection } from '$lib/types';
 	import type { ArrayElement } from 'src/global';
 
 	export let queriedContent: ContentCollection[];
