@@ -36,7 +36,7 @@
 						<a sveltekit:prefetch href="/impressum">Impressum</a>
 					</li>
 					<li>
-						<a sveltekit:prefetch href="/vereniging">Vereninging Love Foundation</a>
+						<a sveltekit:prefetch href="/vereniging">Vereniging Love Foundation</a>
 					</li>
 				</ul>
 			</div>
