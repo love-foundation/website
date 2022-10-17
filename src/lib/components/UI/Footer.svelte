@@ -1,3 +1,4 @@
+import Vereniging from './../../../routes/vereniging.svelte';
 <footer>
 	<div class="container fluid">
 		<div class="columns">
@@ -32,6 +33,7 @@
 			<div class="column is-2">
 				<div class="content">Love Foundation e.V.</div>
 				<a sveltekit:prefetch href="/impressum">Impressum</a>
+				<a sveltekit:prefetch href="/vereniging">Vereninging Love Foundation</a>
 			</div>
 			<div class="column" />
 			<div class="column is-3 is-flex">
