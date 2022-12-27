@@ -1,37 +1,12 @@
-<script lang="ts" context="module">
-	import type { Load } from '@sveltejs/kit';
-	export const load: Load = async ({ fetch }) => {
-		const url = '/hubs.json';
-		const eventUrl = '/events.json';
-		const resEvents = await fetch(eventUrl);
-		const res = await fetch(url);
-
-		if (res.ok && resEvents.ok) {
-			const hubs = await res.json();
-			const events = await resEvents.json();
-			return {
-				props: { hubs, events }
-			};
-		}
-
-		return {
-			status: res.status || resEvents.status,
-			error: new Error(`Could not load ${url}`)
-		};
-	};
-</script>
-
 <script lang="ts">
 	import UpcomingEvents from '$lib/components/UI/FrontPage/UpcomingEvents.svelte';
 	import Button from '$lib/components/UI/Button.svelte';
 	import Hub from '$lib/components/UI/Hub.svelte';
-	import type { Hubs } from '$lib/types';
-	import type { ConvertedIndexEvents } from './events/_types';
+	import type { PageData } from './$types';
+	export let data: PageData;
 
-	export let hubs: Hubs[];
-	export let events: ConvertedIndexEvents[];
-
-	let upcomingEvents = events.filter((event) => new Date(event.starttime) >= new Date());
+	let upcomingEvents =
+		data.events?.filter((event) => new Date(event.starttime) >= new Date()) || [];
 	let image = {
 		src: 'map_countries.jpg',
 		alt: 'Map of Love Foundation Hubs'
@@ -55,7 +30,7 @@
 	</div>
 </section>
 
-{#if upcomingEvents.length}
+{#if upcomingEvents.length > 0}
 	<section class="pad--bottom--small">
 		<h1 class="centered">Upcoming Events</h1>
 		<UpcomingEvents {upcomingEvents} />
@@ -84,7 +59,7 @@
 <section class="active-hubs row">
 	<h1>Active Love Hubs</h1>
 	<div class="columns is-multiline">
-		{#each hubs as hub}
+		{#each data.hubs as hub}
 			<Hub {hub} />
 		{/each}
 	</div>
