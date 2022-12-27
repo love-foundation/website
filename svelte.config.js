@@ -14,19 +14,7 @@ const config = {
 			}
 		})
 	],
-
-	kit: {
-		adapter: process.env.ADAPTER === 'node' ? node() : adapterStatic(),
-		vite: {
-			css: {
-				preprocessorOptions: {
-					scss: {
-						additionalData: '@use "src/variables.scss" as *;'
-					}
-				}
-			}
-		}
-	}
+	adapter: process.env.ADAPTER === 'node' ? node() : adapterStatic()
 };
 
 export default config;
