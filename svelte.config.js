@@ -14,7 +14,9 @@ const config = {
 			}
 		})
 	],
-	adapter: process.env.ADAPTER === 'node' ? node() : adapterStatic()
+	kit: {
+		adapter: process.env.ADAPTER === 'node' ? node() : adapterStatic()
+	}
 };
 
 export default config;

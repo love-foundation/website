@@ -3,16 +3,15 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
-		<meta name="theme-color" content="#333333" />
 
 		<link rel="manifest" href="/manifest.json" />
-		<link rel="icon" type="image/ico" href="/favicon.ico" />
+		<link rel="icon" type="image/ico" href="%sveltekit.assets%/favicon.ico" />
 
 		<!-- This contains the contents of the <svelte:head> component, if
 	     the current page has one -->
-		%svelte.head%
+		%sveltekit.head%
 	</head>
-	<body>
-		<div id="svelte">%svelte.body%</div>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
 	</body>
 </html>
