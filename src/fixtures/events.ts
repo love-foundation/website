@@ -1,4 +1,4 @@
-export default {
+const events = {
 	data: [
 		{
 			id: 9,
@@ -17731,3 +17731,5 @@ export default {
 		}
 	]
 };
+
+export default events;

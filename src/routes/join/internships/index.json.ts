@@ -2,7 +2,7 @@ import { callApi, directus, status } from '$lib/_directus';
 import type { RequestHandler } from '@sveltejs/kit';
 
 //FIX ME: This should have a fakeResponse from a fixture for the specific join page
-import fakeResponse from '../../../../cypress/fixtures/join';
+import fakeResponse from '../../../fixtures/join';
 
 export const get: RequestHandler = async () => {
 	const pageContent = callApi
