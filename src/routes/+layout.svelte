@@ -3,10 +3,10 @@
 	import Footer from '$lib/components/UI/Footer.svelte';
 	import { page } from '$app/stores';
 	import '@beyonk/gdpr-cookie-consent-banner/dist/style.css'; // optional, you can also define your own styles
-	import GdprBanner from '@beyonk/gdpr-cookie-consent-banner';
+	import attachBanner from '@beyonk/gdpr-cookie-consent-banner';
 	import '../app.scss';
 
-	const choices = {
+	const choices: Parameters<typeof attachBanner>[1]['choices'] = {
 		necessary: {
 			label: 'Necessary cookies',
 			description: 'Used for cookie control and usage of the donation form',
@@ -23,6 +23,7 @@
 	let docHeight = 0;
 	let mainClasses = '';
 	let progressClasses = '';
+	let bodyElement: HTMLBodyElement;
 
 	mainClasses = $page.url.pathname === '/events' ? 'events' : '';
 
@@ -62,6 +63,17 @@
 		/>
 	</p></noscript
 >`;
+	$: {
+		bodyElement
+			? attachBanner(bodyElement, {
+					heading: 'We want to inform you about our usage of cookies',
+					cookieName: 'love_foundation_cookieconsent',
+					description:
+						'We only use cookies as part of our donation form that is implemented with a third party supplier that sets cookies. We currently do not set any cookies ourselves.',
+					choices: typeof attachBanner
+			  })
+			: undefined;
+	}
 </script>
 
 <svelte:head>
@@ -72,6 +84,7 @@
 </svelte:head>
 
 <svelte:window bind:scrollY={y} bind:innerHeight={winHeight} />
+<svelte:body bind:this={bodyElement} />
 
 <Nav />
 <progress value={progress} class={progressClasses} />
@@ -82,13 +95,6 @@
 	</main>
 	<Footer />
 </div>
-
-<GdprBanner
-	heading="We want to inform you about our usage of cookies"
-	cookieName="love_foundation_cookieconsent"
-	description="We only use cookies as part of our donation form that is implemented with a third party supplier that sets cookies. We currently do not set any cookies ourselves."
-	{choices}
-/>
 
 <style lang="scss">
 	main {

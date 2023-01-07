@@ -1,7 +1,7 @@
 import type { Artists } from '$lib/types';
 
 export type ConvertedIndexEvents = {
-	id: string;
+	id: number;
 	slug: string;
 	title: string;
 	imageUrl: string;

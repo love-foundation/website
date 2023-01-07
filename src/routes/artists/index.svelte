@@ -113,6 +113,9 @@
 			on:click={() => {
 				shuffle();
 			}}
+			on:keydown={() => {
+				shuffle();
+			}}
 			data-cy="shuffleArtists"
 		>
 			Shuffle Artists

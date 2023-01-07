@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { session } from '$app/stores';
+	// import { session } from '$app/stores';
 
-	$: necessaryAccepted = $session.cookieConsent.necessary;
+	// $: necessaryAccepted = $session.cookieConsent.necessary;
+	const necessaryAccepted = true;
 </script>
 
 <svelte:head>
