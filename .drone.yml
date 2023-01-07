@@ -45,16 +45,17 @@ steps:
           - master
 
   - name: deploy staging
-    image: cupcakearmy/drone-deploy
+    image: appleboy/drone-scp
     pull: always
     settings:
       host: love-foundation.org
-      user: lfdeploy
+      username: lfdeploy
       port:
         from_secret: port
       key:
         from_secret: key
       target: /srv/lf/website/staging
+      overwrite: true
       sources:
         - ./build
         - ./node_modules
@@ -64,6 +65,25 @@ steps:
         - ./Dockerfile
         - ./docker-compose.staging.yml
       commands:
+        - docker-compose -f docker-compose.staging.yml up -d --build
+    when:
+      branch:
+        exclude:
+          - master
+
+  - name: restart staging server
+    image: appleboy/drone-ssh
+    pull: always
+    settings:
+      host: love-foundation.org
+      username: lfdeploy
+      port:
+        from_secret: port
+      key:
+        from_secret: key
+
+      commands:
+        - cd /srv/lf/website/staging
         - docker-compose -f docker-compose.staging.yml up -d --build
     when:
       branch:
@@ -85,11 +105,8 @@ steps:
         - master
 
   - name: deploy production
-    image: cupcakearmy/drone-deploy
+    image: appleboy/drone-scp
     pull: always
-    environment:
-      PLUGIN_KEY:
-        from_secret: key
     settings:
       host: love-foundation.org
       user: lfdeploy
@@ -101,11 +118,28 @@ steps:
       sources:
         - ./build
         - ./docker-compose.prod.yml
-      commands:
-        - docker-compose -f docker-compose.prod.yml up -d --build
+      overwrite: true
     when:
       branch:
         - master
+
+  - name: restart production server
+    image: appleboy/drone-ssh
+    pull: always
+    settings:
+      host: love-foundation.org
+      username: lfdeploy
+      port:
+        from_secret: port
+      key:
+        from_secret: key
+      commands:
+        - cd /srv/lf/website/prod
+        - docker-compose -f docker-compose.prod.yml up -d --build
+    when:
+      branch:
+        exclude:
+          - master
 
 trigger:
   event:
@@ -153,11 +187,8 @@ steps:
       - npm run build
 
   - name: deploy production
-    image: cupcakearmy/drone-deploy
+    image: appleboy/drone-scp
     pull: always
-    environment:
-      PLUGIN_KEY:
-        from_secret: key
     settings:
       host: love-foundation.org
       user: lfdeploy
@@ -169,9 +200,28 @@ steps:
       sources:
         - ./build
         - ./docker-compose.prod.yml
-      commands:
-        - docker-compose -f docker-compose.prod.yml up -d --build
+      overwrite: true
+    when:
+      branch:
+        - master
 
+  - name: restart production server
+    image: appleboy/drone-ssh
+    pull: always
+    settings:
+      host: love-foundation.org
+      username: lfdeploy
+      port:
+        from_secret: port
+      key:
+        from_secret: key
+      commands:
+        - cd /srv/lf/website/prod
+        - docker-compose -f docker-compose.prod.yml up -d --build
+    when:
+      branch:
+        exclude:
+          - master
 trigger:
   event:
     include:
