@@ -56,7 +56,7 @@ steps:
         from_secret: key
       target: /srv/lf/website/staging
       overwrite: true
-      sources:
+      source:
         - ./build
         - ./node_modules
         - ./package.json
@@ -115,7 +115,7 @@ steps:
       port:
         from_secret: port
       target: /srv/lf/website/prod
-      sources:
+      source:
         - ./build
         - ./docker-compose.prod.yml
       overwrite: true
@@ -196,7 +196,7 @@ steps:
       port:
         from_secret: port
       target: /srv/lf/website/prod
-      sources:
+      source:
         - ./build
         - ./docker-compose.prod.yml
       overwrite: true
