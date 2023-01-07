@@ -112,6 +112,9 @@
 			on:click={() => {
 				filterProjects(category.slug);
 			}}
+			on:keydown={() => {
+				filterProjects(category.slug);
+			}}
 		>
 			<PillarBlob pillar={category.slug} />
 			<h3>{category.name}</h3>
