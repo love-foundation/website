@@ -54,7 +54,7 @@ steps:
         from_secret: port
       key:
         from_secret: key
-      target: /srv/lf/website/staging
+      target: /srv/lf/website/staging/deploy
       overwrite: true
       source:
         - ./build
@@ -84,6 +84,8 @@ steps:
 
       commands:
         - cd /srv/lf/website/staging
+        - mv ./deploy .
+        - rm -rf ./deploy
         - docker-compose -f docker-compose.staging.yml up -d --build
     when:
       branch:
