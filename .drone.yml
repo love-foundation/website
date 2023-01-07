@@ -52,7 +52,7 @@ steps:
         from_secret: key
     settings:
       host: love-foundation.org
-      user: root
+      user: lfdeploy
       port: 1312
       target: /srv/lf/website/staging
       sources:
@@ -92,7 +92,7 @@ steps:
         from_secret: key
     settings:
       host: love-foundation.org
-      user: root
+      user: lfdeploy
       port: 1312
       target: /srv/lf/website/prod
       sources:
@@ -157,7 +157,7 @@ steps:
         from_secret: key
     settings:
       host: love-foundation.org
-      user: root
+      user: lfdeploy
       port: 1312
       target: /srv/lf/website/prod
       sources:
