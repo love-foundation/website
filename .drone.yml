@@ -138,8 +138,7 @@ steps:
         - docker-compose -f docker-compose.prod.yml up -d --build
     when:
       branch:
-        exclude:
-          - master
+        - master
 
 trigger:
   event:
@@ -201,9 +200,6 @@ steps:
         - ./build
         - ./docker-compose.prod.yml
       overwrite: true
-    when:
-      branch:
-        - master
 
   - name: restart production server
     image: appleboy/drone-ssh
@@ -218,10 +214,7 @@ steps:
       commands:
         - cd /srv/lf/website/prod
         - docker-compose -f docker-compose.prod.yml up -d --build
-    when:
-      branch:
-        exclude:
-          - master
+
 trigger:
   event:
     include:
