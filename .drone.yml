@@ -86,7 +86,7 @@ steps:
         from_secret: passphrase
       script:
         - cd /srv/lf/website/staging
-        - rsync -ravI ./deploy/ . --delete-after
+        - rsync -ravI ./deploy/ . --delete-after --filter="P .env"
         - rm -rf ./deploy
         - docker-compose -f docker-compose.staging.yml up -d --build
     when:
