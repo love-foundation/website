@@ -66,8 +66,6 @@ steps:
         - ./src
         - ./Dockerfile
         - ./docker-compose.staging.yml
-      commands:
-        - docker-compose -f docker-compose.staging.yml up -d --build
     when:
       branch:
         exclude:
@@ -77,6 +75,7 @@ steps:
     image: appleboy/drone-ssh
     pull: always
     settings:
+      command_timeout: 2m
       host: love-foundation.org
       username: lfdeploy
       port:
@@ -85,7 +84,7 @@ steps:
         from_secret: key
       passphrase:
         from_secret: passphrase
-      commands:
+      script:
         - cd /srv/lf/website/staging
         - rsync -ravI ./deploy/ . --delete-after
         - rm -rf ./deploy
@@ -134,6 +133,7 @@ steps:
     image: appleboy/drone-ssh
     pull: always
     settings:
+      command_timeout: 2m
       host: love-foundation.org
       username: lfdeploy
       port:
@@ -142,8 +142,10 @@ steps:
         from_secret: key
       passphrase:
         from_secret: passphrase
-      commands:
+      script:
+        - pwd
         - cd /srv/lf/website/prod
+        - pwd
         - rsync -ravI ./deploy/ . --delete-after
         - rm -rf ./deploy
         - docker-compose -f docker-compose.prod.yml up -d --build
@@ -218,6 +220,7 @@ steps:
     image: appleboy/drone-ssh
     pull: always
     settings:
+      command_timeout: 2m
       host: love-foundation.org
       username: lfdeploy
       port:
@@ -226,7 +229,7 @@ steps:
         from_secret: key
       passphrase:
         from_secret: passphrase
-      commands:
+      script:
         - cd /srv/lf/website/prod
         - rsync -ravI ./deploy/ . --delete-after
         - rm -rf ./deploy
