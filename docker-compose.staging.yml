@@ -9,7 +9,7 @@ services:
     build: .
     restart: unless-stopped
     env_file:
-      - ./.env
+      - /srv/lf/website/staging/.env
     ports:
       - 3000:3000
     volumes:
