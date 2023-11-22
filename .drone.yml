@@ -85,9 +85,11 @@ steps:
       passphrase:
         from_secret: passphrase
       script:
-        - ln -sfn /srv/lf/website/staging/releases/${DRONE_BUILD_NUMBER} /srv/lf/website/staging/current/
+        - mkdir -p /srv/lf/website/staging/current
+        - ln -sfn /srv/lf/website/staging/releases/${DRONE_BUILD_NUMBER} /srv/lf/website/staging/current
         - "cd /srv/lf/website/staging/releases && ls -dt */ | tail -n +6 | xargs rm -rf"
-        - docker-compose -f /srv/lf/website/staging/current/docker-compose.staging.yml up -d --build
+        - "cd /srv/lf/website/staging/current && docker-compose -f docker-compose.staging.yml up -d --build"
+
     when:
       branch:
         exclude:
@@ -142,9 +144,11 @@ steps:
       passphrase:
         from_secret: passphrase
       script:
-        - ln -sfn  /srv/lf/website/prod/releases/${DRONE_BUILD_NUMBER} /srv/lf/website/prod/current
+        - mkdir -p /srv/lf/website/prod/current
+        - ln -sfn /srv/lf/website/prod/releases/${DRONE_BUILD_NUMBER} /srv/lf/website/prod/current
         - "cd /srv/lf/website/prod/releases && ls -dt */ | tail -n +6 | xargs rm -rf"
-        - docker-compose -f /srv/lf/website/prod/current/docker-compose.prod.yml up -d --build
+        - "cd /srv/lf/website/prod/current && docker-compose -f docker-compose.prod.yml up -d --build"
+
     when:
       branch:
         - master
@@ -226,9 +230,10 @@ steps:
       passphrase:
         from_secret: passphrase
       script:
-        - ln -sfn  /srv/lf/website/prod/releases/${DRONE_BUILD_NUMBER} /srv/lf/website/prod/current
+        - mkdir -p /srv/lf/website/prod/current
+        - ln -sfn /srv/lf/website/prod/releases/${DRONE_BUILD_NUMBER} /srv/lf/website/prod/current
         - "cd /srv/lf/website/prod/releases && ls -dt */ | tail -n +6 | xargs rm -rf"
-        - docker-compose -f /srv/lf/website/prod/current/docker-compose.prod.yml up -d --build
+        - "cd /srv/lf/website/prod/current && docker-compose -f docker-compose.prod.yml up -d --build"
 
 trigger:
   event:
