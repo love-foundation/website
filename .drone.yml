@@ -86,12 +86,9 @@ steps:
         from_secret: passphrase
       script:
         - "cd /srv/lf/website/staging/releases && ls -dt */ | tail -n +6 | xargs rm -rf"
-        - rm -rf /srv/lf/website/staging/current
         - ln -sfn /srv/lf/website/staging/releases/${DRONE_BUILD_NUMBER} /srv/lf/website/staging/current
-        - cd /srv/lf/website/staging/current
-        - pwd
-        - ls -l
-        - docker-compose -f docker-compose.staging.yml up -d --build
+        - docker-compose -f /srv/lf/website/staging/current/docker-compose.staging.yml down
+        - docker-compose -t website-staging -f /srv/lf/website/staging/current/docker-compose.staging.yml up -d --build
 
     when:
       branch:
@@ -150,7 +147,8 @@ steps:
         - "cd /srv/lf/website/prod/releases && ls -dt */ | tail -n +6 | xargs rm -rf"
         - ln -sfn /srv/lf/website/prod/releases/${DRONE_BUILD_NUMBER} /srv/lf/website/prod/current
         - cd /srv/lf/website/prod/current
-        - docker-compose -f docker-compose.prod.yml up -d --build
+        - docker-compose -f /srv/lf/website/prod/current/docker-compose.prod.yml down
+        - docker-compose -t website-prod -f /srv/lf/website/prod/current/docker-compose.prod.yml up -d --build
 
     when:
       branch:
@@ -235,8 +233,8 @@ steps:
       script:
         - "cd /srv/lf/website/prod/releases && ls -dt */ | tail -n +6 | xargs rm -rf"
         - ln -sfn /srv/lf/website/prod/releases/${DRONE_BUILD_NUMBER} /srv/lf/website/prod/current
-        - cd /srv/lf/website/prod/current
-        - docker-compose -f docker-compose.prod.yml up -d --build
+        - docker-compose -f /srv/lf/website/prod/current/docker-compose.prod.yml down
+        - docker-compose -t website-prod -f /srv/lf/website/prod/current/docker-compose.prod.yml up -d --build
 
 trigger:
   event:
