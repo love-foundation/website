@@ -87,7 +87,7 @@ steps:
       script:
         - "cd /srv/lf/website/staging/releases && ls -dt */ | tail -n +6 | xargs rm -rf"
         - ln -sfn /srv/lf/website/staging/releases/${DRONE_BUILD_NUMBER} /srv/lf/website/staging/current
-        - docker-compose -f /srv/lf/website/staging/current/docker-compose.staging.yml up -d --build
+        - docker-compose -p staging -f /srv/lf/website/staging/current/docker-compose.staging.yml up -d --build
 
     when:
       branch:
@@ -145,8 +145,7 @@ steps:
       script:
         - "cd /srv/lf/website/prod/releases && ls -dt */ | tail -n +6 | xargs rm -rf"
         - ln -sfn /srv/lf/website/prod/releases/${DRONE_BUILD_NUMBER} /srv/lf/website/prod/current
-        - cd /srv/lf/website/prod/current
-        - docker-compose -f /srv/lf/website/prod/current/docker-compose.prod.yml up -d --build
+        - docker-compose -p prod -f /srv/lf/website/prod/current/docker-compose.prod.yml up -d --build
 
     when:
       branch:
@@ -231,8 +230,7 @@ steps:
       script:
         - "cd /srv/lf/website/prod/releases && ls -dt */ | tail -n +6 | xargs rm -rf"
         - ln -sfn /srv/lf/website/prod/releases/${DRONE_BUILD_NUMBER} /srv/lf/website/prod/current
-        - docker-compose -f /srv/lf/website/prod/current/docker-compose.prod.yml down
-        - docker-compose -f /srv/lf/website/prod/current/docker-compose.prod.yml up -d --build
+        - docker-compose -p prod -f /srv/lf/website/prod/current/docker-compose.prod.yml up -d --build
 
 trigger:
   event:
