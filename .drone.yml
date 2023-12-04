@@ -91,7 +91,7 @@ steps:
         - cd /srv/lf/website/staging/current
         - pwd
         - ls -l
-        - docker-compose -f docker-compose.staging.yml up -d --build
+        - docker-compose -f docker-compose.staging.yml up -d --build"
 
     when:
       branch:
