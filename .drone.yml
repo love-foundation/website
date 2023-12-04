@@ -56,7 +56,7 @@ steps:
         from_secret: key
       passphrase:
         from_secret: passphrase
-      target: /srv/lf/website/stag_releases/${DRONE_BUILD_NUMBER}
+      target: /srv/lf/website/staging/deploy
       overwrite: true
       source:
         - ./build
@@ -85,9 +85,10 @@ steps:
       passphrase:
         from_secret: passphrase
       script:
-        - ln -sfn /srv/lf/website/stag_releases/${DRONE_BUILD_NUMBER} /srv/lf/website/stag
-        - "cd /srv/lf/website/stag_releases && ls -dt */ | tail -n +6 | xargs rm -rf"
-        - docker-compose -f /srv/lf/website/stag/docker-compose.staging.yml up -d --build
+        - cd /srv/lf/website/staging
+        - rsync -ravI ./deploy/ . --delete-after --filter="P .env"
+        - rm -rf ./deploy
+        - docker-compose -f docker-compose.staging.yml up -d --build
     when:
       branch:
         exclude:
@@ -119,7 +120,7 @@ steps:
         from_secret: passphrase
       port:
         from_secret: port
-      target: /srv/lf/website/prod_releases/${DRONE_BUILD_NUMBER}
+      target: /srv/lf/website/prod/deploy
       source:
         - ./build
         - ./docker-compose.prod.yml
@@ -142,9 +143,12 @@ steps:
       passphrase:
         from_secret: passphrase
       script:
-        - ln -sfn /srv/lf/website/prod_releases/${DRONE_BUILD_NUMBER} /srv/lf/website/prod
-        - "cd /srv/lf/website/prod_releases && ls -dt */ | tail -n +6 | xargs rm -rf"
-        - docker-compose -f /srv/lf/website/prod/docker-compose.prod.yml up -d --build
+        - pwd
+        - cd /srv/lf/website/prod
+        - pwd
+        - rsync -ravI ./deploy/ . --delete-after
+        - rm -rf ./deploy
+        - docker-compose -f docker-compose.prod.yml up -d --build
     when:
       branch:
         - master
@@ -206,7 +210,7 @@ steps:
         from_secret: passphrase
       port:
         from_secret: port
-      target: /srv/lf/website/prod_releases/${DRONE_BUILD_NUMBER}
+      target: /srv/lf/website/prod/deploy
       source:
         - ./build
         - ./docker-compose.prod.yml
@@ -226,9 +230,10 @@ steps:
       passphrase:
         from_secret: passphrase
       script:
-        - ln -sfn /srv/lf/website/prod_releases/${DRONE_BUILD_NUMBER} /srv/lf/website/prod
-        - "cd /srv/lf/website/prod_releases && ls -dt */ | tail -n +6 | xargs rm -rf"
-        - docker-compose -f /srv/lf/website/prod/docker-compose.prod.yml up -d --build
+        - cd /srv/lf/website/prod
+        - rsync -ravI ./deploy/ . --delete-after
+        - rm -rf ./deploy
+        - docker-compose -f docker-compose.prod.yml up -d --build
 
 trigger:
   event:
