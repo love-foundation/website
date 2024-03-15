@@ -3,7 +3,7 @@ name: build-and-deploy
 
 steps:
   - name: install
-    image: node:16
+    image: node:20
     pull: always
     environment:
       CYPRESS_CACHE_FOLDER: .cypress
@@ -29,7 +29,7 @@ steps:
           - master
 
   - name: build staging
-    image: node:16
+    image: node:20
     pull: always
     environment:
       VITE_DIRECTUS_URL:
@@ -95,7 +95,7 @@ steps:
           - master
 
   - name: build production
-    image: node:16
+    image: node:20
     pull: always
     environment:
       VITE_DIRECTUS_URL:
@@ -165,7 +165,7 @@ name: directus-build-and-deploy
 
 steps:
   - name: install
-    image: node:16
+    image: node:20
     pull: always
     environment:
       CYPRESS_CACHE_FOLDER: .cypress
@@ -187,7 +187,7 @@ steps:
       - npm run test
 
   - name: build production
-    image: node:16
+    image: node:20
     pull: always
     environment:
       VITE_DIRECTUS_URL:

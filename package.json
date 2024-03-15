@@ -28,12 +28,12 @@
     "last 2 safari versions"
   ],
   "dependencies": {
+    "@beyonk/gdpr-cookie-consent-banner": "^12.1.0",
     "@directus/sdk": "^10.3.1",
     "cross-env": "^7.0.3",
     "lozad": "^1.16.0"
   },
   "devDependencies": {
-    "@beyonk/gdpr-cookie-consent-banner": "^12.1.0",
     "@sveltejs/adapter-node": "^5.0.1",
     "@sveltejs/adapter-static": "^3.0.1",
     "@sveltejs/kit": "^2.5.4",
