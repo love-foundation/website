@@ -1,11 +1,11 @@
 import { callApi, directus, status } from '$lib/_directus';
+import blindCast from '$lib/helpers/blindCast';
+import type { Events } from '$lib/types';
+import type { ManyItems } from '@directus/sdk';
+import { error } from '@sveltejs/kit';
+import eventFixture from '../fixtures/events';
 import type { LayoutLoad } from './$types';
 import type { ConvertedIndexEvents } from './events/_types';
-import eventFixture from '../fixtures/events';
-import type { ManyItems } from '@directus/sdk';
-import type { Events } from '$lib/types';
-import blindCast from '$lib/helpers/blindCast';
-import { error } from '@sveltejs/kit';
 
 export const prerender = true;
 
