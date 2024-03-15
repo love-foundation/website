@@ -1,46 +1,35 @@
-<script context="module" lang="ts">
-	export const load: Load = async ({ fetch, params }) => {
-		const url = `/artists/${params.slug}.json`;
-		const res = await fetch(url);
-
-		if (res.ok) {
-			const artist = await res.json();
-			return {
-				props: { artist }
-			};
-		}
-
-		return {
-			status: res.status,
-			error: new Error(`Could not load ${url}`)
-		};
-	};
-</script>
 
 <script lang="ts">
 	import HeroModule from '$lib/components/UI/ContentModules/HeroModule.svelte';
 	import GridItem from '$lib/components/UI/Grid/GridItem.svelte';
-	import type { Load } from '@sveltejs/kit';
+	import type { ConvertedIndexEvents } from '../../events/_types';
+	import type { PageData } from './$types';
 
-	export let artist;
+  export let data: PageData;
 
-	const mapping = {
+  if(!data.singleArtist) {
+    throw new Error('No data found');
+  }
+
+	const mapping: {
+    [key: number]: string;
+  } = {
 		0: 'one',
 		1: 'two',
 		2: 'three'
 	};
 
-	let { name, image, location, category, status, soundcloud, facebook, events, heroColor } = artist;
+	let { name, imageUrl, location, category, status, soundcloud, facebook, events, heroColor } = data.singleArtist;
 	let heroContent: {
 		image?: string;
-		bgColor?: string;
+		bgColor?: string | null;
 		heading?: string;
 	} = {};
 
-	heroContent.image = image;
+	heroContent.image = imageUrl;
 	heroContent.bgColor = heroColor;
 
-	let eventGroups = [];
+	let eventGroups: ConvertedIndexEvents[][] = [];
 	for (let i = 0, len = events.length; i < len; i += 3) {
 		eventGroups = [...eventGroups, events.slice(i, i + 3)];
 	}

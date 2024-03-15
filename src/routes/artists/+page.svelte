@@ -1,44 +1,30 @@
-<script context="module" lang="ts">
-	export const load: Load = async ({ fetch }) => {
-		const fetchUrl = '/artists.json';
-		const res = await fetch(fetchUrl);
-		if (res.ok) {
-			const artists = await res.json();
-			return {
-				props: {
-					artists
-				}
-			};
-		}
 
-		return {
-			status: res.status,
-			error: new Error(`Could not load ${fetchUrl}`)
-		};
-	};
-</script>
 
 <script lang="ts">
 	import ArtistItem from '$lib/components/UI/ArtistItem.svelte';
 	import { shuffleArray, updateClass, setTransitionDuration } from '$lib/helpers/sharedFunctions';
-	import type { Load } from '@sveltejs/kit';
 	import Fuse from 'fuse.js';
 	import lozad from 'lozad';
 	import { onMount } from 'svelte';
+	import type { LayoutData } from './$types';
+	import type { ConvertedArtist } from './_types';
+  export let data: LayoutData
 
-	export let artists;
+  if (!data.artists) {
+    throw new Error('No artists found');
+  }
 
 	let headerClass = 'show';
 	let y = 0;
 	let lastY = 0;
 	let helper;
 	let searchString = '';
-	let artistArray = artists;
-	let filteredArtists = shuffleArray(artistArray);
-	let fuseArtists = [];
-	let currentSet = [];
-	let fuseArtistsIds = [];
-	let searchedArtists = [];
+	let artistArray = data.artists;
+	let filteredArtists = shuffleArray<Array<ConvertedArtist>>(artistArray);
+	let fuseArtists: Fuse.FuseResult<ConvertedArtist>[];
+	let currentSet: ConvertedArtist[] = [];
+	let fuseArtistsIds: string[] = [];
+	let searchedArtists: ConvertedArtist[] = [];
 	let fuseOptions = {
 		// isCaseSensitive: false,
 		// includeScore: false,
@@ -57,7 +43,7 @@
 
 	onMount(() => {
 		const observer = lozad('.lozad', {
-			loaded: function (el) {
+			loaded: function (el: HTMLElement) {
 				// Custom implementation on a loaded element
 				el.classList.add('loaded');
 			}
