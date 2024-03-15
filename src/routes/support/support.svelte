@@ -1,7 +1,4 @@
 <script lang="ts">
-	// import { session } from '$app/stores';
-
-	// $: necessaryAccepted = $session.cookieConsent.necessary;
 	const necessaryAccepted = true;
 </script>
 

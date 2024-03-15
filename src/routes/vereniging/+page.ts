@@ -9,7 +9,7 @@ export const load: PageLoad = async () => {
 			.readByQuery({
 				fields: ['content.*.*'],
 				filter: {
-					slug: 'impressum',
+					slug: 'vereniging-love-foundation',
 					status: {
 						_in: status
 					}
@@ -17,7 +17,7 @@ export const load: PageLoad = async () => {
 			});
 		if (pageContent.data?.length === 1) {
 			return {
-				impressum: pageContent.data[0].content
+				vereniging: pageContent.data[0].content
 			};
 		}
 	} catch (apiError) {

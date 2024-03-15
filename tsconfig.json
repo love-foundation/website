@@ -9,7 +9,6 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
-		"verbatimModuleSyntax": true,
 		"paths": {
 			"$lib": ["./src/lib"],
 			"$lib/*": ["./src/lib/*"]

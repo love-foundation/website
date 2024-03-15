@@ -67,10 +67,15 @@
 					cookieName: 'love_foundation_cookieconsent',
 					description:
 						'We only use cookies as part of our donation form that is implemented with a third party supplier that sets cookies. We currently do not set any cookies ourselves.',
-					choices
+					choices,
+
 			  })
 			: undefined;
 	}
+
+  window.addEventListener("consent:necessary", () => {
+
+  });
 </script>
 
 <svelte:head>
