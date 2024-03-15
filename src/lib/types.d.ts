@@ -17,7 +17,7 @@ export type Artists = {
 	artist_name?: string;
 	hero_background_color?: string;
 	slug?: string;
-	events: string | EventsArtists[];
+	events: EventsArtists[];
 };
 
 export type Content = {
@@ -84,8 +84,8 @@ export type Events = {
 
 export type EventsArtists = {
 	id: number;
-	events_id?: number | Events;
-	artists_id?: number | Artists;
+	events_id: Events;
+	artists_id: Artists;
 };
 
 export type EventsDirectusFiles = {

@@ -1,14 +1,14 @@
-import { directus, status, callApi } from '$lib/_directus';
+import { callApi, directus, status } from '$lib/_directus';
 import type { RequestHandler } from '@sveltejs/kit';
 import fakeResponse from '../../fixtures/artists';
-import type { convertedIndexArtist } from './_types.js';
+import type { ConvertedArtist } from './_types.js';
 
 export const get: RequestHandler = async () => {
 	const artists = callApi
 		? await directus()
 				.items('artists')
 				.readByQuery({
-					fields: 'id, slug, artist_name, image.data.*, current_location, type_of_art',
+					fields: ['id', 'artist_name', 'image', 'current_location', 'type_of_art', 'slug'],
 					filter: {
 						status: {
 							_in: status
@@ -18,7 +18,7 @@ export const get: RequestHandler = async () => {
 				})
 		: fakeResponse;
 
-	const artistsData: convertedIndexArtist[] = artists.data.map((artist) => {
+	const artistsData: ConvertedArtist[] = artists.data.map((artist) => {
 		const { id, slug, artist_name, image, current_location, type_of_art } = artist;
 		return {
 			id,
