@@ -1,46 +1,28 @@
-<script context="module" lang="ts">
-	export const load: Load = async ({ fetch }) => {
-		const fetchUrl = '/events.json';
-		const res = await fetch(fetchUrl);
-		if (res.ok) {
-			const events = await res.json();
-			return {
-				props: {
-					events
-				}
-			};
-		}
-
-		return {
-			status: res.status,
-			error: new Error(`Could not load ${fetchUrl}`)
-		};
-	};
-</script>
-
 <script lang="ts">
 	import GridGroup from '$lib/components/UI/Grid/GridGroup.svelte';
 	import FilterBar from '$lib/components/UI/FilterBar.svelte';
 	import { onMount, beforeUpdate, afterUpdate } from 'svelte';
 	import lozad from 'lozad';
-	import type { Load } from '@sveltejs/kit';
 	import { page } from '$app/stores';
-	import { browser } from '$app/env';
-	export let events;
+	import { browser } from '$app/environment';
+	import type { LayoutData } from '../$types';
+	import type { ConvertedIndexEvents } from './_types';
+
+
+	export let data: LayoutData;
+
 	const pageFilters: {
-		hub?: string | undefined;
-		category?: string | undefined;
+		hub?: string | null | boolean;
+		category?: string | null | boolean;
 	} = {
-		hub: browser && $page.url.searchParams.get('hub'),
-		category: browser && $page.url.searchParams.get('category')
 	};
 
-	let eventsArray = events;
-	let eventGroups = [];
+	let eventsArray = data.events;
+	let eventGroups: ConvertedIndexEvents[][] = [];
 	let len;
-	let categories = [];
-	let hubs = [];
-	let filteredEvents;
+	let categories: string[] = [];
+	let hubs: string[] = [];
+	let filteredEvents: ConvertedIndexEvents[];
 	let currentFilters = { ...pageFilters };
 
 	eventsArray.map((event) => {
@@ -65,17 +47,17 @@
 		let url = new URL(window.location.href);
 
 		if (params.hub) {
-			url.searchParams.set('hub', params.hub);
+			url.searchParams.set('hub', params.hub.toString());
 		} else if (url.searchParams.has('hub')) {
 			url.searchParams.delete('hub');
 		}
 
 		if (params.category) {
-			url.searchParams.set('category', params.category);
+			url.searchParams.set('category', params.category.toString());
 		} else if (url.searchParams.has('category')) {
 			url.searchParams.delete('category');
 		}
-		window.history.pushState({}, null, url);
+		window.history.pushState({}, '', url);
 	});
 
 	afterUpdate(() => {
@@ -85,7 +67,7 @@
 
 	$: filteredEvents = eventsArray.filter((e) => {
 		return Object.entries(currentFilters).every(
-			([filterName, value]) => e[filterName] == value || value == undefined
+			([filterName, value]) =>  e[filterName as keyof typeof e] == value || value == undefined
 		);
 	});
 
@@ -96,7 +78,7 @@
 		}
 	}
 
-	function filterEvents(filter) {
+	function filterEvents(filter: typeof currentFilters) {
 		if (filter.hub) {
 			currentFilters.hub = filter.hub;
 		} else {
@@ -104,7 +86,7 @@
 		}
 	}
 
-	function reset(filter) {
+	function reset(filter: 'hub' | 'category') {
 		delete currentFilters[filter];
 
 		// force an update

@@ -8,6 +8,10 @@ export type ConvertedIndexEvents = {
 	hub: string;
 	category: string;
 	starttime: DateTime;
+	endtime: DateTime;
+	location?: string;
+	heroColor?: string | null;
+	artists: PartialItem<Artists>[];
 };
 
 export type ConvertedSingleEvent = {
