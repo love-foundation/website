@@ -21,7 +21,7 @@
 	} = {};
 
 	heroContent.image = event.imageUrl;
-	heroContent.bgColor = event.heroColor;
+	heroContent.bgColor = event.hero;
 </script>
 
 <svelte:head>

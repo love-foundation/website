@@ -23,6 +23,6 @@ export const load: PageLoad = async ({ fetch }) => {
 			hubs: hubs.data
 		};
 	} catch (apiError) {
-		throw error(500, `Could not load homepage: ${apiError}`);
+		error(500, `Could not load homepage: ${apiError}`);
 	}
 };

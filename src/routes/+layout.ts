@@ -95,5 +95,5 @@ export const load: LayoutLoad = async () => {
 			events: eventsData
 		};
 	}
-	throw error(500, 'Fetching events failed');
+	error(500, 'Fetching events failed');
 };
