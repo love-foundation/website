@@ -2,10 +2,10 @@
 <script lang="ts">
 	import HeroModule from '$lib/components/UI/ContentModules/HeroModule.svelte';
 	import GridItem from '$lib/components/UI/Grid/GridItem.svelte';
+	import type { PageServerData } from './$types';
 	import type { ConvertedIndexEvents } from '../../events/_types';
-	import type { PageData } from './$types';
 
-  export let data: PageData;
+  export let data: PageServerData;
 
   if(!data.singleArtist) {
     throw new Error('No data found');

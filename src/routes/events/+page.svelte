@@ -4,12 +4,11 @@
 	import { onMount, beforeUpdate, afterUpdate } from 'svelte';
 	import lozad from 'lozad';
 	import { page } from '$app/stores';
-	import { browser } from '$app/environment';
-	import type { LayoutData } from '../$types';
+	import type { PageData } from '../$types';
 	import type { ConvertedIndexEvents } from './_types';
 
 
-	export let data: LayoutData;
+	export let data: PageData;
 
 	const pageFilters: {
 		hub?: string | null | boolean;
