@@ -2,8 +2,7 @@
 <script lang="ts">
 	import HeroModule from '$lib/components/UI/ContentModules/HeroModule.svelte';
 	import ArtistItem from '$lib/components/UI/ArtistItem.svelte';
-	import { normalizeEventDate, normalizeTime } from '$lib/helpers/sharedFunctions';
-	import type { ConvertedSingleEvent } from '../_types';
+	import { normalizeEventDate } from '$lib/helpers/sharedFunctions';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -21,16 +20,16 @@
 	} = {};
 
 	heroContent.image = event.imageUrl;
-	heroContent.bgColor = event.hero;
+	heroContent.bgColor = event.heroColor ?? undefined;
 </script>
 
 <svelte:head>
-	<title>{event.name}</title>
+	<title>{event.title}</title>
 </svelte:head>
 
 <HeroModule heroModuleProps={heroContent} />
 <div class="head">
-	<h1>{event.name}</h1>
+	<h1>{event.title}</h1>
 </div>
 <div class="info">
 	<div class="columns is-vertical is-multiline is-centered">

@@ -13,10 +13,10 @@ export type Artists = {
 	other_links?: string;
 	booking_contact?: string;
 	type_of_art?: string;
-	image?: string | DirectusFiles;
-	artist_name?: string;
+	image: string | DirectusFiles;
+	artist_name: string;
 	hero_background_color?: string;
-	slug?: string;
+	slug: string;
 	events: EventsArtists[];
 };
 

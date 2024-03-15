@@ -1,37 +1,34 @@
-import { callApi, directus, status } from '$lib/_directus';
+import { directus, status } from '$lib/_directus';
 import { error } from '@sveltejs/kit';
-import artistFixture from '../../fixtures/artists';
-import type { LayoutLoad } from './$types';
 import type { ConvertedArtist } from './_types';
 
 export const prerender = true;
 
-export const load: LayoutLoad = async ({ parent }) => {
+export const load = async ({ parent }) => {
 	try {
-		const artists = callApi
-			? await directus()
-					.items('artists')
-					.readByQuery({
-						fields: [
-							'id',
-							'artist_name',
-							'image',
-							'current_location',
-							'type_of_art',
-							'slug',
-							'events.events_id.id',
-							'soundcloud_url',
-							'facebook_url',
-							'level_of_involvement',
-							'hero_background_color'
-						],
-						filter: {
-							status: {
-								_in: status
-							}
-						}
-					})
-			: artistFixture;
+		const artists = await directus()
+			.items('artists')
+			.readByQuery({
+				fields: [
+					'id',
+					'artist_name',
+					'image',
+					'current_location',
+					'type_of_art',
+					'slug',
+					'events.events_id.id',
+					'soundcloud_url',
+					'facebook_url',
+					'level_of_involvement',
+					'hero_background_color'
+				],
+				filter: {
+					status: {
+						_in: status
+					}
+				},
+				limit: -1
+			});
 
 		if (!artists.data) {
 			throw new Error('No data returned from Directus');

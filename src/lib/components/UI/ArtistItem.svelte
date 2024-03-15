@@ -1,11 +1,13 @@
-<script>
-	export let artist = {};
+<script lang="ts">
+	import type { ConvertedIndexEvents } from "../../../routes/events/_types";
+
+  export let artist: ConvertedIndexEvents["artists"][0]
 	export let lazy = false;
 </script>
 
 <a
-	sveltekit:prefetch
-	href={artist.slug && `/artists/${artist.slug}`}
+  data-sveltekit-preload-data
+	href={`/artists/${artist.slug}`}
 	class="column is-one-quarter-desktop is-one-third-tablet"
 >
 	<div>
