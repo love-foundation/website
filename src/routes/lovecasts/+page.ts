@@ -1,16 +1,16 @@
 import { callApi, directus, status } from '$lib/_directus';
 import fakeResponse from '../../fixtures/lovecasts';
-import type { RequestHandler } from '@sveltejs/kit';
-import type { ConvertedLovecast } from './_types.js';
+import type { PageLoad } from './$types';
+import type { ConvertedLovecast } from './_types';
 
 const episodeNumberRegex = /(\w+cast)\s+(\d{1,4})/i;
 
-export const get: RequestHandler = async () => {
+export const load: PageLoad = async () => {
 	const lovecasts = callApi
 		? await directus()
 				.items('lovecast')
 				.readByQuery({
-					fields: 'id, name_of_the_set, design, soundcloud_link, type',
+					fields: ['id', 'name_of_the_set', 'design', 'soundcloud_link', 'type'],
 					filter: {
 						status: {
 							_in: status
@@ -20,16 +20,20 @@ export const get: RequestHandler = async () => {
 				})
 		: fakeResponse;
 
+	if (!lovecasts.data) {
+		throw new Error('No lovecasts found');
+	}
+
 	const lovecastsData: ConvertedLovecast[] = lovecasts.data
 		.map((lovecast) => {
 			const { id, name_of_the_set, design, soundcloud_link, type } = lovecast;
-			const [_, regexCastType, episodeNumber] = name_of_the_set.match(episodeNumberRegex);
+			const [_, regexCastType, episodeNumber] = name_of_the_set?.match(episodeNumberRegex) ?? [];
 			return {
 				id,
-				title: name_of_the_set,
-				soundcloud: soundcloud_link,
-				imageUrl: design ? `${import.meta.env.VITE_DIRECTUS_URL}assets/${design}` : null,
-				type,
+				title: name_of_the_set ?? 'No lovecast name defined',
+				soundcloud: soundcloud_link ?? 'https://soundcloud.com/love-foundation',
+				imageUrl: design ? `${import.meta.env.VITE_DIRECTUS_URL}assets/${design}` : '',
+				type: type ?? 'No type',
 				regexCastType,
 				episodeNumber: parseInt(episodeNumber, 10)
 			};
@@ -37,13 +41,10 @@ export const get: RequestHandler = async () => {
 		.sort((a, b) => {
 			return b.regexCastType.localeCompare(a.regexCastType) || b.episodeNumber - a.episodeNumber;
 		});
+
 	if (lovecastsData) {
 		return {
-			body: JSON.stringify(lovecastsData)
+			lovecasts: lovecastsData
 		};
 	}
-
-	return {
-		status: 404
-	};
 };

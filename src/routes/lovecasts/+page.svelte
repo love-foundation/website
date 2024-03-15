@@ -1,21 +1,4 @@
-<script context="module" lang="ts">
-	export const load = async ({ fetch }) => {
-		const url = '/lovecasts.json';
-		const res = await fetch(url);
 
-		if (res.ok) {
-			const lovecasts = await res.json();
-			return {
-				props: { lovecasts }
-			};
-		}
-
-		return {
-			status: res.status,
-			error: new Error(`Could not load ${url}`)
-		};
-	};
-</script>
 
 <script lang="ts">
 	import GridGroup from '$lib/components/UI/Grid/GridGroup.svelte';
@@ -24,18 +7,19 @@
 	import { afterUpdate, beforeUpdate, onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import type { ConvertedLovecast } from './_types';
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
+	import type { PageData } from './$types';
 
-	export let lovecasts: ConvertedLovecast[];
+	export let data: PageData;
 
-	let lovecastGroups = [];
+	let lovecastGroups: ConvertedLovecast[][] = [];
 	let headerClass = 'show';
 	let y = 0;
 	let lastY = 0;
 	let helper;
 
 	let lovecastFilters: {
-		type?: string;
+		type?: string | null | boolean;
 	} = { type: browser && $page.url.searchParams.get('type') };
 
 	onMount(() => {
@@ -47,14 +31,14 @@
 	beforeUpdate(() => {
 		let url = new URL(window.location.href);
 		if (lovecastFilters.type) {
-			url.searchParams.set('type', lovecastFilters.type);
+			url.searchParams.set('type', lovecastFilters.type.toString());
 		} else {
 			url.searchParams.delete('type');
 		}
-		window.history.pushState({}, null, url);
+		window.history.pushState({}, '', url);
 	});
 
-	function filterLovecasts(type) {
+	function filterLovecasts(type: string) {
 		if (lovecastFilters.type === type) {
 			delete lovecastFilters.type;
 			// force update
@@ -63,7 +47,7 @@
 			lovecastFilters.type = type;
 		}
 	}
-	$: filteredLovecasts = lovecasts.filter((lovecast) =>
+	$: filteredLovecasts = data.lovecasts?.filter((lovecast) =>
 		lovecastFilters.type ? lovecast.type === lovecastFilters.type : true
 	);
 
@@ -75,8 +59,9 @@
 
 	$: {
 		lovecastGroups = [];
-		for (let i = 0, len = filteredLovecasts.length; i < len; i += 5) {
-			lovecastGroups.push(filteredLovecasts.slice(i, i + 5));
+		for (let i = 0, len = filteredLovecasts?.length; i < (len ?? 0); i += 5) {
+      if (filteredLovecasts && filteredLovecasts?.length > 0)
+			lovecastGroups.push(filteredLovecasts?.slice(i, i + 5));
 		}
 	}
 
@@ -96,6 +81,7 @@
 	<div class="column is-hidden-mobile" />
 	<div class="column is-6-mobile is-2-desktop shuffle">
 		<h2
+      role="button"
 			class="vcentered pointer centered"
 			on:click={() => filterLovecasts('lovecast')}
 			class:active={lovecastFilters.type === 'lovecast'}
@@ -105,6 +91,7 @@
 	</div>
 	<div class="column is-6-mobile is-2-desktop shuffle">
 		<h2
+      role="button"
 			class="vcentered pointer centered"
 			on:click={() => filterLovecasts('radiocast')}
 			class:active={lovecastFilters.type === 'radiocast'}
