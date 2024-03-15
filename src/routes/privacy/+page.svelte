@@ -1,19 +1,18 @@
-
 <script lang="ts">
 	import Content from '$lib/components/UI/Content.svelte';
 	import type { PageData } from './$types';
   export let data: PageData
 
-  const queriedContent = data.impressum;
+  const queriedContent = data.privacyPolicy;
 
 
 </script>
 
 <svelte:head>
-	<title>Love Foundation e.V. - Impressum</title>
+	<title>Privacy Policy</title>
 </svelte:head>
 {#if queriedContent}
-<section id="impressum" class="pad--bottom--small">
+<section id="privacy-policy" class="pad--bottom--small">
 	<Content {queriedContent} />
 </section>
 {/if}
