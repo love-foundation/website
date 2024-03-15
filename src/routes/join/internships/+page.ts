@@ -24,6 +24,6 @@ export const load: PageLoad = async () => {
 			};
 		}
 	} catch (apiError) {
-		throw error(500, `Could not load impressum: ${apiError}`);
+		error(500, `Could not load impressum: ${apiError}`);
 	}
 };

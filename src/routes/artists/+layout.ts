@@ -85,6 +85,6 @@ export const load: LayoutLoad = async ({ parent }) => {
 			};
 		}
 	} catch (apiError) {
-		throw error(500, `Could not load impressum: ${apiError}`);
+		error(500, `Could not load impressum: ${apiError}`);
 	}
 };
