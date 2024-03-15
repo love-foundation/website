@@ -1,4 +1,6 @@
 <script lang="ts">
+	import CookieBar from "$lib/components/UI/CookieBar.svelte";
+
 	const necessaryAccepted = true;
 </script>
 
@@ -7,7 +9,7 @@
 </svelte:head>
 
 <h1 class="pad--bottom--small centered">Support us financially</h1>
-
+<CookieBar />
 <section>
 	{#if necessaryAccepted}
 		<div>
