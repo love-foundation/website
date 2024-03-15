@@ -6,15 +6,12 @@
 	import attachBanner from '@beyonk/gdpr-cookie-consent-banner';
 	import '../app.scss';
 
-	const choices: Parameters<typeof attachBanner>[1]['choices'] = {
+	const choices = {
 		necessary: {
 			label: 'Necessary cookies',
 			description: 'Used for cookie control and usage of the donation form',
 			value: true
 		},
-		tracking: false,
-		analytics: false,
-		marketing: false
 	};
 
 	let winHeight = 0;
@@ -70,7 +67,7 @@
 					cookieName: 'love_foundation_cookieconsent',
 					description:
 						'We only use cookies as part of our donation form that is implemented with a third party supplier that sets cookies. We currently do not set any cookies ourselves.',
-					choices: typeof attachBanner
+					choices
 			  })
 			: undefined;
 	}

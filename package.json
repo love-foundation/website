@@ -19,7 +19,7 @@
     "test-dev": "run-p --race dev cy:open"
   },
   "engine": {
-    "node": "16.13.2",
+    "node": "20.11.0",
     "npm": "8.4.0"
   },
   "browserslist": [
