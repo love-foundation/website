@@ -79,7 +79,7 @@ export type Events = {
 	logo_of_other_collectives_involved: string | EventsDirectusFilesOtherCollectivesLogos[];
 	upload_inspiration: string | EventsDirectusFilesInspiration[];
 	design_assets: string | EventsDirectusFiles[];
-	artists: string | EventsArtists[];
+	artists: EventsArtists[];
 };
 
 export type EventsArtists = {
