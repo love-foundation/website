@@ -72,10 +72,6 @@
 			  })
 			: undefined;
 	}
-
-  window.addEventListener("consent:necessary", () => {
-
-  });
 </script>
 
 <svelte:head>

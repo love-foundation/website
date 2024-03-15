@@ -1,35 +1,17 @@
-<script context="module" lang="ts">
-	export const load: Load = async ({ fetch }) => {
-		const fetchUrl = '/projects.json';
-		const res = await fetch(fetchUrl);
-
-		if (res.ok) {
-			const projects = await res.json();
-			return {
-				props: { projects }
-			};
-		}
-
-		return {
-			status: res.status,
-			error: new Error(`Could not load ${fetchUrl}`)
-		};
-	};
-</script>
-
 <script lang="ts">
 	import ProjectItem from '$lib/components/UI/ProjectItem.svelte';
 	import PillarBlob from '$lib/components/UI/PillarBlob.svelte';
 	import { fade } from 'svelte/transition';
 	import { beforeUpdate, onMount } from 'svelte';
-	import type { ConvertedProjectForIndex } from './_types';
-	import type { Load } from '@sveltejs/kit';
+	import type { ConvertedProjects } from './_types';
 	import { page } from '$app/stores';
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
+	import type { PageData } from '../$types';
+  export let data: PageData;
 
-	export let projects: ConvertedProjectForIndex[];
+  const projects = data.projects as ConvertedProjects[];
 	const pageFilters: {
-		pillar?: string;
+		pillar?: string | null | boolean;
 	} = { pillar: browser && $page.url.searchParams.get('pillar') };
 
 	onMount(() => {
@@ -38,7 +20,7 @@
 
 	let currentPillars = { ...pageFilters };
 	let projectsArray = projects;
-	let filteredProjects = [];
+	let filteredProjects: ConvertedProjects[]= [];
 
 	let categories = [
 		{
@@ -71,10 +53,10 @@
 		} else {
 			url.searchParams.delete('pillar');
 		}
-		window.history.pushState({}, null, url);
+		window.history.pushState({}, '', url);
 	});
 
-	function filterProjects(pillar) {
+	function filterProjects(pillar: string | null) {
 		if (currentPillars.pillar === pillar) {
 			delete currentPillars.pillar;
 
@@ -107,6 +89,7 @@
 <ul data-cy="projectFilters" id="projectfilters">
 	{#each categories as category}
 		<li
+      role="button"
 			data-cy="projectFilter"
 			class="projectfilter"
 			on:click={() => {
