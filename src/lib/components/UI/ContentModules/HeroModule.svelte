@@ -5,7 +5,7 @@
 	export let heroModuleProps:
 		| {
 				image?: string;
-				bgColor?: string;
+				bgColor?: string | null;
 				heading?: string;
 		  }
 		| undefined = undefined;

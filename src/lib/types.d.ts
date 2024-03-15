@@ -188,12 +188,12 @@ export type Projects = {
 	created_on?: string;
 	name?: string;
 	location_country?: string;
-	main_image?: string | DirectusFiles;
+	main_image?: DirectusFiles;
 	pillar?: string;
-	slug?: string;
+	slug: string;
 	hero_background_color?: string;
 	events_that_donated: string | ProjectsEvents[];
-	content: string | Content[];
+	content: Content[];
 };
 
 export type ProjectsEvents = {
