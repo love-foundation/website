@@ -10,17 +10,14 @@
 	import type { ConvertedArtist } from './_types';
   export let data: PageData
 
-  if (!data.artists) {
-    throw new Error('No artists found');
-  }
 
 	let headerClass = 'show';
 	let y = 0;
 	let lastY = 0;
 	let helper;
 	let searchString = '';
-	let artistArray = data.artists;
-	let filteredArtists = shuffleArray<Array<ConvertedArtist>>(artistArray);
+	$: artistArray = data.artists;
+	$: filteredArtists = artistArray ? shuffleArray<Array<ConvertedArtist>>(artistArray): [];
 	let fuseArtists: Fuse.FuseResult<ConvertedArtist>[];
 	let currentSet: ConvertedArtist[] = [];
 	let fuseArtistsIds: string[] = [];
@@ -51,7 +48,7 @@
 		observer.observe();
 	});
 
-	const fuse = new Fuse(filteredArtists, fuseOptions);
+	$: fuse = new Fuse(filteredArtists, fuseOptions);
 
 	$: {
 		fuseArtists = fuse.search(searchString);

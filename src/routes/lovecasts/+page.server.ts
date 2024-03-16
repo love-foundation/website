@@ -1,24 +1,20 @@
-import { callApi, directus, status } from '$lib/_directus';
-import fakeResponse from '../../fixtures/lovecasts';
-import type { PageLoad } from './$types';
+import { directus, status } from '$lib/_directus';
 import type { ConvertedLovecast } from './_types';
 
 const episodeNumberRegex = /(\w+cast)\s+(\d{1,4})/i;
 
-export const load: PageLoad = async () => {
-	const lovecasts = callApi
-		? await directus()
-				.items('lovecast')
-				.readByQuery({
-					fields: ['id', 'name_of_the_set', 'design', 'soundcloud_link', 'type'],
-					filter: {
-						status: {
-							_in: status
-						}
-					},
-					limit: -1
-				})
-		: fakeResponse;
+export const load = async () => {
+	const lovecasts = await directus()
+		.items('lovecast')
+		.readByQuery({
+			fields: ['id', 'name_of_the_set', 'design', 'soundcloud_link', 'type'],
+			filter: {
+				status: {
+					_in: status
+				}
+			},
+			limit: -1
+		});
 
 	if (!lovecasts.data) {
 		throw new Error('No lovecasts found');

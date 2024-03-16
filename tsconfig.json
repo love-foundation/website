@@ -11,12 +11,5 @@
 		"strict": true,
 		"moduleResolution": "bundler"
 	},
-	"include": [
-		"src/**/*.d.ts",
-		"src/**/*.js",
-		"src/**/*.ts",
-		"src/**/*.svelte",
-		"fixtures/**/*.ts",
-		"fixtures/**/*.js"
-	]
+	"include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.ts", "src/**/*.svelte"]
 }

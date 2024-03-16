@@ -4,7 +4,7 @@
 	import type { PageData } from './$types';
   export let data: PageData
 
-  const queriedContent = data.impressum;
+  $: queriedContent = data.impressum;
 
 
 </script>

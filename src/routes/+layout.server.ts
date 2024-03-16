@@ -5,6 +5,7 @@ import type { ConvertedIndexEvents } from './events/_types';
 export const prerender = true;
 
 export const load = async () => {
+  console.log('running layout load');
 	const events = await directus()
 		.items('events')
 		.readByQuery({
@@ -35,7 +36,7 @@ export const load = async () => {
 
 	const eventsData: ConvertedIndexEvents[] =
 		events.data
-			?.filter((event) => event.slug)
+			?.filter((event) => !!event.slug)
 			.map((event) => {
 				const {
 					id,
@@ -68,6 +69,9 @@ export const load = async () => {
 						.map((artist) => {
 							if (typeof artist !== 'object') {
 								return;
+							}
+							if (!artist.artists_id) {
+								console.log(artist.artists_id);
 							}
 							return {
 								id: artist.artists_id.id,
