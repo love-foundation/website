@@ -4,7 +4,7 @@
 	import type { PageData } from './$types';
   export let data: PageData
 
-  const queriedContent = data.about;
+  $: queriedContent = data.about;
 
 </script>
 <svelte:head>

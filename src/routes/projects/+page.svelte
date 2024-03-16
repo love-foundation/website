@@ -6,11 +6,11 @@
 	import type { ConvertedProjects } from './_types';
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
-	import type { PageData } from '../$types';
+	import type { PageData } from './$types';
 	import { pushState } from '$app/navigation';
   export let data: PageData;
 
-  const projects = data.projects as ConvertedProjects[];
+  $: projects = data.projects as ConvertedProjects[];
 	const pageFilters: {
 		pillar?: string | null | boolean;
 	} = { pillar: browser && $page.url.searchParams.get('pillar') };
@@ -20,7 +20,6 @@
 	});
 
 	let currentPillars = { ...pageFilters };
-	let projectsArray = projects;
 	let filteredProjects: ConvertedProjects[]= [];
 
 	let categories = [
@@ -50,7 +49,7 @@
 		let params = { ...currentPillars };
 		let url = new URL(window.location.href);
 		if (params.pillar) {
-			url.searchParams.set('pillar', params.pillar);
+			url.searchParams.set('pillar', params.pillar.toString());
 		} else {
 			url.searchParams.delete('pillar');
 		}
@@ -68,7 +67,7 @@
 		}
 	}
 
-	$: filteredProjects = projectsArray.filter((p) => {
+	$: filteredProjects = projects.filter((p) => {
 		if (currentPillars.pillar) {
 			return p.pillar === currentPillars.pillar;
 		} else {

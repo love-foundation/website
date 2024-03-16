@@ -1,18 +1,14 @@
 import { directus, status } from '$lib/_directus';
-
-//FIX ME: This should have a fakeResponse from a fixture for the specific join page
-
 import { error } from '@sveltejs/kit';
-import type { PageLoad } from './$types';
 
-export const load: PageLoad = async () => {
+export const load = async () => {
 	try {
 		const pageContent = await directus()
 			.items('pages')
 			.readByQuery({
 				fields: ['content.*.*'],
 				filter: {
-					slug: 'join',
+					slug: 'impressum',
 					status: {
 						_in: status
 					}
@@ -20,7 +16,7 @@ export const load: PageLoad = async () => {
 			});
 		if (pageContent.data?.length === 1) {
 			return {
-				join: pageContent.data[0].content
+				impressum: pageContent.data[0].content
 			};
 		}
 	} catch (apiError) {

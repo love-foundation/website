@@ -52,6 +52,7 @@ export const load = async ({ parent }) => {
 			const flattenedArtistEvents = events
 				.map((event) => {
 					if (!event.events_id || typeof event !== 'object' || event.events_id === undefined) {
+						return undefined;
 					} else {
 						return event.events_id.id;
 					}
@@ -64,7 +65,7 @@ export const load = async ({ parent }) => {
 				name: artist_name ?? 'No artist name defined',
 				imageUrl: image
 					? import.meta.env.VITE_DIRECTUS_URL + 'assets/' + image + '?key=artist-square'
-					: 'placeholder_artists.png',
+					: '/placeholder_artists.png',
 				location: current_location ?? 'No location defined',
 				category: type_of_art ?? 'No category defined',
 				status: '',

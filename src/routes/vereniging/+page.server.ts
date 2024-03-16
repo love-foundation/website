@@ -1,15 +1,14 @@
 import { directus, status } from '$lib/_directus';
 import { error } from '@sveltejs/kit';
-import type { PageLoad } from '../$types';
 
-export const load: PageLoad = async () => {
+export const load = async () => {
 	try {
 		const pageContent = await directus()
 			.items('pages')
 			.readByQuery({
 				fields: ['content.*.*'],
 				filter: {
-					slug: 'impressum',
+					slug: 'vereniging-love-foundation',
 					status: {
 						_in: status
 					}
@@ -17,7 +16,7 @@ export const load: PageLoad = async () => {
 			});
 		if (pageContent.data?.length === 1) {
 			return {
-				impressum: pageContent.data[0].content
+				vereniging: pageContent.data[0].content
 			};
 		}
 	} catch (apiError) {

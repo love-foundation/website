@@ -2,14 +2,12 @@
 <script lang="ts">
 	import HeroModule from '$lib/components/UI/ContentModules/HeroModule.svelte';
 	import GridItem from '$lib/components/UI/Grid/GridItem.svelte';
-	import type { PageServerData } from './$types';
+	import type { PageData } from './$types';
 	import type { ConvertedIndexEvents } from '../../events/_types';
 
-  export let data: PageServerData;
+  export let data: PageData;
 
-  if(!data.singleArtist) {
-    throw new Error('No data found');
-  }
+  $: artist = data.singleArtist
 
 	const mapping: {
     [key: number]: string;
@@ -19,20 +17,31 @@
 		2: 'three'
 	};
 
-	let { name, imageUrl, location, category, status, soundcloud, facebook, events, heroColor } = data.singleArtist;
 	let heroContent: {
 		image?: string;
 		bgColor?: string | null;
 		heading?: string;
 	} = {};
 
-	heroContent.image = imageUrl;
-	heroContent.bgColor = heroColor;
+	heroContent.image = artist?.imageUrl;
+	heroContent.bgColor = artist?.heroColor;
 
-	let eventGroups: ConvertedIndexEvents[][] = [];
-	for (let i = 0, len = events.length; i < len; i += 3) {
-		eventGroups = [...eventGroups, events.slice(i, i + 3)];
-	}
+  $: events = artist?.events ?? [];
+  $: name = artist?.name ?? '';
+  $: location = artist?.location ?? null;
+  $: status = artist?.status ?? null;
+  $: category = artist?.category ?? null;
+  $: facebook = artist?.facebook ?? null;
+  $: soundcloud = artist?.soundcloud ?? null;
+
+let eventGroups: ConvertedIndexEvents[][] = [];
+
+$: {
+  eventGroups = [];
+  for (let i = 0, len = events.length; i < len; i += 3) {
+    eventGroups = [...eventGroups, events.slice(i, i + 3)];
+  }
+}
 </script>
 
 <svelte:head>

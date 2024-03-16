@@ -5,12 +5,9 @@
 	import type { PageData } from './$types';
 	export let data: PageData;
 
-	let upcomingEvents =
+	$: upcomingEvents =
 		data.events?.filter((event) => new Date(event.starttime) >= new Date()) || [];
-	let image = {
-		src: 'map_countries.jpg',
-		alt: 'Map of Love Foundation Hubs'
-	};
+  $: hubs = data.hubs
 </script>
 
 <svelte:head>
@@ -59,7 +56,7 @@
 <section class="active-hubs row">
 	<h1>Active Love Hubs</h1>
 	<div class="columns is-multiline">
-		{#each data.hubs as hub}
+		{#each hubs as hub}
 			<Hub {hub} />
 		{/each}
 	</div>

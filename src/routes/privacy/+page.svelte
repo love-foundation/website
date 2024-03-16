@@ -3,7 +3,7 @@
 	import type { PageData } from './$types';
   export let data: PageData
 
-  const queriedContent = data.privacyPolicy;
+  $: queriedContent = data.privacyPolicy;
 
 
 </script>

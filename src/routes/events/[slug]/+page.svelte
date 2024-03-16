@@ -7,11 +7,7 @@
 
 	export let data: PageData;
 
-  if(!data.singleEvent) {
-    throw new Error('No data found');
-  }
-
-  const event = data.singleEvent;
+  $: event = data.singleEvent;
 
 	let heroContent: {
 		image?: string;
@@ -19,17 +15,17 @@
 		heading?: string;
 	} = {};
 
-	heroContent.image = event.imageUrl;
-	heroContent.bgColor = event.heroColor ?? undefined;
+	heroContent.image = event?.imageUrl;
+	heroContent.bgColor = event?.heroColor ?? undefined;
 </script>
 
 <svelte:head>
-	<title>{event.title}</title>
+	<title>{event?.title}</title>
 </svelte:head>
 
 <HeroModule heroModuleProps={heroContent} />
 <div class="head">
-	<h1>{event.title}</h1>
+	<h1>{event?.title}</h1>
 </div>
 <div class="info">
 	<div class="columns is-vertical is-multiline is-centered">
@@ -37,45 +33,45 @@
 			<h2>
 				Hub:
 				<br />
-				{event.hub}
+				{event?.hub}
 			</h2>
 		</div>
 		<div class="column is-4">
 			<h2>
 				Location:
 				<br />
-				{event.location}
+				{event?.location}
 			</h2>
 		</div>
 		<div class="column is-4">
 			<h2 class="capitalized">
 				Genre:
 				<br />
-				{event.category}
+				{event?.category}
 			</h2>
 		</div>
 		<div class="column">
 			<h2>
 				Start:
 				<br />
-				{normalizeEventDate(event.starttime, true)}
+				{normalizeEventDate(event?.starttime, true)}
 			</h2>
 		</div>
 		<div class="column">
 			<h2>
 				End:
 				<br />
-				{normalizeEventDate(event.endtime, true)}
+				{normalizeEventDate(event?.endtime, true)}
 			</h2>
 		</div>
 		<div class="column is-4" />
 	</div>
 </div>
 
-{#if event.artists.length}
+{#if event?.artists.length}
 	<h2 class="centered">Artists that supported this event</h2>
 	<div class="columns is-multiline">
-		{#each event.artists as artist}
+		{#each event?.artists as artist}
 			<ArtistItem {artist} />
 		{/each}
 	</div>

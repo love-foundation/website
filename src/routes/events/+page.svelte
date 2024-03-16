@@ -4,7 +4,7 @@
 	import { onMount, beforeUpdate, afterUpdate } from 'svelte';
 	import lozad from 'lozad';
 	import { page } from '$app/stores';
-	import type { PageData } from '../$types';
+	import type { PageData } from './$types';
 	import type { ConvertedIndexEvents } from './_types';
 	import { pushState } from '$app/navigation';
 
@@ -17,23 +17,16 @@
 	} = {
 	};
 
-	let eventsArray = data.events;
+	$: eventsArray = data.events;
 	let eventGroups: ConvertedIndexEvents[][] = [];
-	let len;
+
 	let categories: string[] = [];
 	let hubs: string[] = [];
 	let filteredEvents: ConvertedIndexEvents[];
 	let currentFilters = { ...pageFilters };
 
-	eventsArray.map((event) => {
-		hubs = [...hubs, event.hub];
-		if (event.category) {
-			categories = [...categories, event.category];
-		}
-	});
-
-	hubs = [...new Set(hubs)];
-	categories = [...new Set(categories)];
+	$: hubs = [...new Set(eventsArray.map((event) => event.hub))];
+	$: categories = [...new Set(eventsArray.map((event) => event.category))];
 
 	onMount(() => {
 		const observer = lozad();
