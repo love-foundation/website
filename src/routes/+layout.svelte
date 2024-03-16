@@ -50,6 +50,8 @@
 		/>
 	</p></noscript
 >`;
+
+$: segment = $page.url.pathname ? $page.url.pathname.split('/')[1] : undefined;
 </script>
 
 <svelte:head>
@@ -62,7 +64,7 @@
 <svelte:window bind:scrollY={y} bind:innerHeight={winHeight} />
 <svelte:body bind:this={bodyElement} />
 
-<Nav />
+<Nav segment={segment}/>
 <progress value={progress} class={progressClasses} />
 
 <div bind:clientHeight={docHeight}>
