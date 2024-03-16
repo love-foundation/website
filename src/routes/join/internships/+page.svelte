@@ -4,7 +4,7 @@
 	import type { PageData } from './$types';
   export let data: PageData
 
-  const queriedContent = data.join;
+  $: queriedContent = data.join;
 
 </script>
 
