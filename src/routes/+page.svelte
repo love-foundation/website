@@ -56,9 +56,11 @@
 <section class="active-hubs row">
 	<h1>Active Love Hubs</h1>
 	<div class="columns is-multiline">
-		{#each hubs as hub}
-			<Hub {hub} />
-		{/each}
+    {#if hubs}
+      {#each hubs as hub}
+        <Hub {hub} />
+      {/each}
+    {/if}
 	</div>
 </section>
 

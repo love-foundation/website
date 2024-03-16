@@ -17,14 +17,14 @@
 		2: 'three'
 	};
 
-	let heroContent: {
-		image?: string;
-		bgColor?: string | null;
-		heading?: string;
-	} = {};
-
-	heroContent.image = artist?.imageUrl;
-	heroContent.bgColor = artist?.heroColor;
+  let heroContent: {
+    image: string;
+    bgColor: string;
+  };
+	$: heroContent = {
+    image: artist?.imageUrl,
+    bgColor: artist?.heroColor,
+  };
 
   $: events = artist?.events ?? [];
   $: name = artist?.name ?? '';

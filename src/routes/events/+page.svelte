@@ -20,8 +20,6 @@
 	$: eventsArray = data.events;
 	let eventGroups: ConvertedIndexEvents[][] = [];
 
-	let categories: string[] = [];
-	let hubs: string[] = [];
 	let filteredEvents: ConvertedIndexEvents[];
 	let currentFilters = { ...pageFilters };
 
@@ -86,7 +84,6 @@
 		currentFilters = { ...currentFilters };
 	}
 
-	let filters = {};
 	$: filters = {
 		hub: {
 			placeholder: 'Location',

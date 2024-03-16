@@ -15,8 +15,8 @@
 		heading?: string;
 	} = {};
 
-	heroContent.image = event?.imageUrl;
-	heroContent.bgColor = event?.heroColor ?? undefined;
+	$: heroContent.image = event?.imageUrl;
+	$: heroContent.bgColor = event?.heroColor ?? undefined;
 </script>
 
 <svelte:head>

@@ -6,7 +6,7 @@
 	export let data: PageData;
   $: project = data.singleProject
 
-	let heroContent = {
+	$: heroContent = {
 		image: project?.imageUrl,
 		heading: project?.name,
 		bgColor: project?.heroColor
