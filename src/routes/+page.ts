@@ -1,7 +1,7 @@
-import type { PageLoad } from './$types';
-import { error } from '@sveltejs/kit';
 import { callApi, directus, status } from '$lib/_directus';
-import fakeHubResponse from '../fixtures/hubs';
+import { error } from '@sveltejs/kit';
+import fakeHubResponse from '../../fixtures/hubs';
+import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch }) => {
 	try {

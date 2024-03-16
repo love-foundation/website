@@ -1,5 +1,5 @@
 import { callApi, directus, status } from '$lib/_directus';
-import fakeResponse from '../../fixtures/lovecasts';
+import fakeResponse from '../../../fixtures/lovecasts';
 import type { PageLoad } from './$types';
 import type { ConvertedLovecast } from './_types';
 

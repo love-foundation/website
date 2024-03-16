@@ -1,7 +1,7 @@
 import { callApi, directus, status } from "$lib/_directus";
 import { error } from "@sveltejs/kit";
 import type { LayoutLoad } from "../$types";
-import projectFixture from '../../fixtures/projects';
+import projectFixture from '../../../fixtures/projects';
 import type { ConvertedProjects } from "./_types";
 
 export const prerender = true;
