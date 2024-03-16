@@ -7,6 +7,7 @@
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
 	import type { PageData } from '../$types';
+	import { pushState } from '$app/navigation';
   export let data: PageData;
 
   const projects = data.projects as ConvertedProjects[];
@@ -53,7 +54,7 @@
 		} else {
 			url.searchParams.delete('pillar');
 		}
-		window.history.pushState({}, '', url);
+		pushState(url, {});
 	});
 
 	function filterProjects(pillar: string | null) {

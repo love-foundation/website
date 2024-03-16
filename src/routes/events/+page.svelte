@@ -6,6 +6,7 @@
 	import { page } from '$app/stores';
 	import type { PageData } from '../$types';
 	import type { ConvertedIndexEvents } from './_types';
+	import { pushState } from '$app/navigation';
 
 
 	export let data: PageData;
@@ -56,7 +57,7 @@
 		} else if (url.searchParams.has('category')) {
 			url.searchParams.delete('category');
 		}
-		window.history.pushState({}, '', url);
+		pushState(url, {});
 	});
 
 	afterUpdate(() => {

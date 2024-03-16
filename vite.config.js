@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 
 const config = defineConfig({
 	plugins: [sveltekit()],
+	optimizeDeps: { include: ['lozad'] },
 	css: {
 		preprocessorOptions: {
 			scss: {

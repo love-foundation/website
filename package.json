@@ -2,10 +2,10 @@
   "name": "love_foundation_website",
   "description": "Love Foundation Website",
   "type": "module",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
+    "build": "vite build -d",
     "package": "vite package",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
@@ -18,22 +18,17 @@
     "test": "run-p --race dev cy:run",
     "test-dev": "run-p --race dev cy:open"
   },
-  "engine": {
-    "node": "20.11.0",
-    "npm": "8.4.0"
-  },
   "browserslist": [
     "last 2 chrome versions",
     "last 2 firefox versions",
     "last 2 safari versions"
   ],
   "dependencies": {
-    "@beyonk/gdpr-cookie-consent-banner": "^12.1.0",
     "@directus/sdk": "^10.3.1",
-    "cross-env": "^7.0.3",
     "lozad": "^1.16.0"
   },
   "devDependencies": {
+    "@beyonk/gdpr-cookie-consent-banner": "^12.1.0",
     "@sveltejs/adapter-node": "^5.0.1",
     "@sveltejs/adapter-static": "^3.0.1",
     "@sveltejs/kit": "^2.5.4",
@@ -42,6 +37,7 @@
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "bulma": "^0.9.4",
+    "cross-env": "^7.0.3",
     "cypress": "^13.7.0",
     "dotenv": "^16.0.3",
     "eslint": "^8.30.0",
@@ -57,6 +53,7 @@
     "svelte-check": "^3.6.7",
     "svelte-select": "^5.8.3",
     "tslib": "^2.6.2",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.2",
+    "vite": "^5.1.6"
   }
 }

@@ -9,6 +9,7 @@
 	import type { ConvertedLovecast } from './_types';
 	import { browser } from '$app/environment';
 	import type { PageData } from './$types';
+	import { pushState } from '$app/navigation';
 
 	export let data: PageData;
 
@@ -35,7 +36,7 @@
 		} else {
 			url.searchParams.delete('type');
 		}
-		window.history.pushState({}, '', url);
+		pushState(url, {});
 	});
 
 	function filterLovecasts(type: string) {

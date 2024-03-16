@@ -56,7 +56,7 @@ export const load = async () => {
 					title: name,
 					imageUrl: poster
 						? import.meta.env.VITE_DIRECTUS_URL + 'assets/' + poster + '?key=event-poster'
-						: 'placeholder_events.png',
+						: '/placeholder_events.png',
 					hub:
 						hubs[0] && typeof hubs[0] !== 'string' && typeof hubs[0].hubs_id !== 'number'
 							? hubs[0].hubs_id?.city || ''
