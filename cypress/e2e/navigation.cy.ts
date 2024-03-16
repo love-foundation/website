@@ -63,7 +63,7 @@ describe('Navigation with the navbar', () => {
 		cy.get('[data-cy=toggleNav]').click();
 		cy.wait(1000);
 		cy.get('nav').contains('Home').click();
-		cy.url().should('eq', 'http://localhost:3000/');
+		cy.url().should('eq', 'http://localhost:5173/');
 		cy.contains('What is Love Foundation?');
 	});
 });
