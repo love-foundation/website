@@ -6,7 +6,7 @@
 	let { name, imageUrl, pillar, country, slug } = project;
 </script>
 
-<a sveltekit:prefetch href="/projects/{slug}">
+<a data-sveltekit-preload-data href="/projects/{slug}">
 	<div class="project--card">
 		<img src={imageUrl} alt="{name} Image" />
 		<div class="project--information">
