@@ -5,7 +5,6 @@ import type { ConvertedIndexEvents } from './events/_types';
 export const prerender = true;
 
 export const load = async () => {
-  console.log('running layout load');
 	const events = await directus()
 		.items('events')
 		.readByQuery({
