@@ -6,7 +6,7 @@
 </script>
 
 <div class="btn--wrap">
-	<a sveltekit:prefetch {target} class="btn" href={link}>
+	<a data-sveltekit-preload-data {target} class="btn" href={link}>
 		<slot />
 	</a>
 </div>

@@ -5,7 +5,14 @@
 
 	const dispatch = createEventDispatcher();
 
-	export let filters = {};
+	export let filters: Record<
+		string,
+		{
+			options;
+			placeholder: string;
+			value: string;
+		}
+	>;
 
 	let sort = false;
 	let headerClass = 'show';

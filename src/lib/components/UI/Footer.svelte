@@ -7,25 +7,25 @@
 						<a href="/">Home</a>
 					</li>
 					<li>
-						<a href="/about" sveltekit:prefetch>About</a>
+						<a href="/about" data-sveltekit-preload-data>About</a>
 					</li>
 					<li>
-						<a sveltekit:prefetch href="/projects">Projects</a>
+						<a data-sveltekit-preload-data href="/projects">Projects</a>
 					</li>
 					<li>
-						<a sveltekit:prefetch href="/events">Events</a>
+						<a data-sveltekit-preload-data href="/events">Events</a>
 					</li>
 					<li>
-						<a sveltekit:prefetch href="/artists">Artists</a>
+						<a data-sveltekit-preload-data href="/artists">Artists</a>
 					</li>
 					<li>
-						<a sveltekit:prefetch href="/lovecasts">Lovecasts</a>
+						<a data-sveltekit-preload-data href="/lovecasts">Lovecasts</a>
 					</li>
 					<li>
-						<a sveltekit:prefetch href="/support">Support</a>
+						<a data-sveltekit-preload-data href="/support">Support</a>
 					</li>
 					<li>
-						<a sveltekit:prefetch href="/privacy">Privacy Policy</a>
+						<a data-sveltekit-preload-data href="/privacy">Privacy Policy</a>
 					</li>
 				</ul>
 			</div>
@@ -33,10 +33,10 @@
 				<ul>
 					<li>
 						<div class="content">Love Foundation e.V.</div>
-						<a sveltekit:prefetch href="/impressum">Impressum</a>
+						<a data-sveltekit-preload-data href="/impressum">Impressum</a>
 					</li>
 					<li>
-						<a sveltekit:prefetch href="/vereniging">Vereniging Love Foundation</a>
+						<a data-sveltekit-preload-data href="/vereniging">Vereniging Love Foundation</a>
 					</li>
 				</ul>
 			</div>

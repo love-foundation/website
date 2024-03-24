@@ -1,23 +1,17 @@
-import type { Events } from '$lib/types';
+import type { ConvertedIndexEvents } from '../events/_types';
 
-export type convertedIndexArtist = {
+export type ConvertedArtist = {
 	id: string;
 	slug: string;
 	name: string;
 	imageUrl: string;
 	location: string;
 	category: string;
-};
-
-export type convertedSingleArtist = {
-	name: string;
-	slug: string;
-	image: string;
 	status: string;
 	location: string;
 	category: string;
-	facebook: string;
-	soundcloud: string;
-	heroColor: string | null;
-	events: PartialItem<Events>[];
+	facebook?: string | null;
+	soundcloud?: string | null;
+	heroColor?: string | null;
+	events: ConvertedIndexEvents[];
 };

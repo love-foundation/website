@@ -2,16 +2,16 @@
 	import { fly } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 	import VanishingHeader from './VanishingHeader.svelte';
-	import { page } from '$app/stores';
+
+  export let segment: string | undefined;
 
 	let navActive = false;
-	$: segment = $page.url.pathname ? $page.url.pathname.split('/')[1] : undefined;
 	function toggleNav() {
 		navActive = !navActive;
 	}
 </script>
 
-<VanishingHeader on:nav={toggleNav} {navActive} {segment} />
+<VanishingHeader on:nav={toggleNav} {navActive} segment="test" />
 
 {#if navActive}
 	<nav transition:fly={{ delay: 250, duration: 300, easing: quintOut, x: 200 }}>
@@ -23,7 +23,7 @@
 				<a
 					class:selected={segment === 'about'}
 					href="/about"
-					sveltekit:prefetch
+					data-sveltekit-preload-data
 					on:click={toggleNav}
 				>
 					About
@@ -32,7 +32,7 @@
 			<li>
 				<a
 					on:click={toggleNav}
-					sveltekit:prefetch
+					data-sveltekit-preload-data
 					class:selected={segment === 'projects'}
 					href="/projects"
 				>
@@ -41,7 +41,7 @@
 			</li>
 			<li>
 				<a
-					sveltekit:prefetch
+					data-sveltekit-preload-data
 					class:selected={segment === 'events'}
 					href="/events"
 					on:click={toggleNav}
@@ -51,7 +51,7 @@
 			</li>
 			<li>
 				<a
-					sveltekit:prefetch
+					data-sveltekit-preload-data
 					class:selected={segment === 'artists'}
 					href="/artists"
 					on:click={toggleNav}
@@ -61,7 +61,7 @@
 			</li>
 			<li>
 				<a
-					sveltekit:prefetch
+					data-sveltekit-preload-data
 					class:selected={segment === 'lovecasts'}
 					href="/lovecasts"
 					on:click={toggleNav}
@@ -71,7 +71,7 @@
 			</li>
 			<li>
 				<a
-					sveltekit:prefetch
+					data-sveltekit-preload-data
 					class:selected={segment === 'support'}
 					href="/support"
 					on:click={toggleNav}

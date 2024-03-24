@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Hubs } from '$lib/types';
 
-	export let hub: Hubs;
+	export let hub: Partial<Hubs>;
 
 	const { city, facebook, instagram } = hub;
 </script>

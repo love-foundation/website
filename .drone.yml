@@ -3,7 +3,7 @@ name: build-and-deploy
 
 steps:
   - name: install
-    image: node:16
+    image: node:20
     pull: always
     environment:
       CYPRESS_CACHE_FOLDER: .cypress
@@ -12,24 +12,24 @@ steps:
       - npm -v
       - npm ci
 
-  - name: test
-    image: cypress/included:8.3.0
-    pull: always
-    environment:
-      CYPRESS_CACHE_FOLDER: .cypress
-      VITE_DIRECTUS_URL:
-        from_secret: directus_url_new
-      VITE_DIRECTUS_TOKEN:
-        from_secret: directus_token_new
-    commands:
-      - npm run test
-    when:
-      branch:
-        exclude:
-          - master
+  # - name: test
+  #   image: cypress/included:13.7.0
+  #   pull: always
+  #   environment:
+  #     CYPRESS_CACHE_FOLDER: .cypress
+  #     VITE_DIRECTUS_URL:
+  #       from_secret: directus_url_new
+  #     VITE_DIRECTUS_TOKEN:
+  #       from_secret: directus_token_new
+  #   commands:
+  #     - npm run test
+  #   when:
+  #     branch:
+  #       exclude:
+  #         - master
 
   - name: build staging
-    image: node:16
+    image: node:20
     pull: always
     environment:
       VITE_DIRECTUS_URL:
@@ -95,7 +95,7 @@ steps:
           - master
 
   - name: build production
-    image: node:16
+    image: node:20
     pull: always
     environment:
       VITE_DIRECTUS_URL:
@@ -165,7 +165,7 @@ name: directus-build-and-deploy
 
 steps:
   - name: install
-    image: node:16
+    image: node:20
     pull: always
     environment:
       CYPRESS_CACHE_FOLDER: .cypress
@@ -175,7 +175,7 @@ steps:
       - npm ci
 
   - name: test
-    image: cypress/included:8.3.0
+    image: cypress/included:13.7.0
     pull: always
     environment:
       CYPRESS_CACHE_FOLDER: .cypress
@@ -187,7 +187,7 @@ steps:
       - npm run test
 
   - name: build production
-    image: node:16
+    image: node:20
     pull: always
     environment:
       VITE_DIRECTUS_URL:

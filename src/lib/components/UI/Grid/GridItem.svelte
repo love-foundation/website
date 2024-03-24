@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 
-	export let item = null;
+	export let item;
 	export let showDate = false;
 	export let lazy = false;
 	export let cardClass = '';
