@@ -2,7 +2,7 @@ import { directus, status } from '$lib/_directus';
 import { error } from '@sveltejs/kit';
 import type { ConvertedIndexEvents } from './events/_types';
 
-export const prerender = process.env.ADAPTER !== 'node';
+export const prerender = true;
 
 export const load = async () => {
 	const events = await directus()
@@ -70,6 +70,8 @@ export const load = async () => {
 								return;
 							}
 							if (!artist.artists_id) {
+								console.log(artist);
+								console.log(event);
 								console.log(artist.artists_id);
 							}
 							return {
