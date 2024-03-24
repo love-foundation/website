@@ -3,7 +3,13 @@ import { defineConfig } from 'vite';
 
 const config = defineConfig({
 	plugins: [sveltekit()],
-	optimizeDeps: { include: ['lozad'] },
+	// optimizeDeps: { include: ['lozad'] },
+	build: {
+		rollupOptions: {
+			logLevel: 'debug',
+			maxParallelFileOps: 40
+		}
+	},
 	css: {
 		preprocessorOptions: {
 			scss: {
