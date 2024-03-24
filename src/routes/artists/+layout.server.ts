@@ -2,7 +2,7 @@ import { directus, status } from '$lib/_directus';
 import { error } from '@sveltejs/kit';
 import type { ConvertedArtist } from './_types';
 
-export const prerender = process.env.ADAPTER !== 'node';
+export const prerender = true;
 
 export const load = async ({ parent }) => {
 	try {
