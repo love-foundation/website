@@ -69,13 +69,13 @@ export const load = async () => {
 							if (typeof artist !== 'object') {
 								return;
 							}
-							console.log(event);
+							console.log(artist.artists_id.id, { event });
 							console.log(name);
-							if (!artist.artists_id) {
-								console.log(artist);
 
-								console.log(artist.artists_id);
-							}
+							console.log(artist);
+
+							console.log(artist.artists_id);
+
 							return {
 								id: artist.artists_id.id,
 								slug: artist.artists_id.slug,
