@@ -8,9 +8,9 @@
 	import { browser } from '$app/environment';
 	import type { PageData } from './$types';
 	import { pushState } from '$app/navigation';
-  export let data: PageData;
+	export let data: PageData;
 
-  $: projects = data.projects as ConvertedProjects[];
+	$: projects = data.projects ?? [];
 	const pageFilters: {
 		pillar?: string | null | boolean;
 	} = { pillar: browser && $page.url.searchParams.get('pillar') };
@@ -20,7 +20,7 @@
 	});
 
 	let currentPillars = { ...pageFilters };
-	let filteredProjects: ConvertedProjects[]= [];
+	let filteredProjects: ConvertedProjects[] = [];
 
 	let categories = [
 		{
@@ -88,19 +88,22 @@
 
 <ul data-cy="projectFilters" id="projectfilters">
 	{#each categories as category}
-		<li
-      role="button"
-			data-cy="projectFilter"
-			class="projectfilter"
-			on:click={() => {
-				filterProjects(category.slug);
-			}}
-			on:keydown={() => {
-				filterProjects(category.slug);
-			}}
-		>
-			<PillarBlob pillar={category.slug} />
-			<h3>{category.name}</h3>
+		<li data-cy="projectFilter" class="projectfilter">
+			<div
+				tabindex="0"
+				role="button"
+				data-cy="projectFilter"
+				class="projectfilter"
+				on:click={() => {
+					filterProjects(category.slug);
+				}}
+				on:keydown={() => {
+					filterProjects(category.slug);
+				}}
+			>
+				<PillarBlob pillar={category.slug} />
+				<h3>{category.name}</h3>
+			</div>
 		</li>
 	{/each}
 </ul>
