@@ -6,16 +6,14 @@
 	import { page } from '$app/stores';
 	import type { PageData } from './$types';
 	import type { ConvertedIndexEvents } from './_types';
-	import { pushState } from '$app/navigation';
-
+	import { goto, pushState } from '$app/navigation';
 
 	export let data: PageData;
 
 	const pageFilters: {
 		hub?: string | null | boolean;
 		category?: string | null | boolean;
-	} = {
-	};
+	} = {};
 
 	$: eventsArray = data.events;
 	let eventGroups: ConvertedIndexEvents[][] = [];
@@ -48,7 +46,7 @@
 		} else if (url.searchParams.has('category')) {
 			url.searchParams.delete('category');
 		}
-		pushState(url, {});
+		goto(`?${url.searchParams.toString()}`, {});
 	});
 
 	afterUpdate(() => {
@@ -58,7 +56,7 @@
 
 	$: filteredEvents = eventsArray.filter((e) => {
 		return Object.entries(currentFilters).every(
-			([filterName, value]) =>  e[filterName as keyof typeof e] == value || value == undefined
+			([filterName, value]) => e[filterName as keyof typeof e] == value || value == undefined
 		);
 	});
 
@@ -121,7 +119,9 @@
 <style lang="scss">
 	section {
 		opacity: 0;
-		transition: margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94), opacity 1s ease-in;
+		transition:
+			margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94),
+			opacity 1s ease-in;
 		&:first-of-type {
 			padding-top: 50px;
 		}

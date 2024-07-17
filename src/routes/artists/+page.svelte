@@ -1,5 +1,3 @@
-
-
 <script lang="ts">
 	import ArtistItem from '$lib/components/UI/ArtistItem.svelte';
 	import { shuffleArray, updateClass, setTransitionDuration } from '$lib/helpers/sharedFunctions';
@@ -8,8 +6,7 @@
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 	import type { ConvertedArtist } from './_types';
-  export let data: PageData
-
+	export let data: PageData;
 
 	let headerClass = 'show';
 	let y = 0;
@@ -17,7 +14,7 @@
 	let helper;
 	let searchString = '';
 	$: artistArray = data.artists;
-	$: filteredArtists = artistArray ? shuffleArray<Array<ConvertedArtist>>(artistArray): [];
+	$: filteredArtists = artistArray ? shuffleArray<Array<ConvertedArtist>>(artistArray) : [];
 	let fuseArtists: Fuse.FuseResult<ConvertedArtist>[];
 	let currentSet: ConvertedArtist[] = [];
 	let fuseArtistsIds: string[] = [];
@@ -91,8 +88,9 @@
 	</div>
 	<div class="column is-hidden-mobile" />
 	<div class="column is-6-mobile is-2-desktop shuffle">
-		<h2
-			class="vcentered pointer centered"
+		<div
+			tabindex="0"
+			role="button"
 			on:click={() => {
 				shuffle();
 			}}
@@ -101,8 +99,8 @@
 			}}
 			data-cy="shuffleArtists"
 		>
-			Shuffle Artists
-		</h2>
+			<h2 class="vcentered pointer centered">Shuffle Artists</h2>
+		</div>
 	</div>
 </div>
 

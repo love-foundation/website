@@ -7,7 +7,7 @@
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
 	import type { PageData } from './$types';
-	import { pushState } from '$app/navigation';
+	import { goto, pushState } from '$app/navigation';
 	export let data: PageData;
 
 	$: projects = data.projects ?? [];
@@ -53,7 +53,7 @@
 		} else {
 			url.searchParams.delete('pillar');
 		}
-		pushState(url, {});
+		goto(`?${url.searchParams.toString()}`, {});
 	});
 
 	function filterProjects(pillar: string | null) {
