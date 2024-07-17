@@ -1,5 +1,5 @@
-import type { CustomDirectusTypes } from '$lib/types';
-import { Directus } from '@directus/sdk';
+import type { Schema } from '$lib/types';
+import { createDirectus, rest, staticToken } from '@directus/sdk';
 
 export const callApi = import.meta.env.MODE === 'production';
 
@@ -8,11 +8,8 @@ export const status =
 	import.meta.env.VITE_APP_MODE === 'staging' || import.meta.env.MODE === 'development'
 		? ['published', 'under_review', 'draft']
 		: ['published'];
-const directusSDK = new Directus<CustomDirectusTypes>(
-	import.meta.env.VITE_DIRECTUS_URL.toString(),
-	{
-		auth: { staticToken: import.meta.env.VITE_DIRECTUS_TOKEN.toString() }
-	}
-);
+const directusSDK = createDirectus<Schema>(import.meta.env.VITE_DIRECTUS_URL.toString())
+	.with(staticToken(import.meta.env.VITE_DIRECTUS_TOKEN.toString()))
+	.with(rest());
 
-export const directus = (): Directus<CustomDirectusTypes> => directusSDK;
+export const directus = directusSDK;
