@@ -1,46 +1,38 @@
 import { directus, status } from '$lib/_directus';
+import { readItems } from '@directus/sdk';
 import { error } from '@sveltejs/kit';
-import type eventData from '../../fixtures/events';
 import type { ConvertedIndexEvents } from './events/_types';
 
 export const prerender = process.env.ADAPTER === 'node' ? false : true;
 
 export const load = async () => {
-	const events = !process.env.USE_FIXTURES
-		? await directus()
-				.items('events')
-				.readByQuery({
-					fields: [
-						'id',
-						'name',
-						'poster',
-						'event_type',
-						'hubs.hubs_id.city',
-						'startdatetime',
-						'enddatetime',
-						'location',
-						'slug',
-						'artists.artists_id.id',
-						'artists.artists_id.artist_name',
-						'artists.artists_id.image',
-						'artists.artists_id.slug',
-						'hero_background_color'
-					],
-					filter: {
-						status: {
-							_in: status
-						}
-					},
-					sort: ['sort', '-startdatetime'],
-					limit: -1
-				})
-		: (
-				(await import('../../fixtures/events')) as unknown as {
-					default: typeof eventData;
+	const events = await directus.request(
+		readItems('events', {
+			fields: [
+				'id',
+				'name',
+				'poster',
+				'event_type',
+				{ hubs: [{ hubs_id: ['city'] }] },
+				'startdatetime',
+				'enddatetime',
+				'location',
+				'slug',
+				{ artists: [{ artists_id: ['id', 'artist_name', 'image', 'slug'] }] },
+				'hero_background_color'
+			],
+			filter: {
+				status: {
+					_in: status
 				}
-			).default;
+			},
+			sort: ['sort', '-startdatetime'],
+			limit: -1
+		})
+	);
+
 	const eventsData: ConvertedIndexEvents[] =
-		events.data
+		events
 			?.filter((event) => !!event.slug)
 			.map((event) => {
 				const {
@@ -64,14 +56,14 @@ export const load = async () => {
 						? import.meta.env.VITE_DIRECTUS_URL + 'assets/' + poster + '?key=event-poster'
 						: '/placeholder_events.png',
 					hub:
-						hubs[0] && typeof hubs[0] !== 'string' && typeof hubs[0].hubs_id !== 'number'
+						hubs?.[0] && typeof hubs[0] !== 'string' && typeof hubs[0].hubs_id !== 'number'
 							? hubs[0].hubs_id?.city || ''
 							: '',
 					category: event_type || '',
 					starttime: startdatetime,
 					endtime: enddatetime,
 					artists: artists
-						.map((artist) => {
+						?.map((artist) => {
 							if (!artist.artists_id || typeof artist !== 'object') {
 								return;
 							}
