@@ -85,6 +85,7 @@ steps:
       script:
         - cd /srv/lf/website/staging
         - rsync -ravI ./deploy/ . --delete-after --filter="P .env"
+        - ls -al ./deploy
         - rm -rf ./deploy
         - docker-compose -f docker-compose.staging.yml up -d --build
     when:
