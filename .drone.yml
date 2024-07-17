@@ -1,3 +1,4 @@
+type: "docker"
 kind: pipeline
 name: build-and-deploy
 
@@ -12,21 +13,22 @@ steps:
       - npm -v
       - npm ci
 
-  # - name: test
-  #   image: cypress/included:13.7.0
-  #   pull: always
-  #   environment:
-  #     CYPRESS_CACHE_FOLDER: .cypress
-  #     VITE_DIRECTUS_URL:
-  #       from_secret: directus_url_new
-  #     VITE_DIRECTUS_TOKEN:
-  #       from_secret: directus_token_new
-  #   commands:
-  #     - npm run test
-  #   when:
-  #     branch:
-  #       exclude:
-  #         - master
+  - name: test
+    image: cypress/included:13.7.0
+    pull: always
+    environment:
+      CYPRESS_CACHE_FOLDER: .cypress
+      VITE_DIRECTUS_URL:
+        from_secret: directus_url_new
+      VITE_DIRECTUS_TOKEN:
+        from_secret: directus_token_new
+    commands:
+      - echo $VITE_DIRECTUS_URL
+      - npm run test
+    when:
+      branch:
+        exclude:
+          - master
 
   - name: build staging
     image: node:20
@@ -160,6 +162,7 @@ trigger:
       - pull_request
 
 ---
+type: "docker"
 kind: pipeline
 name: directus-build-and-deploy
 
