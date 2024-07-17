@@ -88,7 +88,7 @@
 
 <ul data-cy="projectFilters" id="projectfilters">
 	{#each categories as category}
-		<li data-cy="projectFilter" class="projectfilter">
+		<li>
 			<div
 				tabindex="0"
 				role="button"
