@@ -6,8 +6,6 @@ steps:
   - name: install
     image: node:20
     pull: always
-    environment:
-      CYPRESS_CACHE_FOLDER: .cypress
     commands:
       - node -v
       - npm -v
@@ -17,13 +15,11 @@ steps:
     image: cypress/included:13.7.0
     pull: always
     environment:
-      CYPRESS_CACHE_FOLDER: .cypress
       VITE_DIRECTUS_URL:
         from_secret: directus_url_new
       VITE_DIRECTUS_TOKEN:
         from_secret: directus_token_new
     commands:
-      - echo VITE_DIRECTUS_URL
       - npm run test
     when:
       branch:
