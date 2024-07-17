@@ -1,23 +1,27 @@
 import { directus, status } from '$lib/_directus';
+import { readItems } from '@directus/sdk';
 import { error } from '@sveltejs/kit';
-import type { PageLoad } from '../$types';
 
-export const load: PageLoad = async () => {
+export const load = async () => {
 	try {
-		const pageContent = await directus()
-			.items('pages')
-			.readByQuery({
-				fields: ['content.*.*'],
+		const pageContent = await directus.request(
+			readItems('pages', {
+				fields: [
+					{
+						content: ['*', { image: ['*'], image_two: ['*'] }]
+					}
+				],
 				filter: {
-					slug: 'privacy-policy',
+					slug: { _eq: 'privacy-policy' },
 					status: {
 						_in: status
 					}
 				}
-			});
-		if (pageContent.data?.length === 1) {
+			})
+		);
+		if (pageContent.length === 1) {
 			return {
-				privacyPolicy: pageContent.data[0].content
+				privacyPolicy: pageContent[0].content
 			};
 		}
 	} catch (apiError) {
