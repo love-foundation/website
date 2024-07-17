@@ -75,7 +75,7 @@ export type Events = {
 	estimated_guests?: string;
 	Links?: unknown;
 	rental_contract?: string | DirectusFiles;
-	hubs: string | EventsHubs[];
+	hubs: EventsHubs[];
 	logo_of_other_collectives_involved: string | EventsDirectusFilesOtherCollectivesLogos[];
 	upload_inspiration: string | EventsDirectusFilesInspiration[];
 	design_assets: string | EventsDirectusFiles[];

@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { ConvertedIndexEvents } from "../../../routes/events/_types";
+	import type { ConvertedArtist } from '../../../routes/artists/_types';
 
-  export let artist: ConvertedIndexEvents["artists"][0]
+	export let artist: ConvertedArtist;
 	export let lazy = false;
 </script>
 
 <a
-  data-sveltekit-preload-data
+	data-sveltekit-preload-data
 	href={`/artists/${artist.slug}`}
 	class="column is-one-quarter-desktop is-one-third-tablet"
 >
@@ -36,7 +36,9 @@
 		color: $white;
 		opacity: 0;
 		margin-top: -50px;
-		transition: margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94), opacity 1s ease-in,
+		transition:
+			margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94),
+			opacity 1s ease-in,
 			transform 0.3s;
 		transform: scale(1);
 		&:hover {
@@ -47,7 +49,9 @@
 	:global(.loaded) {
 		margin-top: 0 !important;
 		opacity: 1 !important;
-		transition: margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94), opacity 1s ease-in;
+		transition:
+			margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94),
+			opacity 1s ease-in;
 	}
 
 	.column {

@@ -6,7 +6,7 @@
 	import { page } from '$app/stores';
 	import type { PageData } from './$types';
 	import type { ConvertedIndexEvents } from './_types';
-	import { goto, pushState } from '$app/navigation';
+	import { goto } from '$app/navigation';
 
 	export let data: PageData;
 

@@ -10,7 +10,7 @@ export type ConvertedIndexEvents = {
 	location?: string;
 	heroColor?: string | null;
 	artists: {
-		id: string;
+		id: number;
 		slug: string;
 		name: string;
 		imageUrl: string;
