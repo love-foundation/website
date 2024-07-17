@@ -1,3 +1,5 @@
+import { DirectusFiles } from '@directus/sdk';
+
 export interface Artists {
 	id: number;
 	status?: string;
@@ -20,24 +22,24 @@ export interface Artists {
 	events: EventsArtists[];
 }
 
-export type Content = {
+export interface Content {
 	id: number;
 	status?: string;
 	created_by?: string;
 	created_on?: string;
-	on_page?: number | Pages;
+	on_page?: Pages;
 	text?: string;
-	image?: string | DirectusFiles;
+	image: DirectusFiles;
 	type?: string;
-	image_two?: string | DirectusFiles;
+	image_two: DirectusFiles;
 	sort?: number;
 	text_layout?: string;
 	content_label?: string;
 	distance_to_next?: string;
 	captions?: unknown;
-	content_for_project?: number | Projects;
+	content_for_project?: Projects;
 	hero_background_color?: string;
-};
+}
 
 export interface Events {
 	id: number;
@@ -259,29 +261,29 @@ export type DirectusFields = {
 	validation_message?: string;
 };
 
-export type DirectusFiles = {
-	id: string;
-	storage: string;
-	filename_disk?: string;
-	filename_download: string;
-	title?: string;
-	type?: string;
-	folder?: string | DirectusFolders;
-	uploaded_by?: string | DirectusUsers;
-	uploaded_on: string;
-	modified_by?: string | DirectusUsers;
-	modified_on: string;
-	charset?: string;
-	filesize?: number;
-	width?: number;
-	height?: number;
-	duration?: number;
-	embed?: string;
-	description?: string;
-	location?: string;
-	tags?: unknown;
-	metadata?: unknown;
-};
+// export type DirectusFiles = {
+// 	id: string;
+// 	storage: string;
+// 	filename_disk?: string;
+// 	filename_download: string;
+// 	title?: string;
+// 	type?: string;
+// 	folder?: string | DirectusFolders;
+// 	uploaded_by?: string | DirectusUsers;
+// 	uploaded_on: string;
+// 	modified_by?: string | DirectusUsers;
+// 	modified_on: string;
+// 	charset?: string;
+// 	filesize?: number;
+// 	width?: number;
+// 	height?: number;
+// 	duration?: number;
+// 	embed?: string;
+// 	description?: string;
+// 	location?: string;
+// 	tags?: unknown;
+// 	metadata?: unknown;
+// };
 
 export type DirectusFolders = {
 	id: string;
