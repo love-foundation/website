@@ -66,7 +66,7 @@ export const load = async () => {
 					endtime: enddatetime,
 					artists: artists
 						.map((artist) => {
-							if (typeof artist !== 'object') {
+							if (!artist.artists_id || typeof artist !== 'object') {
 								return;
 							}
 
