@@ -1,5 +1,3 @@
-
-
 <script lang="ts">
 	import GridGroup from '$lib/components/UI/Grid/GridGroup.svelte';
 	import { setTransitionDuration, updateClass } from '$lib/helpers/sharedFunctions';
@@ -9,7 +7,7 @@
 	import type { ConvertedLovecast } from './_types';
 	import { browser } from '$app/environment';
 	import type { PageData } from './$types';
-	import { pushState } from '$app/navigation';
+	import { goto } from '$app/navigation';
 
 	export let data: PageData;
 
@@ -36,7 +34,7 @@
 		} else {
 			url.searchParams.delete('type');
 		}
-		pushState(url, {});
+		goto(`?${url.searchParams.toString()}`, {});
 	});
 
 	function filterLovecasts(type: string) {
@@ -61,8 +59,8 @@
 	$: {
 		lovecastGroups = [];
 		for (let i = 0, len = filteredLovecasts?.length; i < (len ?? 0); i += 5) {
-      if (filteredLovecasts && filteredLovecasts?.length > 0)
-			lovecastGroups.push(filteredLovecasts?.slice(i, i + 5));
+			if (filteredLovecasts && filteredLovecasts?.length > 0)
+				lovecastGroups.push(filteredLovecasts?.slice(i, i + 5));
 		}
 	}
 
@@ -81,24 +79,28 @@
 <div use:setTransitionDuration class={`topbar columns centered is-mobile ${headerClass}`}>
 	<div class="column is-hidden-mobile" />
 	<div class="column is-6-mobile is-2-desktop shuffle">
-		<h2
-      role="button"
-			class="vcentered pointer centered"
+		<div
+			role="button"
+			tabindex="0"
 			on:click={() => filterLovecasts('lovecast')}
-			class:active={lovecastFilters.type === 'lovecast'}
+			on:keydown={() => filterLovecasts('lovecast')}
 		>
-			Lovecasts
-		</h2>
+			<h2 class="vcentered pointer centered" class:active={lovecastFilters.type === 'lovecast'}>
+				Lovecasts
+			</h2>
+		</div>
 	</div>
 	<div class="column is-6-mobile is-2-desktop shuffle">
-		<h2
-      role="button"
-			class="vcentered pointer centered"
+		<div
+			role="button"
+			tabindex="0"
 			on:click={() => filterLovecasts('radiocast')}
-			class:active={lovecastFilters.type === 'radiocast'}
+			on:keydown={() => filterLovecasts('radiocast')}
 		>
-			Radiocasts
-		</h2>
+			<h2 class="vcentered pointer centered" class:active={lovecastFilters.type === 'radiocast'}>
+				Radiocasts
+			</h2>
+		</div>
 	</div>
 	<div class="column is-hidden-mobile" />
 </div>
@@ -111,7 +113,9 @@
 <style lang="scss">
 	section {
 		opacity: 0;
-		transition: margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94), opacity 1s ease-in;
+		transition:
+			margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94),
+			opacity 1s ease-in;
 		&.loaded {
 			opacity: 1;
 			margin-top: 0;
@@ -147,7 +151,6 @@
 		}
 
 		h2 {
-			margin-top: 5px;
 			&.active {
 				text-decoration: underline;
 			}
