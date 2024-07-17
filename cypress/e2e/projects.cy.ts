@@ -29,8 +29,7 @@ describe('Projects Page Functionality', () => {
 
 	it('changes the filter when clicking another category', () => {
 		cy.get('[data-cy=projectItem]').should('have.length', 7);
-		cy.get('[data-cy=projectFilter]').contains('Water for all').click();
-		cy.debug();
+		cy.get('[data-cy=projectFilter]').contains('Water for all').click().debug();
 
 		cy.get('[data-cy=projectItem]').should('have.length', 4);
 		cy.get('[data-cy=projectPillar]').should('have.class', 'water');
