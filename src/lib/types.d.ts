@@ -1,4 +1,4 @@
-export type Artists = {
+export interface Artists {
 	id: number;
 	status?: string;
 	sort?: number;
@@ -18,7 +18,7 @@ export type Artists = {
 	hero_background_color?: string;
 	slug: string;
 	events: EventsArtists[];
-};
+}
 
 export type Content = {
 	id: number;
@@ -39,7 +39,7 @@ export type Content = {
 	hero_background_color?: string;
 };
 
-export type Events = {
+export interface Events {
 	id: number;
 	status?: string;
 	sort?: number;
@@ -80,13 +80,13 @@ export type Events = {
 	upload_inspiration: string | EventsDirectusFilesInspiration[];
 	design_assets: string | EventsDirectusFiles[];
 	artists: EventsArtists[];
-};
+}
 
-export type EventsArtists = {
+export interface EventsArtists {
 	id: number;
 	events_id: Events;
 	artists_id: Artists;
-};
+}
 
 export type EventsDirectusFiles = {
 	id: number;
@@ -108,8 +108,8 @@ export type EventsDirectusFilesOtherCollectivesLogos = {
 
 export type EventsHubs = {
 	id: number;
-	events_id?: number | Events;
-	hubs_id?: number | Hubs;
+	events_id: Events;
+	hubs_id: Hubs;
 };
 
 export type Hubs = {
@@ -515,42 +515,21 @@ export type DirectusOperations = {
 	user_created?: string | DirectusUsers;
 };
 
-export type CustomDirectusTypes = {
-	artists: Artists;
-	content: Content;
-	events: Events;
-	events_artists: EventsArtists;
-	events_directus_files: EventsDirectusFiles;
-	events_directus_files_inspiration: EventsDirectusFilesInspiration;
-	events_directus_files_other_collectives_logos: EventsDirectusFilesOtherCollectivesLogos;
-	events_hubs: EventsHubs;
-	hubs: Hubs;
-	hubs_members: HubsMembers;
-	lovecast: Lovecast;
-	lovecast_artists: LovecastArtists;
-	members: Members;
-	pages: Pages;
-	projects: Projects;
-	projects_events: ProjectsEvents;
-	directus_activity: DirectusActivity;
-	directus_collections: DirectusCollections;
-	directus_fields: DirectusFields;
-	directus_files: DirectusFiles;
-	directus_folders: DirectusFolders;
-	directus_migrations: DirectusMigrations;
-	directus_permissions: DirectusPermissions;
-	directus_presets: DirectusPresets;
-	directus_relations: DirectusRelations;
-	directus_revisions: DirectusRevisions;
-	directus_roles: DirectusRoles;
-	directus_sessions: DirectusSessions;
-	directus_settings: DirectusSettings;
-	directus_users: DirectusUsers;
-	directus_webhooks: DirectusWebhooks;
-	directus_dashboards: DirectusDashboards;
-	directus_panels: DirectusPanels;
-	directus_notifications: DirectusNotifications;
-	directus_shares: DirectusShares;
-	directus_flows: DirectusFlows;
-	directus_operations: DirectusOperations;
-};
+export interface Schema {
+	artists: Artists[];
+	content: Content[];
+	events: Events[];
+	events_artists: EventsArtists[];
+	events_directus_files: EventsDirectusFiles[];
+	events_directus_files_inspiration: EventsDirectusFilesInspiration[];
+	events_directus_files_other_collectives_logos: EventsDirectusFilesOtherCollectivesLogos[];
+	events_hubs: EventsHubs[];
+	hubs: Hubs[];
+	hubs_members: HubsMembers[];
+	lovecast: Lovecast[];
+	lovecast_artists: LovecastArtists[];
+	members: Members[];
+	pages: Pages[];
+	projects: Projects[];
+	projects_events: ProjectsEvents[];
+}
