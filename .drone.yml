@@ -23,7 +23,7 @@ steps:
       VITE_DIRECTUS_TOKEN:
         from_secret: directus_token_new
     commands:
-      - echo $VITE_DIRECTUS_URL
+      - echo VITE_DIRECTUS_URL
       - npm run test
     when:
       branch:
