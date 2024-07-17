@@ -7,7 +7,7 @@
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
 	import type { PageData } from './$types';
-	import { goto, pushState } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	export let data: PageData;
 
 	$: projects = data.projects ?? [];

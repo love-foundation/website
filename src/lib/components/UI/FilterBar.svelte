@@ -8,47 +8,20 @@
 	export let filters: Record<
 		string,
 		{
-			options;
+			options: string[];
 			placeholder: string;
-			value: string;
+			value: string | boolean | null | undefined;
 		}
 	>;
 
-	let sort = false;
 	let headerClass = 'show';
 	let y = 0;
 	let lastY = 0;
 	let helper;
 
-	function selected(key, event) {
+	function selected(key: string, event: CustomEvent) {
 		dispatch('selected', { [key]: event.detail.value });
 	}
-
-	const setActiveClass = (mutationsList, observer) => {
-		for (let mutation of mutationsList) {
-			if (mutation.type === 'childList') {
-				mutation.target.children.length > 1
-					? mutation.target.parentNode.classList.add('active')
-					: mutation.target.parentNode.classList.remove('active');
-			}
-		}
-	};
-
-	const selectAction = (node) => {
-		node.children[0].children.length > 1
-			? node.classList.add('active')
-			: node.classList.remove('active');
-
-		const config = { childList: true };
-		const observer = new MutationObserver(setActiveClass);
-		observer.observe(node.children[0], config);
-
-		return {
-			destroy() {
-				observer.disconnect();
-			}
-		};
-	};
 
 	$: {
 		helper = updateClass(y, lastY);
@@ -62,10 +35,10 @@
 <div use:setTransitionDuration class={`topbar columns is-horizontal ${headerClass}`}>
 	{#each Object.entries(filters) as [key, { options, placeholder, value }]}
 		<div class="column is-3">
-			<div use:selectAction class="select" class:active={false}>
+			<div class="select" class:active={true}>
 				<Select
 					inputAttributes={{ readonly: 'readonly' }}
-					selectedValue={value}
+					{value}
 					items={options}
 					{placeholder}
 					on:select={(e) => {
