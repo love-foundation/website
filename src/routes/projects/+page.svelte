@@ -5,7 +5,6 @@
 	import { beforeUpdate, onMount } from 'svelte';
 	import type { ConvertedProjects } from './_types';
 	import { page } from '$app/stores';
-	import { browser } from '$app/environment';
 	import type { PageData } from './$types';
 	import { goto } from '$app/navigation';
 	export let data: PageData;
@@ -13,7 +12,7 @@
 	$: projects = data.projects ?? [];
 	const pageFilters: {
 		pillar?: string | null | boolean;
-	} = { pillar: browser && $page.url.searchParams.get('pillar') };
+	} = {};
 
 	onMount(() => {
 		pageFilters.pillar = $page.url.searchParams.get('pillar');
@@ -71,7 +70,7 @@
 		if (currentPillars.pillar) {
 			return p.pillar === currentPillars.pillar;
 		} else {
-			return p.pillar;
+			return true;
 		}
 	});
 </script>
