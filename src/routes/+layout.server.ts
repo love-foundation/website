@@ -50,7 +50,6 @@ export const load = async () => {
 					location,
 					hero_background_color
 				} = event;
-				console.log(hubs);
 				return {
 					id: id,
 					slug: slug,
