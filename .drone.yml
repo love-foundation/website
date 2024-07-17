@@ -84,6 +84,7 @@ steps:
         from_secret: passphrase
       script:
         - cd /srv/lf/website/staging
+        - docker-compose -f docker-compose.staging.yml down
         - rsync -ravI ./deploy/ . --delete-after --filter="P .env"
         - ls -al ./deploy
         - rm -rf ./deploy
@@ -144,6 +145,7 @@ steps:
       script:
         - pwd
         - cd /srv/lf/website/prod
+        - docker-compose -f docker-compose.prod.yml down
         - pwd
         - rsync -ravI ./deploy/ . --delete-after
         - rm -rf ./deploy
