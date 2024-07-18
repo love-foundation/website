@@ -14,3 +14,7 @@ build/
 .env
 
 .DS_Store
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
