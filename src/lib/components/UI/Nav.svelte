@@ -3,7 +3,7 @@
 	import { quintOut } from 'svelte/easing';
 	import VanishingHeader from './VanishingHeader.svelte';
 
-  export let segment: string | undefined;
+	export let segment: string | undefined;
 
 	let navActive = false;
 	function toggleNav() {
@@ -11,7 +11,7 @@
 	}
 </script>
 
-<VanishingHeader on:nav={toggleNav} {navActive} segment="test" />
+<VanishingHeader on:nav={toggleNav} {navActive} {segment} />
 
 {#if navActive}
 	<nav transition:fly={{ delay: 250, duration: 300, easing: quintOut, x: 200 }}>
