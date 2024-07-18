@@ -14,7 +14,7 @@
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "build:staging": "cross-env ADAPTER=node vite build",
     "playwright:run": "npx playwright test",
-    "playwright:open": "cypress open",
+    "playwright:open": "npx playwright test --ui",
     "test": "run-p --race dev playwright:run",
     "test-dev": "run-p --race dev playwright:open"
   },
