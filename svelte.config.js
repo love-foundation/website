@@ -16,8 +16,7 @@ const config = {
 			process.env.ADAPTER === 'node'
 				? node()
 				: adapter({
-						trailingSlash: 'always',
-						precompress: true
+						trailingSlash: 'always'
 					})
 	}
 };
