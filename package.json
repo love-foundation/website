@@ -5,6 +5,7 @@
   "version": "2.0.0",
   "scripts": {
     "dev": "vite dev",
+    "dev:test": "cross-env USE_FIXTURES=true vite dev",
     "build": "vite build -d",
     "package": "vite package",
     "preview": "vite preview",
@@ -15,8 +16,8 @@
     "build:staging": "cross-env ADAPTER=node vite build",
     "playwright:run": "npx playwright test",
     "playwright:open": "npx playwright test --ui",
-    "test": "run-p --race dev playwright:run",
-    "test-dev": "run-p --race dev playwright:open"
+    "test": "run-p --race dev:test playwright:run",
+    "test-dev": "run-p --race dev:test playwright:open"
   },
   "browserslist": [
     "last 2 chrome versions",

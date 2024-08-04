@@ -1,30 +1,34 @@
 import { directus, status } from '$lib/_directus';
 import { error } from '@sveltejs/kit';
+import type projectData from '../../../fixtures/projects';
 import type { ConvertedProjects } from './_types';
 
 export const prerender = process.env.ADAPTER === 'node' ? false : true;
 
 export const load = async () => {
 	try {
-		const projects = await directus()
-			.items('projects')
-			.readByQuery({
-				fields: [
-					'id',
-					'name',
-					'main_image.*',
-					'pillar',
-					'slug',
-					'location_country',
-					'content.*.*',
-					'hero_background_color'
-				],
-				filter: {
-					status: {
-						_in: status
-					}
-				}
-			});
+		console.log(process.env.USE_FIXTURES);
+		const projects = !process.env.USE_FIXTURES
+			? await directus()
+					.items('projects')
+					.readByQuery({
+						fields: [
+							'id',
+							'name',
+							'main_image.*',
+							'pillar',
+							'slug',
+							'location_country',
+							'content.*.*',
+							'hero_background_color'
+						],
+						filter: {
+							status: {
+								_in: status
+							}
+						}
+					})
+			: ((await import('../../../fixtures/projects')) as unknown as typeof projectData);
 		if (!projects.data) {
 			throw new Error('No data returned from Directus');
 		}
