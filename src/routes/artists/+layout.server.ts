@@ -1,35 +1,38 @@
 import { directus, status } from '$lib/_directus';
 import { error } from '@sveltejs/kit';
+import type artistData from '../../../fixtures/artists';
 import type { ConvertedArtist } from './_types';
 
 export const prerender = process.env.ADAPTER === 'node' ? false : true;
 
 export const load = async ({ parent }) => {
 	try {
-		const artists = await directus()
-			.items('artists')
-			.readByQuery({
-				fields: [
-					'id',
-					'artist_name',
-					'image',
-					'current_location',
-					'type_of_art',
-					'slug',
-					'events.events_id.id',
-					'soundcloud_url',
-					'facebook_url',
-					'level_of_involvement',
-					'hero_background_color'
-				],
-				filter: {
-					status: {
-						_in: status
-					}
-				},
-				limit: -1
-			});
-
+		const artists = !process.env.USE_FIXTURES
+			? await directus()
+					.items('artists')
+					.readByQuery({
+						fields: [
+							'id',
+							'artist_name',
+							'image',
+							'current_location',
+							'type_of_art',
+							'slug',
+							'events.events_id.id',
+							'soundcloud_url',
+							'facebook_url',
+							'level_of_involvement',
+							'hero_background_color'
+						],
+						filter: {
+							status: {
+								_in: status
+							}
+						},
+						limit: -1
+					})
+			: ((await import('../../../fixtures/artists')) as unknown as { default: typeof artistData })
+					.default;
 		if (!artists.data) {
 			throw new Error('No data returned from Directus');
 		}

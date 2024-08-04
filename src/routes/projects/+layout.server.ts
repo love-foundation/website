@@ -7,7 +7,6 @@ export const prerender = process.env.ADAPTER === 'node' ? false : true;
 
 export const load = async () => {
 	try {
-		console.log(process.env.USE_FIXTURES);
 		const projects = !process.env.USE_FIXTURES
 			? await directus()
 					.items('projects')
