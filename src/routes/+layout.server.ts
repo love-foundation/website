@@ -1,38 +1,44 @@
 import { directus, status } from '$lib/_directus';
 import { error } from '@sveltejs/kit';
+import type eventData from '../../fixtures/events';
 import type { ConvertedIndexEvents } from './events/_types';
 
 export const prerender = process.env.ADAPTER === 'node' ? false : true;
 
 export const load = async () => {
-	const events = await directus()
-		.items('events')
-		.readByQuery({
-			fields: [
-				'id',
-				'name',
-				'poster',
-				'event_type',
-				'hubs.hubs_id.city',
-				'startdatetime',
-				'enddatetime',
-				'location',
-				'slug',
-				'artists.artists_id.id',
-				'artists.artists_id.artist_name',
-				'artists.artists_id.image',
-				'artists.artists_id.slug',
-				'hero_background_color'
-			],
-			filter: {
-				status: {
-					_in: status
+	const events = !process.env.USE_FIXTURES
+		? await directus()
+				.items('events')
+				.readByQuery({
+					fields: [
+						'id',
+						'name',
+						'poster',
+						'event_type',
+						'hubs.hubs_id.city',
+						'startdatetime',
+						'enddatetime',
+						'location',
+						'slug',
+						'artists.artists_id.id',
+						'artists.artists_id.artist_name',
+						'artists.artists_id.image',
+						'artists.artists_id.slug',
+						'hero_background_color'
+					],
+					filter: {
+						status: {
+							_in: status
+						}
+					},
+					sort: ['sort', '-startdatetime'],
+					limit: -1
+				})
+		: (
+				(await import('../../fixtures/events')) as unknown as {
+					default: typeof eventData;
 				}
-			},
-			sort: ['sort', '-startdatetime'],
-			limit: -1
-		});
-
+			).default;
 	const eventsData: ConvertedIndexEvents[] =
 		events.data
 			?.filter((event) => !!event.slug)
