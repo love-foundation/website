@@ -6,30 +6,32 @@ import type { ConvertedIndexEvents } from './events/_types';
 export const prerender = process.env.ADAPTER === 'node' ? false : true;
 
 export const load = async () => {
-	const events = await directus.request(
-		readItems('events', {
-			fields: [
-				'id',
-				'name',
-				'poster',
-				'event_type',
-				{ hubs: [{ hubs_id: ['city'] }] },
-				'startdatetime',
-				'enddatetime',
-				'location',
-				'slug',
-				{ artists: [{ artists_id: ['id', 'artist_name', 'image', 'slug'] }] },
-				'hero_background_color'
-			],
-			filter: {
-				status: {
-					_in: status
-				}
-			},
-			sort: ['sort', '-startdatetime'],
-			limit: -1
-		})
-	);
+	const events = process.env.USE_FIXTURES
+		? (await import('../../fixtures/events')).default
+		: await directus.request(
+				readItems('events', {
+					fields: [
+						'id',
+						'name',
+						'poster',
+						'event_type',
+						{ hubs: [{ hubs_id: ['city'] }] },
+						'startdatetime',
+						'enddatetime',
+						'location',
+						'slug',
+						{ artists: [{ artists_id: ['id', 'artist_name', 'image', 'slug'] }] },
+						'hero_background_color'
+					],
+					filter: {
+						status: {
+							_in: status
+						}
+					},
+					sort: ['sort', '-startdatetime'],
+					limit: -1
+				})
+			);
 
 	const eventsData: ConvertedIndexEvents[] =
 		events
