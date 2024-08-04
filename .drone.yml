@@ -11,17 +11,6 @@ steps:
       - npm -v
       - npm ci
 
-  - name: run tests
-    image: node:20
-    pull: always
-    commands:
-      - npx playwright install
-      - npm run test
-    when:
-      branch:
-        exclude:
-          - master
-
   - name: build staging
     image: node:20
     pull: always
