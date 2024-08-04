@@ -10,10 +10,11 @@ services:
     restart: unless-stopped
     volumes:
       - ./build:/srv
+      - ./nginx.conf:/usr/local/nginx/conf/sites/default.conf
     networks:
       - proxy
     ports:
-      - 80:80
+      - 80
     labels:
       - traefik.enable=true
       - traefik.http.services.lf-website-prod.loadbalancer.server.port=80
