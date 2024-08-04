@@ -28,7 +28,12 @@ export const load = async () => {
 							}
 						}
 					})
-			: ((await import('../../../fixtures/projects')) as unknown as typeof projectData);
+			: (
+					(await import('../../../fixtures/projects')) as unknown as {
+						default: typeof projectData;
+					}
+				).default;
+
 		if (!projects.data) {
 			throw new Error('No data returned from Directus');
 		}
