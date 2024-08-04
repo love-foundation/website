@@ -55,7 +55,9 @@ test.describe('Projects Page Functionality', () => {
 			.first()
 			.click();
 		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(2);
-		await expect(page.getByTestId('projectPillar')).toHaveClass(/community/);
+		await expect(
+			page.locator('#projectList > :first-child').getByTestId('projectPillar')
+		).toHaveClass(/community/);
 	});
 
 	test('removes the filter when clicking the same category again', async ({ page }) => {
