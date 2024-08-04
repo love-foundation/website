@@ -1,16 +1,16 @@
 import { directus, status } from '$lib/_directus';
+import { readItems } from '@directus/sdk';
 import { error } from '@sveltejs/kit';
-import type artistData from '../../../fixtures/artists';
 import type { ConvertedArtist } from './_types';
 
 export const prerender = process.env.ADAPTER === 'node' ? false : true;
 
 export const load = async ({ parent }) => {
 	try {
-		const artists = !process.env.USE_FIXTURES
-			? await directus()
-					.items('artists')
-					.readByQuery({
+		const artists = process.env.USE_FIXTURES
+			? (await import('../../../fixtures/artists')).default
+			: await directus.request(
+					readItems('artists', {
 						fields: [
 							'id',
 							'artist_name',
@@ -18,7 +18,7 @@ export const load = async ({ parent }) => {
 							'current_location',
 							'type_of_art',
 							'slug',
-							'events.events_id.id',
+							{ events: [{ events_id: ['id'] }] },
 							'soundcloud_url',
 							'facebook_url',
 							'level_of_involvement',
@@ -31,14 +31,16 @@ export const load = async ({ parent }) => {
 						},
 						limit: -1
 					})
-			: ((await import('../../../fixtures/artists')) as unknown as { default: typeof artistData })
-					.default;
-		if (!artists.data) {
+				);
+
+		console.debug(JSON.stringify(artists));
+
+		if (!artists) {
 			throw new Error('No data returned from Directus');
 		}
 
 		const storedEvents = (await parent()).events;
-		const artistsData: ConvertedArtist[] = artists.data.map((artist) => {
+		const artistsData: ConvertedArtist[] = artists.map((artist) => {
 			const {
 				id,
 				slug,
@@ -53,7 +55,7 @@ export const load = async ({ parent }) => {
 				hero_background_color
 			} = artist;
 			const flattenedArtistEvents = events
-				.map((event) => {
+				?.map((event) => {
 					if (!event.events_id || typeof event !== 'object' || event.events_id === undefined) {
 						return undefined;
 					} else {
