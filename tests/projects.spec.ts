@@ -31,13 +31,13 @@ test.describe('Projects Page Functionality', () => {
 	});
 
 	test('filters the projects when using one of the filter options', async ({ page }) => {
-		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(7);
+		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(9);
 		await page.locator('[data-cy=projectFilter]').first().click();
-		await expect(page.locator('[data-cy=projectItem]')).not.toHaveCount(7);
+		await expect(page.locator('[data-cy=projectItem]')).not.toHaveCount(9);
 	});
 
 	test('changes the filter when clicking another category', async ({ page }) => {
-		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(7);
+		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(9);
 		await page
 			.locator('[data-cy=projectFilter]')
 			.getByText(/Water for all/)
@@ -61,14 +61,14 @@ test.describe('Projects Page Functionality', () => {
 	});
 
 	test('removes the filter when clicking the same category again', async ({ page }) => {
-		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(7);
+		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(9);
 		await page.locator('[data-cy=projectFilter]').first().click();
-		await expect(page.locator('[data-cy=projectItem]')).not.toHaveCount(7);
+		await expect(page.locator('[data-cy=projectItem]')).not.toHaveCount(9);
 		await page.locator('[data-cy=projectFilter]').first().click();
 	});
 
 	test('filters the projects for water projects', async ({ page }) => {
-		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(7);
+		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(9);
 		await page
 			.locator('[data-cy=projectFilter]')
 			.getByText(/Water for all/)
@@ -81,7 +81,7 @@ test.describe('Projects Page Functionality', () => {
 	});
 
 	test('filters the projects for community projects', async ({ page }) => {
-		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(7);
+		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(9);
 		await page
 			.locator('[data-cy=projectFilter]')
 			.getByText(/Community Spirit/)
@@ -94,20 +94,20 @@ test.describe('Projects Page Functionality', () => {
 	});
 
 	test('filters the projects for sustainability projects', async ({ page }) => {
-		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(7);
+		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(9);
 		await page
 			.locator('[data-cy=projectFilter]')
 			.getByText(/Shared Sustainability/)
 			.first()
 			.click();
-		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(0);
+		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(1);
 		await expect(
 			page.locator('#projectList > :first-child').getByTestId('projectPillar')
 		).toHaveClass(/sustainability/);
 	});
 
 	test('filters the projects for joy projects', async ({ page }) => {
-		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(7);
+		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(9);
 		await page
 			.locator('[data-cy=projectFilter]')
 			.getByText(/Joyful Purpose/)
@@ -120,13 +120,13 @@ test.describe('Projects Page Functionality', () => {
 	});
 
 	test('filters the projects for love projects', async ({ page }) => {
-		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(7);
+		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(9);
 		await page
 			.locator('[data-cy=projectFilter]')
 			.getByText(/Universal Love/)
 			.first()
 			.click();
-		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(0);
+		await expect(page.locator('[data-cy=projectItem]')).toHaveCount(1);
 		await expect(
 			page.locator('#projectList > :first-child').getByTestId('projectPillar')
 		).toHaveClass(/love/);
