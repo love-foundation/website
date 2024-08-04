@@ -109,6 +109,7 @@ steps:
       source:
         - ./build
         - ./docker-compose.prod.yml
+        - ./nginx.conf
       overwrite: true
     when:
       branch:
@@ -128,10 +129,8 @@ steps:
       passphrase:
         from_secret: passphrase
       script:
-        - pwd
         - cd /srv/lf/website/prod
         - docker-compose -f docker-compose.prod.yml down
-        - pwd
         - rsync -ravI ./deploy/ . --delete-after
         - rm -rf ./deploy
         - docker-compose -f docker-compose.prod.yml up -d --build
@@ -189,6 +188,7 @@ steps:
       source:
         - ./build
         - ./docker-compose.prod.yml
+        - ./nginx.conf
       overwrite: true
 
   - name: restart production server
@@ -206,6 +206,7 @@ steps:
         from_secret: passphrase
       script:
         - cd /srv/lf/website/prod
+        - docker-compose -f docker-compose.prod.yml down
         - rsync -ravI ./deploy/ . --delete-after
         - rm -rf ./deploy
         - docker-compose -f docker-compose.prod.yml up -d --build
