@@ -12,8 +12,11 @@ services:
       - ./build:/srv
     networks:
       - proxy
+    ports:
+      - 80:80
     labels:
       - traefik.enable=true
+      - traefik.http.services.lf-website-prod.loadbalancer.server.port=80
       - traefik.http.routers.lf-website-prod.rule=Host(`www.love-foundation.org`) || Host(`love-foundation.org`)
       - traefik.http.routers.lf-website-prod.entrypoints=secure
       - traefik.http.routers.lf-website-prod.tls.certresolver=le
