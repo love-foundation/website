@@ -1,4 +1,5 @@
 import { directus, status } from '$lib/_directus';
+import { readItems } from '@directus/sdk';
 import { error } from '@sveltejs/kit';
 import type projectData from '../../../fixtures/projects';
 import type { ConvertedProjects } from './_types';
@@ -8,17 +9,18 @@ export const prerender = process.env.ADAPTER === 'node' ? false : true;
 export const load = async () => {
 	try {
 		const projects = !process.env.USE_FIXTURES
-			? await directus()
-					.items('projects')
-					.readByQuery({
+			? await directus.request(
+					readItems('projects', {
 						fields: [
 							'id',
 							'name',
-							'main_image.*',
+							{ main_image: ['*'] },
 							'pillar',
 							'slug',
 							'location_country',
-							'content.*.*',
+							{
+								content: ['*', { image: ['*'], image_two: ['*'] }]
+							},
 							'hero_background_color'
 						],
 						filter: {
@@ -27,17 +29,14 @@ export const load = async () => {
 							}
 						}
 					})
-			: (
-					(await import('../../../fixtures/projects')) as unknown as {
-						default: typeof projectData;
-					}
-				).default;
+				)
+			: ((await import('../../../fixtures/projects')) as unknown as typeof projectData);
 
-		if (!projects.data) {
+		if (!projects) {
 			throw new Error('No data returned from Directus');
 		}
 
-		const projectsData: ConvertedProjects[] = projects.data.reverse().map((project) => {
+		const projectsData: ConvertedProjects[] = projects.reverse().map((project) => {
 			const {
 				id,
 				name,
