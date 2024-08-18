@@ -1,12 +1,12 @@
 import { directus, status } from '$lib/_directus';
+import { readItems } from '@directus/sdk';
 import type { ConvertedLovecast } from './_types';
 
 const episodeNumberRegex = /(\w+cast)\s+(\d{1,4})/i;
 
 export const load = async () => {
-	const lovecasts = await directus()
-		.items('lovecast')
-		.readByQuery({
+	const lovecasts = await directus.request(
+		readItems('lovecast', {
 			fields: ['id', 'name_of_the_set', 'design', 'soundcloud_link', 'type'],
 			filter: {
 				status: {
@@ -14,13 +14,14 @@ export const load = async () => {
 				}
 			},
 			limit: -1
-		});
+		})
+	);
 
-	if (!lovecasts.data) {
+	if (!lovecasts) {
 		throw new Error('No lovecasts found');
 	}
 
-	const lovecastsData: ConvertedLovecast[] = lovecasts.data
+	const lovecastsData: ConvertedLovecast[] = lovecasts
 		.map((lovecast) => {
 			const { id, name_of_the_set, design, soundcloud_link, type } = lovecast;
 			const [_, regexCastType, episodeNumber] = name_of_the_set?.match(episodeNumberRegex) ?? [];
