@@ -69,16 +69,19 @@ export const load = async () => {
 							if (!artist.artists_id || typeof artist !== 'object') {
 								return;
 							}
+							const { id, artist_name, image, slug } = artist.artists_id as {
+								id: number;
+								artist_name: string;
+								slug: string;
+								image: string | null;
+							};
 
 							return {
-								id: artist.artists_id.id,
-								slug: artist.artists_id.slug,
-								name: artist.artists_id.artist_name,
-								imageUrl: artist.artists_id.image
-									? import.meta.env.VITE_DIRECTUS_URL +
-										'assets/' +
-										artist.artists_id.image +
-										'?key=artist-square'
+								id,
+								slug,
+								name: artist_name,
+								imageUrl: image
+									? import.meta.env.VITE_DIRECTUS_URL + 'assets/' + image + '?key=artist-square'
 									: '/placeholder_artists.png'
 							};
 						})
