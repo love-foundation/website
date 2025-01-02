@@ -22,7 +22,7 @@ jobs:
         env:
           VITE_DIRECTUS_URL: ${{ secrets.DIRECTUS_URL }}
           VITE_DIRECTUS_TOKEN: ${{ secrets.DIRECTUS_TOKEN }}
-        run: npx playwright test
+        run: VITE_DIRECTUS_URL="$VITE_DIRECTUS_URL" VITE_DIRECTUS_TOKEN="$VITE_DIRECTUS_TOKEN" npx playwright test
       - uses: actions/upload-artifact@v4
         if: always()
         with:
