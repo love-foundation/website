@@ -15,8 +15,18 @@ Open up [localhost:3000](http://localhost:3000) and start clicking around.
 
 Consult [kit.svelte.dev](https://kit.svelte.dev) for help getting started.
 
+## Environment Variables
 
-# OUTDATED 
+The project uses the following environment variables:
+
+- `VITE_DIRECTUS_URL`: The URL of the Directus instance.
+- `VITE_DIRECTUS_TOKEN`: The token to use for the Directus instance.
+
+The `VITE_DIRECTUS_URL` should be any directus instance of Love Foundation. Generally, it's totally fine to use the production instance for testing, for development you should rather use a local instance or work with mock fixtures.
+
+The `VITE_DIRECTUS_TOKEN` can be generated in your user profile on the directus instance. Head to your profile and generate it. If you can't see an option, reach out.
+
+# OUTDATED
 
 ## Structure
 
