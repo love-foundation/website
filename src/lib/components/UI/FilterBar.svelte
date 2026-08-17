@@ -19,8 +19,18 @@
 	let lastY = 0;
 	let helper;
 
-	function selected(key: string, event: CustomEvent) {
-		dispatch('selected', { [key]: event.detail.value });
+	// svelte-select v6 types `items` as objects, so the plain string options are
+	// mapped to `{ value, label }` pairs here and unwrapped again on selection.
+	const toItems = (options: string[]) =>
+		options.map((option) => ({ value: option, label: option }));
+
+	const toItem = (value: string | boolean | null | undefined) =>
+		value === null || value === undefined || value === false
+			? null
+			: { value: String(value), label: String(value) };
+
+	function selected(key: string, value: unknown) {
+		dispatch('selected', { [key]: value });
 	}
 
 	$: {
@@ -38,13 +48,13 @@
 			<div class="select" class:active={true}>
 				<Select
 					inputAttributes={{ readonly: 'readonly' }}
-					{value}
-					items={options}
+					value={toItem(value)}
+					items={toItems(options)}
 					{placeholder}
-					on:select={(e) => {
-						selected(key, e);
+					onselect={(selection) => {
+						selected(key, selection.value);
 					}}
-					on:clear={() => {
+					onclear={() => {
 						dispatch('clear', key);
 					}}
 				/>

@@ -2,12 +2,10 @@
 	import Button from '$lib/components/UI/Button.svelte';
 	import Content from '$lib/components/UI/Content.svelte';
 	import type { PageData } from './$types';
-  export let data: PageData
+	export let data: PageData;
 
-  $: queriedContent = data.join;
-
+	$: queriedContent = data.join;
 </script>
-
 
 <svelte:head>
 	<title>Love Foundation - Work With Us</title>
@@ -15,8 +13,8 @@
 
 <h1 class="pad--bottom--small centered">Work With Us</h1>
 {#if queriedContent}
-  <Content {queriedContent} />
-  <Button newTab={true} link={'mailto:hello@love-foundation.org'}>Join the family</Button>
+	<Content {queriedContent} />
+	<Button newTab={true} link="mailto:hello@love-foundation.org">Join the family</Button>
 {/if}
 
 <style lang="scss">

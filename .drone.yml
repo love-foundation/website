@@ -1,10 +1,10 @@
-type: "docker"
+type: 'docker'
 kind: pipeline
 name: build-and-deploy
 
 steps:
   - name: install
-    image: node:20
+    image: node:24
     pull: always
     commands:
       - node -v
@@ -12,7 +12,7 @@ steps:
       - npm ci
 
   - name: build staging
-    image: node:20
+    image: node:24
     pull: always
     environment:
       VITE_DIRECTUS_URL:
@@ -80,7 +80,7 @@ steps:
           - master
 
   - name: build production
-    image: node:20
+    image: node:24
     pull: always
     environment:
       VITE_DIRECTUS_URL:
@@ -145,23 +145,21 @@ trigger:
       - pull_request
 
 ---
-type: "docker"
+type: 'docker'
 kind: pipeline
 name: directus-build-and-deploy
 
 steps:
   - name: install
-    image: node:20
+    image: node:24
     pull: always
-    environment:
-      CYPRESS_CACHE_FOLDER: .cypress
     commands:
       - node -v
       - npm -v
       - npm ci
 
   - name: build production
-    image: node:20
+    image: node:24
     pull: always
     environment:
       VITE_DIRECTUS_URL:

@@ -5,8 +5,8 @@ const BASE_URL =
 	import.meta.env.MODE === 'production'
 		? 'https://www.love-foundation.org'
 		: import.meta.env.MODE === 'staging'
-		? 'https://staging.love-foundation.org'
-		: 'http://localhost:3000';
+			? 'https://staging.love-foundation.org'
+			: 'http://localhost:3000';
 const pages = [];
 
 fs.readdirSync('./src/routes').forEach((file) => {
@@ -81,7 +81,7 @@ export const get: RequestHandler = async () => {
 		'Content-Type': 'application/xml'
 	};
 
-	let fetchedEvents = await fetch(
+	const fetchedEvents = await fetch(
 		import.meta.env.MODE === 'development'
 			? `http://localhost:3000/events.json`
 			: `${BASE_URL}/events.json`,
@@ -93,7 +93,7 @@ export const get: RequestHandler = async () => {
 		}
 	);
 
-	let fetchedArtists = await fetch(
+	const fetchedArtists = await fetch(
 		import.meta.env.MODE === 'development'
 			? `http://localhost:3000/artists.json`
 			: `${BASE_URL}/artists.json`,
@@ -105,7 +105,7 @@ export const get: RequestHandler = async () => {
 		}
 	);
 
-	let fetchedLovecasts = await fetch(
+	const fetchedLovecasts = await fetch(
 		import.meta.env.MODE === 'development'
 			? `http://localhost:3000/lovecasts.json`
 			: `${BASE_URL}/lovecasts.json`,
@@ -117,7 +117,7 @@ export const get: RequestHandler = async () => {
 		}
 	);
 
-	let fetchedProjects = await fetch(
+	const fetchedProjects = await fetch(
 		import.meta.env.MODE === 'development'
 			? `http://localhost:3000/projects.json`
 			: `${BASE_URL}/projects.json`,

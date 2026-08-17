@@ -1,12 +1,13 @@
 <script lang="ts">
 	import GridGroup from '$lib/components/UI/Grid/GridGroup.svelte';
 	import FilterBar from '$lib/components/UI/FilterBar.svelte';
-	import { onMount, beforeUpdate, afterUpdate } from 'svelte';
+	import { onMount, afterUpdate } from 'svelte';
 	import lozad from 'lozad';
 	import { page } from '$app/stores';
 	import type { PageData } from './$types';
 	import type { ConvertedIndexEvents } from './_types';
 	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
 
 	export let data: PageData;
 
@@ -31,23 +32,40 @@
 		pageFilters.hub = $page.url.searchParams.get('hub');
 	});
 
-	beforeUpdate(() => {
-		let params = { ...currentFilters };
-		let url = new URL(window.location.href);
+	// Mirror the active filters into the query string. This must not run from
+	// `beforeUpdate`: `goto` schedules another update, which re-runs the hook and
+	// navigates again in a loop. Reacting to the filter values and skipping the
+	// navigation when the URL already matches keeps it to one `goto` per change.
+	$: syncFiltersToUrl(currentFilters.hub, currentFilters.category);
 
-		if (params.hub) {
-			url.searchParams.set('hub', params.hub.toString());
-		} else if (url.searchParams.has('hub')) {
+	function syncFiltersToUrl(
+		hub: string | null | boolean | undefined,
+		category: string | null | boolean | undefined
+	) {
+		if (!browser) return;
+
+		const url = new URL(window.location.href);
+
+		if (hub) {
+			url.searchParams.set('hub', hub.toString());
+		} else {
 			url.searchParams.delete('hub');
 		}
 
-		if (params.category) {
-			url.searchParams.set('category', params.category.toString());
-		} else if (url.searchParams.has('category')) {
+		if (category) {
+			url.searchParams.set('category', category.toString());
+		} else {
 			url.searchParams.delete('category');
 		}
-		goto(`?${url.searchParams.toString()}`, {});
-	});
+
+		if (url.search === window.location.search) return;
+
+		goto(`${url.pathname}${url.search}`, {
+			replaceState: true,
+			noScroll: true,
+			keepFocus: true
+		});
+	}
 
 	afterUpdate(() => {
 		const observer = lozad();
@@ -110,7 +128,7 @@
 	}}
 />
 
-{#each eventGroups as eventGroup, i (Math.random())}
+{#each eventGroups as eventGroup, i (eventGroup[0].id)}
 	<section data-toggle-class="loaded" class:loaded={i < 1} class:lozad={i >= 1}>
 		<GridGroup itemGroup={eventGroup} groupIndex={i} lazy={i >= 1} />
 	</section>

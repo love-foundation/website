@@ -1,8 +1,9 @@
 import { expect, test } from '@playwright/test';
+import { gotoHydrated } from './helpers';
 
 test.describe('Navigation with the navbar', () => {
 	test.beforeEach(async ({ page }) => {
-		await page.goto('/');
+		await gotoHydrated(page, '/');
 	});
 
 	test('opens the nav menu when clicking the burger', async ({ page }) => {
@@ -67,7 +68,7 @@ test.describe('Navigation with the navbar', () => {
 	});
 
 	test('allows navigating to root when on another page', async ({ page }) => {
-		await page.goto('/events');
+		await gotoHydrated(page, '/events');
 		await page.locator('[data-cy=toggleNav]').click();
 		await page.locator('nav').getByText(/Home/).first().click();
 		await expect(page).toHaveURL('http://localhost:5173/');

@@ -1,62 +1,67 @@
 {
-  "name": "love_foundation_website",
-  "description": "Love Foundation Website",
-  "type": "module",
-  "version": "2.0.0",
-  "scripts": {
-    "dev": "vite dev",
-    "dev:test": "cross-env USE_FIXTURES=true vite dev",
-    "build": "vite build -d",
-    "package": "vite package",
-    "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
-    "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
-    "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
-    "build:staging": "cross-env ADAPTER=node vite build",
-    "playwright:run": "npx playwright test",
-    "playwright:open": "npx playwright test --ui",
-    "test": "run-p --race dev:test playwright:run",
-    "test-dev": "run-p --race dev:test playwright:open"
-  },
-  "browserslist": [
-    "last 2 chrome versions",
-    "last 2 firefox versions",
-    "last 2 safari versions"
-  ],
-  "dependencies": {
-    "@directus/sdk": "^16.1.1",
-    "lozad": "^1.16.0"
-  },
-  "devDependencies": {
-    "@beyonk/gdpr-cookie-consent-banner": "^12.1.0",
-    "@playwright/test": "^1.45.2",
-    "@sveltejs/adapter-node": "^5.2.0",
-    "@sveltejs/adapter-static": "^3.0.2",
-    "@sveltejs/kit": "^2.5.18",
-    "@sveltejs/vite-plugin-svelte": "^3.1.1",
-    "@types/lozad": "^1.16.4",
-    "@types/node": "^20.14.11",
-    "@typescript-eslint/eslint-plugin": "^7.2.0",
-    "@typescript-eslint/parser": "^7.2.0",
-    "bulma": "^0.9.4",
-    "cross-env": "^7.0.3",
-    "cypress": "^13.7.0",
-    "dotenv": "^16.0.3",
-    "eslint": "^8.30.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-svelte": "^2.35.1",
-    "fuse.js": "^6.6.2",
-    "npm-run-all": "^4.1.5",
-    "postcss-load-config": "^5.0.3",
-    "prettier": "^3.2.5",
-    "prettier-plugin-svelte": "^3.2.2",
-    "sass": "^1.72.0",
-    "svelte": "^4.2.18",
-    "svelte-check": "^3.8.4",
-    "svelte-select": "^5.8.3",
-    "tslib": "^2.6.2",
-    "typescript": "^5.4.2",
-    "vite": "^5.4.14"
-  }
+	"name": "love_foundation_website",
+	"description": "Love Foundation Website",
+	"type": "module",
+	"version": "2.0.0",
+	"engines": {
+		"node": ">=24.15.0"
+	},
+	"scripts": {
+		"dev": "vite dev",
+		"dev:test": "cross-env USE_FIXTURES=true vite dev",
+		"build": "vite build -d",
+		"package": "vite package",
+		"preview": "vite preview",
+		"check": "svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
+		"lint": "prettier --check . && eslint .",
+		"format": "prettier --write .",
+		"build:staging": "cross-env ADAPTER=node vite build",
+		"playwright:run": "npx playwright test",
+		"playwright:open": "npx playwright test --ui",
+		"test": "run-p --race dev:test playwright:run",
+		"test-dev": "run-p --race dev:test playwright:open"
+	},
+	"browserslist": [
+		"last 2 chrome versions",
+		"last 2 firefox versions",
+		"last 2 safari versions"
+	],
+	"overrides": {
+		"cookie": "^0.7.2"
+	},
+	"dependencies": {
+		"@directus/sdk": "^24.0.0",
+		"lozad": "^1.16.0"
+	},
+	"devDependencies": {
+		"@beyonk/gdpr-cookie-consent-banner": "^16.0.2",
+		"@eslint/js": "^10.0.1",
+		"@playwright/test": "^1.62.1",
+		"@sveltejs/adapter-node": "^5.5.7",
+		"@sveltejs/adapter-static": "^3.0.10",
+		"@sveltejs/kit": "^2.70.2",
+		"@sveltejs/vite-plugin-svelte": "^7.3.0",
+		"@types/lozad": "^1.16.4",
+		"@types/node": "^24.13.3",
+		"bulma": "^0.9.4",
+		"cross-env": "^10.1.0",
+		"esbuild": "^0.28.2",
+		"eslint": "^10.8.1",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-svelte": "^3.23.0",
+		"fuse.js": "^7.5.0",
+		"globals": "^17.11.0",
+		"npm-run-all2": "^9.0.3",
+		"prettier": "^3.9.6",
+		"prettier-plugin-svelte": "^4.1.1",
+		"sass": "^1.102.0",
+		"svelte": "^5.56.9",
+		"svelte-check": "^4.7.6",
+		"svelte-select": "^6.0.0",
+		"tslib": "^2.8.1",
+		"typescript": "^6.0.3",
+		"typescript-eslint": "^8.67.0",
+		"vite": "^8.2.1"
+	}
 }

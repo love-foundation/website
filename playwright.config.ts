@@ -12,6 +12,10 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
 	testDir: './tests',
+	/* The suite runs against `vite dev`, which compiles each route the first time
+	   it is requested. A cold route (e.g. /lovecasts) can take well over the 5s
+	   default, so give assertions room for that first compile. */
+	expect: { timeout: 15000 },
 	/* Run tests in files in parallel */
 	fullyParallel: true,
 	/* Fail the build on CI if you accidentally left test.only in the source code. */

@@ -2,11 +2,12 @@
 	import ProjectItem from '$lib/components/UI/ProjectItem.svelte';
 	import PillarBlob from '$lib/components/UI/PillarBlob.svelte';
 	import { fade } from 'svelte/transition';
-	import { beforeUpdate, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import type { ConvertedProjects } from './_types';
 	import { page } from '$app/stores';
 	import type { PageData } from './$types';
 	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
 	export let data: PageData;
 
 	$: projects = data.projects ?? [];
@@ -44,16 +45,30 @@
 		}
 	];
 
-	beforeUpdate(() => {
-		let params = { ...currentPillars };
-		let url = new URL(window.location.href);
-		if (params.pillar) {
-			url.searchParams.set('pillar', params.pillar.toString());
+	// Mirror the active filter into the query string. This must not run from
+	// `beforeUpdate`: `goto` schedules another update, which re-runs the hook and
+	// navigates again in a loop. Reacting to the filter value and skipping the
+	// navigation when the URL already matches keeps it to one `goto` per change.
+	$: syncPillarToUrl(currentPillars.pillar);
+
+	function syncPillarToUrl(pillar: string | null | boolean | undefined) {
+		if (!browser) return;
+
+		const url = new URL(window.location.href);
+		if (pillar) {
+			url.searchParams.set('pillar', pillar.toString());
 		} else {
 			url.searchParams.delete('pillar');
 		}
-		goto(`?${url.searchParams.toString()}`, {});
-	});
+
+		if (url.search === window.location.search) return;
+
+		goto(`${url.pathname}${url.search}`, {
+			replaceState: true,
+			noScroll: true,
+			keepFocus: true
+		});
+	}
 
 	function filterProjects(pillar: string | null) {
 		if (currentPillars.pillar === pillar) {

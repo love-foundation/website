@@ -1,13 +1,14 @@
 import { expect, test } from '@playwright/test';
+import { gotoHydrated } from './helpers';
 
 test.describe('Artist index page behavior', () => {
 	test.beforeEach(async ({ page }) => {
-		await page.goto('/artists');
+		await gotoHydrated(page, '/artists');
 	});
 
 	test('shuffles the artists on each page load', async ({ page }) => {
 		const firstArtistName = page.locator('[data-cy=artistName]').first();
-		await page.goto('/artists');
+		await gotoHydrated(page, '/artists');
 		await expect
 			.poll(async () => page.locator('[data-cy=artistName]').first())
 			.not.toBe(firstArtistName);
