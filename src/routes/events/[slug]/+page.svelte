@@ -1,4 +1,3 @@
-
 <script lang="ts">
 	import HeroModule from '$lib/components/UI/ContentModules/HeroModule.svelte';
 	import ArtistItem from '$lib/components/UI/ArtistItem.svelte';
@@ -7,7 +6,7 @@
 
 	export let data: PageData;
 
-  $: event = data.singleEvent;
+	$: event = data.singleEvent;
 
 	let heroContent: {
 		image?: string;

@@ -7,6 +7,6 @@ export type ConvertedProjects = {
 	pillar: string;
 	country: string;
 	slug: string;
-  heroColor?: string | null;
+	heroColor?: string | null;
 	content: PartialItem<ContentCollection[]>;
 };

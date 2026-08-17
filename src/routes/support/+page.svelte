@@ -1,5 +1,5 @@
 <script lang="ts">
-	import CookieBar from "$lib/components/UI/CookieBar.svelte";
+	import CookieBar from '$lib/components/UI/CookieBar.svelte';
 
 	const necessaryAccepted = true;
 </script>

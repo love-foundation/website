@@ -35,7 +35,9 @@
 	.lazy {
 		opacity: 0;
 		margin-top: -50px;
-		transition: margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94), opacity 1s ease-in;
+		transition:
+			margin-top 1s cubic-bezier(0.4, 0.07, 0.32, 0.94),
+			opacity 1s ease-in;
 		&.loaded {
 			opacity: 1;
 			margin-top: 0;
