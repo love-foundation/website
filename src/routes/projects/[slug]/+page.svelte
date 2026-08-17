@@ -4,7 +4,7 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-  $: project = data.singleProject
+	$: project = data.singleProject;
 
 	$: heroContent = {
 		image: project?.imageUrl,

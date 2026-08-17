@@ -1,47 +1,46 @@
-
 <script lang="ts">
 	import HeroModule from '$lib/components/UI/ContentModules/HeroModule.svelte';
 	import GridItem from '$lib/components/UI/Grid/GridItem.svelte';
 	import type { PageData } from './$types';
 	import type { ConvertedIndexEvents } from '../../events/_types';
 
-  export let data: PageData;
+	export let data: PageData;
 
-  $: artist = data.singleArtist
+	$: artist = data.singleArtist;
 
 	const mapping: {
-    [key: number]: string;
-  } = {
+		[key: number]: string;
+	} = {
 		0: 'one',
 		1: 'two',
 		2: 'three'
 	};
 
-  let heroContent: {
-    image: string;
-    bgColor: string;
-  };
+	let heroContent: {
+		image: string;
+		bgColor: string;
+	};
 	$: heroContent = {
-    image: artist?.imageUrl,
-    bgColor: artist?.heroColor,
-  };
+		image: artist?.imageUrl,
+		bgColor: artist?.heroColor
+	};
 
-  $: events = artist?.events ?? [];
-  $: name = artist?.name ?? '';
-  $: location = artist?.location ?? null;
-  $: status = artist?.status ?? null;
-  $: category = artist?.category ?? null;
-  $: facebook = artist?.facebook ?? null;
-  $: soundcloud = artist?.soundcloud ?? null;
+	$: events = artist?.events ?? [];
+	$: name = artist?.name ?? '';
+	$: location = artist?.location ?? null;
+	$: status = artist?.status ?? null;
+	$: category = artist?.category ?? null;
+	$: facebook = artist?.facebook ?? null;
+	$: soundcloud = artist?.soundcloud ?? null;
 
-let eventGroups: ConvertedIndexEvents[][] = [];
+	let eventGroups: ConvertedIndexEvents[][] = [];
 
-$: {
-  eventGroups = [];
-  for (let i = 0, len = events.length; i < len; i += 3) {
-    eventGroups = [...eventGroups, events.slice(i, i + 3)];
-  }
-}
+	$: {
+		eventGroups = [];
+		for (let i = 0, len = events.length; i < len; i += 3) {
+			eventGroups = [...eventGroups, events.slice(i, i + 3)];
+		}
+	}
 </script>
 
 <svelte:head>

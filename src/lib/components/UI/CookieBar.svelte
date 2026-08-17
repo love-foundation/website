@@ -1,6 +1,6 @@
 <script lang="ts">
-	import GdprBanner from "@beyonk/gdpr-cookie-consent-banner";
-  import "@beyonk/gdpr-cookie-consent-banner/banner.css"; // optional, you can also define your own styles
+	import GdprBanner from '@beyonk/gdpr-cookie-consent-banner';
+	import '@beyonk/gdpr-cookie-consent-banner/banner.css'; // optional, you can also define your own styles
 
 	const choices = {
 		necessary: {
