@@ -5,9 +5,8 @@
 	import type { PageData } from './$types';
 	export let data: PageData;
 
-	$: upcomingEvents =
-		data.events?.filter((event) => new Date(event.starttime) >= new Date()) || [];
-  $: hubs = data.hubs
+	$: upcomingEvents = data.events?.filter((event) => new Date(event.starttime) >= new Date()) || [];
+	$: hubs = data.hubs;
 </script>
 
 <svelte:head>
@@ -23,7 +22,7 @@
 			Love Foundation is a community of activists and artists spreading love, connecting people and
 			raising money for water development projects through cultural events.
 		</h2>
-		<Button link={'join'}>Join the Family</Button>
+		<Button link="join">Join the Family</Button>
 	</div>
 </section>
 
@@ -56,16 +55,16 @@
 <section class="active-hubs row">
 	<h1>Active Love Hubs</h1>
 	<div class="columns is-multiline">
-    {#if hubs}
-      {#each hubs as hub}
-        <Hub {hub} />
-      {/each}
-    {/if}
+		{#if hubs}
+			{#each hubs as hub}
+				<Hub {hub} />
+			{/each}
+		{/if}
 	</div>
 </section>
 
 <section class="cta pad--bottom--small centered">
-	<Button link={'join'}>Join the Family</Button>
+	<Button link="join">Join the Family</Button>
 </section>
 
 <style lang="scss">

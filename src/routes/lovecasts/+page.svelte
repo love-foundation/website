@@ -2,7 +2,7 @@
 	import GridGroup from '$lib/components/UI/Grid/GridGroup.svelte';
 	import { setTransitionDuration, updateClass } from '$lib/helpers/sharedFunctions';
 	import lozad from 'lozad';
-	import { afterUpdate, beforeUpdate, onMount } from 'svelte';
+	import { afterUpdate, onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import type { ConvertedLovecast } from './_types';
 	import { browser } from '$app/environment';
@@ -27,15 +27,30 @@
 		observer.observe();
 	});
 
-	beforeUpdate(() => {
-		let url = new URL(window.location.href);
-		if (lovecastFilters.type) {
-			url.searchParams.set('type', lovecastFilters.type.toString());
+	// Mirror the active filter into the query string. This must not run from
+	// `beforeUpdate`: `goto` schedules another update, which re-runs the hook and
+	// navigates again in a loop. Reacting to the filter value and skipping the
+	// navigation when the URL already matches keeps it to one `goto` per change.
+	$: syncTypeToUrl(lovecastFilters.type);
+
+	function syncTypeToUrl(type: string | null | boolean | undefined) {
+		if (!browser) return;
+
+		const url = new URL(window.location.href);
+		if (type) {
+			url.searchParams.set('type', type.toString());
 		} else {
 			url.searchParams.delete('type');
 		}
-		goto(`?${url.searchParams.toString()}`, {});
-	});
+
+		if (url.search === window.location.search) return;
+
+		goto(`${url.pathname}${url.search}`, {
+			replaceState: true,
+			noScroll: true,
+			keepFocus: true
+		});
+	}
 
 	function filterLovecasts(type: string) {
 		if (lovecastFilters.type === type) {
@@ -104,7 +119,7 @@
 	</div>
 	<div class="column is-hidden-mobile" />
 </div>
-{#each lovecastGroups as lovecastGroup, i (Math.random())}
+{#each lovecastGroups as lovecastGroup, i (lovecastGroup[0].id)}
 	<section data-toggle-class="loaded" class:loaded={i < 1} class:lozad={i >= 1}>
 		<GridGroup itemGroup={lovecastGroup} groupIndex={i} lazy={i >= 1} />
 	</section>

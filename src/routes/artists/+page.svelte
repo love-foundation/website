@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ArtistItem from '$lib/components/UI/ArtistItem.svelte';
 	import { shuffleArray, updateClass, setTransitionDuration } from '$lib/helpers/sharedFunctions';
-	import Fuse from 'fuse.js';
+	import Fuse, { type FuseResult } from 'fuse.js';
 	import lozad from 'lozad';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
@@ -15,7 +15,7 @@
 	let searchString = '';
 	$: artistArray = data.artists;
 	$: filteredArtists = artistArray ? shuffleArray<Array<ConvertedArtist>>(artistArray) : [];
-	let fuseArtists: Fuse.FuseResult<ConvertedArtist>[];
+	let fuseArtists: FuseResult<ConvertedArtist>[];
 	let currentSet: ConvertedArtist[] = [];
 	let fuseArtistsIds: string[] = [];
 	let searchedArtists: ConvertedArtist[] = [];

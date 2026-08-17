@@ -5,17 +5,21 @@ import type { ConvertedLovecast } from './_types';
 const episodeNumberRegex = /(\w+cast)\s+(\d{1,4})/i;
 
 export const load = async () => {
-	const lovecasts = await directus.request(
-		readItems('lovecast', {
-			fields: ['id', 'name_of_the_set', 'design', 'soundcloud_link', 'type'],
-			filter: {
-				status: {
-					_in: status
-				}
-			},
-			limit: -1
-		})
-	);
+	// The lovecasts fixture is a recorded REST response, so unwrap its `data`
+	// envelope to match what `readItems` resolves to.
+	const lovecasts = process.env.USE_FIXTURES
+		? (await import('../../../fixtures/lovecasts')).default.data
+		: await directus.request(
+				readItems('lovecast', {
+					fields: ['id', 'name_of_the_set', 'design', 'soundcloud_link', 'type'],
+					filter: {
+						status: {
+							_in: status
+						}
+					},
+					limit: -1
+				})
+			);
 
 	if (!lovecasts) {
 		throw new Error('No lovecasts found');

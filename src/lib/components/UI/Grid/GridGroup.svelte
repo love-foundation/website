@@ -23,7 +23,7 @@
 
 <div class="grid-group" class:even={isEven}>
 	{#if isEven}
-		<GridItem item={itemGroup[0]} {lazy} cardClass={'big left'} />
+		<GridItem item={itemGroup[0]} {lazy} cardClass="big left" />
 	{/if}
 
 	{#each itemGroup.slice(1, itemGroup.length) as item, i (item.id)}
@@ -31,7 +31,7 @@
 	{/each}
 
 	{#if !isEven}
-		<GridItem {lazy} item={itemGroup[0]} cardClass={'big right'} />
+		<GridItem {lazy} item={itemGroup[0]} cardClass="big right" />
 	{/if}
 </div>
 

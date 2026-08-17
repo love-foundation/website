@@ -1,8 +1,9 @@
 import { expect, test } from '@playwright/test';
+import { gotoHydrated } from './helpers';
 
 test.describe('Projects Page Functionality', () => {
 	test.beforeEach(async ({ page }) => {
-		await page.goto('/projects');
+		await gotoHydrated(page, '/projects');
 	});
 
 	test('displays the projects page and has an introduction text', async ({ page }) => {
